@@ -264,65 +264,52 @@ export function AdvisorConversation({ className }: { className?: string }) {
 
 export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
   return (
-    <header className="flex items-center justify-between gap-3 border-b border-advisor/25 bg-advisor-soft/50 p-4">
-      <div className="flex items-center gap-2">
-        <span className="flex size-8 items-center justify-center rounded-lg bg-advisor text-advisor-foreground">
-          <Sparkles className="size-4" aria-hidden />
-        </span>
-        <div>
-          <h2 className="font-display text-base leading-tight">AI Advisor</h2>
-          <p className="text-xs text-advisor">
-            AI-generated · guidance is informational and may vary by location and individual
-            circumstances
-          </p>
+    <header className="border-b border-advisor/25 bg-advisor-soft/50 p-4">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start gap-2.5">
+          <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-xl bg-advisor text-advisor-foreground">
+            <Sparkles className="size-4.5" aria-hidden />
+          </span>
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-advisor">
+              Core capability
+            </p>
+            <h2 className="font-display text-lg leading-tight">Ask the AI Advisor</h2>
+          </div>
         </div>
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close advisor"
+            className="rounded-lg p-1.5 text-muted-foreground hover:bg-sand"
+          >
+            <X className="size-4" aria-hidden />
+          </button>
+        )}
       </div>
-      {onClose && (
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close advisor"
-          className="rounded-lg p-1.5 text-muted-foreground hover:bg-sand"
-        >
-          <X className="size-4" aria-hidden />
-        </button>
-      )}
+      <p className="mt-3 text-sm leading-relaxed text-secondary-foreground">
+        Ask anything about your own situation — where to look, whether a listing looks safe,
+        deposits and Ontario rules, what to offer without Canadian credit, and how to message a
+        landlord. It asks a few clarifying questions first, and never invents listings or prices.
+      </p>
+      <p className="mt-2 text-xs text-advisor">
+        AI-generated · guidance is informational and may vary by location and individual
+        circumstances
+      </p>
     </header>
   );
 }
 
-/** Right-hand column on desktop. */
+/** Primary advisor surface — third column on desktop, full section on small screens. */
 export function AdvisorPanel() {
   return (
-    <aside className="hidden lg:sticky lg:top-14 lg:flex lg:h-[calc(100vh-3.5rem)] lg:flex-col lg:overflow-hidden lg:rounded-2xl lg:border-2 lg:border-advisor/35 lg:bg-card lg:shadow-sm">
+    <aside
+      aria-label="Ask the AI Advisor"
+      className="flex h-[70vh] flex-col overflow-hidden rounded-2xl border-2 border-advisor/35 bg-card shadow-sm lg:sticky lg:top-14 lg:h-[calc(100vh-3.5rem)]"
+    >
       <AdvisorHeader />
       <AdvisorConversation />
     </aside>
-  );
-}
-
-/** Floating entry point on small screens. */
-export function AdvisorDock() {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="lg:hidden">
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="fixed bottom-5 right-4 z-40 flex items-center gap-2 rounded-full bg-advisor px-4 py-3 text-sm font-semibold text-advisor-foreground shadow-lg transition-transform hover:scale-[1.03]"
-      >
-        <Sparkles className="size-4" aria-hidden />
-        Ask the advisor
-      </button>
-
-      {open && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/40 sm:items-center sm:p-4">
-          <div className="flex h-[85vh] w-full max-w-lg flex-col overflow-hidden rounded-t-2xl border border-border bg-card shadow-xl sm:h-[70vh] sm:rounded-2xl">
-            <AdvisorHeader onClose={() => setOpen(false)} />
-            <AdvisorConversation />
-          </div>
-        </div>
-      )}
-    </div>
   );
 }
