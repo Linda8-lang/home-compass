@@ -189,6 +189,27 @@ export function AdvisorConversation({ className }: { className?: string }) {
           </div>
         )}
 
+        {sample && messages.length > 0 && (
+          <div className="rounded-xl border border-dashed border-advisor/40 bg-advisor-soft/25 p-3 text-xs">
+            <p className="font-semibold text-advisor">Sample conversation · {sample.label}</p>
+            <p className="mt-1 text-muted-foreground">
+              {sample.stillMissing.length > 0
+                ? `Still to clarify: ${sample.stillMissing.join(", ")}. Keep typing to continue this conversation.`
+                : "Enough was known up front, so the advisor answered without extra questions."}
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setSample(null);
+                setMessages([]);
+              }}
+              className="mt-2 font-semibold text-advisor underline underline-offset-2"
+            >
+              Clear and start fresh
+            </button>
+          </div>
+        )}
+
         {messages.map((m, i) => (
           <div
             key={i}
