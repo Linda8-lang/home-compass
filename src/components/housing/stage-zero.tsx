@@ -2,9 +2,21 @@ import { ArrowRight, Plane, Luggage, Home, Info, CheckCircle2, HelpCircle } from
 import { Button } from "@/components/ui/button";
 import { JOURNEY_STAGES, type JourneyStageId } from "@/data/journey";
 import { HOUSING_CONSIDERATIONS } from "@/data/housing-considerations";
+import { CITATIONS } from "@/data/sources";
 import { useFlow } from "./flow-state";
-import { SectionTitle, StageHeader, CautionBadge, VariesNote } from "./primitives";
+import {
+  SectionTitle,
+  StageHeader,
+  CautionBadge,
+  VariesNote,
+  SourcePending,
+  GuidanceBadge,
+  EvidenceLegend,
+  GuidanceDisclaimer,
+} from "./primitives";
+import { SourceCite } from "./source-cite";
 import { cn } from "@/lib/utils";
+
 
 const icons: Record<JourneyStageId, typeof Plane> = {
   "pre-landing": Plane,
