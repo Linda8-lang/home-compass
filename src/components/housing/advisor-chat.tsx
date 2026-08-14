@@ -82,7 +82,7 @@ function useAdvisor() {
     }
   }
 
-  return { messages, pending, error, send };
+  return { messages, setMessages, pending, error, send };
 }
 
 /** The conversation surface: transcript, suggestions and composer. */
