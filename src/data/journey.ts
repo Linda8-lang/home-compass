@@ -72,7 +72,7 @@ export const JOURNEY_STAGES: JourneyStage[] = [
     tasks: [
       {
         label: "Get your SIN",
-        detail: "Free, same-day at a Service Canada office with your permit and passport.",
+        detail: "Apply through Service Canada with your permit and passport. Processing times vary by office and channel.",
         kind: "admin",
       },
       {
