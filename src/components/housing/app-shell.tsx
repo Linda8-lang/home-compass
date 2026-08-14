@@ -22,7 +22,7 @@ const STATIC_STEPS = SECTIONS.map((s) => s.step) as readonly number[];
 
 /** Advisor-only, interactive tools — this is where recommendations live. */
 const TOOL_TITLES: Record<number, string> = {
-  2: "Advisor · Neighbourhood recommendations",
+  2: "How to evaluate housing options",
   4: "Advisor · Listing & negotiation coach",
 };
 

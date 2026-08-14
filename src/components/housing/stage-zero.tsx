@@ -173,7 +173,7 @@ export function StageZero() {
 
       <section className="space-y-3">
         <SectionTitle aside={<GuidanceBadge label="Framework, not advice" />}>
-          What to consider when finding housing
+          How to Evaluate Housing Options
         </SectionTitle>
         <p className="text-sm leading-relaxed text-muted-foreground">
           These are the dimensions people weigh when choosing a place to live. This section does not

@@ -95,7 +95,7 @@ export function StageOne() {
 
       <Button size="lg" className="w-full sm:w-auto" onClick={() => advance(2)}>
         <Sparkles className="size-4" aria-hidden />
-        Ask the advisor to recommend neighbourhoods
+        How to evaluate housing options
         <ArrowRight className="size-4" aria-hidden />
       </Button>
     </div>
