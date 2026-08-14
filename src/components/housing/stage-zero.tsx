@@ -136,7 +136,7 @@ export function StageZero() {
       </section>
 
       <Button size="lg" className="w-full" onClick={() => advance(1)}>
-        Start the housing flow
+        Next: where to look
         <ArrowRight className="size-4" aria-hidden />
       </Button>
     </div>
