@@ -29,6 +29,10 @@ type FlowValue = {
   setVerifiedAddress: (a: string | null) => void;
   chosenListing: string | null;
   setChosenListing: (id: string | null) => void;
+  journeyStage: JourneyStageId;
+  setJourneyStage: (s: JourneyStageId) => void;
+  doneTasks: string[];
+  toggleTask: (key: string) => void;
 };
 
 const FlowContext = createContext<FlowValue | null>(null);
