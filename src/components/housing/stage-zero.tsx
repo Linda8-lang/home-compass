@@ -1,6 +1,7 @@
-import { ArrowRight, Plane, Luggage, Home, Info, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Plane, Luggage, Home, Info, CheckCircle2, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JOURNEY_STAGES, type JourneyStageId } from "@/data/journey";
+import { HOUSING_CONSIDERATIONS } from "@/data/housing-considerations";
 import { useFlow } from "./flow-state";
 import { SectionTitle, StageHeader, CautionBadge } from "./primitives";
 import { cn } from "@/lib/utils";
@@ -21,7 +22,10 @@ const kindTone: Record<string, string> = {
 export function StageZero() {
   const { advance, journeyStage, setJourneyStage, doneTasks, toggleTask } = useFlow();
   const stage = JOURNEY_STAGES.find((s) => s.id === journeyStage) ?? JOURNEY_STAGES[0]!;
-  const done = stage.tasks.filter((t) => doneTasks.includes(`${stage.id}:${t.label}`)).length;
+  // Housing-specific tasks are intentionally excluded: this checklist stays
+  // neutral and does not recommend where or what to rent.
+  const tasks = stage.tasks.filter((t) => t.kind !== "housing");
+  const done = tasks.filter((t) => doneTasks.includes(`${stage.id}:${t.label}`)).length;
 
   return (
     <div className="space-y-10">
@@ -68,10 +72,6 @@ export function StageZero() {
         <SectionTitle aside={<CautionBadge label="Heads up" />}>{stage.name}</SectionTitle>
         <div className="surface space-y-3 p-4">
           <p className="text-sm leading-relaxed text-muted-foreground">{stage.summary}</p>
-          <p className="rounded-lg bg-verified-soft p-3 text-sm leading-relaxed text-verified">
-            <strong className="font-semibold">Housing goal: </strong>
-            {stage.housingGoal}
-          </p>
           <p className="flex gap-2 rounded-lg bg-caution-soft p-3 text-sm leading-relaxed text-caution">
             <Info className="mt-0.5 size-4 shrink-0" aria-hidden />
             {stage.headsUp}
@@ -83,14 +83,14 @@ export function StageZero() {
         <SectionTitle
           aside={
             <span className="text-xs font-medium text-muted-foreground">
-              {done} of {stage.tasks.length} done
+              {done} of {tasks.length} done
             </span>
           }
         >
           Your checklist right now
         </SectionTitle>
         <ul className="surface divide-y divide-border">
-          {stage.tasks.map((t) => {
+          {tasks.map((t) => {
             const key = `${stage.id}:${t.label}`;
             const checked = doneTasks.includes(key);
             return (
@@ -134,6 +134,42 @@ export function StageZero() {
           })}
         </ul>
       </section>
+
+      <section className="space-y-3">
+        <SectionTitle aside={<span className="text-xs text-muted-foreground">Framework, not advice</span>}>
+          What to consider when finding housing
+        </SectionTitle>
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          These are the dimensions people weigh when choosing a place to live. This section does not
+          say which option is right for you — it gives you the questions to ask so you can judge any
+          option yourself.
+        </p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {HOUSING_CONSIDERATIONS.map((c) => (
+            <article key={c.id} className="surface flex flex-col gap-2.5 p-4">
+              <h3 className="text-base leading-snug">{c.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{c.what}</p>
+              <ul className="space-y-1.5">
+                {c.questions.map((q) => (
+                  <li key={q} className="flex gap-2 text-sm leading-relaxed text-secondary-foreground">
+                    <HelpCircle className="mt-0.5 size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+                    {q}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-auto rounded-lg bg-sand p-2.5 text-xs leading-relaxed text-secondary-foreground">
+                <strong className="font-semibold">Trade-off: </strong>
+                {c.tradeoff}
+              </p>
+            </article>
+          ))}
+        </div>
+        <p className="rounded-xl border border-advisor/25 bg-advisor-soft/60 p-3 text-sm leading-relaxed text-advisor">
+          Looking for specific neighbourhoods or listings? That belongs to the AI Advisor — this
+          reference section stays neutral.
+        </p>
+      </section>
+
 
       <Button size="lg" className="w-full" onClick={() => advance(1)}>
         Next: where to look
