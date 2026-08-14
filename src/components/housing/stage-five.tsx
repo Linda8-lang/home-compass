@@ -7,6 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { BASE_DOCS, DOC_PATHS, PAYMENT_NOTES } from "@/data/mock";
 import { useFlow } from "./flow-state";
 import { AdvisorBadge, SectionTitle, StageHeader, VerifiedBadge } from "./primitives";
+import { SourceCite } from "./source-cite";
 
 const statusLabel = {
   student: "Student",
