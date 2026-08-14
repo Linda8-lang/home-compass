@@ -1,4 +1,4 @@
-import { ShieldCheck, Sparkles, AlertTriangle } from "lucide-react";
+import { ShieldCheck, Sparkles, AlertTriangle, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
@@ -74,5 +74,25 @@ export function ScoreTag({ icon, label }: { icon: ReactNode; label: string }) {
       {icon}
       {label}
     </span>
+  );
+}
+
+export function VariesNote({
+  children = "Information may vary by location and circumstance.",
+  className,
+}: {
+  children?: ReactNode;
+  className?: string;
+}) {
+  return (
+    <p
+      className={cn(
+        "flex items-center gap-1.5 text-xs leading-relaxed text-muted-foreground",
+        className,
+      )}
+    >
+      <Info className="size-3.5 shrink-0" aria-hidden />
+      {children}
+    </p>
   );
 }

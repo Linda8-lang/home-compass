@@ -23,7 +23,7 @@ export const HOUSING_TYPES: HousingType[] = [
     price: "$$$ — highest price",
     risk: "Lowest risk",
     creditNeeded: "Credit check required",
-    speed: "2–4 weeks to secure",
+    speed: "Timeline varies by market",
     blurb:
       "Professionally run rental buildings. Standard leases, on-site staff, predictable process.",
     bestFor: "Best if you value certainty over price and have proof of funds.",
@@ -34,7 +34,7 @@ export const HOUSING_TYPES: HousingType[] = [
     price: "$$ — often negotiable",
     risk: "Medium risk",
     creditNeeded: "Flexible, case-by-case",
-    speed: "1–3 weeks to secure",
+    speed: "Timeline varies by landlord",
     blurb:
       "Condos and houses rented directly by the owner. More room to negotiate, but more scam exposure.",
     bestFor: "Best if you can view in person and negotiate your terms.",
@@ -45,10 +45,10 @@ export const HOUSING_TYPES: HousingType[] = [
     price: "$ — cheapest",
     risk: "Varies",
     creditNeeded: "No credit history needed",
-    speed: "2–7 days to secure",
+    speed: "Often the fastest option",
     blurb:
       "A room in a shared unit or house. Fastest path to a local address while you settle in.",
-    bestFor: "Best as a 3–6 month landing pad before you sign a full lease.",
+    bestFor: "Often used as a landing pad before signing a full lease.",
   },
 ];
 
@@ -378,7 +378,7 @@ export const LANDLORD_CHECKLIST: Record<
       need: "Confidence you'll pay on time",
       youHave: "Savings for the year",
       substitute:
-        "Offer a guarantor, or first + last upfront. Do not offer more than 2 months — it's not enforceable in Ontario and signals desperation.",
+        "Offer a guarantor, or first + last upfront. Paying beyond the legal deposit maximum is not enforceable in Ontario, so extra offers carry no protection.",
       strength: "strong",
     },
   ],
@@ -407,7 +407,7 @@ export const LANDLORD_CHECKLIST: Record<
       need: "Confidence you'll pay on time",
       youHave: "Salary starting soon",
       substitute:
-        "Proof of funds covering 3 months of rent bridges the gap until your first pay cycle.",
+        "Proof of funds bridges the gap until your first pay cycle. How much is enough varies by landlord.",
       strength: "medium",
     },
   ],
@@ -416,13 +416,13 @@ export const LANDLORD_CHECKLIST: Record<
       need: "Canadian credit report",
       youHave: "None yet",
       substitute:
-        "Home-country credit report plus 6 months of bank statements showing consistent balances.",
+        "Home-country credit report plus bank statements showing consistent balances.",
       strength: "medium",
     },
     {
       need: "Proof of steady income",
       youHave: "Varies",
-      substitute: "Proof of funds covering 6–12 months of rent is the strongest single document.",
+      substitute: "Proof of funds is often the strongest single document; the amount landlords ask for varies.",
       strength: "strong",
     },
     {
@@ -447,13 +447,13 @@ export const DOC_PATHS: Record<
   student: [
     {
       label: "Guarantor agreement (Canadian co-signer)",
-      speed: "Usually accepted same day",
+      speed: "Often accepted quickly",
       rank: 1,
       why: "Transfers the risk off you entirely — landlords stop asking about credit once this is signed.",
     },
     {
-      label: "Proof of funds: bank letter for 12 months of rent",
-      speed: "Accepted within 1–2 days",
+      label: "Proof of funds: bank letter covering your rent",
+      speed: "Acceptance time varies",
       rank: 2,
       why: "A single official letter is easier for a landlord to trust than a stack of statements.",
     },
@@ -467,13 +467,13 @@ export const DOC_PATHS: Record<
   "job-offer": [
     {
       label: "Signed employment offer + HR verification letter",
-      speed: "Usually accepted same day",
+      speed: "Often accepted quickly",
       rank: 1,
       why: "Salary and start date on letterhead is the closest substitute to a pay stub.",
     },
     {
-      label: "Proof of funds: 3+ months of rent liquid",
-      speed: "Accepted within 1–2 days",
+      label: "Proof of funds: liquid savings for rent",
+      speed: "Acceptance time varies",
       rank: 2,
       why: "Covers the gap between move-in and your first Canadian paycheque.",
     },
@@ -486,14 +486,14 @@ export const DOC_PATHS: Record<
   ],
   other: [
     {
-      label: "Proof of funds: 6–12 months of rent liquid",
-      speed: "Usually accepted same day",
+      label: "Proof of funds: liquid savings for rent",
+      speed: "Often accepted quickly",
       rank: 1,
       why: "Removes the income question completely for the length of the lease.",
     },
     {
       label: "Canadian guarantor",
-      speed: "Accepted within 1–2 days",
+      speed: "Acceptance time varies",
       rank: 2,
       why: "Strong, but depends on finding someone willing to co-sign.",
     },

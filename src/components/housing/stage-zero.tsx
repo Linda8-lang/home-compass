@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { JOURNEY_STAGES, type JourneyStageId } from "@/data/journey";
 import { HOUSING_CONSIDERATIONS } from "@/data/housing-considerations";
 import { useFlow } from "./flow-state";
-import { SectionTitle, StageHeader, CautionBadge } from "./primitives";
+import { SectionTitle, StageHeader, CautionBadge, VariesNote } from "./primitives";
 import { cn } from "@/lib/utils";
 
 const icons: Record<JourneyStageId, typeof Plane> = {
@@ -34,6 +34,10 @@ export function StageZero() {
         title="Where you are in the move changes what you should be doing about housing."
         intro="Pick your stage and get the checklist for right now — then continue into the housing flow."
       />
+
+      <VariesNote>
+        Timelines vary depending on your location, housing market, and personal circumstances.
+      </VariesNote>
 
       <section className="space-y-3">
         <SectionTitle>Pick your stage</SectionTitle>

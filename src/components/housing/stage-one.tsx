@@ -2,7 +2,7 @@ import { ArrowRight, ShieldAlert, MapPin, Wallet, Clock, FileCheck, Sparkles } f
 import { Button } from "@/components/ui/button";
 import { HOUSING_TYPES, SCAM_PATTERNS, POSTING_PLACES } from "@/data/mock";
 import { useFlow } from "./flow-state";
-import { CautionBadge, SectionTitle, StageHeader } from "./primitives";
+import { CautionBadge, SectionTitle, StageHeader, VariesNote } from "./primitives";
 
 const riskTone: Record<string, string> = {
   "Lowest risk": "bg-verified-soft text-verified",
@@ -18,8 +18,10 @@ export function StageOne() {
       <StageHeader
         eyebrow="Stage 1 · Where to look"
         title="Toronto rentals come in three kinds. Pick your risk before you pick a listing."
-        intro="Most newcomers lose weeks applying to the wrong category. Two minutes here saves that."
+        intro="Applying in the wrong category costs time. A few minutes here helps you aim at the right one."
       />
+
+      <VariesNote />
 
       <section className="space-y-3">
         <SectionTitle>The three categories</SectionTitle>

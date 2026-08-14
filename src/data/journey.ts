@@ -24,21 +24,21 @@ export const JOURNEY_STAGES: JourneyStage[] = [
   {
     id: "pre-landing",
     name: "Pre-landing",
-    window: "Before you fly · 1–3 months out",
+    window: "Before you fly",
     summary:
       "You have no Canadian address, no credit file and no way to view a unit in person. Everything you sign now carries scam risk.",
     housingGoal:
-      "Book 30 days of short-term housing, not a 12-month lease. Use this stage to learn prices, not to commit.",
+      "Consider short-term housing rather than committing to a long lease from abroad. Use this stage to learn the market, not to commit.",
     headsUp:
       "Never e-transfer a deposit for a unit you have not seen on a live video call. This is where most newcomers lose money.",
     tasks: [
       {
-        label: "Book 2–4 weeks of temporary housing",
+        label: "Arrange temporary housing for your arrival",
         detail: "A furnished sublet or extended-stay place gives you a mailing address on day one.",
         kind: "housing",
       },
       {
-        label: "Shortlist 2–3 neighbourhoods",
+        label: "Shortlist a few neighbourhoods",
         detail: "Compare commute, rent range and safety before you can walk them yourself.",
         kind: "housing",
       },
@@ -49,12 +49,12 @@ export const JOURNEY_STAGES: JourneyStage[] = [
       },
       {
         label: "Open a newcomer bank account remotely",
-        detail: "Most major banks let you start the application from abroad — you need it for first + last.",
+        detail: "Some banks let newcomers start an application from abroad. Requirements differ by bank, so check directly.",
         kind: "money",
       },
       {
         label: "Budget for landing costs",
-        detail: "First + last month, transit pass, phone plan, furniture. Plan roughly 3 months of rent.",
+        detail: "First + last month, transit pass, phone plan, furniture. Total landing costs vary widely.",
         kind: "money",
       },
     ],
@@ -62,17 +62,17 @@ export const JOURNEY_STAGES: JourneyStage[] = [
   {
     id: "just-landed",
     name: "Just landed",
-    window: "First 30 days on the ground",
+    window: "Your first weeks on the ground",
     summary:
       "You are in the city on temporary housing. The clock is on: you can now view units, but you still have no credit history.",
     housingGoal:
       "View in person, verify the listing, and sign a real lease before your short-term booking runs out.",
     headsUp:
-      "Apply for your SIN in week one — landlords rarely ask for it, but employers and banks do, and it unblocks everything else.",
+      "Apply for your SIN early — landlords rarely ask for it, but employers and banks do, and it unblocks everything else.",
     tasks: [
       {
         label: "Get your SIN",
-        detail: "Free, same-day at a Service Canada office with your permit and passport.",
+        detail: "Apply through Service Canada with your permit and passport. Processing times vary by office and channel.",
         kind: "admin",
       },
       {
@@ -81,7 +81,7 @@ export const JOURNEY_STAGES: JourneyStage[] = [
         kind: "admin",
       },
       {
-        label: "Book 4–6 viewings in one week",
+        label: "Cluster your viewings",
         detail: "Cluster them by neighbourhood so you can compare the same day.",
         kind: "housing",
       },
@@ -105,7 +105,7 @@ export const JOURNEY_STAGES: JourneyStage[] = [
   {
     id: "settling",
     name: "Settling in",
-    window: "Month 2 and beyond",
+    window: "After you have a lease",
     summary:
       "You have a lease. Now the goal shifts from getting approved to knowing your rights and lowering your costs.",
     housingGoal:
@@ -120,7 +120,7 @@ export const JOURNEY_STAGES: JourneyStage[] = [
       },
       {
         label: "Set up tenant insurance",
-        detail: "Often required by the lease, and usually under $30 a month.",
+        detail: "Often required by the lease. Cost depends on your coverage and provider.",
         kind: "money",
       },
       {
