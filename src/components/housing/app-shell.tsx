@@ -8,7 +8,7 @@ import { StageTwo } from "./stage-two";
 import { StageThree } from "./stage-three";
 import { StageFour } from "./stage-four";
 import { StageFive } from "./stage-five";
-import { AdvisorPanel, AdvisorDock } from "./advisor-chat";
+import { AdvisorPanel } from "./advisor-chat";
 
 /** Static reference sections — browsable, factual, no dynamic recommendations. */
 const SECTIONS = [
@@ -104,8 +104,6 @@ export function AppShell() {
         {/* 3 — AI Advisor */}
         <AdvisorPanel />
       </div>
-
-      <AdvisorDock />
 
       {tool !== null && (
         <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-foreground/40 p-0 sm:p-6">
