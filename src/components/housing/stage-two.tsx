@@ -263,7 +263,7 @@ export function StageTwo() {
             disabled={!chosenNeighborhood}
             onClick={() => advance(3)}
           >
-            Continue with this listing
+            Verify this neighbourhood's fact sheet
             <ArrowRight className="size-4" aria-hidden />
           </Button>
           {!chosenNeighborhood && (

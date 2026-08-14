@@ -1,4 +1,4 @@
-import { ArrowRight, ShieldAlert, MapPin, Wallet, Clock, FileCheck } from "lucide-react";
+import { ArrowRight, ShieldAlert, MapPin, Wallet, Clock, FileCheck, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HOUSING_TYPES, SCAM_PATTERNS, POSTING_PLACES } from "@/data/mock";
 import { useFlow } from "./flow-state";
@@ -92,7 +92,8 @@ export function StageOne() {
       </section>
 
       <Button size="lg" className="w-full sm:w-auto" onClick={() => advance(2)}>
-        Start my search
+        <Sparkles className="size-4" aria-hidden />
+        Ask the advisor to recommend neighbourhoods
         <ArrowRight className="size-4" aria-hidden />
       </Button>
     </div>
