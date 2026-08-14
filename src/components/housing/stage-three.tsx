@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FACT_SHEETS, NEIGHBORHOODS, type FactSheet } from "@/data/mock";
 import { cn } from "@/lib/utils";
+import { SourceCite } from "./source-cite";
 import { useFlow } from "./flow-state";
 import { StageHeader, VerifiedBadge } from "./primitives";
 
@@ -126,7 +127,7 @@ export function StageThree() {
                   <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
                     Safety
                   </h3>
-                  <VerifiedBadge label="Police open data" />
+                  <span className="flex items-center gap-2"><VerifiedBadge label="Police open data" /><SourceCite metric="safetyScore" compact /></span>
                 </div>
                 <p className={cn("font-display text-lg font-semibold", toneClass[sheet.safety.tone])}>
                   {sheet.safety.rating}
@@ -139,7 +140,7 @@ export function StageThree() {
                   <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
                     Nearby rents
                   </h3>
-                  <VerifiedBadge label="Closed-lease records" />
+                  <span className="flex items-center gap-2"><VerifiedBadge label="Closed-lease records" /><SourceCite metric="listedRentDelta" compact /></span>
                 </div>
                 <p className="flex items-center gap-2 font-display text-lg font-semibold">
                   {under ? (
@@ -160,7 +161,7 @@ export function StageThree() {
                   <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
                     Groceries & essentials
                   </h3>
-                  <VerifiedBadge label="Mapped on foot" />
+                  <span className="flex items-center gap-2"><VerifiedBadge label="Mapped on foot" /><SourceCite metric="essentials" compact /></span>
                 </div>
                 <ul className="divide-y divide-border/70">
                   {sheet.essentials.map((e) => (

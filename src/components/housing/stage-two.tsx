@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/dialog";
 import { NEIGHBORHOODS } from "@/data/mock";
 import { cn } from "@/lib/utils";
+import { SourceCite } from "./source-cite";
 import { useFlow, type TransitPref } from "./flow-state";
 import { ScoreTag, SectionTitle, StageHeader } from "./primitives";
 
