@@ -6,7 +6,16 @@ import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { BASE_DOCS, DOC_PATHS, PAYMENT_NOTES } from "@/data/mock";
 import { useFlow } from "./flow-state";
-import { AdvisorBadge, SectionTitle, StageHeader, VariesNote, VerifiedBadge } from "./primitives";
+import {
+  AdvisorBadge,
+  SectionTitle,
+  StageHeader,
+  VariesNote,
+  VerifiedBadge,
+  EvidenceLegend,
+  GuidanceDisclaimer,
+} from "./primitives";
+
 import { SourceCite } from "./source-cite";
 
 const statusLabel = {
@@ -40,6 +49,9 @@ export function StageFive() {
       <VariesNote>
         Landlord and bank requirements vary by provider and circumstance — confirm directly with them.
       </VariesNote>
+      <EvidenceLegend />
+      <GuidanceDisclaimer />
+
 
       <section className="surface space-y-4 p-4">
         <div className="flex items-start justify-between gap-3">

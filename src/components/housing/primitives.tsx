@@ -1,6 +1,67 @@
-import { ShieldCheck, Sparkles, AlertTriangle, Info } from "lucide-react";
+import { ShieldCheck, Sparkles, AlertTriangle, Info, BookMarked, Compass, HelpCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
+
+/** Neutral placeholder for factual items whose source is not yet connected. */
+export function SourcePending({ className }: { className?: string }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full border border-dashed border-border bg-muted/40 px-2.5 py-1 text-xs font-medium text-muted-foreground",
+        className,
+      )}
+      title="No source has been connected for this item in the prototype."
+    >
+      <BookMarked className="size-3.5" aria-hidden />
+      Source to be validated
+    </span>
+  );
+}
+
+/** Marks non-authoritative, general guidance (as opposed to sourced reference material). */
+export function GuidanceBadge({ label = "General guidance", className }: { label?: string; className?: string }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-xs font-semibold text-secondary-foreground",
+        className,
+      )}
+    >
+      <Compass className="size-3.5" aria-hidden />
+      {label}
+    </span>
+  );
+}
+
+/** Explains the three kinds of information used across the prototype. */
+export function EvidenceLegend({ className }: { className?: string }) {
+  return (
+    <div className={cn("surface flex flex-wrap items-center gap-x-4 gap-y-2 p-3", className)}>
+      <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+        <ShieldCheck className="size-3.5 text-verified" aria-hidden />
+        <strong className="font-semibold text-verified">Reference</strong> — factual, points at a source
+      </span>
+      <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+        <Compass className="size-3.5 text-secondary-foreground" aria-hidden />
+        <strong className="font-semibold text-secondary-foreground">Guidance</strong> — general, not authoritative
+      </span>
+      <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+        <Sparkles className="size-3.5 text-advisor" aria-hidden />
+        <strong className="font-semibold text-advisor">AI response</strong> — generated in the Advisor
+      </span>
+    </div>
+  );
+}
+
+export function GuidanceDisclaimer({ className }: { className?: string }) {
+  return (
+    <p className={cn("flex items-start gap-1.5 text-xs leading-relaxed text-muted-foreground", className)}>
+      <HelpCircle className="mt-0.5 size-3.5 shrink-0" aria-hidden />
+      Guidance is informational and may vary by location and individual circumstances.
+    </p>
+  );
+}
+
 
 export function VerifiedBadge({ label = "Data-verified", className }: { label?: string; className?: string }) {
   return (

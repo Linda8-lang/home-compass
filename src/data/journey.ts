@@ -1,5 +1,11 @@
 /**
  * SAMPLE DATA — newcomer immigration journey stages for the prototype.
+ *
+ * Each task declares how it is backed:
+ *  - evidence: "reference" → factual/procedural information that should point at a source.
+ *  - evidence: "guidance"  → general, non-authoritative guidance.
+ * `citation` refers to a key in CITATIONS (src/data/sources.ts). When a reference
+ * item has no citation yet, the UI shows "Source to be validated" — never invent one.
  */
 
 export type JourneyStageId = "pre-landing" | "just-landed" | "settling";
@@ -8,6 +14,8 @@ export type JourneyTask = {
   label: string;
   detail: string;
   kind: "housing" | "admin" | "money" | "life";
+  evidence: "reference" | "guidance";
+  citation?: string;
 };
 
 export type JourneyStage = {
@@ -36,26 +44,33 @@ export const JOURNEY_STAGES: JourneyStage[] = [
         label: "Arrange temporary housing for your arrival",
         detail: "A furnished sublet or extended-stay place gives you a mailing address on day one.",
         kind: "housing",
+        evidence: "guidance",
       },
       {
         label: "Shortlist a few neighbourhoods",
         detail: "Compare commute, rent range and safety before you can walk them yourself.",
         kind: "housing",
+        evidence: "guidance",
       },
       {
         label: "Assemble your landlord document pack",
         detail: "Passport, permit, offer or admission letter, proof of funds, translated references.",
         kind: "admin",
+        evidence: "reference",
       },
       {
         label: "Open a newcomer bank account remotely",
-        detail: "Some banks let newcomers start an application from abroad. Requirements differ by bank, so check directly.",
+        detail:
+          "Some banks let newcomers start an application from abroad. Requirements differ by bank, so check directly.",
         kind: "money",
+        evidence: "reference",
       },
       {
         label: "Budget for landing costs",
         detail: "First + last month, transit pass, phone plan, furniture. Total landing costs vary widely.",
         kind: "money",
+        evidence: "reference",
+        citation: "depositRules",
       },
     ],
   },
@@ -74,31 +89,38 @@ export const JOURNEY_STAGES: JourneyStage[] = [
         label: "Get your SIN",
         detail: "Apply through Service Canada with your permit and passport. Processing times vary by office and channel.",
         kind: "admin",
+        evidence: "reference",
       },
       {
         label: "Activate a Canadian phone number",
         detail: "Landlords screen out foreign numbers — a local number visibly raises your reply rate.",
         kind: "admin",
+        evidence: "guidance",
       },
       {
         label: "Cluster your viewings",
         detail: "Cluster them by neighbourhood so you can compare the same day.",
         kind: "housing",
+        evidence: "guidance",
       },
       {
         label: "Verify each shortlisted address",
-        detail: "Run the fact sheet in Stage 3 before you send any money or sign anything.",
+        detail: "Run the fact sheet in the address verification section before you send any money or sign anything.",
         kind: "housing",
+        evidence: "reference",
+        citation: "safetyScore",
       },
       {
         label: "Get a secured credit card",
         detail: "Starts your Canadian credit file now so your next lease is far easier.",
         kind: "money",
+        evidence: "guidance",
       },
       {
         label: "Apply for provincial health coverage",
         detail: "There can be a waiting period — start it the week you arrive.",
         kind: "life",
+        evidence: "reference",
       },
     ],
   },
@@ -117,26 +139,33 @@ export const JOURNEY_STAGES: JourneyStage[] = [
         label: "Know your tenancy rights",
         detail: "Rent increase limits, notice periods, repairs and entry rules all favour tenants here.",
         kind: "admin",
+        evidence: "reference",
+        citation: "tenancyRights",
       },
       {
         label: "Set up tenant insurance",
         detail: "Often required by the lease. Cost depends on your coverage and provider.",
         kind: "money",
+        evidence: "reference",
       },
       {
         label: "Report rent payments to build credit",
         detail: "Rent-reporting services turn payments you already make into credit history.",
         kind: "money",
+        evidence: "guidance",
       },
       {
         label: "Register with a local clinic",
         detail: "Family doctor waitlists are long — join one before you need it.",
         kind: "life",
+        evidence: "guidance",
       },
       {
         label: "Plan your renewal 90 days out",
         detail: "Decide early whether to stay, renegotiate or move while you have leverage.",
         kind: "housing",
+        evidence: "reference",
+        citation: "rentIncreaseNotice",
       },
     ],
   },
