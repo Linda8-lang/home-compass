@@ -1,6 +1,7 @@
-import { ArrowRight, Plane, Luggage, Home, Info, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Plane, Luggage, Home, Info, CheckCircle2, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { JOURNEY_STAGES, type JourneyStageId } from "@/data/journey";
+import { HOUSING_CONSIDERATIONS } from "@/data/housing-considerations";
 import { useFlow } from "./flow-state";
 import { SectionTitle, StageHeader, CautionBadge } from "./primitives";
 import { cn } from "@/lib/utils";
