@@ -71,10 +71,6 @@ export function StageZero() {
         <SectionTitle aside={<CautionBadge label="Heads up" />}>{stage.name}</SectionTitle>
         <div className="surface space-y-3 p-4">
           <p className="text-sm leading-relaxed text-muted-foreground">{stage.summary}</p>
-          <p className="rounded-lg bg-verified-soft p-3 text-sm leading-relaxed text-verified">
-            <strong className="font-semibold">Housing goal: </strong>
-            {stage.housingGoal}
-          </p>
           <p className="flex gap-2 rounded-lg bg-caution-soft p-3 text-sm leading-relaxed text-caution">
             <Info className="mt-0.5 size-4 shrink-0" aria-hidden />
             {stage.headsUp}
@@ -86,14 +82,14 @@ export function StageZero() {
         <SectionTitle
           aside={
             <span className="text-xs font-medium text-muted-foreground">
-              {done} of {stage.tasks.length} done
+              {done} of {tasks.length} done
             </span>
           }
         >
           Your checklist right now
         </SectionTitle>
         <ul className="surface divide-y divide-border">
-          {stage.tasks.map((t) => {
+          {tasks.map((t) => {
             const key = `${stage.id}:${t.label}`;
             const checked = doneTasks.includes(key);
             return (
