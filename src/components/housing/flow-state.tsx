@@ -83,8 +83,24 @@ export function FlowProvider({ children }: { children: ReactNode }) {
       setVerifiedAddress,
       chosenListing,
       setChosenListing,
+      journeyStage,
+      setJourneyStage,
+      doneTasks,
+      toggleTask: (key) =>
+        setDoneTasks((d) => (d.includes(key) ? d.filter((x) => x !== key) : [...d, key])),
     }),
-    [step, maxStep, filters, searched, compare, chosenNeighborhood, verifiedAddress, chosenListing],
+    [
+      step,
+      maxStep,
+      filters,
+      searched,
+      compare,
+      chosenNeighborhood,
+      verifiedAddress,
+      chosenListing,
+      journeyStage,
+      doneTasks,
+    ],
   );
 
   return <FlowContext.Provider value={value}>{children}</FlowContext.Provider>;
