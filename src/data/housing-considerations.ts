@@ -52,15 +52,27 @@ export const HOUSING_CONSIDERATIONS: ConsiderationCategory[] = [
   },
   {
     id: "commute",
-    title: "Commute & transportation",
+    title: "Commute",
     what:
-      "Distance on a map and travel time are different things. Transit frequency, transfers and time of day all change the answer.",
+      "Distance on a map and travel time are different things. Frequency, transfers and time of day all change the answer.",
     questions: [
-      "How many transfers is the trip you would make most often?",
-      "What does that trip cost per month?",
-      "Would you need a car, and where would it be parked?",
+      "How long is the trip you would make most often, door to door?",
+      "How many transfers does it take, and how reliable are they off-peak?",
+      "How would that trip feel five days a week, in winter?",
     ],
-    tradeoff: "Cheaper rent farther out is partly paid back in fares, time and flexibility.",
+    tradeoff: "Cheaper rent farther out is partly paid back in travel time and flexibility.",
+  },
+  {
+    id: "transportation",
+    title: "Transportation",
+    what:
+      "How you move around is a monthly cost and a constraint: transit passes, bike routes, parking, or car ownership.",
+    questions: [
+      "What would you spend per month on fares, fuel or parking?",
+      "Is there a subway, streetcar or frequent bus within walking distance?",
+      "Would you need a car, and where would it be kept?",
+    ],
+    tradeoff: "Car-dependent areas often have lower rent but higher fixed transport costs.",
   },
   {
     id: "lease",
