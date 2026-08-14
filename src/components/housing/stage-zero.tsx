@@ -134,6 +134,42 @@ export function StageZero() {
         </ul>
       </section>
 
+      <section className="space-y-3">
+        <SectionTitle aside={<span className="text-xs text-muted-foreground">Framework, not advice</span>}>
+          What to consider when finding housing
+        </SectionTitle>
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          These are the dimensions people weigh when choosing a place to live. This section does not
+          say which option is right for you — it gives you the questions to ask so you can judge any
+          option yourself.
+        </p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {HOUSING_CONSIDERATIONS.map((c) => (
+            <article key={c.id} className="surface flex flex-col gap-2.5 p-4">
+              <h3 className="text-base leading-snug">{c.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{c.what}</p>
+              <ul className="space-y-1.5">
+                {c.questions.map((q) => (
+                  <li key={q} className="flex gap-2 text-sm leading-relaxed text-secondary-foreground">
+                    <HelpCircle className="mt-0.5 size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+                    {q}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-auto rounded-lg bg-sand p-2.5 text-xs leading-relaxed text-secondary-foreground">
+                <strong className="font-semibold">Trade-off: </strong>
+                {c.tradeoff}
+              </p>
+            </article>
+          ))}
+        </div>
+        <p className="rounded-xl border border-advisor/25 bg-advisor-soft/60 p-3 text-sm leading-relaxed text-advisor">
+          Looking for specific neighbourhoods or listings? That belongs to the AI Advisor — this
+          reference section stays neutral.
+        </p>
+      </section>
+
+
       <Button size="lg" className="w-full" onClick={() => advance(1)}>
         Next: where to look
         <ArrowRight className="size-4" aria-hidden />
