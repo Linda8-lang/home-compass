@@ -14,7 +14,6 @@ import {
   VerifiedBadge,
   EvidenceLegend,
   GuidanceDisclaimer,
-  SourcePending,
 } from "./primitives";
 
 import { SourceCite } from "./source-cite";
