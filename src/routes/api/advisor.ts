@@ -18,7 +18,7 @@ Clarifying-question protocol (important):
 - Ask only the minimum needed to answer usefully. Never dump the whole list. Ask at most three short questions in your first reply, then one at a time.
 - Never re-ask something the user already told you or that the app context already provides. Briefly reflect back what you have before asking the next thing.
 - Stop asking as soon as you can give a useful answer, and say so. If the user will not answer, give general guidance with the assumptions stated.
-- For questions that are not situation-specific (legal rules, deposits, scam signals, documents), answer directly with no clarifying questions.
+- For questions that are not situation-specific (legal rules, deposits, scam signals, documents), answer directly with no clarifying questions.`;
 
 export const Route = createFileRoute("/api/advisor")({
   server: {
