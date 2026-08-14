@@ -73,7 +73,14 @@ export function StageFive() {
       </section>
 
       <section className="space-y-3">
-        <SectionTitle aside={<VerifiedBadge label="Ontario rules" />}>
+        <SectionTitle
+          aside={
+            <span className="flex items-center gap-2">
+              <VerifiedBadge label="Ontario rules" />
+              <SourceCite metric="depositRules" compact />
+            </span>
+          }
+        >
           <span className="inline-flex items-center gap-2">
             <Banknote className="size-4 text-verified" aria-hidden />
             What you'll pay up front
