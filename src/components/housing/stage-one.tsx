@@ -18,8 +18,10 @@ export function StageOne() {
       <StageHeader
         eyebrow="Stage 1 · Where to look"
         title="Toronto rentals come in three kinds. Pick your risk before you pick a listing."
-        intro="Most newcomers lose weeks applying to the wrong category. Two minutes here saves that."
+        intro="Applying in the wrong category costs time. A few minutes here helps you aim at the right one."
       />
+
+      <VariesNote />
 
       <section className="space-y-3">
         <SectionTitle>The three categories</SectionTitle>
