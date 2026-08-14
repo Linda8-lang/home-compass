@@ -197,7 +197,7 @@ export function StageThree() {
               advance(4);
             }}
           >
-            This looks good, help me apply
+            Ask the advisor to coach my reply
             <ArrowRight className="size-4" aria-hidden />
           </Button>
         </section>
