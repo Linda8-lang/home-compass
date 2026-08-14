@@ -291,7 +291,7 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
       <p className="mt-3 text-sm leading-relaxed text-secondary-foreground">
         Ask anything about your own situation — where to look, whether a listing looks safe,
         deposits and Ontario rules, what to offer without Canadian credit, and how to message a
-        landlord. It asks a few clarifying questions first, and never invents listings or prices.
+        landlord.
       </p>
       <p className="mt-2 text-xs text-advisor">
         AI-generated · guidance is informational and may vary by location and individual
