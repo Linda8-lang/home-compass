@@ -233,7 +233,7 @@ export function AdvisorConversation({ className }: { className?: string }) {
       </div>
 
       <form
-        className="flex items-center gap-2 border-t border-border p-3"
+        className="border-t border-advisor/25 bg-advisor-soft/30 p-3"
         onSubmit={(e) => {
           e.preventDefault();
           const v = input;
@@ -241,17 +241,22 @@ export function AdvisorConversation({ className }: { className?: string }) {
           void send(v);
         }}
       >
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask about deposits, credit, scams…"
-          aria-label="Message the advisor"
-          className="h-11 flex-1 rounded-xl border border-border bg-background px-3 text-sm outline-none focus:border-advisor"
-        />
-        <Button type="submit" size="icon" className="size-11 shrink-0" disabled={pending || !input.trim()}>
-          <Send className="size-4" aria-hidden />
-          <span className="sr-only">Send</span>
-        </Button>
+        <div className="flex items-center gap-2 rounded-2xl border-2 border-advisor/40 bg-background p-1.5 focus-within:border-advisor">
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask the advisor a question…"
+            aria-label="Message the advisor"
+            className="h-11 min-w-0 flex-1 bg-transparent px-2.5 text-sm outline-none"
+          />
+          <Button type="submit" size="icon" className="size-10 shrink-0 rounded-xl" disabled={pending || !input.trim()}>
+            <Send className="size-4" aria-hidden />
+            <span className="sr-only">Send</span>
+          </Button>
+        </div>
+        <p className="mt-2 px-1 text-[11px] text-muted-foreground">
+          Try: deposits, credit history, commute trade-offs, landlord messages.
+        </p>
       </form>
     </div>
   );
