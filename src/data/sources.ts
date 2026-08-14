@@ -123,4 +123,17 @@ export const CITATIONS: Record<string, Citation> = {
     agreement: "Sources agree",
     note: "Ontario allows first and last month's rent plus a refundable key deposit. Damage deposits are not permitted.",
   },
+  tenancyRights: {
+    label: "Tenancy rights & obligations",
+    sourceIds: ["ltb"],
+    agreement: "Sources agree",
+    note: "Entry notice, repair responsibility and eviction grounds come from the Residential Tenancies Act as summarised by the Landlord and Tenant Board.",
+  },
+  rentIncreaseNotice: {
+    label: "Rent increase notice period",
+    sourceIds: ["ltb"],
+    agreement: "Sources agree",
+    note: "Most units require 90 days written notice of a rent increase, and increases are limited by the annual provincial guideline.",
+  },
 };
+
