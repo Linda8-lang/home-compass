@@ -88,13 +88,19 @@ function useAdvisor() {
 /** The conversation surface: transcript, suggestions and composer. */
 export function AdvisorConversation({ className }: { className?: string }) {
   const { advance } = useFlow();
-  const { messages, pending, error, send } = useAdvisor();
+  const { messages, setMessages, pending, error, send } = useAdvisor();
   const [input, setInput] = useState("");
+  const [sample, setSample] = useState<SampleConversation | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, pending]);
+
+  function loadSample(s: SampleConversation) {
+    setSample(s);
+    setMessages(s.turns.map((t) => ({ role: t.role, content: t.content })));
+  }
 
   return (
     <div className={cn("flex min-h-0 flex-1 flex-col", className)}>
@@ -104,8 +110,8 @@ export function AdvisorConversation({ className }: { className?: string }) {
             <p className="text-sm leading-relaxed text-muted-foreground">
               This is the interactive half of the app. Anything that responds to your own
               situation happens here — the static pages hold no curated housing recommendations.
-              The advisor helps you explore and weigh information; it has no listing database and
-              will not invent addresses, prices or availability.
+              The advisor asks a few clarifying questions before giving personalised guidance, and
+              it has no listing database, so it will not invent addresses, prices or availability.
             </p>
 
             <div className="rounded-xl border border-advisor/30 bg-advisor-soft/40 p-3">
@@ -129,6 +135,24 @@ export function AdvisorConversation({ className }: { className?: string }) {
                 Try this conversation
               </button>
             </div>
+
+            <div className="space-y-2">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                Sample conversation states
+              </p>
+              {SAMPLE_CONVERSATIONS.map((s) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => loadSample(s)}
+                  className="surface w-full p-3 text-left hover:border-advisor/50"
+                >
+                  <span className="block text-sm font-medium">{s.label}</span>
+                  <span className="mt-0.5 block text-xs text-muted-foreground">{s.blurb}</span>
+                </button>
+              ))}
+            </div>
+
 
             <div className="grid gap-2">
               <button
