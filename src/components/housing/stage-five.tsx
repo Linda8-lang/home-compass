@@ -40,6 +40,9 @@ export function StageFive() {
       <VariesNote>
         Landlord and bank requirements vary by provider and circumstance — confirm directly with them.
       </VariesNote>
+      <EvidenceLegend />
+      <GuidanceDisclaimer />
+
 
       <section className="surface space-y-4 p-4">
         <div className="flex items-start justify-between gap-3">
