@@ -17,7 +17,7 @@ const STAGE_LABELS: Record<number, string> = {
 };
 
 const SUGGESTIONS = [
-  "Which neighbourhoods fit my budget and commute?",
+  "Can you help me find housing near my university?",
   "I have no Canadian credit — what do I offer instead?",
   "Is this deposit request legal in Ontario?",
   "Write a first message to a landlord for me.",
@@ -102,9 +102,33 @@ export function AdvisorConversation({ className }: { className?: string }) {
         {messages.length === 0 && (
           <div className="space-y-4">
             <p className="text-sm leading-relaxed text-muted-foreground">
-              This is the interactive half of the app. Ask anything about renting in Toronto as a
-              newcomer — or open the evaluation framework and read a listing with you.
+              This is the interactive half of the app. Anything that responds to your own
+              situation happens here — the static pages hold no curated housing recommendations.
+              The advisor helps you explore and weigh information; it has no listing database and
+              will not invent addresses, prices or availability.
             </p>
+
+            <div className="rounded-xl border border-advisor/30 bg-advisor-soft/40 p-3">
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-advisor">
+                Example interaction
+              </p>
+              <p className="text-sm leading-relaxed text-secondary-foreground">
+                <span className="font-semibold">You: </span>
+                “Can you help me find housing near my university?”
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-secondary-foreground">
+                <span className="font-semibold">AI Advisor: </span>
+                “Sure. To narrow this down, what is your university, preferred monthly budget, and
+                maximum commute time?”
+              </p>
+              <button
+                type="button"
+                onClick={() => void send("Can you help me find housing near my university?")}
+                className="mt-3 text-xs font-semibold text-advisor underline underline-offset-2"
+              >
+                Try this conversation
+              </button>
+            </div>
 
             <div className="grid gap-2">
               <button
