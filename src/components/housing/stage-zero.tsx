@@ -21,7 +21,10 @@ const kindTone: Record<string, string> = {
 export function StageZero() {
   const { advance, journeyStage, setJourneyStage, doneTasks, toggleTask } = useFlow();
   const stage = JOURNEY_STAGES.find((s) => s.id === journeyStage) ?? JOURNEY_STAGES[0]!;
-  const done = stage.tasks.filter((t) => doneTasks.includes(`${stage.id}:${t.label}`)).length;
+  // Housing-specific tasks are intentionally excluded: this checklist stays
+  // neutral and does not recommend where or what to rent.
+  const tasks = stage.tasks.filter((t) => t.kind !== "housing");
+  const done = tasks.filter((t) => doneTasks.includes(`${stage.id}:${t.label}`)).length;
 
   return (
     <div className="space-y-10">
