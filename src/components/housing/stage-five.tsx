@@ -6,8 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { BASE_DOCS, DOC_PATHS, PAYMENT_NOTES } from "@/data/mock";
 import { useFlow } from "./flow-state";
-import { AdvisorBadge, SectionTitle, StageHeader, VariesNote } from "./primitives";
-import { VerifiedBadge } from "./primitives";
+import { AdvisorBadge, SectionTitle, StageHeader, VariesNote, VerifiedBadge } from "./primitives";
 import { SourceCite } from "./source-cite";
 
 const statusLabel = {
