@@ -2,7 +2,7 @@ import { ArrowRight, ShieldAlert, MapPin, Wallet, Clock, FileCheck, Sparkles } f
 import { Button } from "@/components/ui/button";
 import { HOUSING_TYPES, SCAM_PATTERNS, POSTING_PLACES } from "@/data/mock";
 import { useFlow } from "./flow-state";
-import { CautionBadge, SectionTitle, StageHeader } from "./primitives";
+import { CautionBadge, SectionTitle, StageHeader, VariesNote } from "./primitives";
 
 const riskTone: Record<string, string> = {
   "Lowest risk": "bg-verified-soft text-verified",

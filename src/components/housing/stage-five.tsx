@@ -6,7 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { BASE_DOCS, DOC_PATHS, PAYMENT_NOTES } from "@/data/mock";
 import { useFlow } from "./flow-state";
-import { AdvisorBadge, SectionTitle, StageHeader, VerifiedBadge } from "./primitives";
+import { AdvisorBadge, SectionTitle, StageHeader, VariesNote } from "./primitives";
+import { VerifiedBadge } from "./primitives";
 import { SourceCite } from "./source-cite";
 
 const statusLabel = {
@@ -36,6 +37,10 @@ export function StageFive() {
         title="Get your documents in order before you view."
         intro={`Built for your situation — ${statusLabel[filters.status]} moving to Toronto. We won't ask again.`}
       />
+
+      <VariesNote>
+        Landlord and bank requirements vary by provider and circumstance — confirm directly with them.
+      </VariesNote>
 
       <section className="surface space-y-4 p-4">
         <div className="flex items-start justify-between gap-3">
