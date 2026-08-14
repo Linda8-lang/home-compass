@@ -172,7 +172,7 @@ export function StageZero() {
 
 
       <section className="space-y-3">
-        <SectionTitle aside={<span className="text-xs text-muted-foreground">Framework, not advice</span>}>
+        <SectionTitle aside={<GuidanceBadge label="Framework, not advice" />}>
           What to consider when finding housing
         </SectionTitle>
         <p className="text-sm leading-relaxed text-muted-foreground">
@@ -193,18 +193,23 @@ export function StageZero() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-auto rounded-lg bg-sand p-2.5 text-xs leading-relaxed text-secondary-foreground">
+              <p className="rounded-lg bg-sand p-2.5 text-xs leading-relaxed text-secondary-foreground">
                 <strong className="font-semibold">Trade-off: </strong>
                 {c.tradeoff}
               </p>
+              <div className="mt-auto pt-1">
+                <SourcePending />
+              </div>
             </article>
           ))}
         </div>
+        <GuidanceDisclaimer />
         <p className="rounded-xl border border-advisor/25 bg-advisor-soft/60 p-3 text-sm leading-relaxed text-advisor">
           Looking for specific neighbourhoods or listings? That belongs to the AI Advisor — this
           reference section stays neutral.
         </p>
       </section>
+
 
 
       <Button size="lg" className="w-full" onClick={() => advance(1)}>
