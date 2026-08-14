@@ -105,51 +105,71 @@ export function StageZero() {
         >
           Your checklist right now
         </SectionTitle>
+        <EvidenceLegend />
         <ul className="surface divide-y divide-border">
           {tasks.map((t) => {
             const key = `${stage.id}:${t.label}`;
             const checked = doneTasks.includes(key);
+            const cited = t.citation && CITATIONS[t.citation] ? t.citation : null;
             return (
-              <li key={t.label}>
+              <li
+                key={t.label}
+                className={cn(
+                  "flex items-start gap-3 border-l-2 p-4",
+                  t.evidence === "reference" ? "border-l-verified/60" : "border-l-transparent",
+                )}
+              >
                 <button
                   type="button"
                   onClick={() => toggleTask(key)}
                   aria-pressed={checked}
-                  className="flex w-full items-start gap-3 p-4 text-left"
+                  aria-label={`Mark "${t.label}" as done`}
+                  className="mt-0.5 shrink-0"
                 >
                   <CheckCircle2
-                    className={cn("mt-0.5 size-5 shrink-0", checked ? "text-verified" : "text-border")}
+                    className={cn("size-5", checked ? "text-verified" : "text-border")}
                     aria-hidden
                   />
-                  <span className="min-w-0 flex-1">
-                    <span className="flex flex-wrap items-center gap-2">
-                      <span
-                        className={cn(
-                          "text-sm font-medium",
-                          checked ? "text-muted-foreground line-through" : "text-foreground",
-                        )}
-                      >
-                        {t.label}
-                      </span>
-                      <span
-                        className={cn(
-                          "rounded-full px-2 py-0.5 text-[11px] font-semibold capitalize",
-                          kindTone[t.kind],
-                        )}
-                      >
-                        {t.kind}
-                      </span>
-                    </span>
-                    <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
-                      {t.detail}
-                    </span>
-                  </span>
                 </button>
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span
+                      className={cn(
+                        "text-sm font-medium",
+                        checked ? "text-muted-foreground line-through" : "text-foreground",
+                      )}
+                    >
+                      {t.label}
+                    </span>
+                    <span
+                      className={cn(
+                        "rounded-full px-2 py-0.5 text-[11px] font-semibold capitalize",
+                        kindTone[t.kind],
+                      )}
+                    >
+                      {t.kind}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{t.detail}</p>
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                    {t.evidence === "reference" ? (
+                      cited ? (
+                        <SourceCite metric={cited} />
+                      ) : (
+                        <SourcePending />
+                      )
+                    ) : (
+                      <GuidanceBadge />
+                    )}
+                  </div>
+                </div>
               </li>
             );
           })}
         </ul>
+        <GuidanceDisclaimer />
       </section>
+
 
       <section className="space-y-3">
         <SectionTitle aside={<span className="text-xs text-muted-foreground">Framework, not advice</span>}>
