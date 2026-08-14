@@ -38,8 +38,10 @@ type FlowValue = {
 const FlowContext = createContext<FlowValue | null>(null);
 
 export function FlowProvider({ children }: { children: ReactNode }) {
-  const [step, setStep] = useState(1);
-  const [maxStep, setMaxStep] = useState(1);
+  const [step, setStep] = useState(0);
+  const [maxStep, setMaxStep] = useState(0);
+  const [journeyStage, setJourneyStage] = useState<JourneyStageId>("pre-landing");
+  const [doneTasks, setDoneTasks] = useState<string[]>([]);
   const [filters, setFilters] = useState<Filters>({
     city: "Toronto",
     budget: 2000,
