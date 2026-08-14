@@ -2,7 +2,7 @@ import { Check, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useFlow } from "./flow-state";
 
-const STEPS = ["Where to look", "Search", "Verify", "Negotiate", "Apply"];
+const STEPS = ["Your stage", "Where to look", "Search", "Verify", "Negotiate", "Apply"];
 
 export function StepIndicator() {
   const { step, maxStep, goTo } = useFlow();
@@ -18,13 +18,13 @@ export function StepIndicator() {
             <span className="font-display text-sm font-semibold">Housing Assistant</span>
           </div>
           <span className="text-xs font-medium text-muted-foreground">
-            Stage {step} of 5 · {STEPS[step - 1]}
+            Stage {step} of 5 · {STEPS[step]}
           </span>
         </div>
 
         <ol className="mt-3 flex items-center gap-1.5" aria-label="Progress">
           {STEPS.map((label, i) => {
-            const n = i + 1;
+            const n = i;
             const done = n < step;
             const current = n === step;
             const reachable = n <= maxStep;

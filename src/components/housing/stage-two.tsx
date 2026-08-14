@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/dialog";
 import { NEIGHBORHOODS } from "@/data/mock";
 import { cn } from "@/lib/utils";
+import { SourceCite } from "./source-cite";
 import { useFlow, type TransitPref } from "./flow-state";
 import { ScoreTag, SectionTitle, StageHeader } from "./primitives";
 
@@ -235,6 +236,9 @@ export function StageTwo() {
                       icon={<Timer className="size-3.5" aria-hidden />}
                       label={`${n.commuteMins} min commute`}
                     />
+                    <SourceCite metric="neighborhoodRent" />
+                    <SourceCite metric="transitScore" />
+                    <SourceCite metric="safetyScore" />
                   </div>
 
                   <div className="mt-3 flex items-center justify-between gap-2">

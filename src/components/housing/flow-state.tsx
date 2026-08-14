@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 import type { NewcomerStatus } from "@/data/mock";
+import type { JourneyStageId } from "@/data/journey";
 
 export type TransitPref = "subway" | "car" | "walk";
 
@@ -28,13 +29,19 @@ type FlowValue = {
   setVerifiedAddress: (a: string | null) => void;
   chosenListing: string | null;
   setChosenListing: (id: string | null) => void;
+  journeyStage: JourneyStageId;
+  setJourneyStage: (s: JourneyStageId) => void;
+  doneTasks: string[];
+  toggleTask: (key: string) => void;
 };
 
 const FlowContext = createContext<FlowValue | null>(null);
 
 export function FlowProvider({ children }: { children: ReactNode }) {
-  const [step, setStep] = useState(1);
-  const [maxStep, setMaxStep] = useState(1);
+  const [step, setStep] = useState(0);
+  const [maxStep, setMaxStep] = useState(0);
+  const [journeyStage, setJourneyStage] = useState<JourneyStageId>("pre-landing");
+  const [doneTasks, setDoneTasks] = useState<string[]>([]);
   const [filters, setFilters] = useState<Filters>({
     city: "Toronto",
     budget: 2000,
@@ -76,8 +83,24 @@ export function FlowProvider({ children }: { children: ReactNode }) {
       setVerifiedAddress,
       chosenListing,
       setChosenListing,
+      journeyStage,
+      setJourneyStage,
+      doneTasks,
+      toggleTask: (key) =>
+        setDoneTasks((d) => (d.includes(key) ? d.filter((x) => x !== key) : [...d, key])),
     }),
-    [step, maxStep, filters, searched, compare, chosenNeighborhood, verifiedAddress, chosenListing],
+    [
+      step,
+      maxStep,
+      filters,
+      searched,
+      compare,
+      chosenNeighborhood,
+      verifiedAddress,
+      chosenListing,
+      journeyStage,
+      doneTasks,
+    ],
   );
 
   return <FlowContext.Provider value={value}>{children}</FlowContext.Provider>;
