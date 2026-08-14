@@ -21,7 +21,7 @@ export function SourceCite({
   const [open, setOpen] = useState(false);
   const citation = CITATIONS[metric];
   if (!citation) return null;
-  const sources = citation.sourceIds.map((id) => SOURCES[id]).filter(Boolean);
+  const sources = citation.sourceIds.flatMap((id) => (SOURCES[id] ? [SOURCES[id]!] : []));
 
   return (
     <>
