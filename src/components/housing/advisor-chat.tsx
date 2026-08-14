@@ -306,7 +306,7 @@ export function AdvisorPanel() {
   return (
     <aside
       aria-label="Ask the AI Advisor"
-      className="flex h-[70vh] flex-col overflow-hidden rounded-2xl border-2 border-advisor/35 bg-card shadow-sm lg:sticky lg:top-14 lg:h-[calc(100vh-3.5rem)]"
+      className="order-first flex h-[70vh] flex-col lg:order-none overflow-hidden rounded-2xl border-2 border-advisor/35 bg-card shadow-sm lg:sticky lg:top-14 lg:h-[calc(100vh-3.5rem)]"
     >
       <AdvisorHeader />
       <AdvisorConversation />
