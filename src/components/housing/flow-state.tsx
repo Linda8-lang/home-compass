@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 import type { NewcomerStatus } from "@/data/mock";
+import type { JourneyStageId } from "@/data/journey";
 
 export type TransitPref = "subway" | "car" | "walk";
 
