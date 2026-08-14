@@ -4,7 +4,7 @@ import { AppShell } from "@/components/housing/app-shell";
 
 const title = "Housing Assistant — Find and secure a home in Toronto";
 const description =
-  "A newcomer guide to Toronto housing: a sourced static reference of stages, checklists and fact sheets, plus an AI Advisor for open questions and neighbourhood recommendations.";
+  "A newcomer guide to Toronto housing: a sourced static reference of stages, checklists and fact sheets, plus an AI Advisor for open questions and evaluating options.";
 
 export const Route = createFileRoute("/")({
   head: () => ({

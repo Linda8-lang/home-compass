@@ -10,7 +10,7 @@ type Msg = { role: "user" | "assistant"; content: string };
 const STAGE_LABELS: Record<number, string> = {
   0: "browsing the immigration-stage checklist",
   1: "reading the where-to-look guide",
-  2: "using the advisor's neighbourhood recommender",
+  2: "using the housing evaluation framework",
   3: "verifying a specific address",
   4: "using the advisor's listing & negotiation coach",
   5: "preparing their application documents",
@@ -103,7 +103,7 @@ export function AdvisorConversation({ className }: { className?: string }) {
           <div className="space-y-4">
             <p className="text-sm leading-relaxed text-muted-foreground">
               This is the interactive half of the app. Ask anything about renting in Toronto as a
-              newcomer — or let the advisor recommend neighbourhoods and read a listing with you.
+              newcomer — or open the evaluation framework and read a listing with you.
             </p>
 
             <div className="grid gap-2">
@@ -113,7 +113,7 @@ export function AdvisorConversation({ className }: { className?: string }) {
                 className="flex items-center gap-2.5 rounded-xl border border-advisor/40 bg-advisor-soft/60 p-3 text-left text-sm font-medium text-advisor transition-colors hover:bg-advisor-soft"
               >
                 <Map className="size-4 shrink-0" aria-hidden />
-                Recommend neighbourhoods for me
+                How to evaluate housing options
               </button>
               <button
                 type="button"
