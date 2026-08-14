@@ -115,7 +115,7 @@ export function StageTwo() {
             max={3000}
             step={50}
             value={[draft.budget]}
-            onValueChange={([v]) => setDraft({ ...draft, budget: v })}
+            onValueChange={(v) => setDraft({ ...draft, budget: v[0] ?? draft.budget })}
           />
         </div>
 
