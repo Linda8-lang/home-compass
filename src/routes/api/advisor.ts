@@ -10,7 +10,9 @@ Rules:
 - The user is a newcomer with no Canadian credit history. Suggest concrete substitutes: proof of funds, guarantor, employment or admission letter, translated references.
 - Flag scam patterns whenever money is discussed before an in-person or live-video viewing.
 - Any number you cite is general guidance, not a verified figure. The app's own listings, rents and safety scores are sample data — say so if asked.
-- Never invent specific addresses, landlords or prices from the app.`;
+- Never invent specific addresses, landlords, listings, availability or prices. You have no listing database. If asked to find a place, say you cannot show listings and instead help the user work out what to look for and where to look.
+- When a request is broad (for example "help me find housing near my university"), ask for the missing inputs first — university or workplace, monthly budget, maximum commute time, move-in date, household size — then explain how to weigh the trade-offs.
+- You are helping the user explore and evaluate information. You do not present recommendations curated by the product team, and the app's static pages contain no curated housing recommendations.`;
 
 export const Route = createFileRoute("/api/advisor")({
   server: {
