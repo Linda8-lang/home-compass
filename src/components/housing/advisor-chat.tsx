@@ -3,6 +3,7 @@ import { Sparkles, X, Send, Loader2, Map, FileSearch } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useFlow } from "./flow-state";
 import { JOURNEY_STAGES } from "@/data/journey";
+import { SAMPLE_CONVERSATIONS, type SampleConversation } from "@/data/advisor-samples";
 import { cn } from "@/lib/utils";
 
 type Msg = { role: "user" | "assistant"; content: string };
