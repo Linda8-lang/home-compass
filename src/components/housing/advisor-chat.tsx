@@ -196,7 +196,10 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
         </span>
         <div>
           <h2 className="font-display text-base leading-tight">AI Advisor</h2>
-          <p className="text-xs text-advisor">Interactive · guidance, not legal advice</p>
+          <p className="text-xs text-advisor">
+            AI-generated · guidance is informational and may vary by location and individual
+            circumstances
+          </p>
         </div>
       </div>
       {onClose && (
