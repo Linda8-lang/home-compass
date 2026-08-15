@@ -204,10 +204,6 @@ export function StageZero() {
           ))}
         </div>
         <GuidanceDisclaimer />
-        <p className="rounded-xl border border-advisor/25 bg-advisor-soft/60 p-3 text-sm leading-relaxed text-advisor">
-          Looking for specific neighbourhoods or listings? That belongs to the AI Advisor — this
-          reference section stays neutral.
-        </p>
       </section>
 
 
