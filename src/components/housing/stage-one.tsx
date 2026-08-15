@@ -1,6 +1,20 @@
-import { ArrowRight, ShieldAlert, MapPin, Wallet, Clock, FileCheck, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  ShieldAlert,
+  MapPin,
+  Wallet,
+  Clock,
+  FileCheck,
+  Sparkles,
+  GraduationCap,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { HOUSING_TYPES, SCAM_PATTERNS, POSTING_PLACES } from "@/data/mock";
+import {
+  HOUSING_TYPES,
+  SCAM_PATTERNS,
+  POSTING_PLACES,
+  STUDENT_POSTING_PLACES,
+} from "@/data/mock";
 import { useFlow } from "./flow-state";
 import { CautionBadge, SectionTitle, StageHeader, VariesNote } from "./primitives";
 
