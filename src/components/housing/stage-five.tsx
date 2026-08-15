@@ -14,6 +14,7 @@ import {
   VerifiedBadge,
   EvidenceLegend,
   GuidanceDisclaimer,
+  Disclosure,
 } from "./primitives";
 
 import { SourceCite } from "./source-cite";
@@ -39,7 +40,7 @@ export function StageFive() {
   }
 
   return (
-    <div className="space-y-9 pb-8">
+    <div className="space-y-6 pb-8">
       <StageHeader
         eyebrow="Stage 5 · Application prep"
         title="Get your documents in order before you view."
@@ -49,8 +50,6 @@ export function StageFive() {
       <VariesNote>
         Landlord and bank requirements vary by provider and circumstance — confirm directly with them.
       </VariesNote>
-      <EvidenceLegend />
-      <GuidanceDisclaimer />
 
 
       <section className="surface space-y-4 p-4">
@@ -89,29 +88,23 @@ export function StageFive() {
         )}
       </section>
 
-      <section className="space-y-3">
-        <SectionTitle
-          aside={
-            <span className="flex items-center gap-2">
-              <VerifiedBadge label="Ontario rules" />
-              <SourceCite metric="depositRules" compact />
-            </span>
-          }
-        >
-          <span className="inline-flex items-center gap-2">
-            <Banknote className="size-4 text-verified" aria-hidden />
-            What you'll pay up front
-          </span>
-        </SectionTitle>
+      <Disclosure
+        title="What you'll pay up front"
+        summary={`${PAYMENT_NOTES.length} things to expect before you get keys`}
+      >
+        <div className="flex flex-wrap items-center gap-2">
+          <VerifiedBadge label="Ontario rules" />
+          <SourceCite metric="depositRules" compact />
+        </div>
         <ul className="surface divide-y divide-border">
           {PAYMENT_NOTES.map((n) => (
-            <li key={n.title} className="p-4">
+            <li key={n.title} className="p-3.5">
               <p className="text-sm font-semibold text-foreground">{n.title}</p>
               <p className="text-sm leading-relaxed text-muted-foreground">{n.detail}</p>
             </li>
           ))}
         </ul>
-      </section>
+      </Disclosure>
 
       <section className="space-y-3">
         <SectionTitle
@@ -149,6 +142,14 @@ export function StageFive() {
           </p>
         )}
       </section>
+
+      <Disclosure
+        title="How to read this section"
+        summary="Reference, guidance and AI responses are marked differently"
+      >
+        <EvidenceLegend />
+        <GuidanceDisclaimer />
+      </Disclosure>
     </div>
   );
 }
