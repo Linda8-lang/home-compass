@@ -47,20 +47,18 @@ export function StageZero() {
   const tasks = stage.tasks.filter((t) => t.kind !== "housing");
   const done = tasks.filter((t) => doneTasks.includes(`${stage.id}:${t.label}`)).length;
 
+  const situation = SITUATIONS.find((s) => s.id === filters.status) ?? SITUATIONS[2]!;
+
   return (
-    <div className="space-y-10">
+    <div className="space-y-6">
       <StageHeader
         eyebrow="Stage 0 · Your immigration stage"
-        title="Where you are in the move changes what you should be doing about housing."
-        intro="Pick your stage and get the checklist for right now — then continue into the housing flow."
+        title="Where are you in the move?"
+        intro="Pick your stage — everything below adapts to it. Open only the parts you need right now."
       />
 
-      <VariesNote>
-        Timelines vary depending on your location, housing market, and personal circumstances.
-      </VariesNote>
-
+      {/* Primary question for this screen */}
       <section className="space-y-3">
-        <SectionTitle>Pick your stage</SectionTitle>
         <div className="grid gap-3 sm:grid-cols-3">
           {JOURNEY_STAGES.map((s) => {
             const Icon = icons[s.id];
@@ -90,10 +88,22 @@ export function StageZero() {
             );
           })}
         </div>
+        <p className="flex gap-2 rounded-lg bg-caution-soft p-3 text-sm leading-relaxed text-caution">
+          <Info className="mt-0.5 size-4 shrink-0" aria-hidden />
+          {stage.headsUp}
+        </p>
+        <LearnMore label={`More about “${stage.name}”`}>
+          <p className="text-sm leading-relaxed text-muted-foreground">{stage.summary}</p>
+          <VariesNote>
+            Timelines vary depending on your location, housing market, and personal circumstances.
+          </VariesNote>
+        </LearnMore>
       </section>
 
-      <section className="space-y-3">
-        <SectionTitle>Your situation</SectionTitle>
+      <Disclosure
+        title="Your situation"
+        summary={`Currently: ${situation.label}. Changes which resources you see.`}
+      >
         <div className="grid gap-3 sm:grid-cols-3">
           {SITUATIONS.map((s) => {
             const active = filters.status === s.id;
@@ -118,30 +128,13 @@ export function StageZero() {
           Optional. Student-specific resources such as university housing boards are only shown if
           you select “Student” — everyone else sees general housing resources.
         </p>
-      </section>
+      </Disclosure>
 
-      <section className="space-y-3">
-        <SectionTitle aside={<CautionBadge label="Heads up" />}>{stage.name}</SectionTitle>
-        <div className="surface space-y-3 p-4">
-          <p className="text-sm leading-relaxed text-muted-foreground">{stage.summary}</p>
-          <p className="flex gap-2 rounded-lg bg-caution-soft p-3 text-sm leading-relaxed text-caution">
-            <Info className="mt-0.5 size-4 shrink-0" aria-hidden />
-            {stage.headsUp}
-          </p>
-        </div>
-      </section>
-
-      <section className="space-y-3">
-        <SectionTitle
-          aside={
-            <span className="text-xs font-medium text-muted-foreground">
-              {done} of {tasks.length} done
-            </span>
-          }
-        >
-          Your checklist right now
-        </SectionTitle>
-        <EvidenceLegend />
+      <Disclosure
+        title="Your checklist right now"
+        summary={`${tasks.length} tasks for ${stage.name} · ${done} done`}
+        defaultOpen
+      >
         <ul className="surface divide-y divide-border">
           {tasks.map((t) => {
             const key = `${stage.id}:${t.label}`;
@@ -151,7 +144,7 @@ export function StageZero() {
               <li
                 key={t.label}
                 className={cn(
-                  "flex items-start gap-3 border-l-2 p-4",
+                  "flex items-start gap-3 border-l-2 p-3.5",
                   t.evidence === "reference" ? "border-l-verified/60" : "border-l-transparent",
                 )}
               >
@@ -186,63 +179,71 @@ export function StageZero() {
                       {t.kind}
                     </span>
                   </div>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{t.detail}</p>
-                  <div className="mt-2 flex flex-wrap items-center gap-2">
-                    {t.evidence === "reference" ? (
-                      cited ? (
-                        <SourceCite metric={cited} />
+                  <LearnMore className="mt-1.5" label="Details & source">
+                    <p className="text-sm leading-relaxed text-muted-foreground">{t.detail}</p>
+                    <div className="flex flex-wrap items-center gap-2">
+                      {t.evidence === "reference" ? (
+                        cited ? (
+                          <SourceCite metric={cited} />
+                        ) : (
+                          <SourcePending />
+                        )
                       ) : (
-                        <SourcePending />
-                      )
-                    ) : (
-                      <GuidanceBadge />
-                    )}
-                  </div>
+                        <GuidanceBadge />
+                      )}
+                    </div>
+                  </LearnMore>
                 </div>
               </li>
             );
           })}
         </ul>
         <GuidanceDisclaimer />
-      </section>
+      </Disclosure>
 
-
-      <section className="space-y-3">
-        <SectionTitle aside={<GuidanceBadge label="Framework, not advice" />}>
-          How to Evaluate Housing Options
-        </SectionTitle>
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          These are the dimensions people weigh when choosing a place to live. This section does not
-          say which option is right for you — it gives you the questions to ask so you can judge any
-          option yourself.
-        </p>
+      <Disclosure
+        title="How to Evaluate Housing Options"
+        summary={`${HOUSING_CONSIDERATIONS.length} dimensions to weigh — questions, not recommendations`}
+        aside={<GuidanceBadge label="Framework" className="hidden sm:inline-flex" />}
+      >
         <div className="grid gap-3 sm:grid-cols-2">
           {HOUSING_CONSIDERATIONS.map((c) => (
-            <article key={c.id} className="surface flex flex-col gap-2.5 p-4">
+            <article key={c.id} className="surface flex flex-col gap-2 p-4">
               <h3 className="text-base leading-snug">{c.title}</h3>
               <p className="text-sm leading-relaxed text-muted-foreground">{c.what}</p>
-              <ul className="space-y-1.5">
-                {c.questions.map((q) => (
-                  <li key={q} className="flex gap-2 text-sm leading-relaxed text-secondary-foreground">
-                    <HelpCircle className="mt-0.5 size-3.5 shrink-0 text-muted-foreground" aria-hidden />
-                    {q}
-                  </li>
-                ))}
-              </ul>
-              <p className="rounded-lg bg-sand p-2.5 text-xs leading-relaxed text-secondary-foreground">
-                <strong className="font-semibold">Trade-off: </strong>
-                {c.tradeoff}
-              </p>
-              <div className="mt-auto pt-1">
+              <LearnMore label="Questions & trade-off">
+                <ul className="space-y-1.5">
+                  {c.questions.map((q) => (
+                    <li
+                      key={q}
+                      className="flex gap-2 text-sm leading-relaxed text-secondary-foreground"
+                    >
+                      <HelpCircle
+                        className="mt-0.5 size-3.5 shrink-0 text-muted-foreground"
+                        aria-hidden
+                      />
+                      {q}
+                    </li>
+                  ))}
+                </ul>
+                <p className="rounded-lg bg-sand p-2.5 text-xs leading-relaxed text-secondary-foreground">
+                  <strong className="font-semibold">Trade-off: </strong>
+                  {c.tradeoff}
+                </p>
                 <SourcePending />
-              </div>
+              </LearnMore>
             </article>
           ))}
         </div>
         <GuidanceDisclaimer />
-      </section>
+      </Disclosure>
 
-
+      <Disclosure
+        title="How to read this section"
+        summary="Reference, guidance and AI responses are marked differently"
+      >
+        <EvidenceLegend />
+      </Disclosure>
 
       <Button size="lg" className="w-full" onClick={() => advance(1)}>
         Next: where to look
