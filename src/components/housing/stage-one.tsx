@@ -25,7 +25,8 @@ const riskTone: Record<string, string> = {
 };
 
 export function StageOne() {
-  const { advance } = useFlow();
+  const { advance, filters } = useFlow();
+  const isStudent = filters.status === "student";
 
   return (
     <div className="space-y-10">
