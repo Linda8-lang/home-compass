@@ -19,7 +19,87 @@ ever appears in the static lane.
 
 ---
 
-## STEP 1 — Identify the Signal
+## User flow (end to end)
+
+```text
+Land on app
+   │
+   ▼
+Stage 0 — Orientation hub
+   ├─ pick immigration stage: Pre-landing │ Just landed │ Settling
+   ├─ pick situation: Student │ Working │ Other newcomer
+   └─ work the stage checklist (each item: Reference / Guidance + Source)
+   │
+   ▼
+Stage 1 — Where to look
+   └─ managed vs. owner-listed sites, scam patterns
+      (student housing boards appear ONLY if situation = Student)
+   │
+   ▼
+Stage 2 — How to evaluate housing options
+   └─ dimensions: cost · location · commute · transport · type ·
+      lease requirements · proximity · daily necessities  → user notes worksheet
+   │
+   ▼
+Stage 3 — Verify a place
+   └─ fact-sheet checks, what to ask, what documents to expect
+   │
+   ▼
+Stage 4 — Talk to the landlord
+   └─ hands off to the AI Advisor (listing coach / message coach)
+   │
+   ▼
+Stage 5 — Application prep
+   └─ documents, credit-substitute pack for newcomers
+
+  ⟂ At any point, the AI Advisor column is available:
+      ask question → advisor asks the minimum clarifying questions
+      → streams guidance (never listings, never prices)
+```
+
+Navigation is non-linear: every stage is unlocked, the index column jumps anywhere.
+
+---
+
+## Data flow (end to end)
+
+```text
+┌───────────────────────── BROWSER ─────────────────────────┐
+│                                                            │
+│  Static data files (bundled, no network)                   │
+│   journey.ts · mock.ts · housing-considerations.ts         │
+│   sources.ts · advisor-samples.ts                          │
+│            │ read                                          │
+│            ▼                                               │
+│      FlowProvider (React state, in-memory only)            │
+│      { step, immigrationStage, situation, doneTasks }      │
+│            │ filters/conditions                            │
+│            ▼                                               │
+│   Column 1 Index │ Column 2 Static reference │ Column 3 AI │
+│                                                  │         │
+│                                    last 12 turns + stage   │
+└──────────────────────────────────────────────────┼─────────┘
+                                                   ▼
+                                    POST /api/advisor  (server route)
+                                      1 auth key check
+                                      2 validate body
+                                      3 truncate history → 12 turns
+                                      4 prepend guardrail system prompt
+                                      5 prepend app-context line
+                                      6 call Lovable AI Gateway (stream)
+                                                   │
+                                                   ▼
+                                    google/gemini-2.5-flash (SSE)
+                                                   │
+                                    text deltas ◄──┘
+                                                   ▼
+                                    Advisor bubble grows token by token
+```
+
+Nothing is persisted: no database, no account, no PII. A refresh resets state.
+
+---
+
 
 The events that start a background (non-obvious) flow:
 
