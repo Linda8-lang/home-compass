@@ -14,7 +14,7 @@ import { FACT_SHEETS, NEIGHBORHOODS, type FactSheet } from "@/data/mock";
 import { cn } from "@/lib/utils";
 import { SourceCite } from "./source-cite";
 import { useFlow } from "./flow-state";
-import { StageHeader, VerifiedBadge } from "./primitives";
+import { StageHeader, VerifiedBadge, LearnMore } from "./primitives";
 
 const toneClass: Record<string, string> = {
   good: "text-verified",
@@ -54,8 +54,8 @@ export function StageThree() {
     <div className="space-y-8">
       <StageHeader
         eyebrow="Stage 3 · Verification"
-        title="Before you visit, check the address."
-        intro="Every number below comes from a source we can name — not from a chatbot's guess."
+        title="Is this address what the listing claims?"
+        intro="Paste an address for a short verified summary. Open a section for the detail behind it."
       />
 
       <section className="warm-gradient rounded-2xl border border-border p-5 shadow-soft sm:p-7">
@@ -85,7 +85,8 @@ export function StageThree() {
             Verify
           </Button>
         </form>
-        <div className="mt-3 flex flex-wrap gap-2">
+        <p className="mt-3 text-xs text-muted-foreground">Or try a sample address:</p>
+        <div className="mt-1.5 flex flex-wrap gap-2">
           {FACT_SHEETS.map((f) => (
             <button
               key={f.address}
@@ -135,48 +136,48 @@ export function StageThree() {
                 <p className="text-sm leading-relaxed text-muted-foreground">{sheet.safety.note}</p>
               </div>
 
-              <div className="space-y-2 p-4">
-                <div className="flex items-center justify-between gap-2">
-                  <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                    Nearby rents
-                  </h3>
-                  <span className="flex items-center gap-2"><VerifiedBadge label="Closed-lease records" /><SourceCite metric="listedRentDelta" compact /></span>
-                </div>
-                <p className="flex items-center gap-2 font-display text-lg font-semibold">
-                  {under ? (
-                    <TrendingDown className="size-5 text-verified" aria-hidden />
-                  ) : (
-                    <TrendingUp className="size-5 text-caution" aria-hidden />
-                  )}
-                  ${sheet.rents.comparable.toLocaleString()} average ·{" "}
-                  <span className={under ? "text-verified" : "text-caution"}>
-                    {sheet.rents.delta}
-                  </span>
-                </p>
-                <p className="text-sm leading-relaxed text-muted-foreground">{sheet.rents.note}</p>
+              <div className="p-4">
+                <LearnMore label={`Nearby rents · $${sheet.rents.comparable.toLocaleString()} average (${sheet.rents.delta})`}>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <VerifiedBadge label="Closed-lease records" />
+                    <SourceCite metric="listedRentDelta" compact />
+                  </div>
+                  <p className="flex items-center gap-2 font-display text-lg font-semibold">
+                    {under ? (
+                      <TrendingDown className="size-5 text-verified" aria-hidden />
+                    ) : (
+                      <TrendingUp className="size-5 text-caution" aria-hidden />
+                    )}
+                    ${sheet.rents.comparable.toLocaleString()} average ·{" "}
+                    <span className={under ? "text-verified" : "text-caution"}>
+                      {sheet.rents.delta}
+                    </span>
+                  </p>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{sheet.rents.note}</p>
+                </LearnMore>
               </div>
 
-              <div className="space-y-2 p-4">
-                <div className="flex items-center justify-between gap-2">
-                  <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                    Groceries & essentials
-                  </h3>
-                  <span className="flex items-center gap-2"><VerifiedBadge label="Mapped on foot" /><SourceCite metric="essentials" compact /></span>
-                </div>
-                <ul className="divide-y divide-border/70">
-                  {sheet.essentials.map((e) => (
-                    <li key={e.name} className="flex items-center justify-between gap-3 py-2">
-                      <div>
-                        <p className="text-sm font-medium text-foreground">{e.name}</p>
-                        <p className="text-xs text-muted-foreground">{e.kind}</p>
-                      </div>
-                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-secondary-foreground">
-                        <Footprints className="size-3.5" aria-hidden />
-                        {e.walk}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="p-4">
+                <LearnMore label={`Groceries & essentials · ${sheet.essentials.length} nearby`}>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <VerifiedBadge label="Mapped on foot" />
+                    <SourceCite metric="essentials" compact />
+                  </div>
+                  <ul className="divide-y divide-border/70">
+                    {sheet.essentials.map((e) => (
+                      <li key={e.name} className="flex items-center justify-between gap-3 py-2">
+                        <div>
+                          <p className="text-sm font-medium text-foreground">{e.name}</p>
+                          <p className="text-xs text-muted-foreground">{e.kind}</p>
+                        </div>
+                        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-secondary-foreground">
+                          <Footprints className="size-3.5" aria-hidden />
+                          {e.walk}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </LearnMore>
               </div>
             </div>
 
