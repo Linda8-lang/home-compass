@@ -28,7 +28,13 @@ export function SourcePending({ className }: { className?: string }) {
 }
 
 /** Marks non-authoritative, general guidance (as opposed to sourced reference material). */
-export function GuidanceBadge({ label = "General guidance", className }: { label?: string; className?: string }) {
+export function GuidanceBadge({
+  label = "General guidance",
+  className,
+}: {
+  label?: string;
+  className?: string;
+}) {
   return (
     <span
       className={cn(
@@ -48,15 +54,18 @@ export function EvidenceLegend({ className }: { className?: string }) {
     <div className={cn("surface flex flex-wrap items-center gap-x-4 gap-y-2 p-3", className)}>
       <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
         <ShieldCheck className="size-3.5 text-verified" aria-hidden />
-        <strong className="font-semibold text-verified">Reference</strong> — factual, points at a source
+        <strong className="font-semibold text-verified">Reference</strong> — factual, points at a
+        source
       </span>
       <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
         <Compass className="size-3.5 text-secondary-foreground" aria-hidden />
-        <strong className="font-semibold text-secondary-foreground">Guidance</strong> — general, not authoritative
+        <strong className="font-semibold text-secondary-foreground">Guidance</strong> — general, not
+        authoritative
       </span>
       <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
         <Sparkles className="size-3.5 text-advisor" aria-hidden />
-        <strong className="font-semibold text-advisor">AI response</strong> — generated in the Advisor
+        <strong className="font-semibold text-advisor">AI response</strong> — generated in the
+        Advisor
       </span>
     </div>
   );
@@ -73,8 +82,8 @@ export function StaticDisclaimer({ className }: { className?: string }) {
     >
       <Info className="mt-0.5 size-3 shrink-0" aria-hidden />
       <span>
-        Informational guidance only. Requirements may vary by location and individual
-        circumstances. Verify important requirements with the relevant official source.
+        Informational guidance only. Requirements may vary by location and individual circumstances.
+        Verify important requirements with the relevant official source.
       </span>
     </p>
   );
@@ -82,15 +91,25 @@ export function StaticDisclaimer({ className }: { className?: string }) {
 
 export function GuidanceDisclaimer({ className }: { className?: string }) {
   return (
-    <p className={cn("flex items-start gap-1.5 text-xs leading-relaxed text-muted-foreground", className)}>
+    <p
+      className={cn(
+        "flex items-start gap-1.5 text-xs leading-relaxed text-muted-foreground",
+        className,
+      )}
+    >
       <HelpCircle className="mt-0.5 size-3.5 shrink-0" aria-hidden />
       Guidance is informational and may vary by location and individual circumstances.
     </p>
   );
 }
 
-
-export function VerifiedBadge({ label = "Data-verified", className }: { label?: string; className?: string }) {
+export function VerifiedBadge({
+  label = "Data-verified",
+  className,
+}: {
+  label?: string;
+  className?: string;
+}) {
   return (
     <span
       className={cn(
@@ -104,7 +123,13 @@ export function VerifiedBadge({ label = "Data-verified", className }: { label?: 
   );
 }
 
-export function AdvisorBadge({ label = "AI guidance", className }: { label?: string; className?: string }) {
+export function AdvisorBadge({
+  label = "AI guidance",
+  className,
+}: {
+  label?: string;
+  className?: string;
+}) {
   return (
     <span
       className={cn(
@@ -261,7 +286,10 @@ export function LearnMore({
         className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
       >
         {open ? "Show less" : label}
-        <ChevronDown className={cn("size-3.5 transition-transform", open && "rotate-180")} aria-hidden />
+        <ChevronDown
+          className={cn("size-3.5 transition-transform", open && "rotate-180")}
+          aria-hidden
+        />
       </button>
       {open && <div className="space-y-2">{children}</div>}
     </div>

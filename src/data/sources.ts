@@ -136,4 +136,3 @@ export const CITATIONS: Record<string, Citation> = {
     note: "Most units require 90 days written notice of a rent increase, and increases are limited by the annual provincial guideline.",
   },
 };
-

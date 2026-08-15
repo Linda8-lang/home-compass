@@ -128,16 +128,23 @@ export function StageThree() {
                   <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
                     Safety
                   </h3>
-                  <span className="flex items-center gap-2"><VerifiedBadge label="Police open data" /><SourceCite metric="safetyScore" compact /></span>
+                  <span className="flex items-center gap-2">
+                    <VerifiedBadge label="Police open data" />
+                    <SourceCite metric="safetyScore" compact />
+                  </span>
                 </div>
-                <p className={cn("font-display text-lg font-semibold", toneClass[sheet.safety.tone])}>
+                <p
+                  className={cn("font-display text-lg font-semibold", toneClass[sheet.safety.tone])}
+                >
                   {sheet.safety.rating}
                 </p>
                 <p className="text-sm leading-relaxed text-muted-foreground">{sheet.safety.note}</p>
               </div>
 
               <div className="p-4">
-                <LearnMore label={`Nearby rents · $${sheet.rents.comparable.toLocaleString()} average (${sheet.rents.delta})`}>
+                <LearnMore
+                  label={`Nearby rents · $${sheet.rents.comparable.toLocaleString()} average (${sheet.rents.delta})`}
+                >
                   <div className="flex flex-wrap items-center gap-2">
                     <VerifiedBadge label="Closed-lease records" />
                     <SourceCite metric="listedRentDelta" compact />
@@ -153,7 +160,9 @@ export function StageThree() {
                       {sheet.rents.delta}
                     </span>
                   </p>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{sheet.rents.note}</p>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {sheet.rents.note}
+                  </p>
                 </LearnMore>
               </div>
 

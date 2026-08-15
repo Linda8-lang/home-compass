@@ -29,7 +29,8 @@ export const SAMPLE_CONVERSATIONS: SampleConversation[] = [
       },
       {
         role: "user",
-        content: "University of Toronto, St. George campus. Around $1,500. I'd rather not travel more than 30 minutes.",
+        content:
+          "University of Toronto, St. George campus. Around $1,500. I'd rather not travel more than 30 minutes.",
       },
       {
         role: "assistant",
@@ -44,7 +45,10 @@ export const SAMPLE_CONVERSATIONS: SampleConversation[] = [
     blurb: "Constraints first, then trade-offs",
     stillMissing: ["Budget range", "Work location"],
     turns: [
-      { role: "user", content: "We arrive in Toronto next month with two kids. Where should we live?" },
+      {
+        role: "user",
+        content: "We arrive in Toronto next month with two kids. Where should we live?",
+      },
       {
         role: "assistant",
         content:

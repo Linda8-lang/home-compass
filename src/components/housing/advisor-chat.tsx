@@ -109,18 +109,13 @@ export function AdvisorConversation({ className }: { className?: string }) {
       <div ref={scrollRef} className="min-h-0 flex-1 space-y-3 overflow-y-auto p-4">
         {messages.length === 0 && (
           <div className="space-y-4">
-            <div className="space-y-2">
+            <LearnMore label="How the advisor works">
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Anything that responds to your own situation happens here.
+                The static pages hold no curated housing recommendations. The advisor asks a few
+                clarifying questions before giving personalised guidance, and it has no listing
+                database, so it will not invent addresses, prices or availability.
               </p>
-              <LearnMore label="How the advisor works">
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  The static pages hold no curated housing recommendations. The advisor asks a few
-                  clarifying questions before giving personalised guidance, and it has no listing
-                  database, so it will not invent addresses, prices or availability.
-                </p>
-              </LearnMore>
-            </div>
+            </LearnMore>
 
             <div className="rounded-xl border border-advisor/30 bg-advisor-soft/40 p-3">
               <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-advisor">
@@ -256,7 +251,12 @@ export function AdvisorConversation({ className }: { className?: string }) {
             aria-label="Message the advisor"
             className="h-11 min-w-0 flex-1 bg-transparent px-2.5 text-sm outline-none"
           />
-          <Button type="submit" size="icon" className="size-10 shrink-0 rounded-xl" disabled={pending || !input.trim()}>
+          <Button
+            type="submit"
+            size="icon"
+            className="size-10 shrink-0 rounded-xl"
+            disabled={pending || !input.trim()}
+          >
             <Send className="size-4" aria-hidden />
             <span className="sr-only">Send</span>
           </Button>
@@ -295,14 +295,20 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
           </button>
         )}
       </div>
-      <p className="mt-3 text-sm leading-relaxed text-secondary-foreground">
-        Ask anything about your own situation — where to look, whether a listing looks safe,
-        deposits and Ontario rules, what to offer without Canadian credit, and how to message a
-        landlord.
-      </p>
+      {/*
+        NOTE(engineering): supervisor asked for this label to read
+        "Claude + ChatGPT + Gemini, URL-verified, citation enforced" —
+        that describes a multi-model cross-verification pipeline this app
+        does not currently have (advisor.ts calls a single model,
+        google/gemini-2.5-flash, via the Lovable AI Gateway). Shipping that
+        exact copy would overstate what the product does. The label below
+        is trimmed per the "too much text, nobody reads it" feedback, but
+        kept accurate to the current single-model implementation. Flagging
+        the multi-model requirement as a real scoping item, not silently
+        implementing the copy — see docs/user-and-data-flow.md.
+      */}
       <p className="mt-2 text-xs text-advisor">
-        AI-generated · guidance, not legal advice — it may vary by location and individual
-        circumstances. Verify important requirements with the relevant official source.
+        AI-generated guidance · not verified fact · may vary by situation
       </p>
     </header>
   );

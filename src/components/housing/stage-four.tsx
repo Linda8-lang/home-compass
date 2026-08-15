@@ -1,5 +1,12 @@
 import { useMemo, useState } from "react";
-import { ArrowRight, Copy, Check, Highlighter, ClipboardList, MessageSquareText } from "lucide-react";
+import {
+  ArrowRight,
+  Copy,
+  Check,
+  Highlighter,
+  ClipboardList,
+  MessageSquareText,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LANDLORD_CHECKLIST, LISTINGS } from "@/data/mock";
 import { cn } from "@/lib/utils";

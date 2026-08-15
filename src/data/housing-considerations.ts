@@ -14,125 +14,104 @@ export type ConsiderationCategory = {
 
 export const HOUSING_CONSIDERATIONS: ConsiderationCategory[] = [
   {
-    id: "housing-type",
-    title: "Housing type",
-    what:
-      "Rentals differ by who manages them: purpose-built or managed buildings, owner-owned units, and rooms or shared homes.",
-    questions: [
-      "Who would you be signing with — a company or an individual?",
-      "Is the unit self-contained, or are kitchen and bath shared?",
-      "Is it furnished, and does that match how much you are bringing?",
-    ],
-    tradeoff:
-      "More formal management usually means more paperwork and screening; less formal usually means less screening and less recourse.",
-  },
-  {
     id: "location",
     title: "Location",
-    what:
-      "Location determines your daily routine far more than the unit itself does — the same rent buys different amounts of space in different places.",
+    what: "Location determines your daily routine far more than the unit itself does — the same rent buys different amounts of space in different places.",
     questions: [
       "What does an ordinary weekday look like from this address?",
       "How does rent in this area compare with the areas next to it?",
       "What do you know about the area from data rather than from a listing description?",
     ],
-    tradeoff: "Central areas tend to cost more per square foot; outer areas tend to cost more in travel time.",
+    tradeoff:
+      "Central areas tend to cost more per square foot; outer areas tend to cost more in travel time.",
   },
   {
     id: "cost",
     title: "Cost",
-    what:
-      "The advertised rent is only part of the monthly number. Utilities, internet, laundry, parking and insurance can all sit outside it.",
+    what: "The advertised rent is only part of the monthly number, and it's also part of what you need on move-in day. This is the one place to work out your full number — no need to re-total it elsewhere.",
     questions: [
       "Which utilities are included, and which are billed separately?",
       "What is the total move-in cash requirement, not just the monthly rent?",
-      "What share of your expected income would this be?",
     ],
-    tradeoff: "A lower rent with excluded costs can end up higher than a higher all-inclusive rent.",
+    tradeoff:
+      "A lower rent with excluded costs can end up higher than a higher all-inclusive rent.",
+  },
+  {
+    id: "other-costs",
+    title: "Other costs people forget",
+    what: "Renter's insurance, key and utility deposits, and — if the place is unfurnished — cookware and basic furniture all add to the real move-in number.",
+    questions: ["Which of these does this specific place actually require?"],
+    tradeoff:
+      "An unfurnished place can look cheaper on paper and cost more in the first month once you furnish it.",
   },
   {
     id: "commute",
     title: "Commute",
-    what:
-      "Distance on a map and travel time are different things. Frequency, transfers and time of day all change the answer.",
-    questions: [
-      "How long is the trip you would make most often, door to door?",
-      "How many transfers does it take, and how reliable are they off-peak?",
-      "How would that trip feel five days a week, in winter?",
-    ],
-    tradeoff: "Cheaper rent farther out is partly paid back in travel time and flexibility.",
+    what: "The trip itself, not just the distance: winter waits outside, a subway that's too full to board so you wait for the next one, streetcar delays, carpool lines at peak hours. Bike lanes exist on some streets, not others — worth checking if you'd bike, since the city itself is flat enough to make it viable.",
+    questions: ["How does this trip actually feel at 8am in January, not just on a map?"],
+    tradeoff: "Cheaper rent farther out is partly paid back in travel time and daily friction.",
   },
   {
     id: "transportation",
-    title: "Transportation",
-    what:
-      "How you move around is a monthly cost and a constraint: transit passes, bike routes, parking, or car ownership.",
+    title: "Transportation access",
+    what: "How convenient the area is to transit and highways, and how many options exist — one bus line is a different bet than a subway plus two streetcar routes.",
     questions: [
-      "What would you spend per month on fares, fuel or parking?",
-      "Is there a subway, streetcar or frequent bus within walking distance?",
+      "How many transit options serve this address, not just the closest stop?",
       "Would you need a car, and where would it be kept?",
     ],
     tradeoff: "Car-dependent areas often have lower rent but higher fixed transport costs.",
   },
   {
+    id: "negotiation-room",
+    title: "Spotting negotiation room",
+    what: "Some signals suggest a listing has flexibility: older buildings, a posting that's been up a while, or a listing that never mentions a lease term. Even listings that state requirements plainly — credit check, no pets — are sometimes negotiable once you actually ask.",
+    questions: [
+      "How long has this been listed, and does the posting mention a lease term at all?",
+      "Which stated 'requirements' are actually flexible if you ask?",
+    ],
+    tradeoff:
+      "Asking costs nothing, but over-negotiating on a fresh, competitive listing can cost you the unit.",
+  },
+  {
     id: "lease",
     title: "Lease requirements",
-    what:
-      "The lease sets the length of your commitment, how it ends, and what can change during it. Standard terms exist in Ontario.",
+    what: "Longer leases are usually cheaper per month. Newer condos often have no rent control — Ontario's rules exempt units first occupied after Nov 2018, so the cap depends on the building's age, not the lease itself. Some leases also restrict subletting — worth checking before you sign, not after.",
     questions: [
-      "Is this a fixed term or month-to-month, and what happens at the end?",
-      "What notice is required from each side?",
-      "Who is responsible for repairs, and how are requests made?",
+      "Is this fixed-term or month-to-month, and what happens at the end?",
+      "Does the lease allow subletting, if your plans might change?",
     ],
-    tradeoff: "Longer fixed terms give price stability; shorter terms give the ability to move if the fit is wrong.",
+    tradeoff: "Longer fixed terms give price stability; shorter terms keep your options open.",
   },
   {
     id: "documents",
-    title: "Required documents",
-    what:
-      "Screening usually looks at identity, status, income and rental history. Newcomers often have some of these but not all.",
-    questions: [
-      "Which documents can you produce today, and which are still pending?",
-      "What can stand in for a document you do not have yet?",
-      "Is anything being asked of you that is unusual or not permitted?",
-    ],
+    title: "What affects your eligibility",
+    what: "Income, savings, a job or admission letter, co-signers, credit score, background check and ID all factor into how a landlord screens you. This is about what affects your competitiveness — the actual list of documents to submit lives in Application & Communication.",
+    questions: ["Which of these can you show today, and which need a substitute?"],
     tradeoff:
       "Being able to show more up front tends to speed things up; being asked for more than usual is worth questioning.",
   },
   {
     id: "duration",
     title: "Temporary vs. long-term housing",
-    what:
-      "Temporary housing buys time and an address; long-term housing buys stability and usually a lower monthly cost.",
-    questions: [
-      "How much do you still need to learn about the city before committing?",
-      "What would it cost you to change your mind after signing?",
-      "Do you have a date by which you need a permanent address?",
-    ],
-    tradeoff: "Short stays cost more per night but keep options open; long leases cost less per month but lock them in.",
+    what: "A 3–6 month lease first is often worth considering — it buys time to find permanent housing, get documents sorted, and learn the market, without locking in a full-year commitment right away.",
+    questions: ["Do you have a hard date by which you need a permanent address?"],
+    tradeoff:
+      "Short stays cost more per night but keep options open; long leases cost less per month but lock them in.",
   },
   {
     id: "proximity",
     title: "Proximity to work or school",
-    what:
-      "Whether you need to be close depends on how often you must physically be there and at what hours.",
-    questions: [
-      "How many days a week is the trip required?",
-      "Are the hours ones when transit runs frequently?",
-      "Would being farther away change whether you attend or participate?",
-    ],
-    tradeoff: "Closeness usually carries a rent premium; the value of it depends entirely on your schedule.",
+    what: "Matters most if you're there most days, at hours when transit runs less often.",
+    questions: ["How many days a week is the trip actually required?"],
+    tradeoff:
+      "Closeness usually carries a rent premium; its value depends entirely on your schedule.",
   },
   {
     id: "necessities",
     title: "Daily necessities",
-    what:
-      "Groceries, pharmacies, clinics, laundry, banking and places of worship or community shape how liveable an address feels.",
-    questions: [
-      "What is within walking distance, and what needs a trip?",
-      "Are the shops nearby ones you would actually use?",
-      "What would you have to plan around rather than do casually?",
-    ],
-    tradeoff: "Fewer amenities nearby often means lower rent and more time spent travelling for ordinary errands.",
+    what: "Groceries, pharmacy and transit within walking distance shape how liveable a place feels day to day.",
+    questions: ["What's actually within walking distance, versus what needs a trip?"],
+    tradeoff:
+      "Fewer amenities nearby often means lower rent and more time spent on ordinary errands.",
   },
 ];

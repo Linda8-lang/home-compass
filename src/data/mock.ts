@@ -5,54 +5,81 @@
 
 export type NewcomerStatus = "student" | "job-offer" | "other";
 
-export type HousingType = {
+/**
+ * Two independent axes, not one flat list — who you're renting from is a
+ * different question from how you're living. Deliberately no "risk" label
+ * on either: we don't have data backing a risk ranking, so we don't assert one.
+ */
+export type OwnershipType = {
   id: string;
   title: string;
   price: string;
-  risk: "Lowest risk" | "Medium risk" | "Varies";
   creditNeeded: string;
   speed: string;
   blurb: string;
   bestFor: string;
 };
 
-export const HOUSING_TYPES: HousingType[] = [
+export const OWNERSHIP_TYPES: OwnershipType[] = [
   {
     id: "managed",
-    title: "Managed buildings",
-    price: "$$$ — highest price",
-    risk: "Lowest risk",
+    title: "Managed building",
+    price: "$$$ — typically highest price",
     creditNeeded: "Credit check required",
     speed: "Timeline varies by market",
     blurb:
-      "Professionally run rental buildings. Standard leases, on-site staff, predictable process.",
+      "A property management company runs it. Standard leases, on-site staff, predictable process.",
     bestFor: "Best if you value certainty over price and have proof of funds.",
   },
   {
     id: "owner",
-    title: "Owner-owned units",
+    title: "Individual owner",
     price: "$$ — often negotiable",
-    risk: "Medium risk",
     creditNeeded: "Flexible, case-by-case",
     speed: "Timeline varies by landlord",
     blurb:
-      "Condos and houses rented directly by the owner. More room to negotiate, but more scam exposure.",
-    bestFor: "Best if you can view in person and negotiate your terms.",
+      "You're renting directly from the unit's owner. More room to negotiate — also more variance, since there's no standard process behind it.",
+    bestFor: "Best if you can view in person and negotiate your own terms.",
+  },
+];
+
+export type LivingArrangement = {
+  id: string;
+  title: string;
+  price: string;
+  creditNeeded: string;
+  speed: string;
+  blurb: string;
+  bestFor: string;
+};
+
+export const LIVING_ARRANGEMENTS: LivingArrangement[] = [
+  {
+    id: "whole-unit",
+    title: "Whole unit, alone",
+    price: "Higher monthly cost",
+    creditNeeded: "Full screening typical",
+    speed: "Timeline varies",
+    blurb: "You rent the entire place — your own lease, your own space.",
+    bestFor: "Best if privacy matters more than price.",
   },
   {
     id: "rooms",
-    title: "Rooms & shared housing",
+    title: "Rooms & shared",
     price: "$ — cheapest",
-    risk: "Varies",
-    creditNeeded: "No credit history needed",
+    creditNeeded: "Often no credit history needed",
     speed: "Often the fastest option",
-    blurb:
-      "A room in a shared unit or house. Fastest path to a local address while you settle in.",
-    bestFor: "Often used as a landing pad before signing a full lease.",
+    blurb: "You rent a room in a shared unit or house — a landing pad while you settle in.",
+    bestFor: "Often used as a first step before signing a full lease.",
   },
 ];
 
 export const SCAM_PATTERNS = [
+  {
+    title: "The 'Airbnb shown as a long-term rental' pattern",
+    detail:
+      "A real pattern reported recently: someone rents an Airbnb unit short-term just to show it as a rental listing, and takes a deposit on the spot. At move-in, the renter finds out it was only ever an Airbnb booking — never a real lease.",
+  },
   {
     title: "Deposit requested before any viewing",
     detail:
@@ -65,13 +92,11 @@ export const SCAM_PATTERNS = [
   },
   {
     title: "Landlord is 'abroad' and can't show the unit",
-    detail:
-      "Classic pattern: keys will be 'mailed' after an e-transfer. Walk away.",
+    detail: "Classic pattern: keys will be 'mailed' after an e-transfer. Walk away.",
   },
   {
     title: "Pressure to decide within hours",
-    detail:
-      "Urgency is a tactic. Real listings hold for at least a day for a qualified applicant.",
+    detail: "Urgency is a tactic. Real listings hold for at least a day for a qualified applicant.",
   },
 ];
 
@@ -228,17 +253,17 @@ export const LISTINGS: Listing[] = [
         kind: "leverage",
       },
       {
-        text: "\"Price negotiable for the right tenant\"",
+        text: '"Price negotiable for the right tenant"',
         read: "Explicit invitation. 'Right tenant' usually means low-hassle and financially provable, not highest bidder.",
         kind: "leverage",
       },
       {
-        text: "\"Flexible move-in, unit is vacant\"",
+        text: '"Flexible move-in, unit is vacant"',
         read: "A vacant unit costs the owner money every month. Ask for a mid-month start or a half-month free.",
         kind: "leverage",
       },
       {
-        text: "\"Credit check and references required\"",
+        text: '"Credit check and references required"',
         read: "Standard, but this is where a newcomer stalls. Prepare substitutes before you contact them.",
         kind: "risk",
       },
@@ -258,7 +283,7 @@ export const LISTINGS: Listing[] = [
         kind: "neutral",
       },
       {
-        text: "\"First and last required\"",
+        text: '"First and last required"',
         read: "Standard in Ontario. Have the full amount liquid and say so in your first message.",
         kind: "risk",
       },
@@ -278,7 +303,7 @@ export const LISTINGS: Listing[] = [
         kind: "leverage",
       },
       {
-        text: "\"Ask about our current promotion\"",
+        text: '"Ask about our current promotion"',
         read: "Managed buildings discount with free months or waived locker/parking rather than lower rent.",
         kind: "leverage",
       },
@@ -432,14 +457,14 @@ export const LANDLORD_CHECKLIST: Record<
     {
       need: "Canadian credit report",
       youHave: "None yet",
-      substitute:
-        "Home-country credit report plus bank statements showing consistent balances.",
+      substitute: "Home-country credit report plus bank statements showing consistent balances.",
       strength: "medium",
     },
     {
       need: "Proof of steady income",
       youHave: "Varies",
-      substitute: "Proof of funds is often the strongest single document; the amount landlords ask for varies.",
+      substitute:
+        "Proof of funds is often the strongest single document; the amount landlords ask for varies.",
       strength: "strong",
     },
     {

@@ -10,19 +10,14 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
-  HOUSING_TYPES,
+  OWNERSHIP_TYPES,
+  LIVING_ARRANGEMENTS,
   SCAM_PATTERNS,
   POSTING_PLACES,
   STUDENT_POSTING_PLACES,
 } from "@/data/mock";
 import { useFlow } from "./flow-state";
 import { CautionBadge, StageHeader, VariesNote, Disclosure, LearnMore } from "./primitives";
-
-const riskTone: Record<string, string> = {
-  "Lowest risk": "bg-verified-soft text-verified",
-  "Medium risk": "bg-caution-soft text-caution",
-  Varies: "bg-sand text-secondary-foreground",
-};
 
 export function StageOne() {
   const { advance, filters } = useFlow();
@@ -33,44 +28,75 @@ export function StageOne() {
       <StageHeader
         eyebrow="Stage 1 · Where to look"
         title="Which kind of rental are you aiming at?"
-        intro="Start with the category and its risk level. Open a card for prices, credit and timing."
+        intro="Two separate questions: who you're renting from, and how you're living. Open a card for price, credit and timing."
       />
 
-      {/* Primary question for this screen */}
-      <section className="space-y-3">
-        <div className="grid gap-3 sm:grid-cols-3">
-          {HOUSING_TYPES.map((t) => (
-            <article key={t.id} className="surface flex flex-col gap-2.5 p-4">
-              <div className="flex items-start justify-between gap-2">
+      {/* Primary question for this screen — two independent axes, not one flat list */}
+      <section className="space-y-5">
+        <div className="space-y-2.5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Who you're renting from
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {OWNERSHIP_TYPES.map((t) => (
+              <article key={t.id} className="surface flex flex-col gap-2.5 p-4">
                 <h3 className="text-base leading-snug">{t.title}</h3>
-                <span
-                  className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold ${riskTone[t.risk]}`}
-                >
-                  {t.risk}
-                </span>
-              </div>
-              <p className="text-sm leading-relaxed text-muted-foreground">{t.blurb}</p>
-              <LearnMore className="mt-auto" label="Cost, credit & timing">
-                <ul className="space-y-1.5 text-xs text-secondary-foreground">
-                  <li className="flex items-center gap-2">
-                    <Wallet className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
-                    {t.price}
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <FileCheck className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
-                    {t.creditNeeded}
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Clock className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
-                    {t.speed}
-                  </li>
-                </ul>
-                <p className="rounded-lg bg-sand p-2.5 text-xs leading-relaxed text-secondary-foreground">
-                  {t.bestFor}
-                </p>
-              </LearnMore>
-            </article>
-          ))}
+                <p className="text-sm leading-relaxed text-muted-foreground">{t.blurb}</p>
+                <LearnMore className="mt-auto" label="Cost, credit & timing">
+                  <ul className="space-y-1.5 text-xs text-secondary-foreground">
+                    <li className="flex items-center gap-2">
+                      <Wallet className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+                      {t.price}
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <FileCheck className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+                      {t.creditNeeded}
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Clock className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+                      {t.speed}
+                    </li>
+                  </ul>
+                  <p className="rounded-lg bg-sand p-2.5 text-xs leading-relaxed text-secondary-foreground">
+                    {t.bestFor}
+                  </p>
+                </LearnMore>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-2.5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            How you're living
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {LIVING_ARRANGEMENTS.map((t) => (
+              <article key={t.id} className="surface flex flex-col gap-2.5 p-4">
+                <h3 className="text-base leading-snug">{t.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{t.blurb}</p>
+                <LearnMore className="mt-auto" label="Cost, credit & timing">
+                  <ul className="space-y-1.5 text-xs text-secondary-foreground">
+                    <li className="flex items-center gap-2">
+                      <Wallet className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+                      {t.price}
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <FileCheck className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+                      {t.creditNeeded}
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Clock className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+                      {t.speed}
+                    </li>
+                  </ul>
+                  <p className="rounded-lg bg-sand p-2.5 text-xs leading-relaxed text-secondary-foreground">
+                    {t.bestFor}
+                  </p>
+                </LearnMore>
+              </article>
+            ))}
+          </div>
         </div>
         <VariesNote />
       </section>
@@ -93,6 +119,13 @@ export function StageOne() {
         </ul>
       </Disclosure>
 
+      {/*
+        TODO(product): POSTING_PLACES currently lists categories with generic
+        notes, not real outbound links. Supervisor has a list of actual
+        housing-site URLs in ClickUp — swap these in once shared, so "where
+        people actually post" can link out directly instead of just naming
+        the category.
+      */}
       <Disclosure
         title="Where people actually post"
         summary={`${POSTING_PLACES.length} general resources${isStudent ? " + student-specific" : ""}`}

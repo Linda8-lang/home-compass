@@ -1,5 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+/**
+ * TODO(product/eng): supervisor feedback (round 2) asked for the Advisor's
+ * provenance label to read "Claude + ChatGPT + Gemini, URL-verified,
+ * citation enforced." That describes a multi-model cross-verification
+ * pipeline — querying multiple LLMs and enforcing citations against sources
+ * — which this route does not implement today. It calls a single model
+ * (google/gemini-2.5-flash) via the Lovable AI Gateway.
+ *
+ * This is a real architecture change, not a copy change: multiple provider
+ * API keys, a verification/reconciliation step, cost and latency
+ * implications. Scope this explicitly before the UI label claims it — see
+ * the note in advisor-chat.tsx and docs/user-and-data-flow.md.
+ */
+
 type Msg = { role: "user" | "assistant"; content: string };
 
 const SYSTEM = `You are the AI Advisor inside "Housing Assistant", a prototype that helps newcomers find and secure housing in Toronto, Canada.
@@ -39,7 +53,9 @@ export const Route = createFileRoute("/api/advisor")({
           return new Response(JSON.stringify({ error: "Invalid request." }), { status: 400 });
         }
 
-        const history = (body.messages ?? []).slice(-12).filter((m) => typeof m.content === "string");
+        const history = (body.messages ?? [])
+          .slice(-12)
+          .filter((m) => typeof m.content === "string");
         if (history.length === 0) {
           return new Response(JSON.stringify({ error: "No message provided." }), { status: 400 });
         }

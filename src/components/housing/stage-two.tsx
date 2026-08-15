@@ -9,10 +9,11 @@ import { GuidanceDisclaimer, SectionTitle, StageHeader, VariesNote } from "./pri
 
 const DIMENSION_ORDER = [
   "cost",
+  "other-costs",
   "location",
   "commute",
   "transportation",
-  "housing-type",
+  "negotiation-room",
   "lease",
   "proximity",
   "necessities",
@@ -48,7 +49,9 @@ export function StageTwo() {
 
       <section className="space-y-3">
         <SectionTitle
-          aside={<span className="text-xs text-muted-foreground">{DIMENSIONS.length} dimensions</span>}
+          aside={
+            <span className="text-xs text-muted-foreground">{DIMENSIONS.length} dimensions</span>
+          }
         >
           Dimensions to compare
         </SectionTitle>
@@ -82,7 +85,7 @@ export function StageTwo() {
                   <div className="border-t border-border px-4 py-3">
                     <p className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                       <ListChecks className="size-3.5" aria-hidden />
-                      Questions to ask about any option
+                      Things to consider
                     </p>
                     <ul className="space-y-1.5">
                       {d.questions.map((q) => (

@@ -54,7 +54,8 @@ export const JOURNEY_STAGES: JourneyStage[] = [
       },
       {
         label: "Assemble your landlord document pack",
-        detail: "Passport, permit, offer or admission letter, proof of funds, translated references.",
+        detail:
+          "Passport, permit, offer or admission letter, proof of funds, translated references.",
         kind: "admin",
         evidence: "reference",
       },
@@ -67,7 +68,8 @@ export const JOURNEY_STAGES: JourneyStage[] = [
       },
       {
         label: "Budget for landing costs",
-        detail: "First + last month, transit pass, phone plan, furniture. Total landing costs vary widely.",
+        detail:
+          "Work out your full number in the Evaluate Housing Options section (Cost + Other costs) rather than re-tallying it here.",
         kind: "money",
         evidence: "reference",
         citation: "depositRules",
@@ -87,13 +89,15 @@ export const JOURNEY_STAGES: JourneyStage[] = [
     tasks: [
       {
         label: "Get your SIN",
-        detail: "Apply through Service Canada with your permit and passport. Processing times vary by office and channel.",
+        detail:
+          "Apply through Service Canada with your permit and passport. Processing times vary by office and channel.",
         kind: "admin",
         evidence: "reference",
       },
       {
         label: "Activate a Canadian phone number",
-        detail: "Landlords screen out foreign numbers — a local number visibly raises your reply rate.",
+        detail:
+          "Landlords screen out foreign numbers — a local number visibly raises your reply rate.",
         kind: "admin",
         evidence: "guidance",
       },
@@ -105,7 +109,8 @@ export const JOURNEY_STAGES: JourneyStage[] = [
       },
       {
         label: "Verify each shortlisted address",
-        detail: "Run the fact sheet in the address verification section before you send any money or sign anything.",
+        detail:
+          "Run the fact sheet in the address verification section before you send any money or sign anything.",
         kind: "housing",
         evidence: "reference",
         citation: "safetyScore",
@@ -137,7 +142,8 @@ export const JOURNEY_STAGES: JourneyStage[] = [
     tasks: [
       {
         label: "Know your tenancy rights",
-        detail: "Rent increase limits, notice periods, repairs and entry rules all favour tenants here.",
+        detail:
+          "Rent increase limits, notice periods, repairs and entry rules all favour tenants here.",
         kind: "admin",
         evidence: "reference",
         citation: "tenancyRights",
