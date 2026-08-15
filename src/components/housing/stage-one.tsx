@@ -16,7 +16,7 @@ import {
   STUDENT_POSTING_PLACES,
 } from "@/data/mock";
 import { useFlow } from "./flow-state";
-import { CautionBadge, SectionTitle, StageHeader, VariesNote } from "./primitives";
+import { CautionBadge, StageHeader, VariesNote, Disclosure, LearnMore } from "./primitives";
 
 const riskTone: Record<string, string> = {
   "Lowest risk": "bg-verified-soft text-verified",
@@ -78,7 +78,7 @@ export function StageOne() {
       <Disclosure
         title="Scam patterns to walk away from"
         summary={`${SCAM_PATTERNS.length} signals that a listing is not real`}
-        aside={<CautionBadge label="Safety" className="hidden sm:inline-flex" />}
+        aside={<CautionBadge label="Safety" />}
       >
         <ul className="space-y-3 rounded-xl border border-caution/30 bg-caution-soft/60 p-4">
           {SCAM_PATTERNS.map((s) => (
