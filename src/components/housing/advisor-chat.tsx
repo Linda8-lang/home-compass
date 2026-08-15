@@ -294,8 +294,8 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
         landlord.
       </p>
       <p className="mt-2 text-xs text-advisor">
-        AI-generated · guidance is informational and may vary by location and individual
-        circumstances
+        AI-generated · guidance, not legal advice — it may vary by location and individual
+        circumstances. Verify important requirements with the relevant official source.
       </p>
     </header>
   );
