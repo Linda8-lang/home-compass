@@ -16,7 +16,7 @@ import {
   STUDENT_POSTING_PLACES,
 } from "@/data/mock";
 import { useFlow } from "./flow-state";
-import { CautionBadge, SectionTitle, StageHeader, VariesNote } from "./primitives";
+import { CautionBadge, StageHeader, VariesNote, Disclosure, LearnMore } from "./primitives";
 
 const riskTone: Record<string, string> = {
   "Lowest risk": "bg-verified-soft text-verified",
@@ -29,20 +29,18 @@ export function StageOne() {
   const isStudent = filters.status === "student";
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-6">
       <StageHeader
         eyebrow="Stage 1 · Where to look"
-        title="Toronto rentals come in three kinds. Pick your risk before you pick a listing."
-        intro="Applying in the wrong category costs time. A few minutes here helps you aim at the right one."
+        title="Which kind of rental are you aiming at?"
+        intro="Start with the category and its risk level. Open a card for prices, credit and timing."
       />
 
-      <VariesNote />
-
+      {/* Primary question for this screen */}
       <section className="space-y-3">
-        <SectionTitle>The three categories</SectionTitle>
         <div className="grid gap-3 sm:grid-cols-3">
           {HOUSING_TYPES.map((t) => (
-            <article key={t.id} className="surface flex flex-col gap-3 p-4">
+            <article key={t.id} className="surface flex flex-col gap-2.5 p-4">
               <div className="flex items-start justify-between gap-2">
                 <h3 className="text-base leading-snug">{t.title}</h3>
                 <span
@@ -52,52 +50,56 @@ export function StageOne() {
                 </span>
               </div>
               <p className="text-sm leading-relaxed text-muted-foreground">{t.blurb}</p>
-              <ul className="space-y-1.5 text-xs text-secondary-foreground">
-                <li className="flex items-center gap-2">
-                  <Wallet className="size-3.5 text-muted-foreground" aria-hidden />
-                  {t.price}
-                </li>
-                <li className="flex items-center gap-2">
-                  <FileCheck className="size-3.5 text-muted-foreground" aria-hidden />
-                  {t.creditNeeded}
-                </li>
-                <li className="flex items-center gap-2">
-                  <Clock className="size-3.5 text-muted-foreground" aria-hidden />
-                  {t.speed}
-                </li>
-              </ul>
-              <p className="mt-auto rounded-lg bg-sand p-2.5 text-xs leading-relaxed text-secondary-foreground">
-                {t.bestFor}
-              </p>
+              <LearnMore className="mt-auto" label="Cost, credit & timing">
+                <ul className="space-y-1.5 text-xs text-secondary-foreground">
+                  <li className="flex items-center gap-2">
+                    <Wallet className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+                    {t.price}
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <FileCheck className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+                    {t.creditNeeded}
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Clock className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+                    {t.speed}
+                  </li>
+                </ul>
+                <p className="rounded-lg bg-sand p-2.5 text-xs leading-relaxed text-secondary-foreground">
+                  {t.bestFor}
+                </p>
+              </LearnMore>
             </article>
           ))}
         </div>
+        <VariesNote />
       </section>
 
-      <section className="space-y-3">
-        <SectionTitle aside={<CautionBadge label="Know the pattern" />}>
-          Scam patterns to walk away from
-        </SectionTitle>
-        <div className="rounded-xl border border-caution/30 bg-caution-soft/60 p-4">
-          <ul className="space-y-3">
-            {SCAM_PATTERNS.map((s) => (
-              <li key={s.title} className="flex gap-3">
-                <ShieldAlert className="mt-0.5 size-4 shrink-0 text-caution" aria-hidden />
-                <div>
-                  <p className="text-sm font-semibold text-foreground">{s.title}</p>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{s.detail}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      <Disclosure
+        title="Scam patterns to walk away from"
+        summary={`${SCAM_PATTERNS.length} signals that a listing is not real`}
+        aside={<CautionBadge label="Safety" />}
+      >
+        <ul className="space-y-3 rounded-xl border border-caution/30 bg-caution-soft/60 p-4">
+          {SCAM_PATTERNS.map((s) => (
+            <li key={s.title} className="flex gap-3">
+              <ShieldAlert className="mt-0.5 size-4 shrink-0 text-caution" aria-hidden />
+              <div>
+                <p className="text-sm font-semibold text-foreground">{s.title}</p>
+                <p className="text-sm leading-relaxed text-muted-foreground">{s.detail}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Disclosure>
 
-      <section className="space-y-3">
-        <SectionTitle>Where people actually post</SectionTitle>
+      <Disclosure
+        title="Where people actually post"
+        summary={`${POSTING_PLACES.length} general resources${isStudent ? " + student-specific" : ""}`}
+      >
         <ul className="surface divide-y divide-border">
           {POSTING_PLACES.map((p) => (
-            <li key={p.name} className="flex gap-3 p-4">
+            <li key={p.name} className="flex gap-3 p-3.5">
               <MapPin className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
               <div>
                 <p className="text-sm font-semibold text-foreground">{p.name}</p>
@@ -106,42 +108,34 @@ export function StageOne() {
             </li>
           ))}
         </ul>
-        {!isStudent && (
+        {isStudent ? (
+          <div className="space-y-2">
+            <p className="flex items-center gap-2 text-sm font-semibold text-advisor">
+              <GraduationCap className="size-4" aria-hidden />
+              Student-specific · optional
+            </p>
+            <ul className="surface divide-y divide-border">
+              {STUDENT_POSTING_PLACES.map((p) => (
+                <li key={p.name} className="flex gap-3 p-3.5">
+                  <GraduationCap className="mt-0.5 size-4 shrink-0 text-advisor" aria-hidden />
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">{p.name}</p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{p.note}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className="text-xs leading-relaxed text-muted-foreground">
+              Shown because your profile says you are a student. The general resources work too.
+            </p>
+          </div>
+        ) : (
           <p className="text-xs leading-relaxed text-muted-foreground">
-            These are general resources. If you are studying here, set your situation to “Student”
-            in Stage 0 to also see student-specific resources.
+            General resources. If you are studying here, set your situation to “Student” in Stage 0
+            to also see student-specific resources.
           </p>
         )}
-      </section>
-
-      {isStudent && (
-        <section className="space-y-3">
-          <SectionTitle
-            aside={
-              <span className="rounded-full bg-advisor-soft px-2 py-0.5 text-[11px] font-semibold text-advisor">
-                Student-specific · optional
-              </span>
-            }
-          >
-            Extra resources for students
-          </SectionTitle>
-          <ul className="surface divide-y divide-border">
-            {STUDENT_POSTING_PLACES.map((p) => (
-              <li key={p.name} className="flex gap-3 p-4">
-                <GraduationCap className="mt-0.5 size-4 shrink-0 text-advisor" aria-hidden />
-                <div>
-                  <p className="text-sm font-semibold text-foreground">{p.name}</p>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{p.note}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <p className="text-xs leading-relaxed text-muted-foreground">
-            Optional — shown because your profile says you are a student. The general resources
-            above work too.
-          </p>
-        </section>
-      )}
+      </Disclosure>
 
       <Button size="lg" className="w-full sm:w-auto" onClick={() => advance(2)}>
         <Sparkles className="size-4" aria-hidden />

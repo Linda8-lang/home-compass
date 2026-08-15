@@ -1,6 +1,15 @@
-import { ShieldCheck, Sparkles, AlertTriangle, Info, BookMarked, Compass, HelpCircle } from "lucide-react";
+import {
+  ShieldCheck,
+  Sparkles,
+  AlertTriangle,
+  Info,
+  BookMarked,
+  Compass,
+  HelpCircle,
+  ChevronDown,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
 /** Neutral placeholder for factual items whose source is not yet connected. */
 export function SourcePending({ className }: { className?: string }) {
@@ -173,5 +182,88 @@ export function VariesNote({
       <Info className="size-3.5 shrink-0" aria-hidden />
       {children}
     </p>
+  );
+}
+
+/**
+ * Progressive disclosure: shows a heading + one-line summary, keeps the
+ * detail collapsed until the user asks for it.
+ */
+export function Disclosure({
+  title,
+  summary,
+  aside,
+  defaultOpen = false,
+  moreLabel = "Learn more",
+  lessLabel = "Show less",
+  children,
+  className,
+}: {
+  title: ReactNode;
+  summary?: ReactNode;
+  aside?: ReactNode;
+  defaultOpen?: boolean;
+  moreLabel?: string;
+  lessLabel?: string;
+  children: ReactNode;
+  className?: string;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <section className={cn("rounded-xl border border-border/70 bg-card/40", className)}>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 text-left"
+      >
+        <span className="min-w-0">
+          <span className="block text-base leading-snug text-foreground">{title}</span>
+          {summary && (
+            <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
+              {summary}
+            </span>
+          )}
+        </span>
+        <span className="flex shrink-0 items-center gap-2">
+          {aside}
+          <span className="inline-flex items-center gap-1 text-xs font-medium text-primary">
+            {open ? lessLabel : moreLabel}
+            <ChevronDown
+              className={cn("size-3.5 transition-transform", open && "rotate-180")}
+              aria-hidden
+            />
+          </span>
+        </span>
+      </button>
+      {open && <div className="space-y-3 border-t border-border/70 px-4 py-4">{children}</div>}
+    </section>
+  );
+}
+
+/** Inline "Learn more" toggle for a small amount of secondary detail. */
+export function LearnMore({
+  label = "Learn more",
+  children,
+  className,
+}: {
+  label?: string;
+  children: ReactNode;
+  className?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={cn("space-y-2", className)}>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
+      >
+        {open ? "Show less" : label}
+        <ChevronDown className={cn("size-3.5 transition-transform", open && "rotate-180")} aria-hidden />
+      </button>
+      {open && <div className="space-y-2">{children}</div>}
+    </div>
   );
 }

@@ -85,15 +85,19 @@ export function AppShell() {
               );
             })}
           </ol>
-          <p className="mt-3 hidden rounded-xl bg-sand p-3 text-xs leading-relaxed text-secondary-foreground lg:block">
-            These pages are static reference material. Anything that recommends a place to live
-            lives in the AI Advisor.
-          </p>
+          <details className="mt-3 hidden rounded-xl bg-sand p-3 lg:block">
+            <summary className="cursor-pointer text-xs font-medium text-secondary-foreground">
+              About this section
+            </summary>
+            <p className="mt-2 text-xs leading-relaxed text-secondary-foreground">
+              These pages are static reference material. Anything that recommends a place to live
+              lives in the AI Advisor.
+            </p>
+          </details>
         </nav>
 
         {/* 2 — Static / structured information */}
         <main className="min-w-0">
-          <StaticDisclaimer className="mb-5 rounded-lg border border-border/60 bg-muted/30 px-3 py-2" />
           {contentStep === 0 && <StageZero />}
           {contentStep === 1 && <StageOne />}
           {contentStep === 3 && <StageThree />}
