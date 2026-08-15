@@ -46,8 +46,9 @@ export function FlowProvider({ children }: { children: ReactNode }) {
     city: "Toronto",
     budget: 2000,
     transit: "subway",
-    destination: "University of Toronto, St. George",
-    status: "student",
+    destination: "Downtown Toronto",
+    // Do not assume newcomers are students — this is set in the Stage 0 profile.
+    status: "other",
   });
   const [searched, setSearched] = useState(false);
   const [compare, setCompare] = useState<string[]>([]);

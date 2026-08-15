@@ -1,6 +1,20 @@
-import { ArrowRight, ShieldAlert, MapPin, Wallet, Clock, FileCheck, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  ShieldAlert,
+  MapPin,
+  Wallet,
+  Clock,
+  FileCheck,
+  Sparkles,
+  GraduationCap,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { HOUSING_TYPES, SCAM_PATTERNS, POSTING_PLACES } from "@/data/mock";
+import {
+  HOUSING_TYPES,
+  SCAM_PATTERNS,
+  POSTING_PLACES,
+  STUDENT_POSTING_PLACES,
+} from "@/data/mock";
 import { useFlow } from "./flow-state";
 import { CautionBadge, SectionTitle, StageHeader, VariesNote } from "./primitives";
 
@@ -11,7 +25,8 @@ const riskTone: Record<string, string> = {
 };
 
 export function StageOne() {
-  const { advance } = useFlow();
+  const { advance, filters } = useFlow();
+  const isStudent = filters.status === "student";
 
   return (
     <div className="space-y-10">
@@ -91,7 +106,42 @@ export function StageOne() {
             </li>
           ))}
         </ul>
+        {!isStudent && (
+          <p className="text-xs leading-relaxed text-muted-foreground">
+            These are general resources. If you are studying here, set your situation to “Student”
+            in Stage 0 to also see student-specific resources.
+          </p>
+        )}
       </section>
+
+      {isStudent && (
+        <section className="space-y-3">
+          <SectionTitle
+            aside={
+              <span className="rounded-full bg-advisor-soft px-2 py-0.5 text-[11px] font-semibold text-advisor">
+                Student-specific · optional
+              </span>
+            }
+          >
+            Extra resources for students
+          </SectionTitle>
+          <ul className="surface divide-y divide-border">
+            {STUDENT_POSTING_PLACES.map((p) => (
+              <li key={p.name} className="flex gap-3 p-4">
+                <GraduationCap className="mt-0.5 size-4 shrink-0 text-advisor" aria-hidden />
+                <div>
+                  <p className="text-sm font-semibold text-foreground">{p.name}</p>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{p.note}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p className="text-xs leading-relaxed text-muted-foreground">
+            Optional — shown because your profile says you are a student. The general resources
+            above work too.
+          </p>
+        </section>
+      )}
 
       <Button size="lg" className="w-full sm:w-auto" onClick={() => advance(2)}>
         <Sparkles className="size-4" aria-hidden />

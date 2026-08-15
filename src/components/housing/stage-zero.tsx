@@ -2,6 +2,7 @@ import { ArrowRight, Plane, Luggage, Home, Info, CheckCircle2, HelpCircle } from
 import { Button } from "@/components/ui/button";
 import { JOURNEY_STAGES, type JourneyStageId } from "@/data/journey";
 import { HOUSING_CONSIDERATIONS } from "@/data/housing-considerations";
+import type { NewcomerStatus } from "@/data/mock";
 import { CITATIONS } from "@/data/sources";
 import { useFlow } from "./flow-state";
 import {
@@ -31,8 +32,15 @@ const kindTone: Record<string, string> = {
   life: "bg-caution-soft text-caution",
 };
 
+const SITUATIONS: { id: NewcomerStatus; label: string; note: string }[] = [
+  { id: "student", label: "Student", note: "Studying at a college or university here." },
+  { id: "job-offer", label: "Working / job offer", note: "Moving for work or with an offer in hand." },
+  { id: "other", label: "Other newcomer", note: "Family, PR, refugee claimant, or still deciding." },
+];
+
 export function StageZero() {
-  const { advance, journeyStage, setJourneyStage, doneTasks, toggleTask } = useFlow();
+  const { advance, journeyStage, setJourneyStage, doneTasks, toggleTask, filters, setFilters } =
+    useFlow();
   const stage = JOURNEY_STAGES.find((s) => s.id === journeyStage) ?? JOURNEY_STAGES[0]!;
   // Housing-specific tasks are intentionally excluded: this checklist stays
   // neutral and does not recommend where or what to rent.
@@ -82,6 +90,34 @@ export function StageZero() {
             );
           })}
         </div>
+      </section>
+
+      <section className="space-y-3">
+        <SectionTitle>Your situation</SectionTitle>
+        <div className="grid gap-3 sm:grid-cols-3">
+          {SITUATIONS.map((s) => {
+            const active = filters.status === s.id;
+            return (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => setFilters({ ...filters, status: s.id })}
+                aria-pressed={active}
+                className={cn(
+                  "surface flex flex-col gap-1 p-4 text-left transition-colors",
+                  active ? "border-primary ring-2 ring-primary/25" : "hover:border-primary/40",
+                )}
+              >
+                <h3 className="text-base leading-snug">{s.label}</h3>
+                <p className="text-xs text-muted-foreground">{s.note}</p>
+              </button>
+            );
+          })}
+        </div>
+        <p className="text-xs leading-relaxed text-muted-foreground">
+          Optional. Student-specific resources such as university housing boards are only shown if
+          you select “Student” — everyone else sees general housing resources.
+        </p>
       </section>
 
       <section className="space-y-3">

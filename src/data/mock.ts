@@ -75,6 +75,7 @@ export const SCAM_PATTERNS = [
   },
 ];
 
+// General resources — shown to everyone, regardless of whether they are a student.
 export const POSTING_PLACES = [
   {
     name: "Major listing sites",
@@ -85,16 +86,32 @@ export const POSTING_PLACES = [
     note: "Best for rooms and sublets — fastest replies, highest scam rate.",
   },
   {
-    name: "University housing boards",
-    note: "Best for students — postings are lightly screened and near campus.",
-  },
-  {
     name: "Room-share apps",
     note: "Best for matching on lifestyle when you don't know anyone in the city yet.",
   },
   {
     name: "Local newcomer & diaspora groups",
     note: "Best for landlords who have rented to newcomers without local credit before.",
+  },
+  {
+    name: "Municipal & settlement agency housing help",
+    note: "Free, non-commercial help desks that can point you to local rental resources.",
+  },
+];
+
+// Student-specific resources — only surfaced when the profile says the user is a student.
+export const STUDENT_POSTING_PLACES = [
+  {
+    name: "University housing boards",
+    note: "Postings are lightly screened and near campus; usually needs a student login.",
+  },
+  {
+    name: "Campus off-campus housing office",
+    note: "Staff can review a lease and explain what is normal near your campus.",
+  },
+  {
+    name: "Student union & program group chats",
+    note: "Sublets from students leaving for a term — verify the person is a current student.",
   },
 ];
 
