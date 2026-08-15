@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Banknote, CircleHelp, PartyPopper } from "lucide-react";
+import { CircleHelp, PartyPopper } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
