@@ -100,6 +100,7 @@ Nothing is persisted: no database, no account, no PII. A refresh resets state.
 
 ---
 
+## STEP 1 — Identify the Signal
 
 The events that start a background (non-obvious) flow:
 
