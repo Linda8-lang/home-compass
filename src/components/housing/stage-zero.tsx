@@ -6,14 +6,14 @@ import type { NewcomerStatus } from "@/data/mock";
 import { CITATIONS } from "@/data/sources";
 import { useFlow } from "./flow-state";
 import {
-  SectionTitle,
   StageHeader,
-  CautionBadge,
   VariesNote,
   SourcePending,
   GuidanceBadge,
   EvidenceLegend,
   GuidanceDisclaimer,
+  Disclosure,
+  LearnMore,
 } from "./primitives";
 import { SourceCite } from "./source-cite";
 import { cn } from "@/lib/utils";
