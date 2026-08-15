@@ -5,6 +5,7 @@ import { useFlow } from "./flow-state";
 import { JOURNEY_STAGES } from "@/data/journey";
 import { SAMPLE_CONVERSATIONS, type SampleConversation } from "@/data/advisor-samples";
 import { cn } from "@/lib/utils";
+import { Disclosure, LearnMore } from "./primitives";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -108,12 +109,18 @@ export function AdvisorConversation({ className }: { className?: string }) {
       <div ref={scrollRef} className="min-h-0 flex-1 space-y-3 overflow-y-auto p-4">
         {messages.length === 0 && (
           <div className="space-y-4">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              This is the interactive half of the app. Anything that responds to your own
-              situation happens here — the static pages hold no curated housing recommendations.
-              The advisor asks a few clarifying questions before giving personalised guidance, and
-              it has no listing database, so it will not invent addresses, prices or availability.
-            </p>
+            <div className="space-y-2">
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Anything that responds to your own situation happens here.
+              </p>
+              <LearnMore label="How the advisor works">
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  The static pages hold no curated housing recommendations. The advisor asks a few
+                  clarifying questions before giving personalised guidance, and it has no listing
+                  database, so it will not invent addresses, prices or availability.
+                </p>
+              </LearnMore>
+            </div>
 
             <div className="rounded-xl border border-advisor/30 bg-advisor-soft/40 p-3">
               <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-advisor">
@@ -137,10 +144,11 @@ export function AdvisorConversation({ className }: { className?: string }) {
               </button>
             </div>
 
-            <div className="space-y-2">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                Sample conversation states
-              </p>
+            <Disclosure
+              title="Sample conversation states"
+              summary={`${SAMPLE_CONVERSATIONS.length} realistic starting points`}
+              moreLabel="Show"
+            >
               {SAMPLE_CONVERSATIONS.map((s) => (
                 <button
                   key={s.id}
@@ -152,8 +160,7 @@ export function AdvisorConversation({ className }: { className?: string }) {
                   <span className="mt-0.5 block text-xs text-muted-foreground">{s.blurb}</span>
                 </button>
               ))}
-            </div>
-
+            </Disclosure>
 
             <div className="grid gap-2">
               <button
