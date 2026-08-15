@@ -1,6 +1,15 @@
-import { ShieldCheck, Sparkles, AlertTriangle, Info, BookMarked, Compass, HelpCircle } from "lucide-react";
+import {
+  ShieldCheck,
+  Sparkles,
+  AlertTriangle,
+  Info,
+  BookMarked,
+  Compass,
+  HelpCircle,
+  ChevronDown,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
 /** Neutral placeholder for factual items whose source is not yet connected. */
 export function SourcePending({ className }: { className?: string }) {
