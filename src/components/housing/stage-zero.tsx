@@ -2,6 +2,7 @@ import { ArrowRight, Plane, Luggage, Home, Info, CheckCircle2, HelpCircle } from
 import { Button } from "@/components/ui/button";
 import { JOURNEY_STAGES, type JourneyStageId } from "@/data/journey";
 import { HOUSING_CONSIDERATIONS } from "@/data/housing-considerations";
+import type { NewcomerStatus } from "@/data/mock";
 import { CITATIONS } from "@/data/sources";
 import { useFlow } from "./flow-state";
 import {
