@@ -9,6 +9,7 @@ import { StageThree } from "./stage-three";
 import { StageFour } from "./stage-four";
 import { StageFive } from "./stage-five";
 import { AdvisorPanel } from "./advisor-chat";
+import { StaticDisclaimer } from "./primitives";
 
 /** Static reference sections — browsable, factual, no dynamic recommendations. */
 const SECTIONS = [
@@ -92,13 +93,17 @@ export function AppShell() {
 
         {/* 2 — Static / structured information */}
         <main className="min-w-0">
+          <StaticDisclaimer className="mb-5 rounded-lg border border-border/60 bg-muted/30 px-3 py-2" />
           {contentStep === 0 && <StageZero />}
           {contentStep === 1 && <StageOne />}
           {contentStep === 3 && <StageThree />}
           {contentStep === 5 && <StageFive />}
-          <p className="mt-12 border-t border-border pt-4 text-xs text-muted-foreground">
-            Prototype — all listings, scores and reports are sample data.
-          </p>
+          <div className="mt-12 space-y-2 border-t border-border pt-4">
+            <StaticDisclaimer />
+            <p className="text-xs text-muted-foreground">
+              Prototype — all listings, scores and reports are sample data.
+            </p>
+          </div>
         </main>
 
         {/* 3 — AI Advisor */}
