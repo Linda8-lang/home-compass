@@ -9,6 +9,7 @@ import { StageThree } from "./stage-three";
 import { StageFour } from "./stage-four";
 import { StageFive } from "./stage-five";
 import { AdvisorPanel } from "./advisor-chat";
+import { StaticDisclaimer } from "./primitives";
 
 /** Static reference sections — browsable, factual, no dynamic recommendations. */
 const SECTIONS = [
