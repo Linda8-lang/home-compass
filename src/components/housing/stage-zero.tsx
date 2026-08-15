@@ -85,6 +85,34 @@ export function StageZero() {
       </section>
 
       <section className="space-y-3">
+        <SectionTitle>Your situation</SectionTitle>
+        <div className="grid gap-3 sm:grid-cols-3">
+          {SITUATIONS.map((s) => {
+            const active = filters.status === s.id;
+            return (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => setFilters({ ...filters, status: s.id })}
+                aria-pressed={active}
+                className={cn(
+                  "surface flex flex-col gap-1 p-4 text-left transition-colors",
+                  active ? "border-primary ring-2 ring-primary/25" : "hover:border-primary/40",
+                )}
+              >
+                <h3 className="text-base leading-snug">{s.label}</h3>
+                <p className="text-xs text-muted-foreground">{s.note}</p>
+              </button>
+            );
+          })}
+        </div>
+        <p className="text-xs leading-relaxed text-muted-foreground">
+          Optional. Student-specific resources such as university housing boards are only shown if
+          you select “Student” — everyone else sees general housing resources.
+        </p>
+      </section>
+
+      <section className="space-y-3">
         <SectionTitle aside={<CautionBadge label="Heads up" />}>{stage.name}</SectionTitle>
         <div className="surface space-y-3 p-4">
           <p className="text-sm leading-relaxed text-muted-foreground">{stage.summary}</p>
