@@ -53,6 +53,24 @@ export function EvidenceLegend({ className }: { className?: string }) {
   );
 }
 
+/** Subtle, non-dominant disclaimer for all static reference/checklist content. */
+export function StaticDisclaimer({ className }: { className?: string }) {
+  return (
+    <p
+      className={cn(
+        "flex items-start gap-1.5 text-[11px] leading-relaxed text-muted-foreground/90",
+        className,
+      )}
+    >
+      <Info className="mt-0.5 size-3 shrink-0" aria-hidden />
+      <span>
+        Informational guidance only. Requirements may vary by location and individual
+        circumstances. Verify important requirements with the relevant official source.
+      </span>
+    </p>
+  );
+}
+
 export function GuidanceDisclaimer({ className }: { className?: string }) {
   return (
     <p className={cn("flex items-start gap-1.5 text-xs leading-relaxed text-muted-foreground", className)}>
