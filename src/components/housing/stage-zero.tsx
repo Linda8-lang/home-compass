@@ -54,7 +54,7 @@ export function StageZero() {
       <StageHeader
         eyebrow="Stage 0 · Your immigration stage"
         title="Where are you in the move?"
-        intro="Pick your stage — everything below adapts to it. Open only the parts you need right now."
+        intro="Pick your stage — the guidance below adapts to it."
       />
 
       {/* Primary question for this screen */}
@@ -101,109 +101,9 @@ export function StageZero() {
       </section>
 
       <Disclosure
-        title="Your situation"
-        summary={`Currently: ${situation.label}. Changes which resources you see.`}
-      >
-        <div className="grid gap-3 sm:grid-cols-3">
-          {SITUATIONS.map((s) => {
-            const active = filters.status === s.id;
-            return (
-              <button
-                key={s.id}
-                type="button"
-                onClick={() => setFilters({ ...filters, status: s.id })}
-                aria-pressed={active}
-                className={cn(
-                  "surface flex flex-col gap-1 p-4 text-left transition-colors",
-                  active ? "border-primary ring-2 ring-primary/25" : "hover:border-primary/40",
-                )}
-              >
-                <h3 className="text-base leading-snug">{s.label}</h3>
-                <p className="text-xs text-muted-foreground">{s.note}</p>
-              </button>
-            );
-          })}
-        </div>
-        <p className="text-xs leading-relaxed text-muted-foreground">
-          Optional. Student-specific resources such as university housing boards are only shown if
-          you select “Student” — everyone else sees general housing resources.
-        </p>
-      </Disclosure>
-
-      <Disclosure
-        title="Your checklist right now"
-        summary={`${tasks.length} tasks for ${stage.name} · ${done} done`}
+        title="How to evaluate housing options"
         defaultOpen
-      >
-        <ul className="surface divide-y divide-border">
-          {tasks.map((t) => {
-            const key = `${stage.id}:${t.label}`;
-            const checked = doneTasks.includes(key);
-            const cited = t.citation && CITATIONS[t.citation] ? t.citation : null;
-            return (
-              <li
-                key={t.label}
-                className={cn(
-                  "flex items-start gap-3 border-l-2 p-3.5",
-                  t.evidence === "reference" ? "border-l-verified/60" : "border-l-transparent",
-                )}
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleTask(key)}
-                  aria-pressed={checked}
-                  aria-label={`Mark "${t.label}" as done`}
-                  className="mt-0.5 shrink-0"
-                >
-                  <CheckCircle2
-                    className={cn("size-5", checked ? "text-verified" : "text-border")}
-                    aria-hidden
-                  />
-                </button>
-                <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span
-                      className={cn(
-                        "text-sm font-medium",
-                        checked ? "text-muted-foreground line-through" : "text-foreground",
-                      )}
-                    >
-                      {t.label}
-                    </span>
-                    <span
-                      className={cn(
-                        "rounded-full px-2 py-0.5 text-[11px] font-semibold capitalize",
-                        kindTone[t.kind],
-                      )}
-                    >
-                      {t.kind}
-                    </span>
-                  </div>
-                  <LearnMore className="mt-1.5" label="Details & source">
-                    <p className="text-sm leading-relaxed text-muted-foreground">{t.detail}</p>
-                    <div className="flex flex-wrap items-center gap-2">
-                      {t.evidence === "reference" ? (
-                        cited ? (
-                          <SourceCite metric={cited} />
-                        ) : (
-                          <SourcePending />
-                        )
-                      ) : (
-                        <GuidanceBadge />
-                      )}
-                    </div>
-                  </LearnMore>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-        <GuidanceDisclaimer />
-      </Disclosure>
-
-      <Disclosure
-        title="How to Evaluate Housing Options"
-        summary={`${HOUSING_CONSIDERATIONS.length} dimensions to weigh — questions, not recommendations`}
+        summary={`${HOUSING_CONSIDERATIONS.length} dimensions to weigh`}
         aside={<GuidanceBadge label="Framework" className="hidden sm:inline-flex" />}
       >
         <div className="grid gap-3 sm:grid-cols-2">
@@ -211,7 +111,7 @@ export function StageZero() {
             <article key={c.id} className="surface flex flex-col gap-2 p-4">
               <h3 className="text-base leading-snug">{c.title}</h3>
               <p className="text-sm leading-relaxed text-muted-foreground">{c.what}</p>
-              <LearnMore label="Questions & trade-off">
+              <LearnMore label="Things to consider">
                 <ul className="space-y-1.5">
                   {c.questions.map((q) => (
                     <li
@@ -230,6 +130,18 @@ export function StageZero() {
                   <strong className="font-semibold">Trade-off: </strong>
                   {c.tradeoff}
                 </p>
+                {c.local && (
+                  <ul className="space-y-1 rounded-lg bg-muted p-2.5">
+                    <li className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                      In Toronto
+                    </li>
+                    {c.local.map((l) => (
+                      <li key={l} className="text-xs leading-relaxed text-secondary-foreground">
+                        · {l}
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <SourcePending />
               </LearnMore>
             </article>
