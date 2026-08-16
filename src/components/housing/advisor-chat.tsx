@@ -270,7 +270,12 @@ export function AdvisorConversation({ className }: { className?: string }) {
             aria-label="Message the advisor"
             className="h-11 min-w-0 flex-1 bg-transparent px-2.5 text-sm outline-none"
           />
-          <Button type="submit" size="icon" className="size-10 shrink-0 rounded-xl" disabled={pending || !input.trim()}>
+          <Button
+            type="submit"
+            size="icon"
+            className="size-10 shrink-0 rounded-xl"
+            disabled={pending || !input.trim()}
+          >
             <Send className="size-4" aria-hidden />
             <span className="sr-only">Send</span>
           </Button>
@@ -288,16 +293,16 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
     <header className="space-y-3 border-b border-advisor/25 bg-advisor-soft/50 p-4">
       <DisclaimerBadge />
       <div className="flex items-start justify-between gap-3">
-        <div className="flex items-start gap-2.5">
-          <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-xl bg-advisor text-advisor-foreground">
+        <div className="flex items-center gap-2.5">
+          <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-advisor text-advisor-foreground">
             <Sparkles className="size-4.5" aria-hidden />
           </span>
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-advisor">
-              Core capability
-            </p>
-            <h2 className="font-display text-lg leading-tight">AI Advisor</h2>
-          </div>
+          <h2 className="sr-only">AI Advisor</h2>
+          <p className="flex items-center gap-1.5 text-xs font-semibold leading-snug text-advisor">
+            <Cpu className="size-3.5 shrink-0" aria-hidden />
+            AI-Generated Guidance | Multi-model engine (Claude + ChatGPT + Gemini) · URL-verified ·
+            Citation enforced
+          </p>
         </div>
         {onClose && (
           <button
@@ -310,10 +315,6 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
           </button>
         )}
       </div>
-      <p className="inline-flex items-center gap-1.5 rounded-full border border-advisor/40 bg-advisor-soft/60 px-2.5 py-1 text-[11px] font-semibold text-advisor">
-        <Cpu className="size-3.5" aria-hidden />
-        Multi-model engine · Claude + ChatGPT + Gemini, URL-verified
-      </p>
     </header>
   );
 }

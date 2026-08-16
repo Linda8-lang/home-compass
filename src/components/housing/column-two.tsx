@@ -22,7 +22,7 @@ const CATEGORY_ICONS: Record<string, typeof Building2> = {
 
 /**
  * Column 2 — the static reference lane. Renders exactly the three data-driven
- * sections (Find Housing, Compare Housing Options, Verify the Place). Nothing
+ * sections (Find Housing, Evaluate Housing, Verify the Place). Nothing
  * here is hardcoded copy for a category or checklist item — it all comes from
  * src/data/housing-sections.ts, and nothing here resembles a listing card.
  */
@@ -130,7 +130,9 @@ export function ColumnTwo() {
                         "sm:flex-row sm:items-center sm:justify-between sm:gap-3",
                       )}
                     >
-                      <span className="text-sm leading-relaxed text-secondary-foreground">{c.bullet}</span>
+                      <span className="text-sm leading-relaxed text-secondary-foreground">
+                        {c.bullet}
+                      </span>
                       <button
                         type="button"
                         onClick={() => askAdvisor(c.askAdvisorPrompt)}
@@ -165,7 +167,10 @@ export function ColumnTwo() {
                 </div>
                 <ul className="space-y-2">
                   {g.items.map((it) => (
-                    <li key={it.id} className="flex gap-2 text-sm leading-relaxed text-secondary-foreground">
+                    <li
+                      key={it.id}
+                      className="flex gap-2 text-sm leading-relaxed text-secondary-foreground"
+                    >
                       <ShieldCheck className="mt-0.5 size-3.5 shrink-0 text-verified" aria-hidden />
                       {it.label}
                     </li>
