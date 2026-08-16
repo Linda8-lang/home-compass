@@ -13,10 +13,10 @@ import { StaticDisclaimer } from "./primitives";
 
 /** Static reference sections — browsable, factual, no dynamic recommendations. */
 const SECTIONS = [
-  { step: 0, label: "Your stage & checklist", hint: "Timeline and tasks" },
+  { step: 0, label: "How to evaluate housing options", hint: "Dimensions and trade-offs" },
   { step: 1, label: "Where to look", hint: "Categories and scams" },
-  { step: 3, label: "Verify an address", hint: "Sourced fact sheets" },
-  { step: 5, label: "Application & documents", hint: "Deposits and paperwork" },
+  { step: 3, label: "Verify an address", hint: "Local crime reports & nearby market rents" },
+  { step: 5, label: "Application & communication", hint: "Documents, deposits, landlord messages" },
 ] as const;
 
 const STATIC_STEPS = SECTIONS.map((s) => s.step) as readonly number[];
