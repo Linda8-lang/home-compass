@@ -12,10 +12,9 @@ const DIMENSION_ORDER = [
   "location",
   "commute",
   "transportation",
-  "housing-type",
+  "management",
+  "occupancy",
   "lease",
-  "proximity",
-  "necessities",
   "documents",
   "duration",
 ];
@@ -42,7 +41,7 @@ export function StageTwo() {
       <StageHeader
         eyebrow="Decision support"
         title="How to Evaluate Housing Options"
-        intro="This section does not rank neighbourhoods or pick a place for you. It sets out the dimensions worth comparing, the questions to ask on each, and the trade-off that sits behind them — so the comparison is yours to make."
+        intro="Dimensions worth comparing, things to consider on each, and the trade-off behind them. The comparison is yours to make."
       />
       <VariesNote />
 
@@ -82,7 +81,7 @@ export function StageTwo() {
                   <div className="border-t border-border px-4 py-3">
                     <p className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                       <ListChecks className="size-3.5" aria-hidden />
-                      Questions to ask about any option
+                      Things to consider
                     </p>
                     <ul className="space-y-1.5">
                       {d.questions.map((q) => (
@@ -95,6 +94,20 @@ export function StageTwo() {
                       <span className="font-semibold">Trade-off: </span>
                       {d.tradeoff}
                     </p>
+                    {d.local && (
+                      <div className="mt-3 rounded-lg bg-sand p-3">
+                        <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-secondary-foreground">
+                          In Toronto
+                        </p>
+                        <ul className="space-y-1.5">
+                          {d.local.map((l) => (
+                            <li key={l} className="text-sm leading-relaxed text-secondary-foreground">
+                              · {l}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 )}
               </article>
@@ -123,8 +136,7 @@ export function StageTwo() {
           Your own comparison
         </SectionTitle>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          Write in the options you are actually considering and fill the dimensions that matter to
-          you. Nothing here is scored — the weighting is yours.
+          Write in the options you are considering. Nothing is scored — the weighting is yours.
         </p>
 
         <div className="grid gap-3 sm:grid-cols-2">

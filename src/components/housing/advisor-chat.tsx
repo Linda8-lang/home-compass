@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Sparkles, X, Send, Loader2, Map, FileSearch } from "lucide-react";
+import { Sparkles, X, Send, Loader2, Map, FileSearch, Cpu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useFlow } from "./flow-state";
 import { JOURNEY_STAGES } from "@/data/journey";
@@ -111,7 +111,7 @@ export function AdvisorConversation({ className }: { className?: string }) {
           <div className="space-y-4">
             <div className="space-y-2">
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Anything that responds to your own situation happens here.
+                Personalised guidance happens here.
               </p>
               <LearnMore label="How the advisor works">
                 <p className="text-sm leading-relaxed text-muted-foreground">
@@ -296,9 +296,11 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
         )}
       </div>
       <p className="mt-3 text-sm leading-relaxed text-secondary-foreground">
-        Ask anything about your own situation — where to look, whether a listing looks safe,
-        deposits and Ontario rules, what to offer without Canadian credit, and how to message a
-        landlord.
+        Ask anything about your own situation.
+      </p>
+      <p className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-advisor/40 bg-advisor-soft/60 px-2.5 py-1 text-[11px] font-semibold text-advisor">
+        <Cpu className="size-3.5" aria-hidden />
+        Multi-model engine · Claude + ChatGPT + Gemini, URL-verified
       </p>
       <p className="mt-2 text-xs text-advisor">
         AI-generated · guidance, not legal advice — it may vary by location and individual

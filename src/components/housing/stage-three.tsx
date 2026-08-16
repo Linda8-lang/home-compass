@@ -55,7 +55,7 @@ export function StageThree() {
       <StageHeader
         eyebrow="Stage 3 · Verification"
         title="Is this address what the listing claims?"
-        intro="Paste an address for a short verified summary. Open a section for the detail behind it."
+        intro="Paste an address to check local crime reports and nearby market rents, plus daily essentials within walking distance."
       />
 
       <section className="warm-gradient rounded-2xl border border-border p-5 shadow-soft sm:p-7">

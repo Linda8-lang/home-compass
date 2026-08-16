@@ -54,6 +54,11 @@ export const HOUSING_TYPES: HousingType[] = [
 
 export const SCAM_PATTERNS = [
   {
+    title: "Fake short-term rental turned into a \"lease\"",
+    detail:
+      "A common Toronto scam: a unit is booked or shown as an Airbnb, then you are asked to e-transfer a lease deposit. The person is not the landlord and cannot rent it to you.",
+  },
+  {
     title: "Deposit requested before any viewing",
     detail:
       "No legitimate Toronto landlord needs money before you see the unit — in person or on a live video call.",
@@ -550,5 +555,34 @@ export const PAYMENT_NOTES = [
     title: "Rent is typically due the 1st",
     detail:
       "Most landlords ask for pre-authorized debit or e-transfer. Always keep a receipt or transfer record.",
+  },
+];
+
+// External housing search portals — links only, no curated inventory.
+export const SEARCH_PORTALS = [
+  {
+    name: "Rentals.ca",
+    url: "https://rentals.ca/toronto",
+    note: "Managed buildings and listed inventory across Toronto.",
+  },
+  {
+    name: "PadMapper",
+    url: "https://www.padmapper.com/apartments/toronto-on",
+    note: "Map-based search; mixes managed and owner-listed units.",
+  },
+  {
+    name: "Realtor.ca (rentals)",
+    url: "https://www.realtor.ca/",
+    note: "Agent-listed condo and house rentals.",
+  },
+  {
+    name: "Kijiji Toronto rentals",
+    url: "https://www.kijiji.ca/b-apartments-condos/city-of-toronto/c37l1700273",
+    note: "Owner-listed units and rooms — highest scam exposure, verify in person.",
+  },
+  {
+    name: "City of Toronto housing help",
+    url: "https://www.toronto.ca/community-people/employment-social-support/housing-support/",
+    note: "Municipal, non-commercial housing support and referrals.",
   },
 ];

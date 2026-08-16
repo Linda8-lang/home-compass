@@ -7,6 +7,7 @@ import {
   FileCheck,
   Sparkles,
   GraduationCap,
+  ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,15 +15,10 @@ import {
   SCAM_PATTERNS,
   POSTING_PLACES,
   STUDENT_POSTING_PLACES,
+  SEARCH_PORTALS,
 } from "@/data/mock";
 import { useFlow } from "./flow-state";
 import { CautionBadge, StageHeader, VariesNote, Disclosure, LearnMore } from "./primitives";
-
-const riskTone: Record<string, string> = {
-  "Lowest risk": "bg-verified-soft text-verified",
-  "Medium risk": "bg-caution-soft text-caution",
-  Varies: "bg-sand text-secondary-foreground",
-};
 
 export function StageOne() {
   const { advance, filters } = useFlow();
@@ -41,14 +37,7 @@ export function StageOne() {
         <div className="grid gap-3 sm:grid-cols-3">
           {HOUSING_TYPES.map((t) => (
             <article key={t.id} className="surface flex flex-col gap-2.5 p-4">
-              <div className="flex items-start justify-between gap-2">
-                <h3 className="text-base leading-snug">{t.title}</h3>
-                <span
-                  className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold ${riskTone[t.risk]}`}
-                >
-                  {t.risk}
-                </span>
-              </div>
+              <h3 className="text-base leading-snug">{t.title}</h3>
               <p className="text-sm leading-relaxed text-muted-foreground">{t.blurb}</p>
               <LearnMore className="mt-auto" label="Cost, credit & timing">
                 <ul className="space-y-1.5 text-xs text-secondary-foreground">
@@ -77,6 +66,7 @@ export function StageOne() {
 
       <Disclosure
         title="Scam patterns to walk away from"
+        defaultOpen
         summary={`${SCAM_PATTERNS.length} signals that a listing is not real`}
         aside={<CautionBadge label="Safety" />}
       >
@@ -135,6 +125,31 @@ export function StageOne() {
             to also see student-specific resources.
           </p>
         )}
+      </Disclosure>
+
+      <Disclosure
+        title="Where to search"
+        summary={`${SEARCH_PORTALS.length} external portals — opens in a new tab`}
+      >
+        <ul className="surface divide-y divide-border">
+          {SEARCH_PORTALS.map((p) => (
+            <li key={p.name} className="p-3.5">
+              <a
+                href={p.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="flex items-center gap-2 text-sm font-semibold text-primary underline underline-offset-2"
+              >
+                {p.name}
+                <ExternalLink className="size-3.5 shrink-0" aria-hidden />
+              </a>
+              <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">{p.note}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="text-xs leading-relaxed text-muted-foreground">
+          External sites, not affiliated with this prototype. Always view a unit before paying.
+        </p>
       </Disclosure>
 
       <Button size="lg" className="w-full sm:w-auto" onClick={() => advance(2)}>
