@@ -34,15 +34,16 @@ export const JOURNEY_STAGES: JourneyStage[] = [
     name: "Pre-landing",
     window: "Before you fly",
     summary:
-      "You have no Canadian address, no credit file and no way to view a unit in person. Everything you sign now carries scam risk.",
+      "Prepare proof of funds and credit-substitute documents now — you won't yet have a Canadian address, credit file, or a way to view a unit in person, so treat any request for payment before a live viewing as a scam signal.",
     housingGoal:
-      "Consider short-term housing rather than committing to a long lease from abroad. Use this stage to learn the market, not to commit.",
+      "Arrange short-term housing for your arrival rather than committing to a long lease from abroad, and plan to use it until you secure permanent housing.",
     headsUp:
       "Never e-transfer a deposit for a unit you have not seen on a live video call. This is where most newcomers lose money.",
     tasks: [
       {
         label: "Arrange temporary housing for your arrival",
-        detail: "A furnished sublet or extended-stay place gives you a mailing address on day one.",
+        detail:
+          "A furnished sublet or extended-stay place gives you a mailing address from day one — plan to use it until you secure permanent housing.",
         kind: "housing",
         evidence: "guidance",
       },
@@ -79,9 +80,9 @@ export const JOURNEY_STAGES: JourneyStage[] = [
     name: "Just landed",
     window: "Your first weeks on the ground",
     summary:
-      "You are in the city on temporary housing. The clock is on: you can now view units, but you still have no credit history.",
+      "You're in the city on temporary housing. You can now view units in person, and building your local credit history starts here.",
     housingGoal:
-      "View in person, verify the listing, and sign a real lease before your short-term booking runs out.",
+      "View units in person, verify each listing, and sign a lease once you're confident — using your temporary housing as a bridge until then.",
     headsUp:
       "Apply for your SIN early — landlords rarely ask for it, but employers and banks do, and it unblocks everything else.",
     tasks: [
@@ -105,10 +106,10 @@ export const JOURNEY_STAGES: JourneyStage[] = [
       },
       {
         label: "Verify each shortlisted address",
-        detail: "Run the fact sheet in the address verification section before you send any money or sign anything.",
+        detail:
+          "Check ownership, listing authenticity and any payment requests against the Verify the Place checklist before you send any money or sign anything.",
         kind: "housing",
-        evidence: "reference",
-        citation: "safetyScore",
+        evidence: "guidance",
       },
       {
         label: "Get a secured credit card",

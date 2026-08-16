@@ -1,22 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { Sparkles, X, Send, Loader2, Map, FileSearch, Cpu } from "lucide-react";
+import { Sparkles, X, Send, Loader2, Map, ShieldCheck, Cpu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useFlow } from "./flow-state";
 import { JOURNEY_STAGES } from "@/data/journey";
 import { SAMPLE_CONVERSATIONS, type SampleConversation } from "@/data/advisor-samples";
 import { cn } from "@/lib/utils";
-import { Disclosure, LearnMore } from "./primitives";
+import { Disclosure, LearnMore, DisclaimerBadge } from "./primitives";
 
 type Msg = { role: "user" | "assistant"; content: string };
-
-const STAGE_LABELS: Record<number, string> = {
-  0: "browsing the immigration-stage checklist",
-  1: "reading the where-to-look guide",
-  2: "using the housing evaluation framework",
-  3: "verifying a specific address",
-  4: "using the advisor's listing & negotiation coach",
-  5: "preparing their application documents",
-};
 
 const SUGGESTIONS = [
   "Can you help me find housing near my university?",
@@ -26,7 +17,7 @@ const SUGGESTIONS = [
 ];
 
 function useAdvisor() {
-  const { step, journeyStage, filters } = useFlow();
+  const { journeyStage, filters } = useFlow();
   const [messages, setMessages] = useState<Msg[]>([]);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -40,9 +31,7 @@ function useAdvisor() {
     setPending(true);
 
     const journey = JOURNEY_STAGES.find((s) => s.id === journeyStage);
-    const context = `The user is ${STAGE_LABELS[step] ?? "browsing"}. Immigration stage: ${
-      journey?.name ?? journeyStage
-    }. Budget: $${filters.budget}/month in ${filters.city}. Status: ${filters.status}.`;
+    const context = `Immigration stage: ${journey?.name ?? journeyStage}. Budget: $${filters.budget}/month in ${filters.city}. Status: ${filters.status}.`;
 
     try {
       const res = await fetch("/api/advisor", {
@@ -87,17 +76,32 @@ function useAdvisor() {
   return { messages, setMessages, pending, error, send };
 }
 
+function scrollToSection(anchor: string) {
+  if (typeof document === "undefined") return;
+  document.getElementById(anchor)?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 /** The conversation surface: transcript, suggestions and composer. */
 export function AdvisorConversation({ className }: { className?: string }) {
-  const { advance } = useFlow();
+  const { advisorPrompt, clearAdvisorPrompt } = useFlow();
   const { messages, setMessages, pending, error, send } = useAdvisor();
   const [input, setInput] = useState("");
   const [sample, setSample] = useState<SampleConversation | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, pending]);
+
+  // Column 2's "Ask the AI Advisor about this" hands a question over here — a
+  // one-way read, never a write back into Column 2's own data or state.
+  useEffect(() => {
+    if (!advisorPrompt) return;
+    setInput(advisorPrompt);
+    inputRef.current?.focus();
+    clearAdvisorPrompt();
+  }, [advisorPrompt, clearAdvisorPrompt]);
 
   function loadSample(s: SampleConversation) {
     setSample(s);
@@ -165,7 +169,7 @@ export function AdvisorConversation({ className }: { className?: string }) {
             <div className="grid gap-2">
               <button
                 type="button"
-                onClick={() => advance(2)}
+                onClick={() => scrollToSection("compare-housing")}
                 className="flex items-center gap-2.5 rounded-xl border border-advisor/40 bg-advisor-soft/60 p-3 text-left text-sm font-medium text-advisor transition-colors hover:bg-advisor-soft"
               >
                 <Map className="size-4 shrink-0" aria-hidden />
@@ -173,11 +177,11 @@ export function AdvisorConversation({ className }: { className?: string }) {
               </button>
               <button
                 type="button"
-                onClick={() => advance(4)}
+                onClick={() => scrollToSection("verify-the-place")}
                 className="flex items-center gap-2.5 rounded-xl border border-advisor/40 bg-advisor-soft/60 p-3 text-left text-sm font-medium text-advisor transition-colors hover:bg-advisor-soft"
               >
-                <FileSearch className="size-4 shrink-0" aria-hidden />
-                Read a listing & coach my reply
+                <ShieldCheck className="size-4 shrink-0" aria-hidden />
+                Verify a place before you commit
               </button>
             </div>
 
@@ -217,19 +221,28 @@ export function AdvisorConversation({ className }: { className?: string }) {
           </div>
         )}
 
-        {messages.map((m, i) => (
-          <div
-            key={i}
-            className={cn(
-              "max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed",
-              m.role === "user"
-                ? "ml-auto bg-primary text-primary-foreground"
-                : "bg-sand text-foreground",
-            )}
-          >
-            {m.content || "…"}
-          </div>
-        ))}
+        {messages.map((m, i) =>
+          m.role === "user" ? (
+            <div
+              key={i}
+              className="ml-auto max-w-[85%] whitespace-pre-wrap rounded-2xl bg-primary px-3.5 py-2.5 text-sm leading-relaxed text-primary-foreground"
+            >
+              {m.content}
+            </div>
+          ) : (
+            // AI-generated content: visually and structurally distinct from Column 2's
+            // static-content styling (different border/background treatment, not just a label).
+            <div key={i} className="max-w-[85%] space-y-1">
+              <p className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wide text-advisor">
+                <Sparkles className="size-3" aria-hidden />
+                AI-generated
+              </p>
+              <div className="whitespace-pre-wrap rounded-2xl border border-advisor/30 bg-advisor-soft/60 px-3.5 py-2.5 text-sm leading-relaxed text-foreground">
+                {m.content || "…"}
+              </div>
+            </div>
+          ),
+        )}
 
         {pending && messages[messages.length - 1]?.role === "user" && (
           <p className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -250,6 +263,7 @@ export function AdvisorConversation({ className }: { className?: string }) {
       >
         <div className="flex items-center gap-2 rounded-2xl border-2 border-advisor/40 bg-background p-1.5 focus-within:border-advisor">
           <input
+            ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask the advisor a question…"
@@ -271,7 +285,8 @@ export function AdvisorConversation({ className }: { className?: string }) {
 
 export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
   return (
-    <header className="border-b border-advisor/25 bg-advisor-soft/50 p-4">
+    <header className="space-y-3 border-b border-advisor/25 bg-advisor-soft/50 p-4">
+      <DisclaimerBadge />
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-2.5">
           <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-xl bg-advisor text-advisor-foreground">
@@ -295,7 +310,7 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
           </button>
         )}
       </div>
-      <p className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-advisor/40 bg-advisor-soft/60 px-2.5 py-1 text-[11px] font-semibold text-advisor">
+      <p className="inline-flex items-center gap-1.5 rounded-full border border-advisor/40 bg-advisor-soft/60 px-2.5 py-1 text-[11px] font-semibold text-advisor">
         <Cpu className="size-3.5" aria-hidden />
         Multi-model engine · Claude + ChatGPT + Gemini, URL-verified
       </p>
@@ -303,12 +318,16 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
   );
 }
 
-/** Primary advisor surface — third column on desktop, full section on small screens. */
+/**
+ * Column 3 — AI Advisor. Docked as a persistent right-hand column: never a
+ * minimizable/collapsible bottom bubble, and never expands to take over the
+ * full screen. The chatbot lives entirely inside this column.
+ */
 export function AdvisorPanel() {
   return (
     <aside
       aria-label="AI Advisor"
-      className="order-first flex h-[70vh] flex-col lg:order-none overflow-hidden rounded-2xl border-2 border-advisor/35 bg-card shadow-sm lg:sticky lg:top-14 lg:h-[calc(100vh-3.5rem)]"
+      className="order-first flex h-[70vh] flex-col overflow-hidden rounded-2xl border-2 border-advisor/35 bg-card shadow-sm lg:order-none lg:sticky lg:top-14 lg:h-[calc(100vh-3.5rem)]"
     >
       <AdvisorHeader />
       <AdvisorConversation />

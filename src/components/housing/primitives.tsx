@@ -62,6 +62,25 @@ export function EvidenceLegend({ className }: { className?: string }) {
   );
 }
 
+/**
+ * Shared disclaimer badge pinned at the top of Column 2 and Column 3, so the
+ * copy stays identical wherever it appears.
+ */
+export function DisclaimerBadge({ className }: { className?: string }) {
+  return (
+    <div
+      role="note"
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full border border-caution/40 bg-caution-soft px-3 py-1 text-[11px] font-semibold text-caution",
+        className,
+      )}
+    >
+      <AlertTriangle className="size-3.5 shrink-0" aria-hidden />
+      Guidance, not legal advice
+    </div>
+  );
+}
+
 /** Subtle, non-dominant disclaimer for all static reference/checklist content. */
 export function StaticDisclaimer({ className }: { className?: string }) {
   return (

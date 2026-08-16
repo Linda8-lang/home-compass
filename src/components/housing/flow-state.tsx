@@ -1,107 +1,53 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
-import type { NewcomerStatus } from "@/data/mock";
 import type { JourneyStageId } from "@/data/journey";
 
-export type TransitPref = "subway" | "car" | "walk";
+/** The three profiles the app personalises for. "student" gates University Housing Boards. */
+export type NewcomerStatus = "student" | "job-offer" | "other";
 
 export type Filters = {
   city: string;
   budget: number;
-  transit: TransitPref;
-  destination: string;
   status: NewcomerStatus;
 };
 
 type FlowValue = {
-  step: number;
-  maxStep: number;
-  goTo: (s: number) => void;
-  advance: (s: number) => void;
   filters: Filters;
   setFilters: (f: Filters) => void;
-  searched: boolean;
-  setSearched: (v: boolean) => void;
-  compare: string[];
-  toggleCompare: (id: string) => void;
-  chosenNeighborhood: string | null;
-  setChosenNeighborhood: (id: string | null) => void;
-  verifiedAddress: string | null;
-  setVerifiedAddress: (a: string | null) => void;
-  chosenListing: string | null;
-  setChosenListing: (id: string | null) => void;
   journeyStage: JourneyStageId;
   setJourneyStage: (s: JourneyStageId) => void;
-  doneTasks: string[];
-  toggleTask: (key: string) => void;
+  /**
+   * One-way handoff from Column 2 into Column 3: "Ask the AI Advisor about this"
+   * queues a question for the advisor's composer. The advisor never writes back
+   * into this or any Column 2 state — the data sources stay isolated.
+   */
+  advisorPrompt: string | null;
+  askAdvisor: (text: string) => void;
+  clearAdvisorPrompt: () => void;
 };
 
 const FlowContext = createContext<FlowValue | null>(null);
 
 export function FlowProvider({ children }: { children: ReactNode }) {
-  const [step, setStep] = useState(0);
-  const [maxStep, setMaxStep] = useState(5);
   const [journeyStage, setJourneyStage] = useState<JourneyStageId>("pre-landing");
-  const [doneTasks, setDoneTasks] = useState<string[]>([]);
   const [filters, setFilters] = useState<Filters>({
     city: "Toronto",
     budget: 2000,
-    transit: "subway",
-    destination: "Downtown Toronto",
-    // Do not assume newcomers are students — this is set in the Stage 0 profile.
+    // Do not assume newcomers are students — this is set via the persona picker.
     status: "other",
   });
-  const [searched, setSearched] = useState(false);
-  const [compare, setCompare] = useState<string[]>([]);
-  const [chosenNeighborhood, setChosenNeighborhood] = useState<string | null>(null);
-  const [verifiedAddress, setVerifiedAddress] = useState<string | null>(null);
-  const [chosenListing, setChosenListing] = useState<string | null>(null);
+  const [advisorPrompt, setAdvisorPrompt] = useState<string | null>(null);
 
   const value = useMemo<FlowValue>(
     () => ({
-      step,
-      maxStep,
-      goTo: (s) => {
-        if (s <= maxStep) {
-          setStep(s);
-          if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-      },
-      advance: (s) => {
-        setMaxStep((m) => Math.max(m, s));
-        setStep(s);
-        if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
-      },
       filters,
       setFilters,
-      searched,
-      setSearched,
-      compare,
-      toggleCompare: (id) =>
-        setCompare((c) => (c.includes(id) ? c.filter((x) => x !== id) : [...c, id])),
-      chosenNeighborhood,
-      setChosenNeighborhood,
-      verifiedAddress,
-      setVerifiedAddress,
-      chosenListing,
-      setChosenListing,
       journeyStage,
       setJourneyStage,
-      doneTasks,
-      toggleTask: (key) =>
-        setDoneTasks((d) => (d.includes(key) ? d.filter((x) => x !== key) : [...d, key])),
+      advisorPrompt,
+      askAdvisor: (text) => setAdvisorPrompt(text),
+      clearAdvisorPrompt: () => setAdvisorPrompt(null),
     }),
-    [
-      step,
-      maxStep,
-      filters,
-      searched,
-      compare,
-      chosenNeighborhood,
-      verifiedAddress,
-      chosenListing,
-      journeyStage,
-      doneTasks,
-    ],
+    [filters, journeyStage, advisorPrompt],
   );
 
   return <FlowContext.Provider value={value}>{children}</FlowContext.Provider>;
