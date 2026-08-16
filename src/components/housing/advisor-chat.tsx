@@ -299,10 +299,6 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
         <Cpu className="size-3.5" aria-hidden />
         Multi-model engine · Claude + ChatGPT + Gemini, URL-verified
       </p>
-      <p className="mt-2 text-xs text-advisor">
-        AI-generated · guidance, not legal advice — it may vary by location and individual
-        circumstances. Verify important requirements with the relevant official source.
-      </p>
     </header>
   );
 }
