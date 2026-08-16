@@ -281,7 +281,7 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
             <p className="text-[11px] font-semibold uppercase tracking-wide text-advisor">
               Core capability
             </p>
-            <h2 className="font-display text-lg leading-tight">Ask the AI Advisor</h2>
+            <h2 className="font-display text-lg leading-tight">AI Advisor</h2>
           </div>
         </div>
         {onClose && (
@@ -295,10 +295,7 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
           </button>
         )}
       </div>
-      <p className="mt-3 text-sm leading-relaxed text-secondary-foreground">
-        Ask anything about your own situation.
-      </p>
-      <p className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-advisor/40 bg-advisor-soft/60 px-2.5 py-1 text-[11px] font-semibold text-advisor">
+      <p className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-advisor/40 bg-advisor-soft/60 px-2.5 py-1 text-[11px] font-semibold text-advisor">
         <Cpu className="size-3.5" aria-hidden />
         Multi-model engine · Claude + ChatGPT + Gemini, URL-verified
       </p>
