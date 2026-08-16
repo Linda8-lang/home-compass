@@ -1,7 +1,7 @@
 /**
  * Neutral, educational framework for evaluating housing.
- * No recommendations — these are the dimensions to think through,
- * plus the questions to ask yourself and the trade-offs that exist.
+ * No recommendations — dimensions to think through, things to consider,
+ * the trade-off behind them, and Toronto-specific local notes.
  */
 
 export type ConsiderationCategory = {
@@ -10,129 +10,130 @@ export type ConsiderationCategory = {
   what: string;
   questions: string[];
   tradeoff: string;
+  local?: string[];
 };
 
 export const HOUSING_CONSIDERATIONS: ConsiderationCategory[] = [
   {
-    id: "housing-type",
-    title: "Housing type",
-    what:
-      "Rentals differ by who manages them: purpose-built or managed buildings, owner-owned units, and rooms or shared homes.",
+    id: "management",
+    title: "Management type",
+    what: "Who you sign with: a management company or an individual owner.",
     questions: [
-      "Who would you be signing with — a company or an individual?",
-      "Is the unit self-contained, or are kitchen and bath shared?",
-      "Is it furnished, and does that match how much you are bringing?",
+      "Is the landlord a company or a private individual?",
+      "Who handles repairs, and how are requests logged?",
+      "Is the lease the standard Ontario form?",
     ],
     tradeoff:
-      "More formal management usually means more paperwork and screening; less formal usually means less screening and less recourse.",
+      "Companies mean more screening and more process; individual owners mean more flexibility and less recourse.",
+    local: [
+      "Older, individually owned buildings are usually the most open to negotiation.",
+      "Listings up for a long time signal an owner carrying an empty unit.",
+    ],
   },
   {
-    id: "location",
-    title: "Location",
-    what:
-      "Location determines your daily routine far more than the unit itself does — the same rent buys different amounts of space in different places.",
+    id: "occupancy",
+    title: "Occupancy type",
+    what: "What you actually get: an entire unit, or a room in a shared home.",
     questions: [
-      "What does an ordinary weekday look like from this address?",
-      "How does rent in this area compare with the areas next to it?",
-      "What do you know about the area from data rather than from a listing description?",
+      "Is the kitchen or bathroom shared?",
+      "Is it furnished?",
+      "Who else is on the lease?",
     ],
-    tradeoff: "Central areas tend to cost more per square foot; outer areas tend to cost more in travel time.",
+    tradeoff: "Shared rooms cost less and move faster; entire units cost more and give you control.",
   },
   {
     id: "cost",
     title: "Cost",
-    what:
-      "The advertised rent is only part of the monthly number. Utilities, internet, laundry, parking and insurance can all sit outside it.",
+    what: "Advertised rent is only part of the monthly and move-in number.",
     questions: [
-      "Which utilities are included, and which are billed separately?",
-      "What is the total move-in cash requirement, not just the monthly rent?",
-      "What share of your expected income would this be?",
+      "Which utilities are included?",
+      "What is the total move-in cash requirement?",
+      "What share of your income is this?",
     ],
-    tradeoff: "A lower rent with excluded costs can end up higher than a higher all-inclusive rent.",
+    tradeoff: "Low rent with excluded costs can end up above a higher all-inclusive rent.",
+    local: [
+      "Budget beyond rent: key deposit, utility account deposits, renter's insurance (often required), internet setup.",
+      "First-apartment costs add up: utensils, cookware, bedding, a shower curtain.",
+      "Rent control: units in buildings first occupied after Nov 15, 2018 are exempt from Ontario's annual increase cap.",
+    ],
   },
   {
     id: "commute",
     title: "Commute",
-    what:
-      "Distance on a map and travel time are different things. Frequency, transfers and time of day all change the answer.",
+    what: "Map distance and travel time are different things.",
     questions: [
-      "How long is the trip you would make most often, door to door?",
-      "How many transfers does it take, and how reliable are they off-peak?",
-      "How would that trip feel five days a week, in winter?",
+      "How long is the trip you make most often, door to door?",
+      "How many transfers, and how reliable off-peak?",
+      "What does that trip look like in February?",
     ],
-    tradeoff: "Cheaper rent farther out is partly paid back in travel time and flexibility.",
+    tradeoff: "Cheaper rent farther out is paid back in travel time.",
+    local: [
+      "Winter storms add delays; surface routes slow down more than the subway.",
+      "Peak-hour subway and streetcars are crowded — you may wait for a second vehicle.",
+      "Protected bike lanes are uneven across the city; check the route, not just the distance.",
+    ],
   },
   {
     id: "transportation",
     title: "Transportation",
-    what:
-      "How you move around is a monthly cost and a constraint: transit passes, bike routes, parking, or car ownership.",
+    what: "Fares, bike routes, parking or car ownership are a monthly cost.",
     questions: [
-      "What would you spend per month on fares, fuel or parking?",
-      "Is there a subway, streetcar or frequent bus within walking distance?",
-      "Would you need a car, and where would it be kept?",
+      "What would you spend monthly on fares, fuel or parking?",
+      "Is frequent transit within walking distance?",
+      "Would you need a car, and where would it live?",
     ],
-    tradeoff: "Car-dependent areas often have lower rent but higher fixed transport costs.",
+    tradeoff: "Car-dependent areas have lower rent but higher fixed transport costs.",
   },
   {
     id: "lease",
     title: "Lease requirements",
-    what:
-      "The lease sets the length of your commitment, how it ends, and what can change during it. Standard terms exist in Ontario.",
+    what: "Term, deposits, and what the landlord can and cannot ask for.",
     questions: [
-      "Is this a fixed term or month-to-month, and what happens at the end?",
-      "What notice is required from each side?",
-      "Who is responsible for repairs, and how are requests made?",
+      "How long is the term, and what happens at the end?",
+      "What deposits are being requested?",
+      "What are the rules on guests, subletting and ending early?",
     ],
-    tradeoff: "Longer fixed terms give price stability; shorter terms give the ability to move if the fit is wrong.",
+    tradeoff: "Longer terms trade flexibility for stability.",
+    local: [
+      "A 3–6 month or month-to-month start is a common strategy while you build local ID, banking and references.",
+      "Ontario deposits are limited to first and last month's rent, plus a refundable key deposit.",
+    ],
   },
   {
     id: "documents",
-    title: "Required documents",
-    what:
-      "Screening usually looks at identity, status, income and rental history. Newcomers often have some of these but not all.",
+    title: "Application and communication",
+    what: "What you can show, and how you present it.",
     questions: [
-      "Which documents can you produce today, and which are still pending?",
-      "What can stand in for a document you do not have yet?",
-      "Is anything being asked of you that is unusual or not permitted?",
+      "Which documents can you produce today?",
+      "What can stand in for the ones you cannot?",
+      "Is anything being asked that is not permitted?",
     ],
-    tradeoff:
-      "Being able to show more up front tends to speed things up; being asked for more than usual is worth questioning.",
+    tradeoff: "Showing more up front speeds things up; unusual requests are worth questioning.",
+    local: [
+      "Commonly requested: photo ID, proof of income (employment letter, pay stubs or T4), credit score or report, references, void cheque.",
+      "No Canadian credit yet? Offer a guarantor, proof of funds, or an employment/admission letter instead.",
+    ],
   },
   {
     id: "duration",
-    title: "Temporary vs. long-term housing",
-    what:
-      "Temporary housing buys time and an address; long-term housing buys stability and usually a lower monthly cost.",
+    title: "Temporary vs. long-term",
+    what: "Temporary buys time and an address; long-term buys stability.",
     questions: [
-      "How much do you still need to learn about the city before committing?",
-      "What would it cost you to change your mind after signing?",
-      "Do you have a date by which you need a permanent address?",
+      "How much do you still need to learn about the city?",
+      "What would changing your mind cost after signing?",
+      "When do you need a permanent address?",
     ],
-    tradeoff: "Short stays cost more per night but keep options open; long leases cost less per month but lock them in.",
+    tradeoff: "Short stays cost more per night but keep options open.",
   },
   {
-    id: "proximity",
-    title: "Proximity to work or school",
-    what:
-      "Whether you need to be close depends on how often you must physically be there and at what hours.",
+    id: "location",
+    title: "Location",
+    what: "Location shapes your routine more than the unit does.",
     questions: [
-      "How many days a week is the trip required?",
-      "Are the hours ones when transit runs frequently?",
-      "Would being farther away change whether you attend or participate?",
+      "What does an ordinary weekday look like from here?",
+      "How does rent compare with the areas next to it?",
+      "What is walkable, and what needs a trip?",
     ],
-    tradeoff: "Closeness usually carries a rent premium; the value of it depends entirely on your schedule.",
-  },
-  {
-    id: "necessities",
-    title: "Daily necessities",
-    what:
-      "Groceries, pharmacies, clinics, laundry, banking and places of worship or community shape how liveable an address feels.",
-    questions: [
-      "What is within walking distance, and what needs a trip?",
-      "Are the shops nearby ones you would actually use?",
-      "What would you have to plan around rather than do casually?",
-    ],
-    tradeoff: "Fewer amenities nearby often means lower rent and more time spent travelling for ordinary errands.",
+    tradeoff: "Central areas cost more per square foot; outer areas cost more in travel time.",
   },
 ];
