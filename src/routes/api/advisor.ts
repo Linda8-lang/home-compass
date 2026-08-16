@@ -97,7 +97,10 @@ async function callLovable(apiKey: string, history: Msg[], systemLines: string[]
  * "user"/"model" (not "assistant"), and the system prompt is a separate field.
  */
 async function callGeminiDirect(apiKey: string, history: Msg[], systemLines: string[]) {
-  const model = "gemini-2.5-flash";
+  // Configurable because Google periodically retires model names (e.g. gemini-2.5-flash
+  // returning 404 "no longer available to new users") — override via GEMINI_MODEL instead
+  // of hardcoding a name that can silently break again later.
+  const model = process.env["GEMINI_MODEL"] || "gemini-2.0-flash";
   const upstream = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse&key=${apiKey}`,
     {
@@ -119,9 +122,11 @@ async function callGeminiDirect(apiKey: string, history: Msg[], systemLines: str
     const message =
       upstream.status === 429
         ? "The advisor is rate limited right now — try again in a moment."
-        : upstream.status === 400 || upstream.status === 403
-          ? "AI is not configured correctly."
-          : `The advisor could not answer (${upstream.status}).`;
+        : upstream.status === 404
+          ? "The configured AI model is unavailable — set GEMINI_MODEL to a current model name."
+          : upstream.status === 400 || upstream.status === 403
+            ? "AI is not configured correctly."
+            : `The advisor could not answer (${upstream.status}).`;
     return errorResponse(message, upstream.status);
   }
 
