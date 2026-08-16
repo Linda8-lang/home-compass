@@ -42,14 +42,23 @@ export function StageFive() {
   return (
     <div className="space-y-6 pb-8">
       <StageHeader
-        eyebrow="Stage 5 · Application prep"
-        title="Get your documents in order before you view."
-        intro={`Built for your situation — ${statusLabel[filters.status]} moving to Toronto. We won't ask again.`}
+        eyebrow="Stage 5 · Application and communication"
+        title="Documents and how to present them."
+        intro={`Built for your situation — ${statusLabel[filters.status]} moving to Toronto.`}
       />
 
       <VariesNote>
         Landlord and bank requirements vary by provider and circumstance — confirm directly with them.
       </VariesNote>
+
+      <section className="surface space-y-1.5 p-4">
+        <p className="text-sm font-semibold text-foreground">Commonly requested in Toronto</p>
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          Photo ID, proof of income (employment letter, recent pay stubs or a T4), a credit score or
+          report, references, and a void cheque. Without Canadian credit, a guarantor, proof of
+          funds or an employment/admission letter is the usual substitute.
+        </p>
+      </section>
 
 
       <section className="surface space-y-4 p-4">
