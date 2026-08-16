@@ -33,6 +33,24 @@ function writeStored(preferences: RentalPreferences) {
 }
 
 /**
+ * Separate from RentalPreferences itself: "Skip for now" leaves preferences
+ * empty but should still count as onboarded, so `/` doesn't redirect back to
+ * onboarding forever for someone who deliberately skipped.
+ */
+const COMPLETE_KEY = "home-compass:onboarding-complete";
+
+/** SSR-safe: always false on the server, since onboarding state only exists in the browser. */
+export function hasCompletedOnboarding(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.localStorage.getItem(COMPLETE_KEY) === "true";
+}
+
+export function markOnboardingComplete() {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(COMPLETE_KEY, "true");
+}
+
+/**
  * Read-and-write access to the persisted rental preferences.
  *
  * Starts at EMPTY_PREFERENCES on every render pass — including the client's

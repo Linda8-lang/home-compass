@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { StageHeader } from "@/components/housing/primitives";
 import { MANAGEMENT_MODEL_OPTIONS, LIVING_SETUP_OPTIONS } from "@/data/onboarding";
 import { OptionTile } from "./option-tile";
-import { useRentalPreferences } from "./rental-preferences-state";
+import { markOnboardingComplete, useRentalPreferences } from "./rental-preferences-state";
 
 /**
  * Onboarding flow. Currently a single step (rental preferences) — built as
@@ -16,6 +16,7 @@ export function OnboardingFlow() {
   const { preferences, setManagementModel, setLivingSetup } = useRentalPreferences();
 
   function goToApp() {
+    markOnboardingComplete();
     void navigate({ to: "/" });
   }
 
