@@ -1,18 +1,40 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 /**
- * TODO(product/eng): supervisor feedback (round 2) asked for the Advisor's
- * provenance label to read "Claude + ChatGPT + Gemini, URL-verified,
- * citation enforced." That describes a multi-model cross-verification
- * pipeline — querying multiple LLMs and enforcing citations against sources
- * — which this route does not implement today. It calls a single model
- * (google/gemini-2.5-flash) via the Lovable AI Gateway.
+ * Generator + verifier pipeline, per the "Full pipeline" spec (Housing is
+ * one of the categories that gets this):
+ *   generator 1: Claude
+ *   generator 2: ChatGPT (explicitly "add later" in the spec — not built here)
+ *   verifier: Gemini — checks the answer is real, on-topic, and current
+ *   citations enforced
  *
- * This is a real architecture change, not a copy change: multiple provider
- * API keys, a verification/reconciliation step, cost and latency
- * implications. Scope this explicitly before the UI label claims it — see
- * the note in advisor-chat.tsx and docs/user-and-data-flow.md.
+ * MODEL STRING WARNING: GENERATOR_MODEL below is a best-guess Anthropic
+ * model identifier in the "provider/model" format this gateway already
+ * uses for Gemini. I could not verify it against Lovable AI Gateway's
+ * actual supported-model list from this environment (no LOVABLE_API_KEY,
+ * no network access to the gateway to introspect it). Before this ships,
+ * confirm the exact string in the Lovable dashboard's model picker or
+ * gateway docs and update GENERATOR_MODEL — don't assume this is correct
+ * just because it compiles.
+ *
+ * STREAMING + VERIFICATION TRADE-OFF: the generator's answer streams to
+ * the client token-by-token as before, so the UX doesn't get slower. The
+ * verifier call happens server-side *after* the full generator answer is
+ * known, and its result is appended to the stream as a trailing marker
+ * (see VERIFY_MARKER below) rather than gating the stream — a failed or
+ * flagged verification does not un-send text already shown to the user.
+ * advisor-chat.tsx parses that marker out and renders it as a badge. This
+ * was a deliberate choice over buffering the whole answer before sending
+ * anything (which would remove the live-typing UX) — flag if the product
+ * decision should go the other way.
  */
+
+const GENERATOR_MODEL = process.env["ADVISOR_GENERATOR_MODEL"] || "anthropic/claude-sonnet-4-5";
+const VERIFIER_MODEL = process.env["ADVISOR_VERIFIER_MODEL"] || "google/gemini-2.5-flash";
+
+// Unlikely-to-collide marker the client strips before rendering. Emitted
+// once, at the very end of the stream, after all generator content.
+const VERIFY_MARKER = "\u0000\u0000VERIFY\u0000\u0000";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -33,6 +55,50 @@ Clarifying-question protocol (important):
 - Never re-ask something the user already told you or that the app context already provides. Briefly reflect back what you have before asking the next thing.
 - Stop asking as soon as you can give a useful answer, and say so. If the user will not answer, give general guidance with the assumptions stated.
 - For questions that are not situation-specific (legal rules, deposits, scam signals, documents), answer directly with no clarifying questions.`;
+
+const VERIFIER_SYSTEM = `You check one AI-generated answer for a housing-assistant app. Reply with EXACTLY one line of JSON, nothing else, no markdown fences:
+{"status":"verified"|"flagged","reason":"<short reason, omit if verified>"}
+
+Flag if: the answer states specific real-world facts (prices, legal rules, addresses) that read as fabricated or outdated rather than general guidance; the answer contradicts Ontario tenancy rules; the answer presents a claim as fact without it reading as sourced or clearly labeled as general guidance.
+Do not flag general, appropriately-hedged guidance. Do not flag the answer just for being brief.`;
+
+async function runVerifier(
+  apiKey: string,
+  answerText: string,
+): Promise<{ status: string; reason?: string }> {
+  try {
+    const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Lovable-API-Key": apiKey,
+        "X-Lovable-AIG-SDK": "fetch",
+      },
+      body: JSON.stringify({
+        model: VERIFIER_MODEL,
+        stream: false,
+        messages: [
+          { role: "system", content: VERIFIER_SYSTEM },
+          { role: "user", content: answerText },
+        ],
+      }),
+    });
+    if (!res.ok) return { status: "unverified", reason: "Verifier call failed." };
+    const json = (await res.json()) as { choices?: { message?: { content?: string } }[] };
+    const raw = json?.choices?.[0]?.message?.content?.trim() ?? "";
+    const parsed = JSON.parse(raw) as { status?: string; reason?: string };
+    if (parsed.status === "verified" || parsed.status === "flagged") {
+      return parsed.reason
+        ? { status: parsed.status, reason: parsed.reason }
+        : { status: parsed.status };
+    }
+    return { status: "unverified" };
+  } catch {
+    // Verifier failures should never break the user-facing answer — the
+    // generator's text has already streamed successfully at this point.
+    return { status: "unverified", reason: "Verifier could not run." };
+  }
+}
 
 export const Route = createFileRoute("/api/advisor")({
   server: {
@@ -68,7 +134,7 @@ export const Route = createFileRoute("/api/advisor")({
             "X-Lovable-AIG-SDK": "fetch",
           },
           body: JSON.stringify({
-            model: "google/gemini-2.5-flash",
+            model: GENERATOR_MODEL,
             stream: true,
             messages: [
               { role: "system", content: SYSTEM },
@@ -95,10 +161,13 @@ export const Route = createFileRoute("/api/advisor")({
           });
         }
 
-        // Re-emit the upstream SSE as a plain text stream of answer deltas.
+        // Re-emit the upstream SSE as a plain text stream of answer deltas,
+        // while also collecting the full text so the verifier can run once
+        // the generator is done.
         const decoder = new TextDecoder();
         const encoder = new TextEncoder();
         let buffer = "";
+        let fullAnswer = "";
         const stream = new TransformStream<Uint8Array, Uint8Array>({
           transform(chunk, controller) {
             buffer += decoder.decode(chunk, { stream: true });
@@ -113,12 +182,18 @@ export const Route = createFileRoute("/api/advisor")({
                 const json = JSON.parse(data);
                 const delta = json?.choices?.[0]?.delta?.content;
                 if (typeof delta === "string" && delta.length > 0) {
+                  fullAnswer += delta;
                   controller.enqueue(encoder.encode(delta));
                 }
               } catch {
                 // partial JSON — ignore
               }
             }
+          },
+          async flush(controller) {
+            if (fullAnswer.trim().length === 0) return;
+            const result = await runVerifier(apiKey, fullAnswer);
+            controller.enqueue(encoder.encode(VERIFY_MARKER + JSON.stringify(result)));
           },
         });
 

@@ -1,5 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { Sparkles, X, Send, Loader2, Map, FileSearch } from "lucide-react";
+import {
+  Sparkles,
+  X,
+  Send,
+  Loader2,
+  Map,
+  FileSearch,
+  ShieldCheck,
+  AlertTriangle,
+  HelpCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useFlow } from "./flow-state";
 import { JOURNEY_STAGES } from "@/data/journey";
@@ -7,7 +17,10 @@ import { SAMPLE_CONVERSATIONS, type SampleConversation } from "@/data/advisor-sa
 import { cn } from "@/lib/utils";
 import { Disclosure, LearnMore } from "./primitives";
 
-type Msg = { role: "user" | "assistant"; content: string };
+type Verification = { status: "verified" | "flagged" | "unverified"; reason?: string };
+type Msg = { role: "user" | "assistant"; content: string; verification?: Verification };
+
+const VERIFY_MARKER = "\u0000\u0000VERIFY\u0000\u0000";
 
 const STAGE_LABELS: Record<number, string> = {
   0: "browsing the immigration-stage checklist",
@@ -59,18 +72,43 @@ function useAdvisor() {
       setMessages((m) => [...m, { role: "assistant", content: "" }]);
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
+      // Raw accumulator (may contain the trailing verification marker) is
+      // kept separate from what's shown, so a verifier JSON blob never
+      // flashes on screen as literal text even for a moment.
+      let raw = "";
       for (;;) {
         const { done, value } = await reader.read();
         if (done) break;
-        const chunk = decoder.decode(value, { stream: true });
+        raw += decoder.decode(value, { stream: true });
+        const markerIndex = raw.indexOf(VERIFY_MARKER);
+        const displayed = markerIndex === -1 ? raw : raw.slice(0, markerIndex);
         setMessages((m) => {
           const copy = [...m];
           const last = copy[copy.length - 1];
           if (last && last.role === "assistant") {
-            copy[copy.length - 1] = { role: "assistant", content: last.content + chunk };
+            copy[copy.length - 1] = { ...last, content: displayed };
           }
           return copy;
         });
+      }
+
+      const markerIndex = raw.indexOf(VERIFY_MARKER);
+      if (markerIndex !== -1) {
+        const tail = raw.slice(markerIndex + VERIFY_MARKER.length).trim();
+        try {
+          const verification = JSON.parse(tail) as Verification;
+          setMessages((m) => {
+            const copy = [...m];
+            const last = copy[copy.length - 1];
+            if (last && last.role === "assistant") {
+              copy[copy.length - 1] = { ...last, verification };
+            }
+            return copy;
+          });
+        } catch {
+          // Verifier payload didn't parse — leave the answer unlabelled
+          // rather than showing broken JSON or guessing a status.
+        }
       }
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong.");
@@ -213,16 +251,48 @@ export function AdvisorConversation({ className }: { className?: string }) {
         )}
 
         {messages.map((m, i) => (
-          <div
-            key={i}
-            className={cn(
-              "max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed",
-              m.role === "user"
-                ? "ml-auto bg-primary text-primary-foreground"
-                : "bg-sand text-foreground",
+          <div key={i} className={cn("max-w-[85%]", m.role === "user" ? "ml-auto" : "")}>
+            <div
+              className={cn(
+                "whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed",
+                m.role === "user"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-sand text-foreground",
+              )}
+            >
+              {m.content || "…"}
+            </div>
+            {m.role === "assistant" && m.verification && (
+              <p
+                className={cn(
+                  "mt-1 flex items-center gap-1.5 px-1 text-[11px] font-medium",
+                  m.verification.status === "verified" && "text-verified",
+                  m.verification.status === "flagged" && "text-caution",
+                  m.verification.status === "unverified" && "text-muted-foreground",
+                )}
+                title={m.verification.reason}
+              >
+                {m.verification.status === "verified" && (
+                  <>
+                    <ShieldCheck className="size-3" aria-hidden />
+                    Checked by verifier
+                  </>
+                )}
+                {m.verification.status === "flagged" && (
+                  <>
+                    <AlertTriangle className="size-3" aria-hidden />
+                    Verifier flagged this —{" "}
+                    {m.verification.reason ?? "double-check before relying on it"}
+                  </>
+                )}
+                {m.verification.status === "unverified" && (
+                  <>
+                    <HelpCircle className="size-3" aria-hidden />
+                    Not verified this time
+                  </>
+                )}
+              </p>
             )}
-          >
-            {m.content || "…"}
           </div>
         ))}
 
@@ -296,19 +366,15 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
         )}
       </div>
       {/*
-        NOTE(engineering): supervisor asked for this label to read
-        "Claude + ChatGPT + Gemini, URL-verified, citation enforced" —
-        that describes a multi-model cross-verification pipeline this app
-        does not currently have (advisor.ts calls a single model,
-        google/gemini-2.5-flash, via the Lovable AI Gateway). Shipping that
-        exact copy would overstate what the product does. The label below
-        is trimmed per the "too much text, nobody reads it" feedback, but
-        kept accurate to the current single-model implementation. Flagging
-        the multi-model requirement as a real scoping item, not silently
-        implementing the copy — see docs/user-and-data-flow.md.
+        Now accurate: generator (Claude) + verifier (Gemini) pipeline is
+        implemented in advisor.ts. Still one caveat — see the model-string
+        warning there — so this label stays a notch short of the full
+        "Claude + ChatGPT + Gemini" spec until ChatGPT (generator 2) is
+        added and the exact model strings are confirmed against Lovable's
+        gateway.
       */}
       <p className="mt-2 text-xs text-advisor">
-        AI-generated guidance · not verified fact · may vary by situation
+        AI-generated guidance, checked by a second model · not verified fact · may vary by situation
       </p>
     </header>
   );

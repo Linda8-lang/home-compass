@@ -577,3 +577,36 @@ export const PAYMENT_NOTES = [
       "Most landlords ask for pre-authorized debit or e-transfer. Always keep a receipt or transfer record.",
   },
 ];
+
+// Housing > Renting > "moving-in/setup basics" per the Moving Assistant UX
+// doc — the step after signing, before the Application Prep / Checklist
+// screens. Kept small and additive; some of these (utilities, address
+// change) will likely get a fuller home once Daily Needs/Finance
+// categories exist — this is the Housing-scoped version for now.
+export const MOVE_IN_BASICS = [
+  {
+    title: "Set up utilities before move-in day",
+    detail:
+      "Hydro, gas and internet often need a few business days' lead time. Don't leave this for move-in morning.",
+  },
+  {
+    title: "Do a move-in walkthrough first",
+    detail:
+      "Photograph any existing damage or wear before you unpack anything — this protects your deposit later.",
+  },
+  {
+    title: "Confirm keys, fobs and parking in writing",
+    detail:
+      "Get an exact count of what you're receiving, and where parking (if included) actually is.",
+  },
+  {
+    title: "Activate renter's insurance on or before move-in",
+    detail:
+      "Many leases require proof of coverage starting the day you take possession, not after.",
+  },
+  {
+    title: "Update your address",
+    detail:
+      "Bank, employer/school, and government services (health card, driver's licence) all need the new address — most can be done online.",
+  },
+];

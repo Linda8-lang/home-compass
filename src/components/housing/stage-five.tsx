@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { BASE_DOCS, DOC_PATHS, PAYMENT_NOTES } from "@/data/mock";
+import { BASE_DOCS, DOC_PATHS, PAYMENT_NOTES, MOVE_IN_BASICS } from "@/data/mock";
 import { JOURNEY_STAGES } from "@/data/journey";
 import { useFlow } from "./flow-state";
 import {
@@ -177,6 +177,21 @@ export function StageFive() {
             </li>
           ))}
         </ul>
+      </Disclosure>
+
+      <Disclosure
+        title="Moving-in & setup basics"
+        summary={`${MOVE_IN_BASICS.length} things to line up around move-in day`}
+      >
+        <ul className="surface divide-y divide-border">
+          {MOVE_IN_BASICS.map((n) => (
+            <li key={n.title} className="p-3.5">
+              <p className="text-sm font-semibold text-foreground">{n.title}</p>
+              <p className="text-sm leading-relaxed text-muted-foreground">{n.detail}</p>
+            </li>
+          ))}
+        </ul>
+        <GuidanceDisclaimer />
       </Disclosure>
 
       <Disclosure
