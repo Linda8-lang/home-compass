@@ -6,7 +6,8 @@
 
 /*
  * Housing Assistant design system.
- * Warm, calm, trustworthy. All colors in oklch, all tokens semantic.
+ * Warm ivory, sage green, terracotta accent. Calm, modern, trustworthy —
+ * modern real estate crossed with calm Scandinavian interior design.
  */
 
 @theme inline {
@@ -25,6 +26,7 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -62,102 +64,109 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --shadow-soft: 0 1px 2px oklch(0.35 0.05 60 / 0.04), 0 8px 24px oklch(0.35 0.05 60 / 0.06);
-  --shadow-lift: 0 2px 4px oklch(0.35 0.05 60 / 0.06), 0 16px 40px oklch(0.35 0.05 60 / 0.1);
+  --shadow-soft: 0 1px 2px rgba(38, 51, 45, 0.05), 0 8px 24px rgba(38, 51, 45, 0.07);
+  --shadow-lift: 0 2px 4px rgba(38, 51, 45, 0.07), 0 16px 40px rgba(38, 51, 45, 0.12);
 }
 
 :root {
   --radius: 0.875rem;
-  --background: oklch(0.98 0.012 85);
-  --foreground: oklch(0.26 0.03 55);
-  --card: oklch(0.995 0.006 90);
-  --card-foreground: oklch(0.26 0.03 55);
-  --popover: oklch(0.995 0.006 90);
-  --popover-foreground: oklch(0.26 0.03 55);
-  --primary: oklch(0.46 0.09 40);
-  --primary-foreground: oklch(0.985 0.01 85);
-  --secondary: oklch(0.94 0.02 82);
-  --secondary-foreground: oklch(0.32 0.04 50);
-  --muted: oklch(0.945 0.015 84);
-  --muted-foreground: oklch(0.52 0.026 60);
-  --accent: oklch(0.9 0.045 70);
-  --accent-foreground: oklch(0.3 0.05 45);
-  --destructive: oklch(0.55 0.19 25);
-  --destructive-foreground: oklch(0.985 0.01 85);
-  --border: oklch(0.9 0.017 80);
-  --input: oklch(0.9 0.017 80);
-  --ring: oklch(0.55 0.07 45);
-  --sand: oklch(0.955 0.02 80);
+  --background: #f7f5ef;
+  --foreground: #26332d;
+  --card: #ffffff;
+  --card-foreground: #26332d;
+  --popover: #ffffff;
+  --popover-foreground: #26332d;
+  --primary: #6f8f7a;
+  --primary-foreground: #ffffff;
+  --primary-hover: #587461;
+  --secondary: #dce7df;
+  --secondary-foreground: #26332d;
+  --muted: #e5e1d8;
+  --muted-foreground: #718078;
+  --accent: #dce7df;
+  --accent-foreground: #26332d;
+  --destructive: #b5533e;
+  --destructive-foreground: #ffffff;
+  --border: #e5e1d8;
+  --input: #e5e1d8;
+  --ring: #587461;
+  --sand: #dce7df;
 
-  /* Verified (sourced data) vs Advisor (AI guidance) vs Caution (risk) */
-  --verified: oklch(0.5 0.09 168);
-  --verified-foreground: oklch(0.985 0.01 85);
-  --verified-soft: oklch(0.95 0.03 170);
-  --advisor: oklch(0.52 0.1 265);
-  --advisor-foreground: oklch(0.985 0.01 85);
-  --advisor-soft: oklch(0.955 0.025 270);
-  --caution: oklch(0.58 0.15 45);
-  --caution-foreground: oklch(0.985 0.01 85);
-  --caution-soft: oklch(0.96 0.035 60);
+  /* Verified (sourced data) vs Advisor (AI guidance) vs Caution (risk/highlight) */
+  --verified: #587461;
+  --verified-foreground: #ffffff;
+  --verified-soft: #dce7df;
+  /* Kept as its own hue, not sage — this is the one place the palette departs
+     from the brief, deliberately: Column 3 (AI Advisor) has to stay visually
+     distinct from sourced content everywhere else in the app, so it can't
+     collapse into the same green as "verified". Muted plum, same calm/low-
+     saturation register as the rest of the palette. */
+  --advisor: #7d6e93;
+  --advisor-foreground: #ffffff;
+  --advisor-soft: #efeaf3;
+  --caution: #d68b6a;
+  --caution-foreground: #26332d;
+  --caution-soft: #f6e4d9;
 
-  --chart-1: oklch(0.6 0.13 45);
-  --chart-2: oklch(0.55 0.09 168);
-  --chart-3: oklch(0.52 0.1 265);
-  --chart-4: oklch(0.72 0.12 80);
-  --chart-5: oklch(0.45 0.06 40);
-  --sidebar: oklch(0.97 0.014 85);
-  --sidebar-foreground: oklch(0.26 0.03 55);
-  --sidebar-primary: oklch(0.46 0.09 40);
-  --sidebar-primary-foreground: oklch(0.985 0.01 85);
-  --sidebar-accent: oklch(0.94 0.02 82);
-  --sidebar-accent-foreground: oklch(0.3 0.05 45);
-  --sidebar-border: oklch(0.9 0.017 80);
-  --sidebar-ring: oklch(0.55 0.07 45);
+  --chart-1: #d68b6a;
+  --chart-2: #6f8f7a;
+  --chart-3: #7d6e93;
+  --chart-4: #587461;
+  --chart-5: #718078;
+  --sidebar: #f7f5ef;
+  --sidebar-foreground: #26332d;
+  --sidebar-primary: #6f8f7a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #dce7df;
+  --sidebar-accent-foreground: #26332d;
+  --sidebar-border: #e5e1d8;
+  --sidebar-ring: #587461;
 }
 
 .dark {
-  --background: oklch(0.19 0.02 55);
-  --foreground: oklch(0.95 0.012 85);
-  --card: oklch(0.24 0.022 55);
-  --card-foreground: oklch(0.95 0.012 85);
-  --popover: oklch(0.24 0.022 55);
-  --popover-foreground: oklch(0.95 0.012 85);
-  --primary: oklch(0.78 0.09 60);
-  --primary-foreground: oklch(0.22 0.03 50);
-  --secondary: oklch(0.3 0.025 55);
-  --secondary-foreground: oklch(0.95 0.012 85);
-  --muted: oklch(0.3 0.025 55);
-  --muted-foreground: oklch(0.72 0.02 70);
-  --accent: oklch(0.35 0.04 60);
-  --accent-foreground: oklch(0.95 0.012 85);
-  --destructive: oklch(0.65 0.17 25);
-  --destructive-foreground: oklch(0.98 0.01 85);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.7 0.06 60);
-  --sand: oklch(0.27 0.024 55);
-  --verified: oklch(0.72 0.1 168);
-  --verified-foreground: oklch(0.2 0.03 160);
-  --verified-soft: oklch(0.3 0.04 170);
-  --advisor: oklch(0.74 0.1 268);
-  --advisor-foreground: oklch(0.2 0.03 265);
-  --advisor-soft: oklch(0.3 0.04 268);
-  --caution: oklch(0.76 0.13 55);
-  --caution-foreground: oklch(0.22 0.04 45);
-  --caution-soft: oklch(0.32 0.05 55);
-  --chart-1: oklch(0.72 0.13 45);
-  --chart-2: oklch(0.7 0.1 168);
-  --chart-3: oklch(0.7 0.1 265);
-  --chart-4: oklch(0.78 0.12 80);
-  --chart-5: oklch(0.62 0.07 40);
-  --sidebar: oklch(0.22 0.022 55);
-  --sidebar-foreground: oklch(0.95 0.012 85);
-  --sidebar-primary: oklch(0.78 0.09 60);
-  --sidebar-primary-foreground: oklch(0.22 0.03 50);
-  --sidebar-accent: oklch(0.3 0.025 55);
-  --sidebar-accent-foreground: oklch(0.95 0.012 85);
-  --sidebar-border: oklch(1 0 0 / 12%);
-  --sidebar-ring: oklch(0.7 0.06 60);
+  --background: #1c221d;
+  --foreground: #f3f1ea;
+  --card: #242b25;
+  --card-foreground: #f3f1ea;
+  --popover: #242b25;
+  --popover-foreground: #f3f1ea;
+  --primary: #8fb09c;
+  --primary-foreground: #1b2a20;
+  --primary-hover: #a3c2b0;
+  --secondary: #2e362f;
+  --secondary-foreground: #f3f1ea;
+  --muted: #2e362f;
+  --muted-foreground: #a3afa6;
+  --accent: #333c34;
+  --accent-foreground: #f3f1ea;
+  --destructive: #d97a62;
+  --destructive-foreground: #241512;
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.16);
+  --ring: #8fb09c;
+  --sand: #2b332c;
+  --verified: #7fa48d;
+  --verified-foreground: #16241b;
+  --verified-soft: #2c3a2f;
+  --advisor: #a594b8;
+  --advisor-foreground: #211a29;
+  --advisor-soft: #322a3b;
+  --caution: #e4a183;
+  --caution-foreground: #2b1a10;
+  --caution-soft: #3a2a20;
+  --chart-1: #e4a183;
+  --chart-2: #8fb09c;
+  --chart-3: #a594b8;
+  --chart-4: #7fa48d;
+  --chart-5: #a3afa6;
+  --sidebar: #1f251f;
+  --sidebar-foreground: #f3f1ea;
+  --sidebar-primary: #8fb09c;
+  --sidebar-primary-foreground: #1b2a20;
+  --sidebar-accent: #2e362f;
+  --sidebar-accent-foreground: #f3f1ea;
+  --sidebar-border: rgba(255, 255, 255, 0.12);
+  --sidebar-ring: #8fb09c;
 }
 
 @layer base {
@@ -189,10 +198,5 @@
 }
 
 @utility warm-gradient {
-  background-image: linear-gradient(
-    160deg,
-    oklch(0.97 0.03 78) 0%,
-    oklch(0.98 0.015 90) 55%,
-    oklch(0.96 0.025 60) 100%
-  );
+  background-image: linear-gradient(160deg, #f3efe4 0%, #f7f5ef 55%, #f6e4d9 100%);
 }
