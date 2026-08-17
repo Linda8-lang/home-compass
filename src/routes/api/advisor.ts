@@ -21,7 +21,10 @@ Clarifying-question protocol (important):
 - For questions that are not situation-specific (legal rules, deposits, scam signals, documents), answer directly with no clarifying questions.`;
 
 /** Turns an upstream SSE byte stream into a plain-text stream of answer deltas. */
-function toPlainTextStream(upstreamBody: ReadableStream<Uint8Array>, extractDelta: (json: any) => string | null) {
+function toPlainTextStream(
+  upstreamBody: ReadableStream<Uint8Array>,
+  extractDelta: (json: any) => string | null,
+) {
   const decoder = new TextDecoder();
   const encoder = new TextEncoder();
   let buffer = "";
@@ -118,7 +121,11 @@ async function callGeminiDirect(apiKey: string, history: Msg[], systemLines: str
 
   if (!upstream.ok || !upstream.body) {
     const detail = await upstream.text().catch(() => "");
-    console.error("advisor upstream error (gemini fallback)", upstream.status, detail.slice(0, 500));
+    console.error(
+      "advisor upstream error (gemini fallback)",
+      upstream.status,
+      detail.slice(0, 500),
+    );
     const message =
       upstream.status === 429
         ? "The advisor is rate limited right now — try again in a moment."
@@ -144,7 +151,7 @@ export const Route = createFileRoute("/api/advisor")({
     handlers: {
       POST: async ({ request }) => {
         const lovableKey = process.env["LOVABLE_API_KEY"];
-        const geminiKey = process.env["GEMINI_API_KEY"];
+        const geminiKey = process.env["homecompass_api_key"];
         if (!lovableKey && !geminiKey) {
           return errorResponse("AI is not configured.", 500);
         }
@@ -156,7 +163,9 @@ export const Route = createFileRoute("/api/advisor")({
           return errorResponse("Invalid request.", 400);
         }
 
-        const history = (body.messages ?? []).slice(-12).filter((m) => typeof m.content === "string");
+        const history = (body.messages ?? [])
+          .slice(-12)
+          .filter((m) => typeof m.content === "string");
         if (history.length === 0) {
           return errorResponse("No message provided.", 400);
         }
@@ -166,7 +175,7 @@ export const Route = createFileRoute("/api/advisor")({
           ...(body.context ? [`Where the user is in the app: ${body.context}`] : []),
         ];
 
-        // LOVABLE_API_KEY is the primary path; GEMINI_API_KEY only kicks in when it's absent.
+        // LOVABLE_API_KEY is the primary path; homecompass_api_key only kicks in when it's absent.
         if (lovableKey) return callLovable(lovableKey, history, systemLines);
         return callGeminiDirect(geminiKey!, history, systemLines);
       },
