@@ -151,7 +151,7 @@ export const Route = createFileRoute("/api/advisor")({
     handlers: {
       POST: async ({ request }) => {
         const lovableKey = process.env["LOVABLE_API_KEY"];
-        const geminiKey = process.env["homecompass_api_key"];
+        const geminiKey = process.env["homecompass"];
         if (!lovableKey && !geminiKey) {
           return errorResponse("AI is not configured.", 500);
         }
@@ -175,7 +175,7 @@ export const Route = createFileRoute("/api/advisor")({
           ...(body.context ? [`Where the user is in the app: ${body.context}`] : []),
         ];
 
-        // LOVABLE_API_KEY is the primary path; homecompass_api_key only kicks in when it's absent.
+        // LOVABLE_API_KEY is the primary path; homecompass only kicks in when it's absent.
         if (lovableKey) return callLovable(lovableKey, history, systemLines);
         return callGeminiDirect(geminiKey!, history, systemLines);
       },
