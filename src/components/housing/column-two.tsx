@@ -12,7 +12,6 @@ import {
 import { Disclosure, DisclaimerBadge, StaticDisclaimer, GuidanceDisclaimer } from "./primitives";
 import { SourceCite } from "./source-cite";
 import { cn } from "@/lib/utils";
-import { useRentalPreferences } from "@/components/onboarding/rental-preferences-state";
 
 const CATEGORY_ICONS: Record<string, typeof Building2> = {
   managed: Building2,
@@ -30,7 +29,6 @@ const CATEGORY_ICONS: Record<string, typeof Building2> = {
 export function ColumnTwo() {
   const { filters, askAdvisor } = useFlow();
   const isStudent = filters.status === "student";
-  const { preferences } = useRentalPreferences();
 
   const findSection = HOUSING_SECTIONS[0]!;
   const compareSection = HOUSING_SECTIONS[1]!;
@@ -124,37 +122,27 @@ export function ColumnTwo() {
                   {g.title}
                 </h3>
                 <ul className="space-y-2.5">
-                  {g.criteria.map((c) => {
-                    const isOnboardingPick =
-                      (g.id === "management-model" && preferences.managementModel === c.id) ||
-                      (g.id === "living-setup" && preferences.livingSetup === c.id);
-                    return (
-                      <li
-                        key={c.id}
-                        className={cn(
-                          "flex flex-col gap-2 border-b border-border/60 pb-2.5 last:border-0 last:pb-0",
-                          "sm:flex-row sm:items-center sm:justify-between sm:gap-3",
-                        )}
+                  {g.criteria.map((c) => (
+                    <li
+                      key={c.id}
+                      className={cn(
+                        "flex flex-col gap-2 border-b border-border/60 pb-2.5 last:border-0 last:pb-0",
+                        "sm:flex-row sm:items-center sm:justify-between sm:gap-3",
+                      )}
+                    >
+                      <span className="text-sm leading-relaxed text-secondary-foreground">
+                        {c.bullet}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => askAdvisor(c.askAdvisorPrompt)}
+                        className="inline-flex shrink-0 items-center gap-1 self-start rounded-full border border-advisor/40 bg-advisor-soft/50 px-2.5 py-1 text-[11px] font-semibold text-advisor transition-colors hover:bg-advisor-soft"
                       >
-                        <span className="text-sm leading-relaxed text-secondary-foreground">
-                          {isOnboardingPick && (
-                            <span className="mr-2 inline-flex items-center rounded-full bg-caution-soft px-2 py-0.5 text-[10px] font-semibold text-caution">
-                              Your pick
-                            </span>
-                          )}
-                          {c.bullet}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => askAdvisor(c.askAdvisorPrompt)}
-                          className="inline-flex shrink-0 items-center gap-1 self-start rounded-full border border-advisor/40 bg-advisor-soft/50 px-2.5 py-1 text-[11px] font-semibold text-advisor transition-colors hover:bg-advisor-soft"
-                        >
-                          <Sparkles className="size-3" aria-hidden />
-                          Ask the AI Advisor
-                        </button>
-                      </li>
-                    );
-                  })}
+                        <Sparkles className="size-3" aria-hidden />
+                        Ask the AI Advisor
+                      </button>
+                    </li>
+                  ))}
                 </ul>
               </div>
             ))}
