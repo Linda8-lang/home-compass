@@ -117,7 +117,11 @@ export const FIND_HOUSING_STUDENT_RESOURCES: ResourceLink[] = [
 
 export type EvaluationCriterion = {
   id: string;
+  /** Short bold sub-header, e.g. "Entire Unit" — keeps each item scannable. */
+  label: string;
   bullet: string;
+  /** Optional secondary detail, rendered smaller/muted below the bullet. */
+  note?: string;
   /** Pre-filled question offered via the "Ask the AI Advisor about this" affordance. */
   askAdvisorPrompt: string;
 };
@@ -131,165 +135,94 @@ export type CriterionGroup = {
 /** No listings, cards, prices or addresses — a factual evaluation checklist only. */
 export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
   {
-    id: "management-model",
-    title: "Management Model",
-    criteria: [
-      {
-        id: "corporate",
-        bullet:
-          "Corporate property management: a formal application and standard lease, with a management office or portal for repairs — usually consistent process, less room to negotiate.",
-        askAdvisorPrompt:
-          "What's different about renting from a corporate property manager versus an individual landlord?",
-      },
-      {
-        id: "individual-landlord",
-        bullet:
-          "Individual landlord: more room to negotiate terms directly, but responsiveness on repairs and requests depends entirely on that one person.",
-        askAdvisorPrompt:
-          "What should I ask an individual landlord that I wouldn't need to ask a property management company?",
-      },
-    ],
-  },
-  {
     id: "living-setup",
     title: "Living Setup",
     criteria: [
       {
         id: "entire-unit",
-        bullet:
-          "Entire unit: full privacy and control over the space, but the highest cost and sole responsibility for all utilities and upkeep.",
+        label: "Entire Unit",
+        bullet: "Full privacy and control over your space.",
+        note: "Landlords are legally responsible for building repairs and structural maintenance, while tenants pay rent and selected utility bills.",
         askAdvisorPrompt:
-          "Is renting an entire unit realistic on my budget, or should I be looking at shared accommodation?",
-      },
-      {
-        id: "shared-room",
-        bullet:
-          "Shared room or accommodation: lower cost and shared utilities, but less privacy — compatibility with roommates matters as much as the unit itself.",
-        askAdvisorPrompt:
-          "What should I ask before agreeing to a shared room or shared accommodation situation?",
+          "What's the difference between what a landlord must maintain and what I'm responsible for as a tenant?",
       },
     ],
   },
   {
-    id: "cost",
+    id: "costs",
     title: "Total Housing Costs",
     criteria: [
       {
-        id: "utilities",
+        id: "rent-extras",
+        label: "Rent & Extras",
         bullet:
-          "Confirm which utilities — heat, hydro, water — are included in the rent, and estimate the monthly cost of any that aren't.",
-        askAdvisorPrompt:
-          "Which utilities are usually included in rent, and how should I confirm that before signing?",
-      },
-      {
-        id: "internet",
-        bullet:
-          "Budget separately for home internet if it isn't bundled into rent — it's a recurring monthly cost on top of what's advertised.",
-        askAdvisorPrompt:
-          "Is internet ever included in rent in Toronto, and how much should I budget if I have to set it up myself?",
-      },
-      {
-        id: "tenant-insurance",
-        bullet: "Factor in tenant insurance as an ongoing monthly cost — many leases require it.",
-        askAdvisorPrompt: "Is tenant insurance actually required, and roughly what does it cost?",
-      },
-      {
-        id: "deposits",
-        bullet:
-          "Total the deposits you'll be asked for upfront — first and last month's rent plus a refundable key or utility deposit — and check that against local rules.",
-        askAdvisorPrompt:
-          "What deposits am I legally allowed to be asked for, and what should I do if a landlord asks for more?",
-      },
-      {
-        id: "kitchen-setup",
-        bullet:
-          "Budget a one-time cost for kitchen setup — basic cookware and utensils — if the unit is unfurnished.",
-        askAdvisorPrompt:
-          "Help me think through the one-time move-in costs I should budget for beyond the monthly rent.",
+          "Confirm which utilities (heat, hydro, water) are included in the rent, and budget separately for additional costs like internet, tenant insurance, and basic kitchen setup.",
+        askAdvisorPrompt: "How do I figure out my true monthly housing cost beyond just the rent?",
       },
     ],
   },
   {
     id: "commute",
-    title: "Commute",
+    title: "Commute & Transportation",
     criteria: [
       {
-        id: "winter-cold",
+        id: "transit-vs-driving",
+        label: "Transit vs. Driving",
         bullet:
-          "Factor in winter cold exposure on the route — waiting outside for a bus or walking a transfer segment feels very different at -15°C than it does in summer.",
-        askAdvisorPrompt: "How should I think about this commute differently once winter hits?",
-      },
-      {
-        id: "ttc-overcrowding",
-        bullet:
-          "Account for real TTC overcrowding and delays at peak hours, not just the posted schedule — some routes are reliably packed or short-turned during rush hour.",
-        askAdvisorPrompt:
-          "How do I find out if a transit route is actually reliable at rush hour, not just on paper?",
-      },
-      {
-        id: "carpool-wait",
-        bullet:
-          "If you're relying on a carpool, factor in realistic pickup and wait times, which can add significantly to a commute that looks short on paper.",
-        askAdvisorPrompt:
-          "What should I account for if I'm planning to carpool instead of taking transit?",
-      },
-      {
-        id: "bike-lanes",
-        bullet:
-          "Check for dedicated bike lanes on the route if cycling is an option — a route without them can be materially slower and less safe.",
-        askAdvisorPrompt:
-          "Is cycling a realistic commute option for this kind of route in Toronto?",
-      },
-    ],
-  },
-  {
-    id: "transportation",
-    title: "Transportation",
-    criteria: [
-      {
-        id: "transit-vs-highway",
-        bullet:
-          "Check proximity to subway or streetcar lines versus proximity to a highway — the former matters more if you don't drive, the latter if you do.",
+          "Check proximity to subways/streetcars if taking public transit, or highway access if driving.",
         askAdvisorPrompt:
           "I'm not sure yet if I'll need a car — how should that affect where I look?",
       },
       {
-        id: "option-count",
+        id: "winter-ttc-delays",
+        label: "Winter & TTC Delays",
         bullet:
-          "Count the total number of transit options available at a location (subway, streetcar, multiple bus routes) — more options means more resilience when one line has delays.",
+          "Account for outdoor wait times in winter, severe TTC delays, crowding during peak hours, and route detours.",
+        askAdvisorPrompt: "How should I think about this commute differently once winter hits?",
+      },
+      {
+        id: "rideshare-carpooling",
+        label: "Rideshare / Carpooling",
+        bullet:
+          "Allow buffer time for carpool/rideshare apps — driver cancellations and inaccurate ETAs are common.",
         askAdvisorPrompt:
-          "How do I evaluate whether a location's transit access is actually good, beyond distance on a map?",
+          "What should I account for if I'm planning to carpool or rely on rideshare instead of transit?",
+      },
+      {
+        id: "bike-lanes",
+        label: "Bike Lanes",
+        bullet:
+          "Ride on streets with dedicated bike lanes for safety (cycling on sidewalks is illegal).",
+        askAdvisorPrompt:
+          "Is cycling a realistic and safe commute option for this kind of route in Toronto?",
       },
     ],
   },
   {
-    id: "lease",
-    title: "Lease Terms",
+    id: "lease-rent-control",
+    title: "Lease Terms & Rent Control",
     criteria: [
       {
-        id: "length-lowers-rent",
+        id: "lease-strategy",
+        label: "Lease Strategy",
         bullet:
-          "Longer-term leases typically come with a lower monthly rent than a month-to-month or short lease — weigh that saving against how much flexibility you need.",
-        askAdvisorPrompt: "What are the trade-offs of signing a longer lease versus a shorter one?",
+          "Short-term or furnished housing lets newcomers explore neighborhoods before locking into a long-term lease.",
+        askAdvisorPrompt:
+          "Does a short first lease make sense for my situation, or should I commit to a full year?",
       },
       {
-        id: "rent-control-exemption",
+        id: "rent-control-limits",
+        label: "Rent Control Limits",
         bullet:
-          "Ontario's annual rent-increase guideline does not apply to buildings first occupied for residential use after November 15, 2018 — confirm a building's exemption status rather than assuming increases are capped.",
+          "Buildings first occupied after November 15, 2018, have NO cap on annual rent increases. Older buildings are subject to the annual city/provincial rent increase cap.",
         askAdvisorPrompt:
           "How do I find out whether a specific building is exempt from Ontario's rent increase guideline?",
       },
       {
-        id: "subletting",
+        id: "credit-alternatives",
+        label: "Credit Alternatives",
         bullet:
-          "Check the lease's subletting and assignment terms before signing, especially if your plans might change — not every lease allows it, and some require landlord approval.",
-        askAdvisorPrompt:
-          "What are my subletting rights in Ontario if my situation changes partway through the lease?",
-      },
-      {
-        id: "guarantor",
-        bullet:
-          "Ask whether a guarantor or co-signer is required if you have no local credit history.",
+          "If lacking local credit history or a local job offer, stand out by offering a guarantor/co-signer, bank statements, or paying rent upfront.",
         askAdvisorPrompt:
           "I have no local credit history — what can I offer instead of a guarantor?",
       },
@@ -300,42 +233,12 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
     title: "Required Documents",
     criteria: [
       {
-        id: "income-proof",
-        bullet: "Proof of income — recent pay stubs, an offer letter, or equivalent.",
+        id: "application-packet",
+        label: "Application Packet",
+        bullet:
+          "Bring proof of income (pay stubs or offer letter) and recent bank statements showing sufficient funds.",
         askAdvisorPrompt:
           "What counts as acceptable proof of income for a Toronto landlord if I just started my job?",
-      },
-      {
-        id: "bank-statements",
-        bullet: "Recent bank statements showing available funds.",
-        askAdvisorPrompt: "How many months of bank statements do landlords usually want to see?",
-      },
-      {
-        id: "employment-letter",
-        bullet: "An employment letter confirming your position, start date, and salary.",
-        askAdvisorPrompt:
-          "What should an employment letter include to satisfy a landlord's requirements?",
-      },
-      {
-        id: "credit-score",
-        bullet: "A credit score or credit report, where you have one available.",
-        askAdvisorPrompt: "I have no Canadian credit score yet — what should I bring instead?",
-      },
-      {
-        id: "background-check",
-        bullet: "Be prepared for a background or reference check some landlords request.",
-        askAdvisorPrompt: "What does a landlord background check in Ontario usually involve?",
-      },
-      {
-        id: "government-id",
-        bullet: "Government-issued photo ID.",
-        askAdvisorPrompt:
-          "Which forms of ID are accepted if I don't have a Canadian driver's licence yet?",
-      },
-      {
-        id: "cosigner-info",
-        bullet: "Co-signer or guarantor information, if you don't have local credit history.",
-        askAdvisorPrompt: "What information does my co-signer need to provide to a landlord?",
       },
     ],
   },
@@ -344,72 +247,47 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
     title: "Temporary vs. Long-Term Strategy",
     criteria: [
       {
-        id: "initial-short-lease",
+        id: "initial-buffer",
+        label: "Initial Buffer",
         bullet:
-          "Consider an initial 3–6 month lease rather than committing to a full year right away — it buys time to finish job hunting, get your SIN and ID processing done, and actually evaluate the neighbourhood before locking in longer.",
+          "Consider a 3-to-6-month lease first to complete SIN/ID processing, job search, and neighborhood evaluation before committing to 12 months.",
         askAdvisorPrompt:
-          "Does a short first lease make sense for my situation, or should I commit to a full year?",
-      },
-      {
-        id: "reassess-at-renewal",
-        bullet:
-          "Use that shorter first lease to reassess before your next term — you'll have far more local knowledge to negotiate or choose differently the second time.",
-        askAdvisorPrompt:
-          "What should I be evaluating during my first short-term lease so I'm ready to decide at renewal?",
+          "What should I be evaluating during a short first lease before I decide where to settle long-term?",
       },
     ],
   },
   {
     id: "negotiation",
-    title: "Negotiation Opportunities",
+    title: "Negotiation Strategy",
     criteria: [
       {
-        id: "long-listed",
-        bullet:
-          "A listing that's been active for a long time is a signal the landlord may be more open to negotiating on price or terms.",
+        id: "property-age",
+        label: "Property Age",
+        bullet: "Older properties typically offer more rent flexibility than brand-new builds.",
         askAdvisorPrompt:
-          "How can I tell if a listing has been sitting for a while, and how do I use that in a negotiation?",
+          "How should I approach negotiating rent on an older building versus a new one?",
       },
       {
-        id: "older-building",
+        id: "property-management",
+        label: "Property Management",
         bullet:
-          "Older, independently-owned buildings tend to have more flexibility than large corporate-managed properties with fixed pricing.",
+          "Independently owned properties are usually more open to negotiation than corporate-managed complexes.",
         askAdvisorPrompt:
           "How should I approach negotiating with an independent landlord versus a corporate management company?",
-      },
-      {
-        id: "unstated-terms",
-        bullet:
-          "If a landlord hasn't stated firm lease-length or move-in requirements, that's often a sign there's room to negotiate them.",
-        askAdvisorPrompt:
-          "What's a reasonable way to ask a landlord for more flexible lease terms without souring the application?",
       },
     ],
   },
   {
     id: "application",
-    title: "Application and Communication",
+    title: "Application & Communication",
     criteria: [
       {
-        id: "tenant-positioning",
+        id: "landlord-priorities",
+        label: "Landlord Priorities",
         bullet:
-          "Present yourself as a strong applicant: a complete document set upfront, a clear explanation of your income or guarantor situation, and a prompt, professional reply time all help you stand out.",
+          "Frame your application around what landlords care about most: paying rent on time, taking care of the property, and avoiding long vacancies.",
         askAdvisorPrompt:
           "How do I position myself as a strong applicant with no Canadian rental history?",
-      },
-      {
-        id: "landlord-communication",
-        bullet:
-          "Keep landlord communication in writing where possible, and be direct about your move-in date and any conditions — clear communication reduces back-and-forth and signals reliability.",
-        askAdvisorPrompt:
-          "Can you help me write a first message to a landlord that comes across as reliable?",
-      },
-      {
-        id: "standard-lease-check",
-        bullet:
-          "Before signing, check the lease terms against the Standard Form of Lease — Ontario requires most residential leases to use it, so anything that departs from it is worth a closer look.",
-        askAdvisorPrompt:
-          "What should I check for if a lease doesn't look like Ontario's Standard Form of Lease?",
       },
     ],
   },

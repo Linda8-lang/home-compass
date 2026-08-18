@@ -1,4 +1,19 @@
-import { Building2, Home, Users, GraduationCap, ShieldCheck, MapPin, Sparkles } from "lucide-react";
+import {
+  Building2,
+  Home,
+  Users,
+  GraduationCap,
+  ShieldCheck,
+  MapPin,
+  Sparkles,
+  Wallet,
+  Bus,
+  FileText,
+  ClipboardList,
+  Clock,
+  Handshake,
+  MessageCircle,
+} from "lucide-react";
 import { useFlow } from "./flow-state";
 import {
   HOUSING_SECTIONS,
@@ -18,6 +33,18 @@ const CATEGORY_ICONS: Record<string, typeof Building2> = {
   owner: Home,
   rooms: Users,
   university: GraduationCap,
+};
+
+/** One icon per Evaluate Housing group, keyed by CriterionGroup.id — purely visual scanning aid. */
+const CRITERION_GROUP_ICONS: Record<string, typeof Building2> = {
+  "living-setup": Home,
+  costs: Wallet,
+  commute: Bus,
+  "lease-rent-control": FileText,
+  documents: ClipboardList,
+  strategy: Clock,
+  negotiation: Handshake,
+  application: MessageCircle,
 };
 
 /**
@@ -116,36 +143,48 @@ export function ColumnTwo() {
           summary="A factual evaluation checklist — no listings, cards, prices, or addresses"
         >
           <div className="space-y-4">
-            {COMPARE_HOUSING_GROUPS.map((g) => (
-              <div key={g.id} className="surface p-4">
-                <h3 className="mb-2.5 text-sm font-semibold uppercase tracking-wide text-secondary-foreground">
-                  {g.title}
-                </h3>
-                <ul className="space-y-2.5">
-                  {g.criteria.map((c) => (
-                    <li
-                      key={c.id}
-                      className={cn(
-                        "flex flex-col gap-2 border-b border-border/60 pb-2.5 last:border-0 last:pb-0",
-                        "sm:flex-row sm:items-center sm:justify-between sm:gap-3",
-                      )}
-                    >
-                      <span className="text-sm leading-relaxed text-secondary-foreground">
-                        {c.bullet}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => askAdvisor(c.askAdvisorPrompt)}
-                        className="inline-flex shrink-0 items-center gap-1 self-start rounded-full border border-advisor/40 bg-advisor-soft/50 px-2.5 py-1 text-[11px] font-semibold text-advisor transition-colors hover:bg-advisor-soft"
+            {COMPARE_HOUSING_GROUPS.map((g) => {
+              const GroupIcon = CRITERION_GROUP_ICONS[g.id] ?? Home;
+              return (
+                <div key={g.id} className="surface p-4">
+                  <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-secondary-foreground">
+                    <GroupIcon className="size-3.5 shrink-0 text-primary" aria-hidden />
+                    {g.title}
+                  </h3>
+                  <ul className="space-y-3">
+                    {g.criteria.map((c) => (
+                      <li
+                        key={c.id}
+                        className={cn(
+                          "flex flex-col gap-2 border-b border-border/60 pb-3 last:border-0 last:pb-0",
+                          "sm:flex-row sm:items-start sm:justify-between sm:gap-3",
+                        )}
                       >
-                        <Sparkles className="size-3" aria-hidden />
-                        Ask the AI Advisor
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+                        <div>
+                          <p className="text-sm font-semibold text-foreground">{c.label}</p>
+                          <p className="text-sm leading-relaxed text-secondary-foreground">
+                            {c.bullet}
+                          </p>
+                          {c.note && (
+                            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                              Note: {c.note}
+                            </p>
+                          )}
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => askAdvisor(c.askAdvisorPrompt)}
+                          className="inline-flex shrink-0 items-center gap-1 self-start rounded-full border border-advisor/40 bg-advisor-soft/50 px-2.5 py-1 text-[11px] font-semibold text-advisor transition-colors hover:bg-advisor-soft"
+                        >
+                          <Sparkles className="size-3" aria-hidden />
+                          Ask the AI Advisor
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
           </div>
           <GuidanceDisclaimer />
         </Disclosure>
