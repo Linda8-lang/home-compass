@@ -1,0 +1,6806 @@
+{
+  "data_status": "ok",
+  "data_level": "neighbourhood",
+  "last_updated": "2026-08-20T07:54:36.249Z",
+  "source": {
+    "name": "Toronto Police Service — Neighbourhood Crime Rates Open Data",
+    "endpoint": "https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/Neighbourhood_Crime_Rates_Open_Data/FeatureServer/0/query",
+    "disclaimer": "Crime locations are spatially offset by the Toronto Police Service to a nearby intersection or the centre of the block to protect victim/witness privacy. Counts reflect reported occurrences, not convictions, and rates are per 100,000 residents using Environics Analytics projected population."
+  },
+  "neighbourhoods": [
+    {
+      "area_name": "South Eglinton-Davisville",
+      "hood_id": 174,
+      "population": 28902,
+      "offences": {
+        "assault": {
+          "count": 126,
+          "rate_per_100k": 435.955993652344
+        },
+        "auto_theft": {
+          "count": 17,
+          "rate_per_100k": 58.8194580078125
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 20.7598094940186
+        },
+        "break_enter": {
+          "count": 37,
+          "rate_per_100k": 128.018829345703
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 7,
+          "rate_per_100k": 24.2197780609131
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 6,
+          "rate_per_100k": 20.7598094940186
+        },
+        "theft_from_motor_vehicle": {
+          "count": 29,
+          "rate_per_100k": 100.339073181152
+        }
+      }
+    },
+    {
+      "area_name": "North Toronto",
+      "hood_id": 173,
+      "population": 20582,
+      "offences": {
+        "assault": {
+          "count": 129,
+          "rate_per_100k": 626.76123046875
+        },
+        "auto_theft": {
+          "count": 14,
+          "rate_per_100k": 68.0205993652344
+        },
+        "bike_theft": {
+          "count": 15,
+          "rate_per_100k": 72.8792114257813
+        },
+        "break_enter": {
+          "count": 36,
+          "rate_per_100k": 174.910110473633
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 11,
+          "rate_per_100k": 53.4447593688965
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 5,
+          "rate_per_100k": 24.2930717468262
+        },
+        "theft_from_motor_vehicle": {
+          "count": 13,
+          "rate_per_100k": 63.1619873046875
+        }
+      }
+    },
+    {
+      "area_name": "Dovercourt Village",
+      "hood_id": 172,
+      "population": 13129,
+      "offences": {
+        "assault": {
+          "count": 128,
+          "rate_per_100k": 974.940979003906
+        },
+        "auto_theft": {
+          "count": 17,
+          "rate_per_100k": 129.484344482422
+        },
+        "bike_theft": {
+          "count": 23,
+          "rate_per_100k": 175.184707641602
+        },
+        "break_enter": {
+          "count": 31,
+          "rate_per_100k": 236.118515014648
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 9,
+          "rate_per_100k": 68.550537109375
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 22.8501796722412
+        },
+        "theft_from_motor_vehicle": {
+          "count": 19,
+          "rate_per_100k": 144.717803955078
+        }
+      }
+    },
+    {
+      "area_name": "Junction-Wallace Emerson",
+      "hood_id": 171,
+      "population": 27777,
+      "offences": {
+        "assault": {
+          "count": 200,
+          "rate_per_100k": 720.020141601563
+        },
+        "auto_theft": {
+          "count": 30,
+          "rate_per_100k": 108.003021240234
+        },
+        "bike_theft": {
+          "count": 43,
+          "rate_per_100k": 154.804336547852
+        },
+        "break_enter": {
+          "count": 64,
+          "rate_per_100k": 230.406448364258
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 36.0010070800781
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 3.60010075569153
+        },
+        "theft_over": {
+          "count": 9,
+          "rate_per_100k": 32.4009056091309
+        },
+        "theft_from_motor_vehicle": {
+          "count": 56,
+          "rate_per_100k": 201.605651855469
+        }
+      }
+    },
+    {
+      "area_name": "Yonge-Bay Corridor",
+      "hood_id": 170,
+      "population": 16661,
+      "offences": {
+        "assault": {
+          "count": 560,
+          "rate_per_100k": 3361.14282226563
+        },
+        "auto_theft": {
+          "count": 27,
+          "rate_per_100k": 162.055099487305
+        },
+        "bike_theft": {
+          "count": 137,
+          "rate_per_100k": 822.279602050781
+        },
+        "break_enter": {
+          "count": 92,
+          "rate_per_100k": 552.187744140625
+        },
+        "homicide": {
+          "count": 2,
+          "rate_per_100k": 12.0040817260742
+        },
+        "robbery": {
+          "count": 50,
+          "rate_per_100k": 300.102020263672
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 12.0040817260742
+        },
+        "theft_over": {
+          "count": 35,
+          "rate_per_100k": 210.071426391602
+        },
+        "theft_from_motor_vehicle": {
+          "count": 67,
+          "rate_per_100k": 402.13671875
+        }
+      }
+    },
+    {
+      "area_name": "Bay-Cloverhill",
+      "hood_id": 169,
+      "population": 24089,
+      "offences": {
+        "assault": {
+          "count": 145,
+          "rate_per_100k": 601.934509277344
+        },
+        "auto_theft": {
+          "count": 4,
+          "rate_per_100k": 16.6050891876221
+        },
+        "bike_theft": {
+          "count": 57,
+          "rate_per_100k": 236.622528076172
+        },
+        "break_enter": {
+          "count": 69,
+          "rate_per_100k": 286.437805175781
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 18,
+          "rate_per_100k": 74.722900390625
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 21,
+          "rate_per_100k": 87.1767196655273
+        },
+        "theft_from_motor_vehicle": {
+          "count": 35,
+          "rate_per_100k": 145.294525146484
+        }
+      }
+    },
+    {
+      "area_name": "Bendale-Glen Andrew",
+      "hood_id": 156,
+      "population": 20648,
+      "offences": {
+        "assault": {
+          "count": 180,
+          "rate_per_100k": 871.755126953125
+        },
+        "auto_theft": {
+          "count": 96,
+          "rate_per_100k": 464.936065673828
+        },
+        "bike_theft": {
+          "count": 12,
+          "rate_per_100k": 58.1170082092285
+        },
+        "break_enter": {
+          "count": 30,
+          "rate_per_100k": 145.292526245117
+        },
+        "homicide": {
+          "count": 2,
+          "rate_per_100k": 9.68616771697998
+        },
+        "robbery": {
+          "count": 46,
+          "rate_per_100k": 222.781860351563
+        },
+        "shooting": {
+          "count": 3,
+          "rate_per_100k": 14.5292520523071
+        },
+        "theft_over": {
+          "count": 17,
+          "rate_per_100k": 82.3324279785156
+        },
+        "theft_from_motor_vehicle": {
+          "count": 60,
+          "rate_per_100k": 290.585052490234
+        }
+      }
+    },
+    {
+      "area_name": "Downsview",
+      "hood_id": 155,
+      "population": 23055,
+      "offences": {
+        "assault": {
+          "count": 187,
+          "rate_per_100k": 811.103881835938
+        },
+        "auto_theft": {
+          "count": 77,
+          "rate_per_100k": 333.983947753906
+        },
+        "bike_theft": {
+          "count": 8,
+          "rate_per_100k": 34.6996307373047
+        },
+        "break_enter": {
+          "count": 38,
+          "rate_per_100k": 164.8232421875
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 29,
+          "rate_per_100k": 125.786163330078
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 8.67490768432617
+        },
+        "theft_over": {
+          "count": 19,
+          "rate_per_100k": 82.41162109375
+        },
+        "theft_from_motor_vehicle": {
+          "count": 47,
+          "rate_per_100k": 203.860336303711
+        }
+      }
+    },
+    {
+      "area_name": "Oakdale-Beverley Heights",
+      "hood_id": 154,
+      "population": 24522,
+      "offences": {
+        "assault": {
+          "count": 285,
+          "rate_per_100k": 1162.2216796875
+        },
+        "auto_theft": {
+          "count": 111,
+          "rate_per_100k": 452.654754638672
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 24.4678249359131
+        },
+        "break_enter": {
+          "count": 38,
+          "rate_per_100k": 154.962890625
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 4.0779709815979
+        },
+        "robbery": {
+          "count": 39,
+          "rate_per_100k": 159.040863037109
+        },
+        "shooting": {
+          "count": 4,
+          "rate_per_100k": 16.3118839263916
+        },
+        "theft_over": {
+          "count": 19,
+          "rate_per_100k": 77.4814453125
+        },
+        "theft_from_motor_vehicle": {
+          "count": 67,
+          "rate_per_100k": 273.224029541016
+        }
+      }
+    },
+    {
+      "area_name": "Avondale",
+      "hood_id": 153,
+      "population": 16527,
+      "offences": {
+        "assault": {
+          "count": 84,
+          "rate_per_100k": 508.259216308594
+        },
+        "auto_theft": {
+          "count": 11,
+          "rate_per_100k": 66.5577545166016
+        },
+        "bike_theft": {
+          "count": 11,
+          "rate_per_100k": 66.5577545166016
+        },
+        "break_enter": {
+          "count": 18,
+          "rate_per_100k": 108.912689208984
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 5,
+          "rate_per_100k": 30.2535247802734
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 18.1521148681641
+        },
+        "theft_from_motor_vehicle": {
+          "count": 18,
+          "rate_per_100k": 108.912689208984
+        }
+      }
+    },
+    {
+      "area_name": "East Willowdale",
+      "hood_id": 152,
+      "population": 17619,
+      "offences": {
+        "assault": {
+          "count": 52,
+          "rate_per_100k": 295.135925292969
+        },
+        "auto_theft": {
+          "count": 32,
+          "rate_per_100k": 181.622116088867
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 5.6756911277771
+        },
+        "break_enter": {
+          "count": 35,
+          "rate_per_100k": 198.649185180664
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 56.756908416748
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 5.6756911277771
+        },
+        "theft_over": {
+          "count": 9,
+          "rate_per_100k": 51.0812187194824
+        },
+        "theft_from_motor_vehicle": {
+          "count": 34,
+          "rate_per_100k": 192.973495483398
+        }
+      }
+    },
+    {
+      "area_name": "Yonge-Doris",
+      "hood_id": 151,
+      "population": 24085,
+      "offences": {
+        "assault": {
+          "count": 123,
+          "rate_per_100k": 510.691314697266
+        },
+        "auto_theft": {
+          "count": 24,
+          "rate_per_100k": 99.6470794677734
+        },
+        "bike_theft": {
+          "count": 11,
+          "rate_per_100k": 45.6715812683105
+        },
+        "break_enter": {
+          "count": 14,
+          "rate_per_100k": 58.1274642944336
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 17,
+          "rate_per_100k": 70.5833511352539
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 14,
+          "rate_per_100k": 58.1274642944336
+        },
+        "theft_from_motor_vehicle": {
+          "count": 54,
+          "rate_per_100k": 224.205932617188
+        }
+      }
+    },
+    {
+      "area_name": "Fenside-Parkwoods",
+      "hood_id": 150,
+      "population": 23679,
+      "offences": {
+        "assault": {
+          "count": 131,
+          "rate_per_100k": 553.232849121094
+        },
+        "auto_theft": {
+          "count": 63,
+          "rate_per_100k": 266.058532714844
+        },
+        "bike_theft": {
+          "count": 2,
+          "rate_per_100k": 8.44630241394043
+        },
+        "break_enter": {
+          "count": 28,
+          "rate_per_100k": 118.248237609863
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 8,
+          "rate_per_100k": 33.7852096557617
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 8.44630241394043
+        },
+        "theft_over": {
+          "count": 7,
+          "rate_per_100k": 29.5620594024658
+        },
+        "theft_from_motor_vehicle": {
+          "count": 33,
+          "rate_per_100k": 139.363998413086
+        }
+      }
+    },
+    {
+      "area_name": "Parkwoods-O'Connor Hills",
+      "hood_id": 149,
+      "population": 14974,
+      "offences": {
+        "assault": {
+          "count": 78,
+          "rate_per_100k": 520.902893066406
+        },
+        "auto_theft": {
+          "count": 46,
+          "rate_per_100k": 307.199157714844
+        },
+        "bike_theft": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "break_enter": {
+          "count": 30,
+          "rate_per_100k": 200.347274780273
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 66.7824249267578
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 6.67824220657349
+        },
+        "theft_over": {
+          "count": 7,
+          "rate_per_100k": 46.7476959228516
+        },
+        "theft_from_motor_vehicle": {
+          "count": 31,
+          "rate_per_100k": 207.025512695313
+        }
+      }
+    },
+    {
+      "area_name": "East L'Amoreaux",
+      "hood_id": 148,
+      "population": 23908,
+      "offences": {
+        "assault": {
+          "count": 69,
+          "rate_per_100k": 288.606323242188
+        },
+        "auto_theft": {
+          "count": 40,
+          "rate_per_100k": 167.308013916016
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 4.18270015716553
+        },
+        "break_enter": {
+          "count": 56,
+          "rate_per_100k": 234.231216430664
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 21,
+          "rate_per_100k": 87.8367080688477
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 4,
+          "rate_per_100k": 16.7308006286621
+        },
+        "theft_from_motor_vehicle": {
+          "count": 19,
+          "rate_per_100k": 79.471305847168
+        }
+      }
+    },
+    {
+      "area_name": "L'Amoreaux West",
+      "hood_id": 147,
+      "population": 24118,
+      "offences": {
+        "assault": {
+          "count": 96,
+          "rate_per_100k": 398.04296875
+        },
+        "auto_theft": {
+          "count": 55,
+          "rate_per_100k": 228.045440673828
+        },
+        "bike_theft": {
+          "count": 8,
+          "rate_per_100k": 33.1702461242676
+        },
+        "break_enter": {
+          "count": 39,
+          "rate_per_100k": 161.704956054688
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 21,
+          "rate_per_100k": 87.0718994140625
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 4.14628076553345
+        },
+        "theft_over": {
+          "count": 10,
+          "rate_per_100k": 41.4628067016602
+        },
+        "theft_from_motor_vehicle": {
+          "count": 31,
+          "rate_per_100k": 128.534698486328
+        }
+      }
+    },
+    {
+      "area_name": "Malvern East",
+      "hood_id": 146,
+      "population": 28466,
+      "offences": {
+        "assault": {
+          "count": 144,
+          "rate_per_100k": 505.866638183594
+        },
+        "auto_theft": {
+          "count": 64,
+          "rate_per_100k": 224.829620361328
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 21.0777778625488
+        },
+        "break_enter": {
+          "count": 23,
+          "rate_per_100k": 80.7981414794922
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 23,
+          "rate_per_100k": 80.7981414794922
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 10,
+          "rate_per_100k": 35.1296272277832
+        },
+        "theft_from_motor_vehicle": {
+          "count": 53,
+          "rate_per_100k": 186.187026977539
+        }
+      }
+    },
+    {
+      "area_name": "Malvern West",
+      "hood_id": 145,
+      "population": 18267,
+      "offences": {
+        "assault": {
+          "count": 116,
+          "rate_per_100k": 635.02490234375
+        },
+        "auto_theft": {
+          "count": 67,
+          "rate_per_100k": 366.781616210938
+        },
+        "bike_theft": {
+          "count": 2,
+          "rate_per_100k": 10.9487056732178
+        },
+        "break_enter": {
+          "count": 8,
+          "rate_per_100k": 43.7948226928711
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 23,
+          "rate_per_100k": 125.910110473633
+        },
+        "shooting": {
+          "count": 5,
+          "rate_per_100k": 27.3717632293701
+        },
+        "theft_over": {
+          "count": 12,
+          "rate_per_100k": 65.6922302246094
+        },
+        "theft_from_motor_vehicle": {
+          "count": 38,
+          "rate_per_100k": 208.025405883789
+        }
+      }
+    },
+    {
+      "area_name": "Morningside Heights",
+      "hood_id": 144,
+      "population": 26743,
+      "offences": {
+        "assault": {
+          "count": 130,
+          "rate_per_100k": 486.108520507813
+        },
+        "auto_theft": {
+          "count": 97,
+          "rate_per_100k": 362.711730957031
+        },
+        "bike_theft": {
+          "count": 2,
+          "rate_per_100k": 7.47859239578247
+        },
+        "break_enter": {
+          "count": 40,
+          "rate_per_100k": 149.571853637695
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 37,
+          "rate_per_100k": 138.353958129883
+        },
+        "shooting": {
+          "count": 5,
+          "rate_per_100k": 18.6964817047119
+        },
+        "theft_over": {
+          "count": 18,
+          "rate_per_100k": 67.3073348999023
+        },
+        "theft_from_motor_vehicle": {
+          "count": 65,
+          "rate_per_100k": 243.054260253906
+        }
+      }
+    },
+    {
+      "area_name": "West Rouge",
+      "hood_id": 143,
+      "population": 22634,
+      "offences": {
+        "assault": {
+          "count": 63,
+          "rate_per_100k": 278.342315673828
+        },
+        "auto_theft": {
+          "count": 101,
+          "rate_per_100k": 446.231323242188
+        },
+        "bike_theft": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "break_enter": {
+          "count": 17,
+          "rate_per_100k": 75.1082458496094
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 44.1813201904297
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 4.41813182830811
+        },
+        "theft_over": {
+          "count": 10,
+          "rate_per_100k": 44.1813201904297
+        },
+        "theft_from_motor_vehicle": {
+          "count": 39,
+          "rate_per_100k": 172.307144165039
+        }
+      }
+    },
+    {
+      "area_name": "Woburn North",
+      "hood_id": 142,
+      "population": 28743,
+      "offences": {
+        "assault": {
+          "count": 221,
+          "rate_per_100k": 768.882873535156
+        },
+        "auto_theft": {
+          "count": 91,
+          "rate_per_100k": 316.598815917969
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 3.47910785675049
+        },
+        "break_enter": {
+          "count": 52,
+          "rate_per_100k": 180.913619995117
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 22,
+          "rate_per_100k": 76.5403747558594
+        },
+        "shooting": {
+          "count": 4,
+          "rate_per_100k": 13.916431427002
+        },
+        "theft_over": {
+          "count": 18,
+          "rate_per_100k": 62.6239433288574
+        },
+        "theft_from_motor_vehicle": {
+          "count": 81,
+          "rate_per_100k": 281.807739257813
+        }
+      }
+    },
+    {
+      "area_name": "Golfdale-Cedarbrae-Woburn",
+      "hood_id": 141,
+      "population": 30270,
+      "offences": {
+        "assault": {
+          "count": 193,
+          "rate_per_100k": 637.594970703125
+        },
+        "auto_theft": {
+          "count": 75,
+          "rate_per_100k": 247.770065307617
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 19.821605682373
+        },
+        "break_enter": {
+          "count": 27,
+          "rate_per_100k": 89.1972274780273
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 30,
+          "rate_per_100k": 99.108024597168
+        },
+        "shooting": {
+          "count": 3,
+          "rate_per_100k": 9.91080284118652
+        },
+        "theft_over": {
+          "count": 16,
+          "rate_per_100k": 52.8576164245605
+        },
+        "theft_from_motor_vehicle": {
+          "count": 55,
+          "rate_per_100k": 181.698043823242
+        }
+      }
+    },
+    {
+      "area_name": "Guildwood",
+      "hood_id": 140,
+      "population": 10767,
+      "offences": {
+        "assault": {
+          "count": 43,
+          "rate_per_100k": 399.368438720703
+        },
+        "auto_theft": {
+          "count": 8,
+          "rate_per_100k": 74.3011016845703
+        },
+        "bike_theft": {
+          "count": 3,
+          "rate_per_100k": 27.8629150390625
+        },
+        "break_enter": {
+          "count": 6,
+          "rate_per_100k": 55.725830078125
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 6,
+          "rate_per_100k": 55.725830078125
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 18.5752754211426
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 27.8629150390625
+        },
+        "theft_from_motor_vehicle": {
+          "count": 22,
+          "rate_per_100k": 204.328033447266
+        }
+      }
+    },
+    {
+      "area_name": "Scarborough Village",
+      "hood_id": 139,
+      "population": 18730,
+      "offences": {
+        "assault": {
+          "count": 143,
+          "rate_per_100k": 763.481018066406
+        },
+        "auto_theft": {
+          "count": 52,
+          "rate_per_100k": 277.629486083984
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 32.0341682434082
+        },
+        "break_enter": {
+          "count": 46,
+          "rate_per_100k": 245.595306396484
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 5.33902835845947
+        },
+        "robbery": {
+          "count": 20,
+          "rate_per_100k": 106.780563354492
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 5.33902835845947
+        },
+        "theft_over": {
+          "count": 4,
+          "rate_per_100k": 21.3561134338379
+        },
+        "theft_from_motor_vehicle": {
+          "count": 56,
+          "rate_per_100k": 298.985595703125
+        }
+      }
+    },
+    {
+      "area_name": "Eglinton East",
+      "hood_id": 138,
+      "population": 25914,
+      "offences": {
+        "assault": {
+          "count": 214,
+          "rate_per_100k": 825.808471679688
+        },
+        "auto_theft": {
+          "count": 70,
+          "rate_per_100k": 270.124267578125
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 23.153507232666
+        },
+        "break_enter": {
+          "count": 39,
+          "rate_per_100k": 150.497802734375
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 17,
+          "rate_per_100k": 65.6016082763672
+        },
+        "shooting": {
+          "count": 4,
+          "rate_per_100k": 15.4356718063354
+        },
+        "theft_over": {
+          "count": 16,
+          "rate_per_100k": 61.7426872253418
+        },
+        "theft_from_motor_vehicle": {
+          "count": 145,
+          "rate_per_100k": 559.543090820313
+        }
+      }
+    },
+    {
+      "area_name": "West Hill",
+      "hood_id": 136,
+      "population": 31546,
+      "offences": {
+        "assault": {
+          "count": 419,
+          "rate_per_100k": 1328.21911621094
+        },
+        "auto_theft": {
+          "count": 47,
+          "rate_per_100k": 148.988784790039
+        },
+        "bike_theft": {
+          "count": 17,
+          "rate_per_100k": 53.8895568847656
+        },
+        "break_enter": {
+          "count": 61,
+          "rate_per_100k": 193.368408203125
+        },
+        "homicide": {
+          "count": 2,
+          "rate_per_100k": 6.33994817733765
+        },
+        "robbery": {
+          "count": 31,
+          "rate_per_100k": 98.2691955566406
+        },
+        "shooting": {
+          "count": 5,
+          "rate_per_100k": 15.8498697280884
+        },
+        "theft_over": {
+          "count": 20,
+          "rate_per_100k": 63.3994789123535
+        },
+        "theft_from_motor_vehicle": {
+          "count": 123,
+          "rate_per_100k": 389.906799316406
+        }
+      }
+    },
+    {
+      "area_name": "Morningside",
+      "hood_id": 135,
+      "population": 19325,
+      "offences": {
+        "assault": {
+          "count": 125,
+          "rate_per_100k": 646.830505371094
+        },
+        "auto_theft": {
+          "count": 42,
+          "rate_per_100k": 217.335052490234
+        },
+        "bike_theft": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "break_enter": {
+          "count": 15,
+          "rate_per_100k": 77.6196670532227
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 11,
+          "rate_per_100k": 56.921085357666
+        },
+        "shooting": {
+          "count": 3,
+          "rate_per_100k": 15.5239324569702
+        },
+        "theft_over": {
+          "count": 7,
+          "rate_per_100k": 36.2225112915039
+        },
+        "theft_from_motor_vehicle": {
+          "count": 21,
+          "rate_per_100k": 108.667526245117
+        }
+      }
+    },
+    {
+      "area_name": "Highland Creek",
+      "hood_id": 134,
+      "population": 13551,
+      "offences": {
+        "assault": {
+          "count": 78,
+          "rate_per_100k": 575.603271484375
+        },
+        "auto_theft": {
+          "count": 33,
+          "rate_per_100k": 243.524459838867
+        },
+        "bike_theft": {
+          "count": 2,
+          "rate_per_100k": 14.7590579986572
+        },
+        "break_enter": {
+          "count": 16,
+          "rate_per_100k": 118.072463989258
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 7.37952899932861
+        },
+        "robbery": {
+          "count": 6,
+          "rate_per_100k": 44.2771759033203
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 7.37952899932861
+        },
+        "theft_over": {
+          "count": 13,
+          "rate_per_100k": 95.9338760375977
+        },
+        "theft_from_motor_vehicle": {
+          "count": 29,
+          "rate_per_100k": 214.00634765625
+        }
+      }
+    },
+    {
+      "area_name": "Centennial Scarborough",
+      "hood_id": 133,
+      "population": 14695,
+      "offences": {
+        "assault": {
+          "count": 43,
+          "rate_per_100k": 292.616546630859
+        },
+        "auto_theft": {
+          "count": 22,
+          "rate_per_100k": 149.710784912109
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 6.80503559112549
+        },
+        "break_enter": {
+          "count": 28,
+          "rate_per_100k": 190.541000366211
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 3,
+          "rate_per_100k": 20.4151077270508
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 6.80503559112549
+        },
+        "theft_over": {
+          "count": 5,
+          "rate_per_100k": 34.0251770019531
+        },
+        "theft_from_motor_vehicle": {
+          "count": 16,
+          "rate_per_100k": 108.880569458008
+        }
+      }
+    },
+    {
+      "area_name": "Milliken",
+      "hood_id": 130,
+      "population": 26329,
+      "offences": {
+        "assault": {
+          "count": 88,
+          "rate_per_100k": 334.232208251953
+        },
+        "auto_theft": {
+          "count": 160,
+          "rate_per_100k": 607.694946289063
+        },
+        "bike_theft": {
+          "count": 3,
+          "rate_per_100k": 11.3942804336548
+        },
+        "break_enter": {
+          "count": 67,
+          "rate_per_100k": 254.472259521484
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 52,
+          "rate_per_100k": 197.500854492188
+        },
+        "shooting": {
+          "count": 5,
+          "rate_per_100k": 18.9904670715332
+        },
+        "theft_over": {
+          "count": 33,
+          "rate_per_100k": 125.33708190918
+        },
+        "theft_from_motor_vehicle": {
+          "count": 105,
+          "rate_per_100k": 398.7998046875
+        }
+      }
+    },
+    {
+      "area_name": "Agincourt North",
+      "hood_id": 129,
+      "population": 29974,
+      "offences": {
+        "assault": {
+          "count": 83,
+          "rate_per_100k": 276.906646728516
+        },
+        "auto_theft": {
+          "count": 98,
+          "rate_per_100k": 326.950012207031
+        },
+        "bike_theft": {
+          "count": 5,
+          "rate_per_100k": 16.6811237335205
+        },
+        "break_enter": {
+          "count": 28,
+          "rate_per_100k": 93.4142913818359
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 32,
+          "rate_per_100k": 106.75919342041
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 6.67244958877563
+        },
+        "theft_over": {
+          "count": 16,
+          "rate_per_100k": 53.3795967102051
+        },
+        "theft_from_motor_vehicle": {
+          "count": 32,
+          "rate_per_100k": 106.75919342041
+        }
+      }
+    },
+    {
+      "area_name": "Agincourt South-Malvern West",
+      "hood_id": 128,
+      "population": 28477,
+      "offences": {
+        "assault": {
+          "count": 133,
+          "rate_per_100k": 467.043579101563
+        },
+        "auto_theft": {
+          "count": 78,
+          "rate_per_100k": 273.905242919922
+        },
+        "bike_theft": {
+          "count": 4,
+          "rate_per_100k": 14.046422958374
+        },
+        "break_enter": {
+          "count": 74,
+          "rate_per_100k": 259.858825683594
+        },
+        "homicide": {
+          "count": 2,
+          "rate_per_100k": 7.02321147918701
+        },
+        "robbery": {
+          "count": 27,
+          "rate_per_100k": 94.8133544921875
+        },
+        "shooting": {
+          "count": 6,
+          "rate_per_100k": 21.0696353912354
+        },
+        "theft_over": {
+          "count": 11,
+          "rate_per_100k": 38.6276626586914
+        },
+        "theft_from_motor_vehicle": {
+          "count": 69,
+          "rate_per_100k": 242.300811767578
+        }
+      }
+    },
+    {
+      "area_name": "Dorset Park",
+      "hood_id": 126,
+      "population": 27531,
+      "offences": {
+        "assault": {
+          "count": 185,
+          "rate_per_100k": 671.969787597656
+        },
+        "auto_theft": {
+          "count": 98,
+          "rate_per_100k": 355.962371826172
+        },
+        "bike_theft": {
+          "count": 8,
+          "rate_per_100k": 29.0581531524658
+        },
+        "break_enter": {
+          "count": 53,
+          "rate_per_100k": 192.51025390625
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 31,
+          "rate_per_100k": 112.600341796875
+        },
+        "shooting": {
+          "count": 5,
+          "rate_per_100k": 18.1613445281982
+        },
+        "theft_over": {
+          "count": 20,
+          "rate_per_100k": 72.645378112793
+        },
+        "theft_from_motor_vehicle": {
+          "count": 92,
+          "rate_per_100k": 334.168762207031
+        }
+      }
+    },
+    {
+      "area_name": "Ionview",
+      "hood_id": 125,
+      "population": 14254,
+      "offences": {
+        "assault": {
+          "count": 116,
+          "rate_per_100k": 813.806640625
+        },
+        "auto_theft": {
+          "count": 20,
+          "rate_per_100k": 140.311492919922
+        },
+        "bike_theft": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "break_enter": {
+          "count": 13,
+          "rate_per_100k": 91.2024688720703
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 7.01557445526123
+        },
+        "robbery": {
+          "count": 13,
+          "rate_per_100k": 91.2024688720703
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 7.01557445526123
+        },
+        "theft_over": {
+          "count": 6,
+          "rate_per_100k": 42.093448638916
+        },
+        "theft_from_motor_vehicle": {
+          "count": 29,
+          "rate_per_100k": 203.45166015625
+        }
+      }
+    },
+    {
+      "area_name": "Kennedy Park",
+      "hood_id": 124,
+      "population": 18929,
+      "offences": {
+        "assault": {
+          "count": 288,
+          "rate_per_100k": 1521.47497558594
+        },
+        "auto_theft": {
+          "count": 40,
+          "rate_per_100k": 211.315963745117
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 31.697395324707
+        },
+        "break_enter": {
+          "count": 30,
+          "rate_per_100k": 158.48698425293
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 5.28289937973022
+        },
+        "robbery": {
+          "count": 23,
+          "rate_per_100k": 121.506683349609
+        },
+        "shooting": {
+          "count": 3,
+          "rate_per_100k": 15.8486976623535
+        },
+        "theft_over": {
+          "count": 16,
+          "rate_per_100k": 84.5263900756836
+        },
+        "theft_from_motor_vehicle": {
+          "count": 76,
+          "rate_per_100k": 401.500335693359
+        }
+      }
+    },
+    {
+      "area_name": "Cliffcrest",
+      "hood_id": 123,
+      "population": 18043,
+      "offences": {
+        "assault": {
+          "count": 145,
+          "rate_per_100k": 803.6357421875
+        },
+        "auto_theft": {
+          "count": 49,
+          "rate_per_100k": 271.573455810547
+        },
+        "bike_theft": {
+          "count": 3,
+          "rate_per_100k": 16.6269474029541
+        },
+        "break_enter": {
+          "count": 34,
+          "rate_per_100k": 188.438735961914
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 23,
+          "rate_per_100k": 127.473258972168
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 11.0846309661865
+        },
+        "theft_over": {
+          "count": 7,
+          "rate_per_100k": 38.7962074279785
+        },
+        "theft_from_motor_vehicle": {
+          "count": 84,
+          "rate_per_100k": 465.554504394531
+        }
+      }
+    },
+    {
+      "area_name": "Birchcliffe-Cliffside",
+      "hood_id": 122,
+      "population": 25904,
+      "offences": {
+        "assault": {
+          "count": 168,
+          "rate_per_100k": 648.548461914063
+        },
+        "auto_theft": {
+          "count": 69,
+          "rate_per_100k": 266.368133544922
+        },
+        "bike_theft": {
+          "count": 4,
+          "rate_per_100k": 15.4416303634644
+        },
+        "break_enter": {
+          "count": 47,
+          "rate_per_100k": 181.439163208008
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 19,
+          "rate_per_100k": 73.3477478027344
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 9,
+          "rate_per_100k": 34.7436676025391
+        },
+        "theft_from_motor_vehicle": {
+          "count": 72,
+          "rate_per_100k": 277.949340820313
+        }
+      }
+    },
+    {
+      "area_name": "Downtown Yonge East",
+      "hood_id": 168,
+      "population": 25119,
+      "offences": {
+        "assault": {
+          "count": 593,
+          "rate_per_100k": 2360.7626953125
+        },
+        "auto_theft": {
+          "count": 19,
+          "rate_per_100k": 75.6399536132813
+        },
+        "bike_theft": {
+          "count": 109,
+          "rate_per_100k": 433.934478759766
+        },
+        "break_enter": {
+          "count": 69,
+          "rate_per_100k": 274.692474365234
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 36,
+          "rate_per_100k": 143.317810058594
+        },
+        "shooting": {
+          "count": 3,
+          "rate_per_100k": 11.9431505203247
+        },
+        "theft_over": {
+          "count": 25,
+          "rate_per_100k": 99.526252746582
+        },
+        "theft_from_motor_vehicle": {
+          "count": 98,
+          "rate_per_100k": 390.142913818359
+        }
+      }
+    },
+    {
+      "area_name": "Church-Wellesley",
+      "hood_id": 167,
+      "population": 30048,
+      "offences": {
+        "assault": {
+          "count": 380,
+          "rate_per_100k": 1264.64318847656
+        },
+        "auto_theft": {
+          "count": 14,
+          "rate_per_100k": 46.5921211242676
+        },
+        "bike_theft": {
+          "count": 67,
+          "rate_per_100k": 222.976577758789
+        },
+        "break_enter": {
+          "count": 44,
+          "rate_per_100k": 146.432373046875
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 3.32800841331482
+        },
+        "robbery": {
+          "count": 28,
+          "rate_per_100k": 93.1842422485352
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 32,
+          "rate_per_100k": 106.496269226074
+        },
+        "theft_from_motor_vehicle": {
+          "count": 62,
+          "rate_per_100k": 206.336532592773
+        }
+      }
+    },
+    {
+      "area_name": "St Lawrence-East Bayfront-The Islands",
+      "hood_id": 166,
+      "population": 44636,
+      "offences": {
+        "assault": {
+          "count": 473,
+          "rate_per_100k": 1059.68273925781
+        },
+        "auto_theft": {
+          "count": 11,
+          "rate_per_100k": 24.6437854766846
+        },
+        "bike_theft": {
+          "count": 123,
+          "rate_per_100k": 275.562316894531
+        },
+        "break_enter": {
+          "count": 73,
+          "rate_per_100k": 163.545120239258
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 43,
+          "rate_per_100k": 96.3348007202148
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 4.48068809509277
+        },
+        "theft_over": {
+          "count": 35,
+          "rate_per_100k": 78.4120407104492
+        },
+        "theft_from_motor_vehicle": {
+          "count": 73,
+          "rate_per_100k": 163.545120239258
+        }
+      }
+    },
+    {
+      "area_name": "Harbourfront-CityPlace",
+      "hood_id": 165,
+      "population": 35321,
+      "offences": {
+        "assault": {
+          "count": 312,
+          "rate_per_100k": 883.327209472656
+        },
+        "auto_theft": {
+          "count": 20,
+          "rate_per_100k": 56.6235389709473
+        },
+        "bike_theft": {
+          "count": 49,
+          "rate_per_100k": 138.727676391602
+        },
+        "break_enter": {
+          "count": 50,
+          "rate_per_100k": 141.558853149414
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 2.83117699623108
+        },
+        "robbery": {
+          "count": 17,
+          "rate_per_100k": 48.1300086975098
+        },
+        "shooting": {
+          "count": 3,
+          "rate_per_100k": 8.49353122711182
+        },
+        "theft_over": {
+          "count": 20,
+          "rate_per_100k": 56.6235389709473
+        },
+        "theft_from_motor_vehicle": {
+          "count": 43,
+          "rate_per_100k": 121.740608215332
+        }
+      }
+    },
+    {
+      "area_name": "Wellington Place",
+      "hood_id": 164,
+      "population": 37790,
+      "offences": {
+        "assault": {
+          "count": 442,
+          "rate_per_100k": 1169.62158203125
+        },
+        "auto_theft": {
+          "count": 37,
+          "rate_per_100k": 97.9095001220703
+        },
+        "bike_theft": {
+          "count": 92,
+          "rate_per_100k": 243.450653076172
+        },
+        "break_enter": {
+          "count": 111,
+          "rate_per_100k": 293.728485107422
+        },
+        "homicide": {
+          "count": 2,
+          "rate_per_100k": 5.29240560531616
+        },
+        "robbery": {
+          "count": 31,
+          "rate_per_100k": 82.0322799682617
+        },
+        "shooting": {
+          "count": 4,
+          "rate_per_100k": 10.5848112106323
+        },
+        "theft_over": {
+          "count": 33,
+          "rate_per_100k": 87.3246917724609
+        },
+        "theft_from_motor_vehicle": {
+          "count": 80,
+          "rate_per_100k": 211.696212768555
+        }
+      }
+    },
+    {
+      "area_name": "Fort York-Liberty Village",
+      "hood_id": 163,
+      "population": 25723,
+      "offences": {
+        "assault": {
+          "count": 188,
+          "rate_per_100k": 730.863403320313
+        },
+        "auto_theft": {
+          "count": 12,
+          "rate_per_100k": 46.6508560180664
+        },
+        "bike_theft": {
+          "count": 39,
+          "rate_per_100k": 151.615280151367
+        },
+        "break_enter": {
+          "count": 32,
+          "rate_per_100k": 124.402282714844
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 3.88757133483887
+        },
+        "robbery": {
+          "count": 6,
+          "rate_per_100k": 23.3254280090332
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 20,
+          "rate_per_100k": 77.7514266967773
+        },
+        "theft_from_motor_vehicle": {
+          "count": 34,
+          "rate_per_100k": 132.177429199219
+        }
+      }
+    },
+    {
+      "area_name": "West Queen West",
+      "hood_id": 162,
+      "population": 15457,
+      "offences": {
+        "assault": {
+          "count": 91,
+          "rate_per_100k": 588.730041503906
+        },
+        "auto_theft": {
+          "count": 13,
+          "rate_per_100k": 84.1042861938477
+        },
+        "bike_theft": {
+          "count": 19,
+          "rate_per_100k": 122.921653747559
+        },
+        "break_enter": {
+          "count": 40,
+          "rate_per_100k": 258.782440185547
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 8,
+          "rate_per_100k": 51.7564849853516
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 6.46956062316895
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 19.4086818695068
+        },
+        "theft_from_motor_vehicle": {
+          "count": 28,
+          "rate_per_100k": 181.147705078125
+        }
+      }
+    },
+    {
+      "area_name": "Humber Bay Shores",
+      "hood_id": 161,
+      "population": 26343,
+      "offences": {
+        "assault": {
+          "count": 120,
+          "rate_per_100k": 455.528991699219
+        },
+        "auto_theft": {
+          "count": 49,
+          "rate_per_100k": 186.007675170898
+        },
+        "bike_theft": {
+          "count": 24,
+          "rate_per_100k": 91.1057968139648
+        },
+        "break_enter": {
+          "count": 25,
+          "rate_per_100k": 94.9018707275391
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 4,
+          "rate_per_100k": 15.1842994689941
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 3.79607486724854
+        },
+        "theft_over": {
+          "count": 11,
+          "rate_per_100k": 41.7568244934082
+        },
+        "theft_from_motor_vehicle": {
+          "count": 19,
+          "rate_per_100k": 72.1254196166992
+        }
+      }
+    },
+    {
+      "area_name": "Mimico-Queensway",
+      "hood_id": 160,
+      "population": 24090,
+      "offences": {
+        "assault": {
+          "count": 1014,
+          "rate_per_100k": 4209.21533203125
+        },
+        "auto_theft": {
+          "count": 54,
+          "rate_per_100k": 224.159408569336
+        },
+        "bike_theft": {
+          "count": 10,
+          "rate_per_100k": 41.5110015869141
+        },
+        "break_enter": {
+          "count": 32,
+          "rate_per_100k": 132.835205078125
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 4.15110015869141
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 41.5110015869141
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 16,
+          "rate_per_100k": 66.4176025390625
+        },
+        "theft_from_motor_vehicle": {
+          "count": 24,
+          "rate_per_100k": 99.6264038085938
+        }
+      }
+    },
+    {
+      "area_name": "Etobicoke City Centre",
+      "hood_id": 159,
+      "population": 30908,
+      "offences": {
+        "assault": {
+          "count": 261,
+          "rate_per_100k": 844.441589355469
+        },
+        "auto_theft": {
+          "count": 186,
+          "rate_per_100k": 601.785949707031
+        },
+        "bike_theft": {
+          "count": 14,
+          "rate_per_100k": 45.2957153320313
+        },
+        "break_enter": {
+          "count": 65,
+          "rate_per_100k": 210.301544189453
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 58,
+          "rate_per_100k": 187.653686523438
+        },
+        "shooting": {
+          "count": 5,
+          "rate_per_100k": 16.1770420074463
+        },
+        "theft_over": {
+          "count": 62,
+          "rate_per_100k": 200.595321655273
+        },
+        "theft_from_motor_vehicle": {
+          "count": 86,
+          "rate_per_100k": 278.2451171875
+        }
+      }
+    },
+    {
+      "area_name": "Islington",
+      "hood_id": 158,
+      "population": 27977,
+      "offences": {
+        "assault": {
+          "count": 109,
+          "rate_per_100k": 389.605743408203
+        },
+        "auto_theft": {
+          "count": 48,
+          "rate_per_100k": 171.56950378418
+        },
+        "bike_theft": {
+          "count": 13,
+          "rate_per_100k": 46.466739654541
+        },
+        "break_enter": {
+          "count": 82,
+          "rate_per_100k": 293.097900390625
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 3.57436466217041
+        },
+        "robbery": {
+          "count": 11,
+          "rate_per_100k": 39.3180122375488
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 3.57436466217041
+        },
+        "theft_over": {
+          "count": 15,
+          "rate_per_100k": 53.6154708862305
+        },
+        "theft_from_motor_vehicle": {
+          "count": 40,
+          "rate_per_100k": 142.974578857422
+        }
+      }
+    },
+    {
+      "area_name": "Bendale South",
+      "hood_id": 157,
+      "population": 11539,
+      "offences": {
+        "assault": {
+          "count": 79,
+          "rate_per_100k": 684.634704589844
+        },
+        "auto_theft": {
+          "count": 34,
+          "rate_per_100k": 294.652923583984
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 8.66626262664795
+        },
+        "break_enter": {
+          "count": 9,
+          "rate_per_100k": 77.9963607788086
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 11,
+          "rate_per_100k": 95.3288879394531
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 8.66626262664795
+        },
+        "theft_over": {
+          "count": 1,
+          "rate_per_100k": 8.66626262664795
+        },
+        "theft_from_motor_vehicle": {
+          "count": 38,
+          "rate_per_100k": 329.317962646484
+        }
+      }
+    },
+    {
+      "area_name": "Caledonia-Fairbank",
+      "hood_id": 109,
+      "population": 10682,
+      "offences": {
+        "assault": {
+          "count": 59,
+          "rate_per_100k": 552.330993652344
+        },
+        "auto_theft": {
+          "count": 30,
+          "rate_per_100k": 280.846282958984
+        },
+        "bike_theft": {
+          "count": 2,
+          "rate_per_100k": 18.7230854034424
+        },
+        "break_enter": {
+          "count": 13,
+          "rate_per_100k": 121.700057983398
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 8,
+          "rate_per_100k": 74.8923416137695
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 9.36154270172119
+        },
+        "theft_over": {
+          "count": 2,
+          "rate_per_100k": 18.7230854034424
+        },
+        "theft_from_motor_vehicle": {
+          "count": 17,
+          "rate_per_100k": 159.146224975586
+        }
+      }
+    },
+    {
+      "area_name": "Briar Hill-Belgravia",
+      "hood_id": 108,
+      "population": 16362,
+      "offences": {
+        "assault": {
+          "count": 112,
+          "rate_per_100k": 684.512878417969
+        },
+        "auto_theft": {
+          "count": 43,
+          "rate_per_100k": 262.804046630859
+        },
+        "bike_theft": {
+          "count": 5,
+          "rate_per_100k": 30.5586109161377
+        },
+        "break_enter": {
+          "count": 34,
+          "rate_per_100k": 207.798553466797
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 12,
+          "rate_per_100k": 73.3406677246094
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 12.2234449386597
+        },
+        "theft_over": {
+          "count": 8,
+          "rate_per_100k": 48.8937797546387
+        },
+        "theft_from_motor_vehicle": {
+          "count": 24,
+          "rate_per_100k": 146.681335449219
+        }
+      }
+    },
+    {
+      "area_name": "Oakwood Village",
+      "hood_id": 107,
+      "population": 23504,
+      "offences": {
+        "assault": {
+          "count": 152,
+          "rate_per_100k": 646.698425292969
+        },
+        "auto_theft": {
+          "count": 47,
+          "rate_per_100k": 199.965957641602
+        },
+        "bike_theft": {
+          "count": 12,
+          "rate_per_100k": 51.0551414489746
+        },
+        "break_enter": {
+          "count": 25,
+          "rate_per_100k": 106.364875793457
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 3,
+          "rate_per_100k": 12.7637853622437
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 4.25459480285645
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 12.7637853622437
+        },
+        "theft_from_motor_vehicle": {
+          "count": 33,
+          "rate_per_100k": 140.401626586914
+        }
+      }
+    },
+    {
+      "area_name": "Humewood-Cedarvale",
+      "hood_id": 106,
+      "population": 16538,
+      "offences": {
+        "assault": {
+          "count": 78,
+          "rate_per_100k": 471.641082763672
+        },
+        "auto_theft": {
+          "count": 22,
+          "rate_per_100k": 133.026962280273
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 36.2800827026367
+        },
+        "break_enter": {
+          "count": 35,
+          "rate_per_100k": 211.633819580078
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 7,
+          "rate_per_100k": 42.3267631530762
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 12.0933609008789
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 18.1400413513184
+        },
+        "theft_from_motor_vehicle": {
+          "count": 18,
+          "rate_per_100k": 108.84024810791
+        }
+      }
+    },
+    {
+      "area_name": "Lawrence Park North",
+      "hood_id": 105,
+      "population": 16574,
+      "offences": {
+        "assault": {
+          "count": 44,
+          "rate_per_100k": 265.476043701172
+        },
+        "auto_theft": {
+          "count": 16,
+          "rate_per_100k": 96.5367431640625
+        },
+        "bike_theft": {
+          "count": 5,
+          "rate_per_100k": 30.1677322387695
+        },
+        "break_enter": {
+          "count": 39,
+          "rate_per_100k": 235.308319091797
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 7,
+          "rate_per_100k": 42.2348251342773
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 18.1006393432617
+        },
+        "theft_from_motor_vehicle": {
+          "count": 29,
+          "rate_per_100k": 174.972854614258
+        }
+      }
+    },
+    {
+      "area_name": "Lawrence Park South",
+      "hood_id": 103,
+      "population": 16984,
+      "offences": {
+        "assault": {
+          "count": 34,
+          "rate_per_100k": 200.188415527344
+        },
+        "auto_theft": {
+          "count": 30,
+          "rate_per_100k": 176.636840820313
+        },
+        "bike_theft": {
+          "count": 3,
+          "rate_per_100k": 17.6636829376221
+        },
+        "break_enter": {
+          "count": 49,
+          "rate_per_100k": 288.5068359375
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 6,
+          "rate_per_100k": 35.3273658752441
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 7,
+          "rate_per_100k": 41.215259552002
+        },
+        "theft_from_motor_vehicle": {
+          "count": 15,
+          "rate_per_100k": 88.3184204101563
+        }
+      }
+    },
+    {
+      "area_name": "Forest Hill North",
+      "hood_id": 102,
+      "population": 13826,
+      "offences": {
+        "assault": {
+          "count": 57,
+          "rate_per_100k": 412.266754150391
+        },
+        "auto_theft": {
+          "count": 10,
+          "rate_per_100k": 72.3274993896484
+        },
+        "bike_theft": {
+          "count": 3,
+          "rate_per_100k": 21.6982498168945
+        },
+        "break_enter": {
+          "count": 22,
+          "rate_per_100k": 159.120498657227
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 1,
+          "rate_per_100k": 7.23274993896484
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 7,
+          "rate_per_100k": 50.6292495727539
+        },
+        "theft_from_motor_vehicle": {
+          "count": 11,
+          "rate_per_100k": 79.5602493286133
+        }
+      }
+    },
+    {
+      "area_name": "Forest Hill South",
+      "hood_id": 101,
+      "population": 12216,
+      "offences": {
+        "assault": {
+          "count": 24,
+          "rate_per_100k": 196.463653564453
+        },
+        "auto_theft": {
+          "count": 13,
+          "rate_per_100k": 106.417816162109
+        },
+        "bike_theft": {
+          "count": 5,
+          "rate_per_100k": 40.9299278259277
+        },
+        "break_enter": {
+          "count": 40,
+          "rate_per_100k": 327.439422607422
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 9,
+          "rate_per_100k": 73.6738739013672
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 9,
+          "rate_per_100k": 73.6738739013672
+        },
+        "theft_from_motor_vehicle": {
+          "count": 16,
+          "rate_per_100k": 130.975769042969
+        }
+      }
+    },
+    {
+      "area_name": "Yonge-Eglinton",
+      "hood_id": 100,
+      "population": 14709,
+      "offences": {
+        "assault": {
+          "count": 105,
+          "rate_per_100k": 713.848693847656
+        },
+        "auto_theft": {
+          "count": 17,
+          "rate_per_100k": 115.575500488281
+        },
+        "bike_theft": {
+          "count": 8,
+          "rate_per_100k": 54.3884696960449
+        },
+        "break_enter": {
+          "count": 20,
+          "rate_per_100k": 135.971176147461
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 14,
+          "rate_per_100k": 95.1798248291016
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 15,
+          "rate_per_100k": 101.978378295898
+        },
+        "theft_from_motor_vehicle": {
+          "count": 8,
+          "rate_per_100k": 54.3884696960449
+        }
+      }
+    },
+    {
+      "area_name": "Mount Pleasant East",
+      "hood_id": 99,
+      "population": 19611,
+      "offences": {
+        "assault": {
+          "count": 66,
+          "rate_per_100k": 336.545806884766
+        },
+        "auto_theft": {
+          "count": 44,
+          "rate_per_100k": 224.363876342773
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 30.5950736999512
+        },
+        "break_enter": {
+          "count": 40,
+          "rate_per_100k": 203.967163085938
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 2,
+          "rate_per_100k": 10.1983585357666
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 9,
+          "rate_per_100k": 45.8926124572754
+        },
+        "theft_from_motor_vehicle": {
+          "count": 21,
+          "rate_per_100k": 107.08275604248
+        }
+      }
+    },
+    {
+      "area_name": "Rosedale-Moore Park",
+      "hood_id": 98,
+      "population": 23046,
+      "offences": {
+        "assault": {
+          "count": 249,
+          "rate_per_100k": 1080.44775390625
+        },
+        "auto_theft": {
+          "count": 46,
+          "rate_per_100k": 199.600799560547
+        },
+        "bike_theft": {
+          "count": 32,
+          "rate_per_100k": 138.852722167969
+        },
+        "break_enter": {
+          "count": 105,
+          "rate_per_100k": 455.610504150391
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 20,
+          "rate_per_100k": 86.782958984375
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 15,
+          "rate_per_100k": 65.0872192382813
+        },
+        "theft_from_motor_vehicle": {
+          "count": 42,
+          "rate_per_100k": 182.244201660156
+        }
+      }
+    },
+    {
+      "area_name": "Yonge-St.Clair",
+      "hood_id": 97,
+      "population": 15507,
+      "offences": {
+        "assault": {
+          "count": 42,
+          "rate_per_100k": 270.845428466797
+        },
+        "auto_theft": {
+          "count": 10,
+          "rate_per_100k": 64.4870071411133
+        },
+        "bike_theft": {
+          "count": 10,
+          "rate_per_100k": 64.4870071411133
+        },
+        "break_enter": {
+          "count": 58,
+          "rate_per_100k": 374.024627685547
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 4,
+          "rate_per_100k": 25.7948017120361
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 5,
+          "rate_per_100k": 32.2435035705566
+        },
+        "theft_from_motor_vehicle": {
+          "count": 18,
+          "rate_per_100k": 116.076606750488
+        }
+      }
+    },
+    {
+      "area_name": "Casa Loma",
+      "hood_id": 96,
+      "population": 13631,
+      "offences": {
+        "assault": {
+          "count": 77,
+          "rate_per_100k": 564.888854980469
+        },
+        "auto_theft": {
+          "count": 10,
+          "rate_per_100k": 73.362190246582
+        },
+        "bike_theft": {
+          "count": 11,
+          "rate_per_100k": 80.6984100341797
+        },
+        "break_enter": {
+          "count": 44,
+          "rate_per_100k": 322.793640136719
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 4,
+          "rate_per_100k": 29.3448753356934
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 14.6724376678467
+        },
+        "theft_over": {
+          "count": 5,
+          "rate_per_100k": 36.681095123291
+        },
+        "theft_from_motor_vehicle": {
+          "count": 14,
+          "rate_per_100k": 102.707061767578
+        }
+      }
+    },
+    {
+      "area_name": "Annex",
+      "hood_id": 95,
+      "population": 38487,
+      "offences": {
+        "assault": {
+          "count": 416,
+          "rate_per_100k": 1080.88439941406
+        },
+        "auto_theft": {
+          "count": 45,
+          "rate_per_100k": 116.92259979248
+        },
+        "bike_theft": {
+          "count": 81,
+          "rate_per_100k": 210.460678100586
+        },
+        "break_enter": {
+          "count": 149,
+          "rate_per_100k": 387.143707275391
+        },
+        "homicide": {
+          "count": 2,
+          "rate_per_100k": 5.19655990600586
+        },
+        "robbery": {
+          "count": 31,
+          "rate_per_100k": 80.5466766357422
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 5.19655990600586
+        },
+        "theft_over": {
+          "count": 44,
+          "rate_per_100k": 114.324317932129
+        },
+        "theft_from_motor_vehicle": {
+          "count": 85,
+          "rate_per_100k": 220.853790283203
+        }
+      }
+    },
+    {
+      "area_name": "Wychwood",
+      "hood_id": 94,
+      "population": 15375,
+      "offences": {
+        "assault": {
+          "count": 111,
+          "rate_per_100k": 721.951232910156
+        },
+        "auto_theft": {
+          "count": 29,
+          "rate_per_100k": 188.617889404297
+        },
+        "bike_theft": {
+          "count": 10,
+          "rate_per_100k": 65.0406494140625
+        },
+        "break_enter": {
+          "count": 36,
+          "rate_per_100k": 234.146347045898
+        },
+        "homicide": {
+          "count": 2,
+          "rate_per_100k": 13.0081300735474
+        },
+        "robbery": {
+          "count": 4,
+          "rate_per_100k": 26.0162601470947
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 5,
+          "rate_per_100k": 32.5203247070313
+        },
+        "theft_from_motor_vehicle": {
+          "count": 20,
+          "rate_per_100k": 130.081298828125
+        }
+      }
+    },
+    {
+      "area_name": "Corso Italia-Davenport",
+      "hood_id": 92,
+      "population": 14171,
+      "offences": {
+        "assault": {
+          "count": 141,
+          "rate_per_100k": 994.98974609375
+        },
+        "auto_theft": {
+          "count": 28,
+          "rate_per_100k": 197.586624145508
+        },
+        "bike_theft": {
+          "count": 10,
+          "rate_per_100k": 70.566650390625
+        },
+        "break_enter": {
+          "count": 28,
+          "rate_per_100k": 197.586624145508
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 13,
+          "rate_per_100k": 91.7366485595703
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 7.05666494369507
+        },
+        "theft_over": {
+          "count": 5,
+          "rate_per_100k": 35.2833251953125
+        },
+        "theft_from_motor_vehicle": {
+          "count": 46,
+          "rate_per_100k": 324.606597900391
+        }
+      }
+    },
+    {
+      "area_name": "Weston-Pelham Park",
+      "hood_id": 91,
+      "population": 12105,
+      "offences": {
+        "assault": {
+          "count": 74,
+          "rate_per_100k": 611.317626953125
+        },
+        "auto_theft": {
+          "count": 15,
+          "rate_per_100k": 123.915740966797
+        },
+        "bike_theft": {
+          "count": 8,
+          "rate_per_100k": 66.0883941650391
+        },
+        "break_enter": {
+          "count": 23,
+          "rate_per_100k": 190.004135131836
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 8.26104927062988
+        },
+        "robbery": {
+          "count": 7,
+          "rate_per_100k": 57.8273429870605
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 8.26104927062988
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 24.7831478118896
+        },
+        "theft_from_motor_vehicle": {
+          "count": 49,
+          "rate_per_100k": 404.791412353516
+        }
+      }
+    },
+    {
+      "area_name": "Junction Area",
+      "hood_id": 90,
+      "population": 16077,
+      "offences": {
+        "assault": {
+          "count": 146,
+          "rate_per_100k": 908.129638671875
+        },
+        "auto_theft": {
+          "count": 38,
+          "rate_per_100k": 236.362503051758
+        },
+        "bike_theft": {
+          "count": 17,
+          "rate_per_100k": 105.741119384766
+        },
+        "break_enter": {
+          "count": 49,
+          "rate_per_100k": 304.783233642578
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 12,
+          "rate_per_100k": 74.6407928466797
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 6.22006607055664
+        },
+        "theft_over": {
+          "count": 14,
+          "rate_per_100k": 87.080924987793
+        },
+        "theft_from_motor_vehicle": {
+          "count": 93,
+          "rate_per_100k": 578.466125488281
+        }
+      }
+    },
+    {
+      "area_name": "Oakridge",
+      "hood_id": 121,
+      "population": 15593,
+      "offences": {
+        "assault": {
+          "count": 199,
+          "rate_per_100k": 1276.21374511719
+        },
+        "auto_theft": {
+          "count": 25,
+          "rate_per_100k": 160.328353881836
+        },
+        "bike_theft": {
+          "count": 5,
+          "rate_per_100k": 32.0656700134277
+        },
+        "break_enter": {
+          "count": 36,
+          "rate_per_100k": 230.872833251953
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 9,
+          "rate_per_100k": 57.7182083129883
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 12.826268196106
+        },
+        "theft_over": {
+          "count": 7,
+          "rate_per_100k": 44.8919372558594
+        },
+        "theft_from_motor_vehicle": {
+          "count": 31,
+          "rate_per_100k": 198.807159423828
+        }
+      }
+    },
+    {
+      "area_name": "Clairlea-Birchmount",
+      "hood_id": 120,
+      "population": 30603,
+      "offences": {
+        "assault": {
+          "count": 399,
+          "rate_per_100k": 1303.79370117188
+        },
+        "auto_theft": {
+          "count": 88,
+          "rate_per_100k": 287.553497314453
+        },
+        "bike_theft": {
+          "count": 2,
+          "rate_per_100k": 6.53530693054199
+        },
+        "break_enter": {
+          "count": 58,
+          "rate_per_100k": 189.523895263672
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 15,
+          "rate_per_100k": 49.0148010253906
+        },
+        "shooting": {
+          "count": 3,
+          "rate_per_100k": 9.80296039581299
+        },
+        "theft_over": {
+          "count": 26,
+          "rate_per_100k": 84.9589920043945
+        },
+        "theft_from_motor_vehicle": {
+          "count": 89,
+          "rate_per_100k": 290.821166992188
+        }
+      }
+    },
+    {
+      "area_name": "Wexford/Maryvale",
+      "hood_id": 119,
+      "population": 31024,
+      "offences": {
+        "assault": {
+          "count": 350,
+          "rate_per_100k": 1128.15881347656
+        },
+        "auto_theft": {
+          "count": 132,
+          "rate_per_100k": 425.47705078125
+        },
+        "bike_theft": {
+          "count": 14,
+          "rate_per_100k": 45.1263542175293
+        },
+        "break_enter": {
+          "count": 79,
+          "rate_per_100k": 254.641571044922
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 39,
+          "rate_per_100k": 125.709129333496
+        },
+        "shooting": {
+          "count": 10,
+          "rate_per_100k": 32.2331085205078
+        },
+        "theft_over": {
+          "count": 26,
+          "rate_per_100k": 83.8060836791992
+        },
+        "theft_from_motor_vehicle": {
+          "count": 137,
+          "rate_per_100k": 441.593597412109
+        }
+      }
+    },
+    {
+      "area_name": "Tam O'Shanter-Sullivan",
+      "hood_id": 118,
+      "population": 32021,
+      "offences": {
+        "assault": {
+          "count": 143,
+          "rate_per_100k": 446.581939697266
+        },
+        "auto_theft": {
+          "count": 67,
+          "rate_per_100k": 209.237686157227
+        },
+        "bike_theft": {
+          "count": 3,
+          "rate_per_100k": 9.36885166168213
+        },
+        "break_enter": {
+          "count": 40,
+          "rate_per_100k": 124.918022155762
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 3.12295055389404
+        },
+        "robbery": {
+          "count": 31,
+          "rate_per_100k": 96.8114700317383
+        },
+        "shooting": {
+          "count": 4,
+          "rate_per_100k": 12.4918022155762
+        },
+        "theft_over": {
+          "count": 11,
+          "rate_per_100k": 34.3524551391602
+        },
+        "theft_from_motor_vehicle": {
+          "count": 82,
+          "rate_per_100k": 256.081939697266
+        }
+      }
+    },
+    {
+      "area_name": "Steeles",
+      "hood_id": 116,
+      "population": 25699,
+      "offences": {
+        "assault": {
+          "count": 58,
+          "rate_per_100k": 225.689712524414
+        },
+        "auto_theft": {
+          "count": 36,
+          "rate_per_100k": 140.083267211914
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 3.89120197296143
+        },
+        "break_enter": {
+          "count": 46,
+          "rate_per_100k": 178.99528503418
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 14,
+          "rate_per_100k": 54.4768295288086
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 6,
+          "rate_per_100k": 23.3472118377686
+        },
+        "theft_from_motor_vehicle": {
+          "count": 29,
+          "rate_per_100k": 112.844856262207
+        }
+      }
+    },
+    {
+      "area_name": "Mount Dennis",
+      "hood_id": 115,
+      "population": 14409,
+      "offences": {
+        "assault": {
+          "count": 81,
+          "rate_per_100k": 562.148681640625
+        },
+        "auto_theft": {
+          "count": 22,
+          "rate_per_100k": 152.682357788086
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 6.9401068687439
+        },
+        "break_enter": {
+          "count": 18,
+          "rate_per_100k": 124.921920776367
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 6.9401068687439
+        },
+        "robbery": {
+          "count": 12,
+          "rate_per_100k": 83.2812805175781
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 13.8802137374878
+        },
+        "theft_over": {
+          "count": 2,
+          "rate_per_100k": 13.8802137374878
+        },
+        "theft_from_motor_vehicle": {
+          "count": 26,
+          "rate_per_100k": 180.442779541016
+        }
+      }
+    },
+    {
+      "area_name": "Lambton Baby Point",
+      "hood_id": 114,
+      "population": 8614,
+      "offences": {
+        "assault": {
+          "count": 21,
+          "rate_per_100k": 243.789184570313
+        },
+        "auto_theft": {
+          "count": 8,
+          "rate_per_100k": 92.8720703125
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 11.6090087890625
+        },
+        "break_enter": {
+          "count": 3,
+          "rate_per_100k": 34.8270263671875
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 6,
+          "rate_per_100k": 69.654052734375
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 1,
+          "rate_per_100k": 11.6090087890625
+        },
+        "theft_from_motor_vehicle": {
+          "count": 4,
+          "rate_per_100k": 46.43603515625
+        }
+      }
+    },
+    {
+      "area_name": "Weston",
+      "hood_id": 113,
+      "population": 22158,
+      "offences": {
+        "assault": {
+          "count": 194,
+          "rate_per_100k": 875.5302734375
+        },
+        "auto_theft": {
+          "count": 53,
+          "rate_per_100k": 239.191268920898
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 4.51304292678833
+        },
+        "break_enter": {
+          "count": 40,
+          "rate_per_100k": 180.521713256836
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 7,
+          "rate_per_100k": 31.5912990570068
+        },
+        "shooting": {
+          "count": 4,
+          "rate_per_100k": 18.0521717071533
+        },
+        "theft_over": {
+          "count": 8,
+          "rate_per_100k": 36.1043434143066
+        },
+        "theft_from_motor_vehicle": {
+          "count": 30,
+          "rate_per_100k": 135.39128112793
+        }
+      }
+    },
+    {
+      "area_name": "Beechborough-Greenbrook",
+      "hood_id": 112,
+      "population": 8089,
+      "offences": {
+        "assault": {
+          "count": 56,
+          "rate_per_100k": 692.298156738281
+        },
+        "auto_theft": {
+          "count": 20,
+          "rate_per_100k": 247.24934387207
+        },
+        "bike_theft": {
+          "count": 3,
+          "rate_per_100k": 37.08740234375
+        },
+        "break_enter": {
+          "count": 9,
+          "rate_per_100k": 111.26220703125
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 12,
+          "rate_per_100k": 148.349609375
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 12.3624677658081
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 37.08740234375
+        },
+        "theft_from_motor_vehicle": {
+          "count": 12,
+          "rate_per_100k": 148.349609375
+        }
+      }
+    },
+    {
+      "area_name": "Rockcliffe-Smythe",
+      "hood_id": 111,
+      "population": 24102,
+      "offences": {
+        "assault": {
+          "count": 179,
+          "rate_per_100k": 742.676940917969
+        },
+        "auto_theft": {
+          "count": 38,
+          "rate_per_100k": 157.663269042969
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 24.8941993713379
+        },
+        "break_enter": {
+          "count": 32,
+          "rate_per_100k": 132.769058227539
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 18,
+          "rate_per_100k": 74.6826019287109
+        },
+        "shooting": {
+          "count": 4,
+          "rate_per_100k": 16.5961322784424
+        },
+        "theft_over": {
+          "count": 9,
+          "rate_per_100k": 37.3413009643555
+        },
+        "theft_from_motor_vehicle": {
+          "count": 54,
+          "rate_per_100k": 224.047790527344
+        }
+      }
+    },
+    {
+      "area_name": "Keelesdale-Eglinton West",
+      "hood_id": 110,
+      "population": 12670,
+      "offences": {
+        "assault": {
+          "count": 53,
+          "rate_per_100k": 418.310974121094
+        },
+        "auto_theft": {
+          "count": 24,
+          "rate_per_100k": 189.423843383789
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 7.89265966415405
+        },
+        "break_enter": {
+          "count": 14,
+          "rate_per_100k": 110.49723815918
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 9,
+          "rate_per_100k": 71.033935546875
+        },
+        "shooting": {
+          "count": 3,
+          "rate_per_100k": 23.6779804229736
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 23.6779804229736
+        },
+        "theft_from_motor_vehicle": {
+          "count": 30,
+          "rate_per_100k": 236.779800415039
+        }
+      }
+    },
+    {
+      "area_name": "Palmerston-Little Italy",
+      "hood_id": 80,
+      "population": 14054,
+      "offences": {
+        "assault": {
+          "count": 92,
+          "rate_per_100k": 654.617919921875
+        },
+        "auto_theft": {
+          "count": 16,
+          "rate_per_100k": 113.846588134766
+        },
+        "bike_theft": {
+          "count": 39,
+          "rate_per_100k": 277.501068115234
+        },
+        "break_enter": {
+          "count": 36,
+          "rate_per_100k": 256.154846191406
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 16,
+          "rate_per_100k": 113.846588134766
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 7.11541175842285
+        },
+        "theft_over": {
+          "count": 4,
+          "rate_per_100k": 28.4616470336914
+        },
+        "theft_from_motor_vehicle": {
+          "count": 20,
+          "rate_per_100k": 142.308242797852
+        }
+      }
+    },
+    {
+      "area_name": "University",
+      "hood_id": 79,
+      "population": 8216,
+      "offences": {
+        "assault": {
+          "count": 143,
+          "rate_per_100k": 1740.50634765625
+        },
+        "auto_theft": {
+          "count": 15,
+          "rate_per_100k": 182.570587158203
+        },
+        "bike_theft": {
+          "count": 59,
+          "rate_per_100k": 718.111022949219
+        },
+        "break_enter": {
+          "count": 60,
+          "rate_per_100k": 730.282348632813
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 12.1713733673096
+        },
+        "robbery": {
+          "count": 11,
+          "rate_per_100k": 133.885101318359
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 10,
+          "rate_per_100k": 121.713729858398
+        },
+        "theft_from_motor_vehicle": {
+          "count": 29,
+          "rate_per_100k": 352.969818115234
+        }
+      }
+    },
+    {
+      "area_name": "Kensington-Chinatown",
+      "hood_id": 78,
+      "population": 22801,
+      "offences": {
+        "assault": {
+          "count": 460,
+          "rate_per_100k": 2017.45532226563
+        },
+        "auto_theft": {
+          "count": 27,
+          "rate_per_100k": 118.415855407715
+        },
+        "bike_theft": {
+          "count": 89,
+          "rate_per_100k": 390.333770751953
+        },
+        "break_enter": {
+          "count": 101,
+          "rate_per_100k": 442.963012695313
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 44,
+          "rate_per_100k": 192.973999023438
+        },
+        "shooting": {
+          "count": 5,
+          "rate_per_100k": 21.9288635253906
+        },
+        "theft_over": {
+          "count": 50,
+          "rate_per_100k": 219.288635253906
+        },
+        "theft_from_motor_vehicle": {
+          "count": 194,
+          "rate_per_100k": 850.839904785156
+        }
+      }
+    },
+    {
+      "area_name": "North St.James Town",
+      "hood_id": 74,
+      "population": 23408,
+      "offences": {
+        "assault": {
+          "count": 300,
+          "rate_per_100k": 1281.61315917969
+        },
+        "auto_theft": {
+          "count": 20,
+          "rate_per_100k": 85.4408721923828
+        },
+        "bike_theft": {
+          "count": 25,
+          "rate_per_100k": 106.801094055176
+        },
+        "break_enter": {
+          "count": 36,
+          "rate_per_100k": 153.793579101563
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 18,
+          "rate_per_100k": 76.8967895507813
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 4.27204370498657
+        },
+        "theft_over": {
+          "count": 9,
+          "rate_per_100k": 38.4483947753906
+        },
+        "theft_from_motor_vehicle": {
+          "count": 32,
+          "rate_per_100k": 136.70539855957
+        }
+      }
+    },
+    {
+      "area_name": "Moss Park",
+      "hood_id": 73,
+      "population": 29415,
+      "offences": {
+        "assault": {
+          "count": 655,
+          "rate_per_100k": 2226.75512695313
+        },
+        "auto_theft": {
+          "count": 24,
+          "rate_per_100k": 81.5910263061523
+        },
+        "bike_theft": {
+          "count": 59,
+          "rate_per_100k": 200.577941894531
+        },
+        "break_enter": {
+          "count": 103,
+          "rate_per_100k": 350.161468505859
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 3.39962601661682
+        },
+        "robbery": {
+          "count": 49,
+          "rate_per_100k": 166.581680297852
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 3.39962601661682
+        },
+        "theft_over": {
+          "count": 19,
+          "rate_per_100k": 64.5928955078125
+        },
+        "theft_from_motor_vehicle": {
+          "count": 81,
+          "rate_per_100k": 275.369720458984
+        }
+      }
+    },
+    {
+      "area_name": "Regent Park",
+      "hood_id": 72,
+      "population": 16775,
+      "offences": {
+        "assault": {
+          "count": 159,
+          "rate_per_100k": 947.839050292969
+        },
+        "auto_theft": {
+          "count": 16,
+          "rate_per_100k": 95.3800277709961
+        },
+        "bike_theft": {
+          "count": 20,
+          "rate_per_100k": 119.225036621094
+        },
+        "break_enter": {
+          "count": 28,
+          "rate_per_100k": 166.915054321289
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 14,
+          "rate_per_100k": 83.4575271606445
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 5.96125173568726
+        },
+        "theft_over": {
+          "count": 2,
+          "rate_per_100k": 11.9225034713745
+        },
+        "theft_from_motor_vehicle": {
+          "count": 21,
+          "rate_per_100k": 125.18628692627
+        }
+      }
+    },
+    {
+      "area_name": "Cabbagetown-South St.James Town",
+      "hood_id": 71,
+      "population": 13073,
+      "offences": {
+        "assault": {
+          "count": 141,
+          "rate_per_100k": 1078.55883789063
+        },
+        "auto_theft": {
+          "count": 12,
+          "rate_per_100k": 91.7922439575195
+        },
+        "bike_theft": {
+          "count": 21,
+          "rate_per_100k": 160.636428833008
+        },
+        "break_enter": {
+          "count": 42,
+          "rate_per_100k": 321.272857666016
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 19,
+          "rate_per_100k": 145.33772277832
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 22.9480609893799
+        },
+        "theft_from_motor_vehicle": {
+          "count": 30,
+          "rate_per_100k": 229.480606079102
+        }
+      }
+    },
+    {
+      "area_name": "South Riverdale",
+      "hood_id": 70,
+      "population": 31735,
+      "offences": {
+        "assault": {
+          "count": 263,
+          "rate_per_100k": 828.737976074219
+        },
+        "auto_theft": {
+          "count": 69,
+          "rate_per_100k": 217.425552368164
+        },
+        "bike_theft": {
+          "count": 30,
+          "rate_per_100k": 94.5328521728516
+        },
+        "break_enter": {
+          "count": 84,
+          "rate_per_100k": 264.691986083984
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 22,
+          "rate_per_100k": 69.324089050293
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 3.15109491348267
+        },
+        "theft_over": {
+          "count": 28,
+          "rate_per_100k": 88.2306594848633
+        },
+        "theft_from_motor_vehicle": {
+          "count": 111,
+          "rate_per_100k": 349.771545410156
+        }
+      }
+    },
+    {
+      "area_name": "Blake-Jones",
+      "hood_id": 69,
+      "population": 8195,
+      "offences": {
+        "assault": {
+          "count": 54,
+          "rate_per_100k": 658.938354492188
+        },
+        "auto_theft": {
+          "count": 12,
+          "rate_per_100k": 146.430755615234
+        },
+        "bike_theft": {
+          "count": 3,
+          "rate_per_100k": 36.6076889038086
+        },
+        "break_enter": {
+          "count": 8,
+          "rate_per_100k": 97.6204986572266
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 4,
+          "rate_per_100k": 48.8102493286133
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 12.2025623321533
+        },
+        "theft_over": {
+          "count": 4,
+          "rate_per_100k": 48.8102493286133
+        },
+        "theft_from_motor_vehicle": {
+          "count": 3,
+          "rate_per_100k": 36.6076889038086
+        }
+      }
+    },
+    {
+      "area_name": "North Riverdale",
+      "hood_id": 68,
+      "population": 12219,
+      "offences": {
+        "assault": {
+          "count": 81,
+          "rate_per_100k": 662.902038574219
+        },
+        "auto_theft": {
+          "count": 13,
+          "rate_per_100k": 106.39168548584
+        },
+        "bike_theft": {
+          "count": 13,
+          "rate_per_100k": 106.39168548584
+        },
+        "break_enter": {
+          "count": 36,
+          "rate_per_100k": 294.623138427734
+        },
+        "homicide": {
+          "count": 2,
+          "rate_per_100k": 16.3679523468018
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 81.8397598266602
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 8.18397617340088
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 24.5519275665283
+        },
+        "theft_from_motor_vehicle": {
+          "count": 33,
+          "rate_per_100k": 270.071197509766
+        }
+      }
+    },
+    {
+      "area_name": "Playter Estates-Danforth",
+      "hood_id": 67,
+      "population": 8427,
+      "offences": {
+        "assault": {
+          "count": 118,
+          "rate_per_100k": 1400.26110839844
+        },
+        "auto_theft": {
+          "count": 21,
+          "rate_per_100k": 249.199005126953
+        },
+        "bike_theft": {
+          "count": 12,
+          "rate_per_100k": 142.399429321289
+        },
+        "break_enter": {
+          "count": 20,
+          "rate_per_100k": 237.332382202148
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 5,
+          "rate_per_100k": 59.3330955505371
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 11.8666191101074
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 35.5998573303223
+        },
+        "theft_from_motor_vehicle": {
+          "count": 60,
+          "rate_per_100k": 711.997131347656
+        }
+      }
+    },
+    {
+      "area_name": "Danforth",
+      "hood_id": 66,
+      "population": 10245,
+      "offences": {
+        "assault": {
+          "count": 160,
+          "rate_per_100k": 1561.73742675781
+        },
+        "auto_theft": {
+          "count": 27,
+          "rate_per_100k": 263.543182373047
+        },
+        "bike_theft": {
+          "count": 4,
+          "rate_per_100k": 39.0434341430664
+        },
+        "break_enter": {
+          "count": 19,
+          "rate_per_100k": 185.456314086914
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 9.7608585357666
+        },
+        "robbery": {
+          "count": 7,
+          "rate_per_100k": 68.3260116577148
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 1,
+          "rate_per_100k": 9.7608585357666
+        },
+        "theft_from_motor_vehicle": {
+          "count": 32,
+          "rate_per_100k": 312.347473144531
+        }
+      }
+    },
+    {
+      "area_name": "Greenwood-Coxwell",
+      "hood_id": 65,
+      "population": 15496,
+      "offences": {
+        "assault": {
+          "count": 104,
+          "rate_per_100k": 671.140930175781
+        },
+        "auto_theft": {
+          "count": 23,
+          "rate_per_100k": 148.425399780273
+        },
+        "bike_theft": {
+          "count": 16,
+          "rate_per_100k": 103.252449035645
+        },
+        "break_enter": {
+          "count": 21,
+          "rate_per_100k": 135.518844604492
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 6.45327806472778
+        },
+        "robbery": {
+          "count": 9,
+          "rate_per_100k": 58.0795059204102
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 6.45327806472778
+        },
+        "theft_over": {
+          "count": 4,
+          "rate_per_100k": 25.8131122589111
+        },
+        "theft_from_motor_vehicle": {
+          "count": 36,
+          "rate_per_100k": 232.318023681641
+        }
+      }
+    },
+    {
+      "area_name": "Woodbine Corridor",
+      "hood_id": 64,
+      "population": 13722,
+      "offences": {
+        "assault": {
+          "count": 100,
+          "rate_per_100k": 728.756713867188
+        },
+        "auto_theft": {
+          "count": 9,
+          "rate_per_100k": 65.5881042480469
+        },
+        "bike_theft": {
+          "count": 3,
+          "rate_per_100k": 21.8627014160156
+        },
+        "break_enter": {
+          "count": 17,
+          "rate_per_100k": 123.888648986816
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 3,
+          "rate_per_100k": 21.8627014160156
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 6,
+          "rate_per_100k": 43.7254028320313
+        },
+        "theft_from_motor_vehicle": {
+          "count": 18,
+          "rate_per_100k": 131.176208496094
+        }
+      }
+    },
+    {
+      "area_name": "The Beaches",
+      "hood_id": 63,
+      "population": 23784,
+      "offences": {
+        "assault": {
+          "count": 125,
+          "rate_per_100k": 525.563415527344
+        },
+        "auto_theft": {
+          "count": 39,
+          "rate_per_100k": 163.975784301758
+        },
+        "bike_theft": {
+          "count": 16,
+          "rate_per_100k": 67.2721176147461
+        },
+        "break_enter": {
+          "count": 36,
+          "rate_per_100k": 151.362258911133
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 6,
+          "rate_per_100k": 25.2270431518555
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 12,
+          "rate_per_100k": 50.4540863037109
+        },
+        "theft_from_motor_vehicle": {
+          "count": 58,
+          "rate_per_100k": 243.861419677734
+        }
+      }
+    },
+    {
+      "area_name": "East End-Danforth",
+      "hood_id": 62,
+      "population": 25118,
+      "offences": {
+        "assault": {
+          "count": 200,
+          "rate_per_100k": 796.241760253906
+        },
+        "auto_theft": {
+          "count": 37,
+          "rate_per_100k": 147.304718017578
+        },
+        "bike_theft": {
+          "count": 16,
+          "rate_per_100k": 63.6993408203125
+        },
+        "break_enter": {
+          "count": 49,
+          "rate_per_100k": 195.079223632813
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 13,
+          "rate_per_100k": 51.7557144165039
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 3.98120880126953
+        },
+        "theft_over": {
+          "count": 10,
+          "rate_per_100k": 39.8120880126953
+        },
+        "theft_from_motor_vehicle": {
+          "count": 49,
+          "rate_per_100k": 195.079223632813
+        }
+      }
+    },
+    {
+      "area_name": "Taylor-Massey",
+      "hood_id": 61,
+      "population": 16609,
+      "offences": {
+        "assault": {
+          "count": 131,
+          "rate_per_100k": 788.72900390625
+        },
+        "auto_theft": {
+          "count": 32,
+          "rate_per_100k": 192.666625976563
+        },
+        "bike_theft": {
+          "count": 4,
+          "rate_per_100k": 24.0833282470703
+        },
+        "break_enter": {
+          "count": 24,
+          "rate_per_100k": 144.499969482422
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 13,
+          "rate_per_100k": 78.2708206176758
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 4,
+          "rate_per_100k": 24.0833282470703
+        },
+        "theft_from_motor_vehicle": {
+          "count": 35,
+          "rate_per_100k": 210.729125976563
+        }
+      }
+    },
+    {
+      "area_name": "Woodbine-Lumsden",
+      "hood_id": 60,
+      "population": 8625,
+      "offences": {
+        "assault": {
+          "count": 58,
+          "rate_per_100k": 672.463745117188
+        },
+        "auto_theft": {
+          "count": 15,
+          "rate_per_100k": 173.913040161133
+        },
+        "bike_theft": {
+          "count": 2,
+          "rate_per_100k": 23.1884059906006
+        },
+        "break_enter": {
+          "count": 6,
+          "rate_per_100k": 69.5652160644531
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 11.5942029953003
+        },
+        "robbery": {
+          "count": 2,
+          "rate_per_100k": 23.1884059906006
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 11.5942029953003
+        },
+        "theft_over": {
+          "count": 4,
+          "rate_per_100k": 46.3768119812012
+        },
+        "theft_from_motor_vehicle": {
+          "count": 21,
+          "rate_per_100k": 243.478256225586
+        }
+      }
+    },
+    {
+      "area_name": "Danforth East York",
+      "hood_id": 59,
+      "population": 18410,
+      "offences": {
+        "assault": {
+          "count": 80,
+          "rate_per_100k": 434.546447753906
+        },
+        "auto_theft": {
+          "count": 34,
+          "rate_per_100k": 184.682235717773
+        },
+        "bike_theft": {
+          "count": 5,
+          "rate_per_100k": 27.1591529846191
+        },
+        "break_enter": {
+          "count": 16,
+          "rate_per_100k": 86.9092864990234
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 2,
+          "rate_per_100k": 10.8636608123779
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 10.8636608123779
+        },
+        "theft_over": {
+          "count": 4,
+          "rate_per_100k": 21.7273216247559
+        },
+        "theft_from_motor_vehicle": {
+          "count": 44,
+          "rate_per_100k": 239.000549316406
+        }
+      }
+    },
+    {
+      "area_name": "Old East York",
+      "hood_id": 58,
+      "population": 10072,
+      "offences": {
+        "assault": {
+          "count": 66,
+          "rate_per_100k": 655.281982421875
+        },
+        "auto_theft": {
+          "count": 24,
+          "rate_per_100k": 238.28434753418
+        },
+        "bike_theft": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "break_enter": {
+          "count": 10,
+          "rate_per_100k": 99.2851486206055
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 6,
+          "rate_per_100k": 59.5710868835449
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 9.92851448059082
+        },
+        "theft_over": {
+          "count": 5,
+          "rate_per_100k": 49.6425743103027
+        },
+        "theft_from_motor_vehicle": {
+          "count": 27,
+          "rate_per_100k": 268.069885253906
+        }
+      }
+    },
+    {
+      "area_name": "Runnymede-Bloor West Village",
+      "hood_id": 89,
+      "population": 11091,
+      "offences": {
+        "assault": {
+          "count": 61,
+          "rate_per_100k": 549.995483398438
+        },
+        "auto_theft": {
+          "count": 34,
+          "rate_per_100k": 306.554870605469
+        },
+        "bike_theft": {
+          "count": 3,
+          "rate_per_100k": 27.048957824707
+        },
+        "break_enter": {
+          "count": 12,
+          "rate_per_100k": 108.195831298828
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 9,
+          "rate_per_100k": 81.1468734741211
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 6,
+          "rate_per_100k": 54.0979156494141
+        },
+        "theft_from_motor_vehicle": {
+          "count": 22,
+          "rate_per_100k": 198.359024047852
+        }
+      }
+    },
+    {
+      "area_name": "High Park North",
+      "hood_id": 88,
+      "population": 25519,
+      "offences": {
+        "assault": {
+          "count": 173,
+          "rate_per_100k": 677.92626953125
+        },
+        "auto_theft": {
+          "count": 19,
+          "rate_per_100k": 74.4543304443359
+        },
+        "bike_theft": {
+          "count": 19,
+          "rate_per_100k": 74.4543304443359
+        },
+        "break_enter": {
+          "count": 34,
+          "rate_per_100k": 133.23405456543
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 3.91864895820618
+        },
+        "robbery": {
+          "count": 11,
+          "rate_per_100k": 43.1051368713379
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 3.91864895820618
+        },
+        "theft_over": {
+          "count": 7,
+          "rate_per_100k": 27.4305419921875
+        },
+        "theft_from_motor_vehicle": {
+          "count": 39,
+          "rate_per_100k": 152.827301025391
+        }
+      }
+    },
+    {
+      "area_name": "High Park-Swansea",
+      "hood_id": 87,
+      "population": 25763,
+      "offences": {
+        "assault": {
+          "count": 120,
+          "rate_per_100k": 465.784271240234
+        },
+        "auto_theft": {
+          "count": 23,
+          "rate_per_100k": 89.2753143310547
+        },
+        "bike_theft": {
+          "count": 19,
+          "rate_per_100k": 73.7491760253906
+        },
+        "break_enter": {
+          "count": 59,
+          "rate_per_100k": 229.010589599609
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 12,
+          "rate_per_100k": 46.578426361084
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 7.76307106018066
+        },
+        "theft_over": {
+          "count": 6,
+          "rate_per_100k": 23.289213180542
+        },
+        "theft_from_motor_vehicle": {
+          "count": 33,
+          "rate_per_100k": 128.090667724609
+        }
+      }
+    },
+    {
+      "area_name": "Roncesvalles",
+      "hood_id": 86,
+      "population": 16605,
+      "offences": {
+        "assault": {
+          "count": 156,
+          "rate_per_100k": 939.47607421875
+        },
+        "auto_theft": {
+          "count": 17,
+          "rate_per_100k": 102.378799438477
+        },
+        "bike_theft": {
+          "count": 17,
+          "rate_per_100k": 102.378799438477
+        },
+        "break_enter": {
+          "count": 42,
+          "rate_per_100k": 252.93586730957
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 11,
+          "rate_per_100k": 66.2451095581055
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 1,
+          "rate_per_100k": 6.02228260040283
+        },
+        "theft_from_motor_vehicle": {
+          "count": 25,
+          "rate_per_100k": 150.557067871094
+        }
+      }
+    },
+    {
+      "area_name": "South Parkdale",
+      "hood_id": 85,
+      "population": 26221,
+      "offences": {
+        "assault": {
+          "count": 299,
+          "rate_per_100k": 1140.30737304688
+        },
+        "auto_theft": {
+          "count": 19,
+          "rate_per_100k": 72.4610061645508
+        },
+        "bike_theft": {
+          "count": 29,
+          "rate_per_100k": 110.598373413086
+        },
+        "break_enter": {
+          "count": 63,
+          "rate_per_100k": 240.265441894531
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 3.81373715400696
+        },
+        "robbery": {
+          "count": 18,
+          "rate_per_100k": 68.6472702026367
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 7.62747430801392
+        },
+        "theft_over": {
+          "count": 12,
+          "rate_per_100k": 45.7648468017578
+        },
+        "theft_from_motor_vehicle": {
+          "count": 54,
+          "rate_per_100k": 205.941802978516
+        }
+      }
+    },
+    {
+      "area_name": "Little Portugal",
+      "hood_id": 84,
+      "population": 18297,
+      "offences": {
+        "assault": {
+          "count": 133,
+          "rate_per_100k": 726.895141601563
+        },
+        "auto_theft": {
+          "count": 22,
+          "rate_per_100k": 120.238288879395
+        },
+        "bike_theft": {
+          "count": 28,
+          "rate_per_100k": 153.030548095703
+        },
+        "break_enter": {
+          "count": 33,
+          "rate_per_100k": 180.357437133789
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 6,
+          "rate_per_100k": 32.7922592163086
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 10.9307537078857
+        },
+        "theft_over": {
+          "count": 9,
+          "rate_per_100k": 49.1883926391602
+        },
+        "theft_from_motor_vehicle": {
+          "count": 35,
+          "rate_per_100k": 191.288192749023
+        }
+      }
+    },
+    {
+      "area_name": "Dufferin Grove",
+      "hood_id": 83,
+      "population": 12577,
+      "offences": {
+        "assault": {
+          "count": 154,
+          "rate_per_100k": 1224.45739746094
+        },
+        "auto_theft": {
+          "count": 14,
+          "rate_per_100k": 111.314300537109
+        },
+        "bike_theft": {
+          "count": 26,
+          "rate_per_100k": 206.7265625
+        },
+        "break_enter": {
+          "count": 34,
+          "rate_per_100k": 270.334747314453
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 14,
+          "rate_per_100k": 111.314300537109
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 11,
+          "rate_per_100k": 87.4612350463867
+        },
+        "theft_from_motor_vehicle": {
+          "count": 35,
+          "rate_per_100k": 278.285766601563
+        }
+      }
+    },
+    {
+      "area_name": "Trinity-Bellwoods",
+      "hood_id": 81,
+      "population": 17112,
+      "offences": {
+        "assault": {
+          "count": 162,
+          "rate_per_100k": 946.704040527344
+        },
+        "auto_theft": {
+          "count": 13,
+          "rate_per_100k": 75.9700775146484
+        },
+        "bike_theft": {
+          "count": 32,
+          "rate_per_100k": 187.003265380859
+        },
+        "break_enter": {
+          "count": 60,
+          "rate_per_100k": 350.631134033203
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 58.4385223388672
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 5.84385204315186
+        },
+        "theft_over": {
+          "count": 12,
+          "rate_per_100k": 70.1262283325195
+        },
+        "theft_from_motor_vehicle": {
+          "count": 48,
+          "rate_per_100k": 280.504913330078
+        }
+      }
+    },
+    {
+      "area_name": "Don Valley Village",
+      "hood_id": 47,
+      "population": 31066,
+      "offences": {
+        "assault": {
+          "count": 175,
+          "rate_per_100k": 563.316833496094
+        },
+        "auto_theft": {
+          "count": 64,
+          "rate_per_100k": 206.013000488281
+        },
+        "bike_theft": {
+          "count": 4,
+          "rate_per_100k": 12.8758125305176
+        },
+        "break_enter": {
+          "count": 29,
+          "rate_per_100k": 93.3496398925781
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 32,
+          "rate_per_100k": 103.006500244141
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 14,
+          "rate_per_100k": 45.0653457641602
+        },
+        "theft_from_motor_vehicle": {
+          "count": 49,
+          "rate_per_100k": 157.728713989258
+        }
+      }
+    },
+    {
+      "area_name": "Pleasant View",
+      "hood_id": 46,
+      "population": 16533,
+      "offences": {
+        "assault": {
+          "count": 62,
+          "rate_per_100k": 375.007568359375
+        },
+        "auto_theft": {
+          "count": 21,
+          "rate_per_100k": 127.018692016602
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 6.04850912094116
+        },
+        "break_enter": {
+          "count": 15,
+          "rate_per_100k": 90.7276382446289
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 8,
+          "rate_per_100k": 48.3880729675293
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 10,
+          "rate_per_100k": 60.4850921630859
+        },
+        "theft_from_motor_vehicle": {
+          "count": 31,
+          "rate_per_100k": 187.503784179688
+        }
+      }
+    },
+    {
+      "area_name": "Flemingdon Park",
+      "hood_id": 44,
+      "population": 26341,
+      "offences": {
+        "assault": {
+          "count": 157,
+          "rate_per_100k": 596.028991699219
+        },
+        "auto_theft": {
+          "count": 62,
+          "rate_per_100k": 235.37451171875
+        },
+        "bike_theft": {
+          "count": 11,
+          "rate_per_100k": 41.7599945068359
+        },
+        "break_enter": {
+          "count": 16,
+          "rate_per_100k": 60.7418098449707
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 37.9636306762695
+        },
+        "shooting": {
+          "count": 3,
+          "rate_per_100k": 11.3890895843506
+        },
+        "theft_over": {
+          "count": 7,
+          "rate_per_100k": 26.5745410919189
+        },
+        "theft_from_motor_vehicle": {
+          "count": 53,
+          "rate_per_100k": 201.207244873047
+        }
+      }
+    },
+    {
+      "area_name": "Victoria Village",
+      "hood_id": 43,
+      "population": 19622,
+      "offences": {
+        "assault": {
+          "count": 116,
+          "rate_per_100k": 591.173156738281
+        },
+        "auto_theft": {
+          "count": 56,
+          "rate_per_100k": 285.393951416016
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 5.09632062911987
+        },
+        "break_enter": {
+          "count": 41,
+          "rate_per_100k": 208.949142456055
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 4,
+          "rate_per_100k": 20.3852825164795
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 6,
+          "rate_per_100k": 30.5779228210449
+        },
+        "theft_from_motor_vehicle": {
+          "count": 35,
+          "rate_per_100k": 178.371215820313
+        }
+      }
+    },
+    {
+      "area_name": "Banbury-Don Mills",
+      "hood_id": 42,
+      "population": 32597,
+      "offences": {
+        "assault": {
+          "count": 132,
+          "rate_per_100k": 404.945251464844
+        },
+        "auto_theft": {
+          "count": 72,
+          "rate_per_100k": 220.87922668457
+        },
+        "bike_theft": {
+          "count": 4,
+          "rate_per_100k": 12.2710676193237
+        },
+        "break_enter": {
+          "count": 81,
+          "rate_per_100k": 248.489120483398
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 33,
+          "rate_per_100k": 101.236312866211
+        },
+        "shooting": {
+          "count": 3,
+          "rate_per_100k": 9.20330047607422
+        },
+        "theft_over": {
+          "count": 22,
+          "rate_per_100k": 67.4908752441406
+        },
+        "theft_from_motor_vehicle": {
+          "count": 69,
+          "rate_per_100k": 211.675918579102
+        }
+      }
+    },
+    {
+      "area_name": "Bridle Path-Sunnybrook-York Mills",
+      "hood_id": 41,
+      "population": 11654,
+      "offences": {
+        "assault": {
+          "count": 24,
+          "rate_per_100k": 205.937881469727
+        },
+        "auto_theft": {
+          "count": 23,
+          "rate_per_100k": 197.357131958008
+        },
+        "bike_theft": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "break_enter": {
+          "count": 47,
+          "rate_per_100k": 403.295013427734
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 6,
+          "rate_per_100k": 51.4844703674316
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 17.1614894866943
+        },
+        "theft_over": {
+          "count": 4,
+          "rate_per_100k": 34.3229789733887
+        },
+        "theft_from_motor_vehicle": {
+          "count": 19,
+          "rate_per_100k": 163.034149169922
+        }
+      }
+    },
+    {
+      "area_name": "St.Andrew-Windfields",
+      "hood_id": 40,
+      "population": 18704,
+      "offences": {
+        "assault": {
+          "count": 115,
+          "rate_per_100k": 614.841735839844
+        },
+        "auto_theft": {
+          "count": 38,
+          "rate_per_100k": 203.165100097656
+        },
+        "bike_theft": {
+          "count": 2,
+          "rate_per_100k": 10.6928997039795
+        },
+        "break_enter": {
+          "count": 72,
+          "rate_per_100k": 384.944396972656
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 20,
+          "rate_per_100k": 106.929000854492
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 5.34644985198975
+        },
+        "theft_over": {
+          "count": 8,
+          "rate_per_100k": 42.771598815918
+        },
+        "theft_from_motor_vehicle": {
+          "count": 41,
+          "rate_per_100k": 219.204452514648
+        }
+      }
+    },
+    {
+      "area_name": "Bedford Park-Nortown",
+      "hood_id": 39,
+      "population": 25205,
+      "offences": {
+        "assault": {
+          "count": 58,
+          "rate_per_100k": 230.113067626953
+        },
+        "auto_theft": {
+          "count": 38,
+          "rate_per_100k": 150.763732910156
+        },
+        "bike_theft": {
+          "count": 5,
+          "rate_per_100k": 19.8373336791992
+        },
+        "break_enter": {
+          "count": 63,
+          "rate_per_100k": 249.950408935547
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 15,
+          "rate_per_100k": 59.5120010375977
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 17,
+          "rate_per_100k": 67.4469375610352
+        },
+        "theft_from_motor_vehicle": {
+          "count": 50,
+          "rate_per_100k": 198.373336791992
+        }
+      }
+    },
+    {
+      "area_name": "Lansing-Westgate",
+      "hood_id": 38,
+      "population": 18239,
+      "offences": {
+        "assault": {
+          "count": 110,
+          "rate_per_100k": 603.103210449219
+        },
+        "auto_theft": {
+          "count": 41,
+          "rate_per_100k": 224.793029785156
+        },
+        "bike_theft": {
+          "count": 8,
+          "rate_per_100k": 43.8620529174805
+        },
+        "break_enter": {
+          "count": 19,
+          "rate_per_100k": 104.172378540039
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 9,
+          "rate_per_100k": 49.3448104858398
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 5.48275661468506
+        },
+        "theft_over": {
+          "count": 8,
+          "rate_per_100k": 43.8620529174805
+        },
+        "theft_from_motor_vehicle": {
+          "count": 35,
+          "rate_per_100k": 191.896484375
+        }
+      }
+    },
+    {
+      "area_name": "Willowdale West",
+      "hood_id": 37,
+      "population": 21206,
+      "offences": {
+        "assault": {
+          "count": 119,
+          "rate_per_100k": 561.161926269531
+        },
+        "auto_theft": {
+          "count": 19,
+          "rate_per_100k": 89.597282409668
+        },
+        "bike_theft": {
+          "count": 15,
+          "rate_per_100k": 70.7346954345703
+        },
+        "break_enter": {
+          "count": 22,
+          "rate_per_100k": 103.74422454834
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 11,
+          "rate_per_100k": 51.8721122741699
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 8,
+          "rate_per_100k": 37.7251739501953
+        },
+        "theft_from_motor_vehicle": {
+          "count": 30,
+          "rate_per_100k": 141.469390869141
+        }
+      }
+    },
+    {
+      "area_name": "Newtonbrook West",
+      "hood_id": 36,
+      "population": 26457,
+      "offences": {
+        "assault": {
+          "count": 188,
+          "rate_per_100k": 710.586975097656
+        },
+        "auto_theft": {
+          "count": 117,
+          "rate_per_100k": 442.227020263672
+        },
+        "bike_theft": {
+          "count": 21,
+          "rate_per_100k": 79.3740768432617
+        },
+        "break_enter": {
+          "count": 51,
+          "rate_per_100k": 192.765625
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 25,
+          "rate_per_100k": 94.4929504394531
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 20,
+          "rate_per_100k": 75.5943603515625
+        },
+        "theft_from_motor_vehicle": {
+          "count": 67,
+          "rate_per_100k": 253.241104125977
+        }
+      }
+    },
+    {
+      "area_name": "Westminster-Branson",
+      "hood_id": 35,
+      "population": 28693,
+      "offences": {
+        "assault": {
+          "count": 147,
+          "rate_per_100k": 512.320068359375
+        },
+        "auto_theft": {
+          "count": 54,
+          "rate_per_100k": 188.19921875
+        },
+        "bike_theft": {
+          "count": 8,
+          "rate_per_100k": 27.8813648223877
+        },
+        "break_enter": {
+          "count": 17,
+          "rate_per_100k": 59.2479019165039
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 9,
+          "rate_per_100k": 31.3665351867676
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 7,
+          "rate_per_100k": 24.3961944580078
+        },
+        "theft_from_motor_vehicle": {
+          "count": 35,
+          "rate_per_100k": 121.980972290039
+        }
+      }
+    },
+    {
+      "area_name": "Bathurst Manor",
+      "hood_id": 34,
+      "population": 17639,
+      "offences": {
+        "assault": {
+          "count": 90,
+          "rate_per_100k": 510.233001708984
+        },
+        "auto_theft": {
+          "count": 25,
+          "rate_per_100k": 141.731384277344
+        },
+        "bike_theft": {
+          "count": 4,
+          "rate_per_100k": 22.67702293396
+        },
+        "break_enter": {
+          "count": 20,
+          "rate_per_100k": 113.385108947754
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 14,
+          "rate_per_100k": 79.3695755004883
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 11.33851146698
+        },
+        "theft_over": {
+          "count": 10,
+          "rate_per_100k": 56.692554473877
+        },
+        "theft_from_motor_vehicle": {
+          "count": 27,
+          "rate_per_100k": 153.069900512695
+        }
+      }
+    },
+    {
+      "area_name": "Clanton Park",
+      "hood_id": 33,
+      "population": 21057,
+      "offences": {
+        "assault": {
+          "count": 123,
+          "rate_per_100k": 584.128784179688
+        },
+        "auto_theft": {
+          "count": 39,
+          "rate_per_100k": 185.211563110352
+        },
+        "bike_theft": {
+          "count": 18,
+          "rate_per_100k": 85.4822616577148
+        },
+        "break_enter": {
+          "count": 28,
+          "rate_per_100k": 132.972412109375
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 20,
+          "rate_per_100k": 94.9802932739258
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 4.74901437759399
+        },
+        "theft_over": {
+          "count": 19,
+          "rate_per_100k": 90.2312774658203
+        },
+        "theft_from_motor_vehicle": {
+          "count": 41,
+          "rate_per_100k": 194.709594726563
+        }
+      }
+    },
+    {
+      "area_name": "Englemount-Lawrence",
+      "hood_id": 32,
+      "population": 24079,
+      "offences": {
+        "assault": {
+          "count": 130,
+          "rate_per_100k": 539.889526367188
+        },
+        "auto_theft": {
+          "count": 36,
+          "rate_per_100k": 149.507873535156
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 24.9179782867432
+        },
+        "break_enter": {
+          "count": 33,
+          "rate_per_100k": 137.048873901367
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 4.15299654006958
+        },
+        "robbery": {
+          "count": 11,
+          "rate_per_100k": 45.6829605102539
+        },
+        "shooting": {
+          "count": 6,
+          "rate_per_100k": 24.9179782867432
+        },
+        "theft_over": {
+          "count": 7,
+          "rate_per_100k": 29.0709743499756
+        },
+        "theft_from_motor_vehicle": {
+          "count": 50,
+          "rate_per_100k": 207.649826049805
+        }
+      }
+    },
+    {
+      "area_name": "Yorkdale-Glen Park",
+      "hood_id": 31,
+      "population": 21111,
+      "offences": {
+        "assault": {
+          "count": 256,
+          "rate_per_100k": 1212.63793945313
+        },
+        "auto_theft": {
+          "count": 104,
+          "rate_per_100k": 492.634185791016
+        },
+        "bike_theft": {
+          "count": 17,
+          "rate_per_100k": 80.526741027832
+        },
+        "break_enter": {
+          "count": 72,
+          "rate_per_100k": 341.054412841797
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 4.73686695098877
+        },
+        "robbery": {
+          "count": 31,
+          "rate_per_100k": 146.842880249023
+        },
+        "shooting": {
+          "count": 6,
+          "rate_per_100k": 28.4212017059326
+        },
+        "theft_over": {
+          "count": 58,
+          "rate_per_100k": 274.73828125
+        },
+        "theft_from_motor_vehicle": {
+          "count": 76,
+          "rate_per_100k": 360.001892089844
+        }
+      }
+    },
+    {
+      "area_name": "Brookhaven-Amesbury",
+      "hood_id": 30,
+      "population": 19153,
+      "offences": {
+        "assault": {
+          "count": 117,
+          "rate_per_100k": 610.870361328125
+        },
+        "auto_theft": {
+          "count": 37,
+          "rate_per_100k": 193.181228637695
+        },
+        "bike_theft": {
+          "count": 2,
+          "rate_per_100k": 10.4422283172607
+        },
+        "break_enter": {
+          "count": 32,
+          "rate_per_100k": 167.075653076172
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 5.22111415863037
+        },
+        "robbery": {
+          "count": 12,
+          "rate_per_100k": 62.6533699035645
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 10.4422283172607
+        },
+        "theft_over": {
+          "count": 9,
+          "rate_per_100k": 46.9900283813477
+        },
+        "theft_from_motor_vehicle": {
+          "count": 35,
+          "rate_per_100k": 182.738998413086
+        }
+      }
+    },
+    {
+      "area_name": "Maple Leaf",
+      "hood_id": 29,
+      "population": 11327,
+      "offences": {
+        "assault": {
+          "count": 43,
+          "rate_per_100k": 379.623901367188
+        },
+        "auto_theft": {
+          "count": 35,
+          "rate_per_100k": 308.996215820313
+        },
+        "bike_theft": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "break_enter": {
+          "count": 9,
+          "rate_per_100k": 79.456169128418
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 3,
+          "rate_per_100k": 26.4853897094727
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 8.82846260070801
+        },
+        "theft_over": {
+          "count": 6,
+          "rate_per_100k": 52.9707794189453
+        },
+        "theft_from_motor_vehicle": {
+          "count": 25,
+          "rate_per_100k": 220.711578369141
+        }
+      }
+    },
+    {
+      "area_name": "Rustic",
+      "hood_id": 28,
+      "population": 10399,
+      "offences": {
+        "assault": {
+          "count": 101,
+          "rate_per_100k": 971.247253417969
+        },
+        "auto_theft": {
+          "count": 22,
+          "rate_per_100k": 211.558807373047
+        },
+        "bike_theft": {
+          "count": 3,
+          "rate_per_100k": 28.8489284515381
+        },
+        "break_enter": {
+          "count": 9,
+          "rate_per_100k": 86.5467834472656
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 2,
+          "rate_per_100k": 19.2326183319092
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 28.8489284515381
+        },
+        "theft_from_motor_vehicle": {
+          "count": 12,
+          "rate_per_100k": 115.395713806152
+        }
+      }
+    },
+    {
+      "area_name": "York University Heights",
+      "hood_id": 27,
+      "population": 33592,
+      "offences": {
+        "assault": {
+          "count": 428,
+          "rate_per_100k": 1274.11291503906
+        },
+        "auto_theft": {
+          "count": 213,
+          "rate_per_100k": 634.079528808594
+        },
+        "bike_theft": {
+          "count": 18,
+          "rate_per_100k": 53.5841865539551
+        },
+        "break_enter": {
+          "count": 126,
+          "rate_per_100k": 375.089294433594
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 43,
+          "rate_per_100k": 128.00666809082
+        },
+        "shooting": {
+          "count": 4,
+          "rate_per_100k": 11.9075965881348
+        },
+        "theft_over": {
+          "count": 60,
+          "rate_per_100k": 178.613952636719
+        },
+        "theft_from_motor_vehicle": {
+          "count": 105,
+          "rate_per_100k": 312.574432373047
+        }
+      }
+    },
+    {
+      "area_name": "Glenfield-Jane Heights",
+      "hood_id": 25,
+      "population": 31831,
+      "offences": {
+        "assault": {
+          "count": 345,
+          "rate_per_100k": 1083.84912109375
+        },
+        "auto_theft": {
+          "count": 72,
+          "rate_per_100k": 226.194595336914
+        },
+        "bike_theft": {
+          "count": 4,
+          "rate_per_100k": 12.5663661956787
+        },
+        "break_enter": {
+          "count": 36,
+          "rate_per_100k": 113.097297668457
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 46,
+          "rate_per_100k": 144.513214111328
+        },
+        "shooting": {
+          "count": 8,
+          "rate_per_100k": 25.1327323913574
+        },
+        "theft_over": {
+          "count": 20,
+          "rate_per_100k": 62.8318290710449
+        },
+        "theft_from_motor_vehicle": {
+          "count": 31,
+          "rate_per_100k": 97.3893356323242
+        }
+      }
+    },
+    {
+      "area_name": "Broadview North",
+      "hood_id": 57,
+      "population": 12345,
+      "offences": {
+        "assault": {
+          "count": 72,
+          "rate_per_100k": 583.232055664063
+        },
+        "auto_theft": {
+          "count": 24,
+          "rate_per_100k": 194.410690307617
+        },
+        "bike_theft": {
+          "count": 7,
+          "rate_per_100k": 56.7031173706055
+        },
+        "break_enter": {
+          "count": 12,
+          "rate_per_100k": 97.2053451538086
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 1,
+          "rate_per_100k": 8.10044574737549
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 24.3013362884521
+        },
+        "theft_from_motor_vehicle": {
+          "count": 13,
+          "rate_per_100k": 105.305793762207
+        }
+      }
+    },
+    {
+      "area_name": "Leaside-Bennington",
+      "hood_id": 56,
+      "population": 18786,
+      "offences": {
+        "assault": {
+          "count": 40,
+          "rate_per_100k": 212.924514770508
+        },
+        "auto_theft": {
+          "count": 56,
+          "rate_per_100k": 298.094329833984
+        },
+        "bike_theft": {
+          "count": 2,
+          "rate_per_100k": 10.6462259292603
+        },
+        "break_enter": {
+          "count": 34,
+          "rate_per_100k": 180.98583984375
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 2,
+          "rate_per_100k": 10.6462259292603
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 9,
+          "rate_per_100k": 47.908016204834
+        },
+        "theft_from_motor_vehicle": {
+          "count": 44,
+          "rate_per_100k": 234.21696472168
+        }
+      }
+    },
+    {
+      "area_name": "Thorncliffe Park",
+      "hood_id": 55,
+      "population": 23826,
+      "offences": {
+        "assault": {
+          "count": 152,
+          "rate_per_100k": 637.958557128906
+        },
+        "auto_theft": {
+          "count": 90,
+          "rate_per_100k": 377.738616943359
+        },
+        "bike_theft": {
+          "count": 4,
+          "rate_per_100k": 16.7883815765381
+        },
+        "break_enter": {
+          "count": 25,
+          "rate_per_100k": 104.927391052246
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 20,
+          "rate_per_100k": 83.9419097900391
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 13,
+          "rate_per_100k": 54.5622444152832
+        },
+        "theft_from_motor_vehicle": {
+          "count": 54,
+          "rate_per_100k": 226.643157958984
+        }
+      }
+    },
+    {
+      "area_name": "O'Connor-Parkview",
+      "hood_id": 54,
+      "population": 20647,
+      "offences": {
+        "assault": {
+          "count": 156,
+          "rate_per_100k": 755.557678222656
+        },
+        "auto_theft": {
+          "count": 37,
+          "rate_per_100k": 179.202789306641
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 4.84331846237183
+        },
+        "break_enter": {
+          "count": 16,
+          "rate_per_100k": 77.4930953979492
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 9,
+          "rate_per_100k": 43.5898666381836
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 4.84331846237183
+        },
+        "theft_over": {
+          "count": 8,
+          "rate_per_100k": 38.7465476989746
+        },
+        "theft_from_motor_vehicle": {
+          "count": 40,
+          "rate_per_100k": 193.73274230957
+        }
+      }
+    },
+    {
+      "area_name": "Henry Farm",
+      "hood_id": 53,
+      "population": 25449,
+      "offences": {
+        "assault": {
+          "count": 73,
+          "rate_per_100k": 286.848205566406
+        },
+        "auto_theft": {
+          "count": 49,
+          "rate_per_100k": 192.541946411133
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 23.5765647888184
+        },
+        "break_enter": {
+          "count": 14,
+          "rate_per_100k": 55.0119857788086
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 3.9294273853302
+        },
+        "robbery": {
+          "count": 13,
+          "rate_per_100k": 51.0825576782227
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 3.9294273853302
+        },
+        "theft_over": {
+          "count": 7,
+          "rate_per_100k": 27.5059928894043
+        },
+        "theft_from_motor_vehicle": {
+          "count": 24,
+          "rate_per_100k": 94.3062591552734
+        }
+      }
+    },
+    {
+      "area_name": "Bayview Village",
+      "hood_id": 52,
+      "population": 30037,
+      "offences": {
+        "assault": {
+          "count": 132,
+          "rate_per_100k": 439.4580078125
+        },
+        "auto_theft": {
+          "count": 42,
+          "rate_per_100k": 139.827545166016
+        },
+        "bike_theft": {
+          "count": 7,
+          "rate_per_100k": 23.3045902252197
+        },
+        "break_enter": {
+          "count": 53,
+          "rate_per_100k": 176.44905090332
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 17,
+          "rate_per_100k": 56.5968627929688
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 15,
+          "rate_per_100k": 49.9384078979492
+        },
+        "theft_from_motor_vehicle": {
+          "count": 51,
+          "rate_per_100k": 169.790588378906
+        }
+      }
+    },
+    {
+      "area_name": "Newtonbrook East",
+      "hood_id": 50,
+      "population": 18231,
+      "offences": {
+        "assault": {
+          "count": 101,
+          "rate_per_100k": 554.001403808594
+        },
+        "auto_theft": {
+          "count": 46,
+          "rate_per_100k": 252.317474365234
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 5.48516273498535
+        },
+        "break_enter": {
+          "count": 31,
+          "rate_per_100k": 170.0400390625
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 11,
+          "rate_per_100k": 60.3367881774902
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 9,
+          "rate_per_100k": 49.3664627075195
+        },
+        "theft_from_motor_vehicle": {
+          "count": 31,
+          "rate_per_100k": 170.0400390625
+        }
+      }
+    },
+    {
+      "area_name": "Bayview Woods-Steeles",
+      "hood_id": 49,
+      "population": 13992,
+      "offences": {
+        "assault": {
+          "count": 40,
+          "rate_per_100k": 285.877655029297
+        },
+        "auto_theft": {
+          "count": 20,
+          "rate_per_100k": 142.938827514648
+        },
+        "bike_theft": {
+          "count": 3,
+          "rate_per_100k": 21.4408226013184
+        },
+        "break_enter": {
+          "count": 32,
+          "rate_per_100k": 228.702117919922
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 7.14694118499756
+        },
+        "robbery": {
+          "count": 8,
+          "rate_per_100k": 57.1755294799805
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 5,
+          "rate_per_100k": 35.7347068786621
+        },
+        "theft_from_motor_vehicle": {
+          "count": 28,
+          "rate_per_100k": 200.114349365234
+        }
+      }
+    },
+    {
+      "area_name": "Hillcrest Village",
+      "hood_id": 48,
+      "population": 17975,
+      "offences": {
+        "assault": {
+          "count": 84,
+          "rate_per_100k": 467.315704345703
+        },
+        "auto_theft": {
+          "count": 21,
+          "rate_per_100k": 116.828926086426
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 33.379695892334
+        },
+        "break_enter": {
+          "count": 36,
+          "rate_per_100k": 200.278167724609
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 30,
+          "rate_per_100k": 166.898468017578
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 5.56328248977661
+        },
+        "theft_over": {
+          "count": 15,
+          "rate_per_100k": 83.4492340087891
+        },
+        "theft_from_motor_vehicle": {
+          "count": 31,
+          "rate_per_100k": 172.46174621582
+        }
+      }
+    },
+    {
+      "area_name": "Alderwood",
+      "hood_id": 20,
+      "population": 14367,
+      "offences": {
+        "assault": {
+          "count": 73,
+          "rate_per_100k": 508.108856201172
+        },
+        "auto_theft": {
+          "count": 32,
+          "rate_per_100k": 222.732650756836
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 6.96039533615112
+        },
+        "break_enter": {
+          "count": 29,
+          "rate_per_100k": 201.851470947266
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 69.6039505004883
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 6.96039533615112
+        },
+        "theft_over": {
+          "count": 15,
+          "rate_per_100k": 104.40592956543
+        },
+        "theft_from_motor_vehicle": {
+          "count": 19,
+          "rate_per_100k": 132.247512817383
+        }
+      }
+    },
+    {
+      "area_name": "Long Branch",
+      "hood_id": 19,
+      "population": 13151,
+      "offences": {
+        "assault": {
+          "count": 76,
+          "rate_per_100k": 577.90283203125
+        },
+        "auto_theft": {
+          "count": 21,
+          "rate_per_100k": 159.683670043945
+        },
+        "bike_theft": {
+          "count": 5,
+          "rate_per_100k": 38.0199241638184
+        },
+        "break_enter": {
+          "count": 24,
+          "rate_per_100k": 182.495620727539
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 6,
+          "rate_per_100k": 45.6239051818848
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 3,
+          "rate_per_100k": 22.8119525909424
+        },
+        "theft_from_motor_vehicle": {
+          "count": 17,
+          "rate_per_100k": 129.267730712891
+        }
+      }
+    },
+    {
+      "area_name": "New Toronto",
+      "hood_id": 18,
+      "population": 13064,
+      "offences": {
+        "assault": {
+          "count": 118,
+          "rate_per_100k": 903.245544433594
+        },
+        "auto_theft": {
+          "count": 19,
+          "rate_per_100k": 145.437850952148
+        },
+        "bike_theft": {
+          "count": 9,
+          "rate_per_100k": 68.8916091918945
+        },
+        "break_enter": {
+          "count": 24,
+          "rate_per_100k": 183.710968017578
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 76.5462341308594
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 15.3092470169067
+        },
+        "theft_over": {
+          "count": 12,
+          "rate_per_100k": 91.8554840087891
+        },
+        "theft_from_motor_vehicle": {
+          "count": 32,
+          "rate_per_100k": 244.947952270508
+        }
+      }
+    },
+    {
+      "area_name": "Stonegate-Queensway",
+      "hood_id": 16,
+      "population": 29422,
+      "offences": {
+        "assault": {
+          "count": 137,
+          "rate_per_100k": 465.637969970703
+        },
+        "auto_theft": {
+          "count": 57,
+          "rate_per_100k": 193.732574462891
+        },
+        "bike_theft": {
+          "count": 9,
+          "rate_per_100k": 30.58935546875
+        },
+        "break_enter": {
+          "count": 64,
+          "rate_per_100k": 217.524307250977
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 3.39881730079651
+        },
+        "robbery": {
+          "count": 12,
+          "rate_per_100k": 40.7858047485352
+        },
+        "shooting": {
+          "count": 4,
+          "rate_per_100k": 13.595269203186
+        },
+        "theft_over": {
+          "count": 20,
+          "rate_per_100k": 67.9763412475586
+        },
+        "theft_from_motor_vehicle": {
+          "count": 38,
+          "rate_per_100k": 129.155059814453
+        }
+      }
+    },
+    {
+      "area_name": "Kingsway South",
+      "hood_id": 15,
+      "population": 10329,
+      "offences": {
+        "assault": {
+          "count": 53,
+          "rate_per_100k": 513.118408203125
+        },
+        "auto_theft": {
+          "count": 13,
+          "rate_per_100k": 125.859230041504
+        },
+        "bike_theft": {
+          "count": 6,
+          "rate_per_100k": 58.0888748168945
+        },
+        "break_enter": {
+          "count": 28,
+          "rate_per_100k": 271.081420898438
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 3,
+          "rate_per_100k": 29.0444374084473
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 6,
+          "rate_per_100k": 58.0888748168945
+        },
+        "theft_from_motor_vehicle": {
+          "count": 5,
+          "rate_per_100k": 48.407398223877
+        }
+      }
+    },
+    {
+      "area_name": "Etobicoke West Mall",
+      "hood_id": 13,
+      "population": 14512,
+      "offences": {
+        "assault": {
+          "count": 68,
+          "rate_per_100k": 468.577728271484
+        },
+        "auto_theft": {
+          "count": 29,
+          "rate_per_100k": 199.834625244141
+        },
+        "bike_theft": {
+          "count": 2,
+          "rate_per_100k": 13.7816982269287
+        },
+        "break_enter": {
+          "count": 16,
+          "rate_per_100k": 110.25358581543
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 4,
+          "rate_per_100k": 27.5633964538574
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 2,
+          "rate_per_100k": 13.7816982269287
+        },
+        "theft_from_motor_vehicle": {
+          "count": 26,
+          "rate_per_100k": 179.162078857422
+        }
+      }
+    },
+    {
+      "area_name": "Markland Wood",
+      "hood_id": 12,
+      "population": 11437,
+      "offences": {
+        "assault": {
+          "count": 38,
+          "rate_per_100k": 332.254974365234
+        },
+        "auto_theft": {
+          "count": 20,
+          "rate_per_100k": 174.871032714844
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 8.74355125427246
+        },
+        "break_enter": {
+          "count": 28,
+          "rate_per_100k": 244.819442749023
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 11,
+          "rate_per_100k": 96.179069519043
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 11,
+          "rate_per_100k": 96.179069519043
+        },
+        "theft_from_motor_vehicle": {
+          "count": 25,
+          "rate_per_100k": 218.588790893555
+        }
+      }
+    },
+    {
+      "area_name": "Eringate-Centennial-West Deane",
+      "hood_id": 11,
+      "population": 20086,
+      "offences": {
+        "assault": {
+          "count": 79,
+          "rate_per_100k": 393.308776855469
+        },
+        "auto_theft": {
+          "count": 47,
+          "rate_per_100k": 233.99382019043
+        },
+        "bike_theft": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "break_enter": {
+          "count": 22,
+          "rate_per_100k": 109.529022216797
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 6,
+          "rate_per_100k": 29.8715515136719
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 9.95718383789063
+        },
+        "theft_over": {
+          "count": 5,
+          "rate_per_100k": 24.8929595947266
+        },
+        "theft_from_motor_vehicle": {
+          "count": 23,
+          "rate_per_100k": 114.507614135742
+        }
+      }
+    },
+    {
+      "area_name": "Princess-Rosethorn",
+      "hood_id": 10,
+      "population": 12441,
+      "offences": {
+        "assault": {
+          "count": 30,
+          "rate_per_100k": 241.138168334961
+        },
+        "auto_theft": {
+          "count": 23,
+          "rate_per_100k": 184.872604370117
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 8.03793907165527
+        },
+        "break_enter": {
+          "count": 48,
+          "rate_per_100k": 385.821075439453
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 80.37939453125
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 11,
+          "rate_per_100k": 88.4173278808594
+        },
+        "theft_from_motor_vehicle": {
+          "count": 16,
+          "rate_per_100k": 128.607025146484
+        }
+      }
+    },
+    {
+      "area_name": "Edenbridge-Humber Valley",
+      "hood_id": 9,
+      "population": 18577,
+      "offences": {
+        "assault": {
+          "count": 57,
+          "rate_per_100k": 306.831024169922
+        },
+        "auto_theft": {
+          "count": 43,
+          "rate_per_100k": 231.469024658203
+        },
+        "bike_theft": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "break_enter": {
+          "count": 45,
+          "rate_per_100k": 242.235015869141
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 53.830005645752
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 9,
+          "rate_per_100k": 48.4470062255859
+        },
+        "theft_from_motor_vehicle": {
+          "count": 11,
+          "rate_per_100k": 59.213005065918
+        }
+      }
+    },
+    {
+      "area_name": "Humber Heights-Westmount",
+      "hood_id": 8,
+      "population": 11340,
+      "offences": {
+        "assault": {
+          "count": 46,
+          "rate_per_100k": 405.643737792969
+        },
+        "auto_theft": {
+          "count": 25,
+          "rate_per_100k": 220.458557128906
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 8.8183422088623
+        },
+        "break_enter": {
+          "count": 13,
+          "rate_per_100k": 114.638450622559
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 88.1834182739258
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 8.8183422088623
+        },
+        "theft_over": {
+          "count": 4,
+          "rate_per_100k": 35.2733688354492
+        },
+        "theft_from_motor_vehicle": {
+          "count": 10,
+          "rate_per_100k": 88.1834182739258
+        }
+      }
+    },
+    {
+      "area_name": "Willowridge-Martingrove-Richview",
+      "hood_id": 7,
+      "population": 25305,
+      "offences": {
+        "assault": {
+          "count": 95,
+          "rate_per_100k": 375.419891357422
+        },
+        "auto_theft": {
+          "count": 82,
+          "rate_per_100k": 324.046630859375
+        },
+        "bike_theft": {
+          "count": 3,
+          "rate_per_100k": 11.8553647994995
+        },
+        "break_enter": {
+          "count": 31,
+          "rate_per_100k": 122.505432128906
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 13,
+          "rate_per_100k": 51.3732452392578
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 19,
+          "rate_per_100k": 75.0839767456055
+        },
+        "theft_from_motor_vehicle": {
+          "count": 35,
+          "rate_per_100k": 138.312591552734
+        }
+      }
+    },
+    {
+      "area_name": "Kingsview Village-The Westway",
+      "hood_id": 6,
+      "population": 24019,
+      "offences": {
+        "assault": {
+          "count": 152,
+          "rate_per_100k": 632.832336425781
+        },
+        "auto_theft": {
+          "count": 71,
+          "rate_per_100k": 295.599304199219
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 4.16337060928345
+        },
+        "break_enter": {
+          "count": 28,
+          "rate_per_100k": 116.574378967285
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 10,
+          "rate_per_100k": 41.6337051391602
+        },
+        "shooting": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "theft_over": {
+          "count": 5,
+          "rate_per_100k": 20.8168525695801
+        },
+        "theft_from_motor_vehicle": {
+          "count": 35,
+          "rate_per_100k": 145.717971801758
+        }
+      }
+    },
+    {
+      "area_name": "Elms-Old Rexdale",
+      "hood_id": 5,
+      "population": 10093,
+      "offences": {
+        "assault": {
+          "count": 81,
+          "rate_per_100k": 802.536437988281
+        },
+        "auto_theft": {
+          "count": 49,
+          "rate_per_100k": 485.484985351563
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 9.90785694122314
+        },
+        "break_enter": {
+          "count": 16,
+          "rate_per_100k": 158.52571105957
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 14,
+          "rate_per_100k": 138.709991455078
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 19.8157138824463
+        },
+        "theft_over": {
+          "count": 4,
+          "rate_per_100k": 39.6314277648926
+        },
+        "theft_from_motor_vehicle": {
+          "count": 16,
+          "rate_per_100k": 158.52571105957
+        }
+      }
+    },
+    {
+      "area_name": "Rexdale-Kipling",
+      "hood_id": 4,
+      "population": 11131,
+      "offences": {
+        "assault": {
+          "count": 80,
+          "rate_per_100k": 718.713500976563
+        },
+        "auto_theft": {
+          "count": 37,
+          "rate_per_100k": 332.404998779297
+        },
+        "bike_theft": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "break_enter": {
+          "count": 19,
+          "rate_per_100k": 170.694458007813
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 14,
+          "rate_per_100k": 125.774864196777
+        },
+        "shooting": {
+          "count": 1,
+          "rate_per_100k": 8.98391914367676
+        },
+        "theft_over": {
+          "count": 7,
+          "rate_per_100k": 62.8874320983887
+        },
+        "theft_from_motor_vehicle": {
+          "count": 21,
+          "rate_per_100k": 188.662292480469
+        }
+      }
+    },
+    {
+      "area_name": "Thistletown-Beaumond Heights",
+      "hood_id": 3,
+      "population": 10902,
+      "offences": {
+        "assault": {
+          "count": 68,
+          "rate_per_100k": 623.73876953125
+        },
+        "auto_theft": {
+          "count": 35,
+          "rate_per_100k": 321.042022705078
+        },
+        "bike_theft": {
+          "count": 2,
+          "rate_per_100k": 18.3452568054199
+        },
+        "break_enter": {
+          "count": 11,
+          "rate_per_100k": 100.898918151855
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 17,
+          "rate_per_100k": 155.934692382813
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 18.3452568054199
+        },
+        "theft_over": {
+          "count": 5,
+          "rate_per_100k": 45.8631439208984
+        },
+        "theft_from_motor_vehicle": {
+          "count": 16,
+          "rate_per_100k": 146.762054443359
+        }
+      }
+    },
+    {
+      "area_name": "Mount Olive-Silverstone-Jamestown",
+      "hood_id": 2,
+      "population": 34492,
+      "offences": {
+        "assault": {
+          "count": 272,
+          "rate_per_100k": 788.588684082031
+        },
+        "auto_theft": {
+          "count": 95,
+          "rate_per_100k": 275.426177978516
+        },
+        "bike_theft": {
+          "count": 4,
+          "rate_per_100k": 11.5968923568726
+        },
+        "break_enter": {
+          "count": 19,
+          "rate_per_100k": 55.0852355957031
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 2.89922308921814
+        },
+        "robbery": {
+          "count": 37,
+          "rate_per_100k": 107.27124786377
+        },
+        "shooting": {
+          "count": 7,
+          "rate_per_100k": 20.2945613861084
+        },
+        "theft_over": {
+          "count": 9,
+          "rate_per_100k": 26.0930061340332
+        },
+        "theft_from_motor_vehicle": {
+          "count": 45,
+          "rate_per_100k": 130.465042114258
+        }
+      }
+    },
+    {
+      "area_name": "West Humber-Clairville",
+      "hood_id": 1,
+      "population": 37406,
+      "offences": {
+        "assault": {
+          "count": 349,
+          "rate_per_100k": 933.00537109375
+        },
+        "auto_theft": {
+          "count": 494,
+          "rate_per_100k": 1320.64379882813
+        },
+        "bike_theft": {
+          "count": 5,
+          "rate_per_100k": 13.3668394088745
+        },
+        "break_enter": {
+          "count": 130,
+          "rate_per_100k": 347.537841796875
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 2.67336797714233
+        },
+        "robbery": {
+          "count": 57,
+          "rate_per_100k": 152.381973266602
+        },
+        "shooting": {
+          "count": 10,
+          "rate_per_100k": 26.733678817749
+        },
+        "theft_over": {
+          "count": 92,
+          "rate_per_100k": 245.949844360352
+        },
+        "theft_from_motor_vehicle": {
+          "count": 204,
+          "rate_per_100k": 545.367065429688
+        }
+      }
+    },
+    {
+      "area_name": "Black Creek",
+      "hood_id": 24,
+      "population": 23252,
+      "offences": {
+        "assault": {
+          "count": 280,
+          "rate_per_100k": 1204.19750976563
+        },
+        "auto_theft": {
+          "count": 60,
+          "rate_per_100k": 258.042327880859
+        },
+        "bike_theft": {
+          "count": 8,
+          "rate_per_100k": 34.4056434631348
+        },
+        "break_enter": {
+          "count": 22,
+          "rate_per_100k": 94.6155166625977
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 12,
+          "rate_per_100k": 51.6084632873535
+        },
+        "shooting": {
+          "count": 8,
+          "rate_per_100k": 34.4056434631348
+        },
+        "theft_over": {
+          "count": 11,
+          "rate_per_100k": 47.3077583312988
+        },
+        "theft_from_motor_vehicle": {
+          "count": 39,
+          "rate_per_100k": 167.727508544922
+        }
+      }
+    },
+    {
+      "area_name": "Pelmo Park-Humberlea",
+      "hood_id": 23,
+      "population": 12651,
+      "offences": {
+        "assault": {
+          "count": 78,
+          "rate_per_100k": 616.552062988281
+        },
+        "auto_theft": {
+          "count": 47,
+          "rate_per_100k": 371.512145996094
+        },
+        "bike_theft": {
+          "count": 5,
+          "rate_per_100k": 39.5225677490234
+        },
+        "break_enter": {
+          "count": 15,
+          "rate_per_100k": 118.56770324707
+        },
+        "homicide": {
+          "count": 1,
+          "rate_per_100k": 7.90451335906982
+        },
+        "robbery": {
+          "count": 9,
+          "rate_per_100k": 71.140625
+        },
+        "shooting": {
+          "count": 2,
+          "rate_per_100k": 15.8090267181396
+        },
+        "theft_over": {
+          "count": 11,
+          "rate_per_100k": 86.9496459960938
+        },
+        "theft_from_motor_vehicle": {
+          "count": 29,
+          "rate_per_100k": 229.230895996094
+        }
+      }
+    },
+    {
+      "area_name": "Humbermede",
+      "hood_id": 22,
+      "population": 19579,
+      "offences": {
+        "assault": {
+          "count": 194,
+          "rate_per_100k": 990.857543945313
+        },
+        "auto_theft": {
+          "count": 86,
+          "rate_per_100k": 439.246124267578
+        },
+        "bike_theft": {
+          "count": 1,
+          "rate_per_100k": 5.10751295089722
+        },
+        "break_enter": {
+          "count": 33,
+          "rate_per_100k": 168.547927856445
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 14,
+          "rate_per_100k": 71.5051803588867
+        },
+        "shooting": {
+          "count": 3,
+          "rate_per_100k": 15.3225393295288
+        },
+        "theft_over": {
+          "count": 14,
+          "rate_per_100k": 71.5051803588867
+        },
+        "theft_from_motor_vehicle": {
+          "count": 22,
+          "rate_per_100k": 112.365287780762
+        }
+      }
+    },
+    {
+      "area_name": "Humber Summit",
+      "hood_id": 21,
+      "population": 13084,
+      "offences": {
+        "assault": {
+          "count": 135,
+          "rate_per_100k": 1031.79455566406
+        },
+        "auto_theft": {
+          "count": 88,
+          "rate_per_100k": 672.577209472656
+        },
+        "bike_theft": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "break_enter": {
+          "count": 52,
+          "rate_per_100k": 397.431976318359
+        },
+        "homicide": {
+          "count": 0,
+          "rate_per_100k": 0
+        },
+        "robbery": {
+          "count": 25,
+          "rate_per_100k": 191.073059082031
+        },
+        "shooting": {
+          "count": 4,
+          "rate_per_100k": 30.5716915130615
+        },
+        "theft_over": {
+          "count": 25,
+          "rate_per_100k": 191.073059082031
+        },
+        "theft_from_motor_vehicle": {
+          "count": 37,
+          "rate_per_100k": 282.788146972656
+        }
+      }
+    }
+  ]
+}

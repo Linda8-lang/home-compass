@@ -1,0 +1,960 @@
+{
+  "data_status": "ok",
+  "data_level": "neighbourhood",
+  "last_updated": "2026-08-20T07:54:44.745Z",
+  "source": {
+    "name": "City of Toronto Open Data — Neighbourhood Profiles (2021 Census, 158-model)",
+    "endpoint": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/6e19a90f-971c-46b3-852c-0c48c436d1fc/resource/19d4a806-7385-4889-acf2-256f1e079060/download/nbhd_2021_census_profile_full_158model.xlsx",
+    "disclaimer": "Median monthly shelter cost from the 2021 Census is used as a neighbourhood-level rent proxy. It is refreshed roughly every 5 years on the census cycle, so it lags current market rent — pair it with the CMHC annual baseline rather than treating it as a live asking-rent figure."
+  },
+  "neighbourhoods": [
+    {
+      "area_name": "West Humber-Clairville",
+      "hood_id": 1,
+      "median_renter_shelter_cost": 1320,
+      "median_owner_shelter_cost": 1640
+    },
+    {
+      "area_name": "Mount Olive-Silverstone-Jamestown",
+      "hood_id": 2,
+      "median_renter_shelter_cost": 1320,
+      "median_owner_shelter_cost": 1640
+    },
+    {
+      "area_name": "Thistletown-Beaumond Heights",
+      "hood_id": 3,
+      "median_renter_shelter_cost": 1250,
+      "median_owner_shelter_cost": 1540
+    },
+    {
+      "area_name": "Rexdale-Kipling",
+      "hood_id": 4,
+      "median_renter_shelter_cost": 1200,
+      "median_owner_shelter_cost": 1470
+    },
+    {
+      "area_name": "Elms-Old Rexdale",
+      "hood_id": 5,
+      "median_renter_shelter_cost": 1330,
+      "median_owner_shelter_cost": 1620
+    },
+    {
+      "area_name": "Kingsview Village-The Westway",
+      "hood_id": 6,
+      "median_renter_shelter_cost": 1470,
+      "median_owner_shelter_cost": 1280
+    },
+    {
+      "area_name": "Willowridge-Martingrove-Richview",
+      "hood_id": 7,
+      "median_renter_shelter_cost": 1500,
+      "median_owner_shelter_cost": 1150
+    },
+    {
+      "area_name": "Humber Heights-Westmount",
+      "hood_id": 8,
+      "median_renter_shelter_cost": 1460,
+      "median_owner_shelter_cost": 1170
+    },
+    {
+      "area_name": "Edenbridge-Humber Valley",
+      "hood_id": 9,
+      "median_renter_shelter_cost": 1510,
+      "median_owner_shelter_cost": 1560
+    },
+    {
+      "area_name": "Princess-Rosethorn",
+      "hood_id": 10,
+      "median_renter_shelter_cost": 1590,
+      "median_owner_shelter_cost": 1480
+    },
+    {
+      "area_name": "Eringate-Centennial-West Deane",
+      "hood_id": 11,
+      "median_renter_shelter_cost": 1450,
+      "median_owner_shelter_cost": 1200
+    },
+    {
+      "area_name": "Markland Wood",
+      "hood_id": 12,
+      "median_renter_shelter_cost": 1480,
+      "median_owner_shelter_cost": 1280
+    },
+    {
+      "area_name": "Etobicoke West Mall",
+      "hood_id": 13,
+      "median_renter_shelter_cost": 1500,
+      "median_owner_shelter_cost": 1640
+    },
+    {
+      "area_name": "Kingsway South",
+      "hood_id": 15,
+      "median_renter_shelter_cost": 2440,
+      "median_owner_shelter_cost": 1820
+    },
+    {
+      "area_name": "Stonegate-Queensway",
+      "hood_id": 16,
+      "median_renter_shelter_cost": 1280,
+      "median_owner_shelter_cost": 1500
+    },
+    {
+      "area_name": "New Toronto",
+      "hood_id": 18,
+      "median_renter_shelter_cost": 1120,
+      "median_owner_shelter_cost": 1840
+    },
+    {
+      "area_name": "Long Branch",
+      "hood_id": 19,
+      "median_renter_shelter_cost": 1280,
+      "median_owner_shelter_cost": 1900
+    },
+    {
+      "area_name": "Alderwood",
+      "hood_id": 20,
+      "median_renter_shelter_cost": 1450,
+      "median_owner_shelter_cost": 1300
+    },
+    {
+      "area_name": "Humber Summit",
+      "hood_id": 21,
+      "median_renter_shelter_cost": 1360,
+      "median_owner_shelter_cost": 1160
+    },
+    {
+      "area_name": "Humbermede",
+      "hood_id": 22,
+      "median_renter_shelter_cost": 1280,
+      "median_owner_shelter_cost": 1570
+    },
+    {
+      "area_name": "Pelmo Park-Humberlea",
+      "hood_id": 23,
+      "median_renter_shelter_cost": 1510,
+      "median_owner_shelter_cost": 1720
+    },
+    {
+      "area_name": "Black Creek",
+      "hood_id": 24,
+      "median_renter_shelter_cost": 1200,
+      "median_owner_shelter_cost": 1090
+    },
+    {
+      "area_name": "Glenfield-Jane Heights",
+      "hood_id": 25,
+      "median_renter_shelter_cost": 1200,
+      "median_owner_shelter_cost": 1150
+    },
+    {
+      "area_name": "York University Heights",
+      "hood_id": 27,
+      "median_renter_shelter_cost": 1300,
+      "median_owner_shelter_cost": 1580
+    },
+    {
+      "area_name": "Rustic",
+      "hood_id": 28,
+      "median_renter_shelter_cost": 1010,
+      "median_owner_shelter_cost": 930
+    },
+    {
+      "area_name": "Maple Leaf",
+      "hood_id": 29,
+      "median_renter_shelter_cost": 1290,
+      "median_owner_shelter_cost": 920
+    },
+    {
+      "area_name": "Brookhaven-Amesbury",
+      "hood_id": 30,
+      "median_renter_shelter_cost": 1270,
+      "median_owner_shelter_cost": 1370
+    },
+    {
+      "area_name": "Yorkdale-Glen Park",
+      "hood_id": 31,
+      "median_renter_shelter_cost": 1550,
+      "median_owner_shelter_cost": 1260
+    },
+    {
+      "area_name": "Englemount-Lawrence",
+      "hood_id": 32,
+      "median_renter_shelter_cost": 1210,
+      "median_owner_shelter_cost": 1620
+    },
+    {
+      "area_name": "Clanton Park",
+      "hood_id": 33,
+      "median_renter_shelter_cost": 1460,
+      "median_owner_shelter_cost": 1840
+    },
+    {
+      "area_name": "Bathurst Manor",
+      "hood_id": 34,
+      "median_renter_shelter_cost": 1500,
+      "median_owner_shelter_cost": 1680
+    },
+    {
+      "area_name": "Westminster-Branson",
+      "hood_id": 35,
+      "median_renter_shelter_cost": 1520,
+      "median_owner_shelter_cost": 1570
+    },
+    {
+      "area_name": "Newtonbrook West",
+      "hood_id": 36,
+      "median_renter_shelter_cost": 1600,
+      "median_owner_shelter_cost": 1480
+    },
+    {
+      "area_name": "Willowdale West",
+      "hood_id": 37,
+      "median_renter_shelter_cost": 1800,
+      "median_owner_shelter_cost": 1800
+    },
+    {
+      "area_name": "Lansing-Westgate",
+      "hood_id": 38,
+      "median_renter_shelter_cost": 1800,
+      "median_owner_shelter_cost": 1760
+    },
+    {
+      "area_name": "Bedford Park-Nortown",
+      "hood_id": 39,
+      "median_renter_shelter_cost": 1480,
+      "median_owner_shelter_cost": 1940
+    },
+    {
+      "area_name": "St.Andrew-Windfields",
+      "hood_id": 40,
+      "median_renter_shelter_cost": 1720,
+      "median_owner_shelter_cost": 1880
+    },
+    {
+      "area_name": "Bridle Path-Sunnybrook-York Mills",
+      "hood_id": 41,
+      "median_renter_shelter_cost": 3080,
+      "median_owner_shelter_cost": 2900
+    },
+    {
+      "area_name": "Banbury-Don Mills",
+      "hood_id": 42,
+      "median_renter_shelter_cost": 1540,
+      "median_owner_shelter_cost": 1660
+    },
+    {
+      "area_name": "Victoria Village",
+      "hood_id": 43,
+      "median_renter_shelter_cost": 1270,
+      "median_owner_shelter_cost": 1320
+    },
+    {
+      "area_name": "Flemingdon Park",
+      "hood_id": 44,
+      "median_renter_shelter_cost": 1340,
+      "median_owner_shelter_cost": 1500
+    },
+    {
+      "area_name": "Pleasant View",
+      "hood_id": 46,
+      "median_renter_shelter_cost": 1600,
+      "median_owner_shelter_cost": 1130
+    },
+    {
+      "area_name": "Don Valley Village",
+      "hood_id": 47,
+      "median_renter_shelter_cost": 1580,
+      "median_owner_shelter_cost": 1460
+    },
+    {
+      "area_name": "Hillcrest Village",
+      "hood_id": 48,
+      "median_renter_shelter_cost": 695,
+      "median_owner_shelter_cost": 1360
+    },
+    {
+      "area_name": "Bayview Woods-Steeles",
+      "hood_id": 49,
+      "median_renter_shelter_cost": 1940,
+      "median_owner_shelter_cost": 1500
+    },
+    {
+      "area_name": "Newtonbrook East",
+      "hood_id": 50,
+      "median_renter_shelter_cost": 1740,
+      "median_owner_shelter_cost": 1700
+    },
+    {
+      "area_name": "Bayview Village",
+      "hood_id": 52,
+      "median_renter_shelter_cost": 1940,
+      "median_owner_shelter_cost": 1880
+    },
+    {
+      "area_name": "Henry Farm",
+      "hood_id": 53,
+      "median_renter_shelter_cost": 1860,
+      "median_owner_shelter_cost": 1920
+    },
+    {
+      "area_name": "O`Connor Parkview",
+      "hood_id": 54,
+      "median_renter_shelter_cost": 1240,
+      "median_owner_shelter_cost": 1660
+    },
+    {
+      "area_name": "Thorncliffe Park",
+      "hood_id": 55,
+      "median_renter_shelter_cost": 1370,
+      "median_owner_shelter_cost": 1680
+    },
+    {
+      "area_name": "Leaside-Bennington",
+      "hood_id": 56,
+      "median_renter_shelter_cost": 1480,
+      "median_owner_shelter_cost": 1740
+    },
+    {
+      "area_name": "Broadview North",
+      "hood_id": 57,
+      "median_renter_shelter_cost": 1300,
+      "median_owner_shelter_cost": 1880
+    },
+    {
+      "area_name": "Old East York",
+      "hood_id": 58,
+      "median_renter_shelter_cost": 1210,
+      "median_owner_shelter_cost": 1370
+    },
+    {
+      "area_name": "Danforth-East York",
+      "hood_id": 59,
+      "median_renter_shelter_cost": 1230,
+      "median_owner_shelter_cost": 1600
+    },
+    {
+      "area_name": "Woodbine-Lumsden",
+      "hood_id": 60,
+      "median_renter_shelter_cost": 1290,
+      "median_owner_shelter_cost": 1940
+    },
+    {
+      "area_name": "Taylor Massey",
+      "hood_id": 61,
+      "median_renter_shelter_cost": 1300,
+      "median_owner_shelter_cost": 1660
+    },
+    {
+      "area_name": "East End Danforth",
+      "hood_id": 62,
+      "median_renter_shelter_cost": 1210,
+      "median_owner_shelter_cost": 2060
+    },
+    {
+      "area_name": "The Beaches",
+      "hood_id": 63,
+      "median_renter_shelter_cost": 1580,
+      "median_owner_shelter_cost": 2040
+    },
+    {
+      "area_name": "Woodbine Corridor",
+      "hood_id": 64,
+      "median_renter_shelter_cost": 1160,
+      "median_owner_shelter_cost": 2120
+    },
+    {
+      "area_name": "Greenwood-Coxwell",
+      "hood_id": 65,
+      "median_renter_shelter_cost": 1230,
+      "median_owner_shelter_cost": 2040
+    },
+    {
+      "area_name": "Danforth",
+      "hood_id": 66,
+      "median_renter_shelter_cost": 1120,
+      "median_owner_shelter_cost": 1470
+    },
+    {
+      "area_name": "Playter Estates-Danforth",
+      "hood_id": 67,
+      "median_renter_shelter_cost": 1400,
+      "median_owner_shelter_cost": 1440
+    },
+    {
+      "area_name": "North Riverdale",
+      "hood_id": 68,
+      "median_renter_shelter_cost": 1440,
+      "median_owner_shelter_cost": 1620
+    },
+    {
+      "area_name": "Blake-Jones",
+      "hood_id": 69,
+      "median_renter_shelter_cost": 940,
+      "median_owner_shelter_cost": 1900
+    },
+    {
+      "area_name": "South Riverdale",
+      "hood_id": 70,
+      "median_renter_shelter_cost": 1510,
+      "median_owner_shelter_cost": 2120
+    },
+    {
+      "area_name": "Cabbagetown-South St. James Town",
+      "hood_id": 71,
+      "median_renter_shelter_cost": 1330,
+      "median_owner_shelter_cost": 1860
+    },
+    {
+      "area_name": "Regent Park",
+      "hood_id": 72,
+      "median_renter_shelter_cost": 1180,
+      "median_owner_shelter_cost": 2060
+    },
+    {
+      "area_name": "Moss Park",
+      "hood_id": 73,
+      "median_renter_shelter_cost": 1470,
+      "median_owner_shelter_cost": 2140
+    },
+    {
+      "area_name": "North St. James Town",
+      "hood_id": 74,
+      "median_renter_shelter_cost": 1300,
+      "median_owner_shelter_cost": 2060
+    },
+    {
+      "area_name": "Kensington-Chinatown",
+      "hood_id": 78,
+      "median_renter_shelter_cost": 1530,
+      "median_owner_shelter_cost": 1680
+    },
+    {
+      "area_name": "University",
+      "hood_id": 79,
+      "median_renter_shelter_cost": 1590,
+      "median_owner_shelter_cost": 1230
+    },
+    {
+      "area_name": "Palmerston-Little Italy",
+      "hood_id": 80,
+      "median_renter_shelter_cost": 1760,
+      "median_owner_shelter_cost": 1530
+    },
+    {
+      "area_name": "Trinity-Bellwoods",
+      "hood_id": 81,
+      "median_renter_shelter_cost": 1700,
+      "median_owner_shelter_cost": 1410
+    },
+    {
+      "area_name": "Dufferin Grove",
+      "hood_id": 83,
+      "median_renter_shelter_cost": 1500,
+      "median_owner_shelter_cost": 1760
+    },
+    {
+      "area_name": "Little Portugal",
+      "hood_id": 84,
+      "median_renter_shelter_cost": 1800,
+      "median_owner_shelter_cost": 1960
+    },
+    {
+      "area_name": "South Parkdale",
+      "hood_id": 85,
+      "median_renter_shelter_cost": 1200,
+      "median_owner_shelter_cost": 2080
+    },
+    {
+      "area_name": "Roncesvalles",
+      "hood_id": 86,
+      "median_renter_shelter_cost": 1400,
+      "median_owner_shelter_cost": 2000
+    },
+    {
+      "area_name": "High Park-Swansea",
+      "hood_id": 87,
+      "median_renter_shelter_cost": 1530,
+      "median_owner_shelter_cost": 1820
+    },
+    {
+      "area_name": "High Park North",
+      "hood_id": 88,
+      "median_renter_shelter_cost": 1640,
+      "median_owner_shelter_cost": 1700
+    },
+    {
+      "area_name": "Runnymede-Bloor West Village",
+      "hood_id": 89,
+      "median_renter_shelter_cost": 1600,
+      "median_owner_shelter_cost": 1760
+    },
+    {
+      "area_name": "Junction Area",
+      "hood_id": 90,
+      "median_renter_shelter_cost": 1460,
+      "median_owner_shelter_cost": 1900
+    },
+    {
+      "area_name": "Weston-Pelham Park",
+      "hood_id": 91,
+      "median_renter_shelter_cost": 1020,
+      "median_owner_shelter_cost": 1800
+    },
+    {
+      "area_name": "Corso Italia-Davenport",
+      "hood_id": 92,
+      "median_renter_shelter_cost": 1400,
+      "median_owner_shelter_cost": 1580
+    },
+    {
+      "area_name": "Wychwood",
+      "hood_id": 94,
+      "median_renter_shelter_cost": 1330,
+      "median_owner_shelter_cost": 1540
+    },
+    {
+      "area_name": "Annex",
+      "hood_id": 95,
+      "median_renter_shelter_cost": 1740,
+      "median_owner_shelter_cost": 2080
+    },
+    {
+      "area_name": "Casa Loma",
+      "hood_id": 96,
+      "median_renter_shelter_cost": 1980,
+      "median_owner_shelter_cost": 2320
+    },
+    {
+      "area_name": "Yonge-St. Clair",
+      "hood_id": 97,
+      "median_renter_shelter_cost": 1680,
+      "median_owner_shelter_cost": 2060
+    },
+    {
+      "area_name": "Rosedale-Moore Park",
+      "hood_id": 98,
+      "median_renter_shelter_cost": 1920,
+      "median_owner_shelter_cost": 2220
+    },
+    {
+      "area_name": "Mount Pleasant East",
+      "hood_id": 99,
+      "median_renter_shelter_cost": 1510,
+      "median_owner_shelter_cost": 1800
+    },
+    {
+      "area_name": "Yonge-Eglinton",
+      "hood_id": 100,
+      "median_renter_shelter_cost": 1640,
+      "median_owner_shelter_cost": 1820
+    },
+    {
+      "area_name": "Forest Hill South",
+      "hood_id": 101,
+      "median_renter_shelter_cost": 1640,
+      "median_owner_shelter_cost": 2360
+    },
+    {
+      "area_name": "Forest Hill North",
+      "hood_id": 102,
+      "median_renter_shelter_cost": 1500,
+      "median_owner_shelter_cost": 1700
+    },
+    {
+      "area_name": "Lawrence Park South",
+      "hood_id": 103,
+      "median_renter_shelter_cost": 1800,
+      "median_owner_shelter_cost": 1980
+    },
+    {
+      "area_name": "Lawrence Park North",
+      "hood_id": 105,
+      "median_renter_shelter_cost": 1660,
+      "median_owner_shelter_cost": 1880
+    },
+    {
+      "area_name": "Humewood-Cedarvale",
+      "hood_id": 106,
+      "median_renter_shelter_cost": 1340,
+      "median_owner_shelter_cost": 1920
+    },
+    {
+      "area_name": "Oakwood Village",
+      "hood_id": 107,
+      "median_renter_shelter_cost": 1210,
+      "median_owner_shelter_cost": 1570
+    },
+    {
+      "area_name": "Briar Hill-Belgravia",
+      "hood_id": 108,
+      "median_renter_shelter_cost": 1400,
+      "median_owner_shelter_cost": 1520
+    },
+    {
+      "area_name": "Caledonia-Fairbank",
+      "hood_id": 109,
+      "median_renter_shelter_cost": 1280,
+      "median_owner_shelter_cost": 1500
+    },
+    {
+      "area_name": "Keelesdale-Eglinton West",
+      "hood_id": 110,
+      "median_renter_shelter_cost": 1210,
+      "median_owner_shelter_cost": 1190
+    },
+    {
+      "area_name": "Rockcliffe-Smythe",
+      "hood_id": 111,
+      "median_renter_shelter_cost": 1100,
+      "median_owner_shelter_cost": 1500
+    },
+    {
+      "area_name": "Beechborough-Greenbrook",
+      "hood_id": 112,
+      "median_renter_shelter_cost": 1060,
+      "median_owner_shelter_cost": 1470
+    },
+    {
+      "area_name": "Weston",
+      "hood_id": 113,
+      "median_renter_shelter_cost": 1210,
+      "median_owner_shelter_cost": 1700
+    },
+    {
+      "area_name": "Lambton Baby Point",
+      "hood_id": 114,
+      "median_renter_shelter_cost": 1100,
+      "median_owner_shelter_cost": 1780
+    },
+    {
+      "area_name": "Mount Dennis",
+      "hood_id": 115,
+      "median_renter_shelter_cost": 1200,
+      "median_owner_shelter_cost": 1700
+    },
+    {
+      "area_name": "Steeles",
+      "hood_id": 116,
+      "median_renter_shelter_cost": 1500,
+      "median_owner_shelter_cost": 1200
+    },
+    {
+      "area_name": "Tam O'Shanter-Sullivan",
+      "hood_id": 118,
+      "median_renter_shelter_cost": 1330,
+      "median_owner_shelter_cost": 1300
+    },
+    {
+      "area_name": "Wexford/Maryvale",
+      "hood_id": 119,
+      "median_renter_shelter_cost": 1300,
+      "median_owner_shelter_cost": 1600
+    },
+    {
+      "area_name": "Clairlea-Birchmount",
+      "hood_id": 120,
+      "median_renter_shelter_cost": 1270,
+      "median_owner_shelter_cost": 1780
+    },
+    {
+      "area_name": "Oakridge",
+      "hood_id": 121,
+      "median_renter_shelter_cost": 1100,
+      "median_owner_shelter_cost": 1680
+    },
+    {
+      "area_name": "Birchcliffe-Cliffside",
+      "hood_id": 122,
+      "median_renter_shelter_cost": 1200,
+      "median_owner_shelter_cost": 1780
+    },
+    {
+      "area_name": "Cliffcrest",
+      "hood_id": 123,
+      "median_renter_shelter_cost": 1230,
+      "median_owner_shelter_cost": 1760
+    },
+    {
+      "area_name": "Kennedy Park",
+      "hood_id": 124,
+      "median_renter_shelter_cost": 1000,
+      "median_owner_shelter_cost": 1640
+    },
+    {
+      "area_name": "Ionview",
+      "hood_id": 125,
+      "median_renter_shelter_cost": 1180,
+      "median_owner_shelter_cost": 1550
+    },
+    {
+      "area_name": "Dorset Park",
+      "hood_id": 126,
+      "median_renter_shelter_cost": 1290,
+      "median_owner_shelter_cost": 1600
+    },
+    {
+      "area_name": "Agincourt South-Malvern West",
+      "hood_id": 128,
+      "median_renter_shelter_cost": 1660,
+      "median_owner_shelter_cost": 1460
+    },
+    {
+      "area_name": "Agincourt North",
+      "hood_id": 129,
+      "median_renter_shelter_cost": 1480,
+      "median_owner_shelter_cost": 1100
+    },
+    {
+      "area_name": "Milliken",
+      "hood_id": 130,
+      "median_renter_shelter_cost": 1400,
+      "median_owner_shelter_cost": 1140
+    },
+    {
+      "area_name": "Centennial Scarborough",
+      "hood_id": 133,
+      "median_renter_shelter_cost": 1500,
+      "median_owner_shelter_cost": 1510
+    },
+    {
+      "area_name": "Highland Creek",
+      "hood_id": 134,
+      "median_renter_shelter_cost": 1250,
+      "median_owner_shelter_cost": 1310
+    },
+    {
+      "area_name": "Morningside",
+      "hood_id": 135,
+      "median_renter_shelter_cost": 1200,
+      "median_owner_shelter_cost": 1780
+    },
+    {
+      "area_name": "West Hill",
+      "hood_id": 136,
+      "median_renter_shelter_cost": 940,
+      "median_owner_shelter_cost": 1720
+    },
+    {
+      "area_name": "Eglinton East",
+      "hood_id": 138,
+      "median_renter_shelter_cost": 1230,
+      "median_owner_shelter_cost": 1590
+    },
+    {
+      "area_name": "Scarborough Village",
+      "hood_id": 139,
+      "median_renter_shelter_cost": 1200,
+      "median_owner_shelter_cost": 1660
+    },
+    {
+      "area_name": "Guildwood",
+      "hood_id": 140,
+      "median_renter_shelter_cost": 1480,
+      "median_owner_shelter_cost": 1510
+    },
+    {
+      "area_name": "Golfdale-Cedarbrae-Woburn",
+      "hood_id": 141,
+      "median_renter_shelter_cost": 1200,
+      "median_owner_shelter_cost": 1720
+    },
+    {
+      "area_name": "Woburn North",
+      "hood_id": 142,
+      "median_renter_shelter_cost": 1300,
+      "median_owner_shelter_cost": 1620
+    },
+    {
+      "area_name": "West Rouge",
+      "hood_id": 143,
+      "median_renter_shelter_cost": 1400,
+      "median_owner_shelter_cost": 1550
+    },
+    {
+      "area_name": "Morningside Heights",
+      "hood_id": 144,
+      "median_renter_shelter_cost": 1540,
+      "median_owner_shelter_cost": 2100
+    },
+    {
+      "area_name": "Malvern West",
+      "hood_id": 145,
+      "median_renter_shelter_cost": 1300,
+      "median_owner_shelter_cost": 1760
+    },
+    {
+      "area_name": "Malvern East",
+      "hood_id": 146,
+      "median_renter_shelter_cost": 1300,
+      "median_owner_shelter_cost": 1680
+    },
+    {
+      "area_name": "L'Amoreaux West",
+      "hood_id": 147,
+      "median_renter_shelter_cost": 1260,
+      "median_owner_shelter_cost": 1380
+    },
+    {
+      "area_name": "East L'Amoreaux",
+      "hood_id": 148,
+      "median_renter_shelter_cost": 1380,
+      "median_owner_shelter_cost": 1520
+    },
+    {
+      "area_name": "Parkwoods-O'Connor Hills",
+      "hood_id": 149,
+      "median_renter_shelter_cost": 1620,
+      "median_owner_shelter_cost": 1480
+    },
+    {
+      "area_name": "Fenside-Parkwoods",
+      "hood_id": 150,
+      "median_renter_shelter_cost": 1480,
+      "median_owner_shelter_cost": 1430
+    },
+    {
+      "area_name": "Yonge-Doris",
+      "hood_id": 151,
+      "median_renter_shelter_cost": 1960,
+      "median_owner_shelter_cost": 1640
+    },
+    {
+      "area_name": "East Willowdale",
+      "hood_id": 152,
+      "median_renter_shelter_cost": 2000,
+      "median_owner_shelter_cost": 1720
+    },
+    {
+      "area_name": "Avondale",
+      "hood_id": 153,
+      "median_renter_shelter_cost": 2100,
+      "median_owner_shelter_cost": 2020
+    },
+    {
+      "area_name": "Oakdale-Beverley Heights",
+      "hood_id": 154,
+      "median_renter_shelter_cost": 1250,
+      "median_owner_shelter_cost": 1460
+    },
+    {
+      "area_name": "Downsview",
+      "hood_id": 155,
+      "median_renter_shelter_cost": 1300,
+      "median_owner_shelter_cost": 1510
+    },
+    {
+      "area_name": "Bendale-Glen Andrew",
+      "hood_id": 156,
+      "median_renter_shelter_cost": 1580,
+      "median_owner_shelter_cost": 1350
+    },
+    {
+      "area_name": "Bendale South",
+      "hood_id": 157,
+      "median_renter_shelter_cost": 1330,
+      "median_owner_shelter_cost": 1430
+    },
+    {
+      "area_name": "Islington",
+      "hood_id": 158,
+      "median_renter_shelter_cost": 1580,
+      "median_owner_shelter_cost": 1440
+    },
+    {
+      "area_name": "Etobicoke City Centre",
+      "hood_id": 159,
+      "median_renter_shelter_cost": 1740,
+      "median_owner_shelter_cost": 1940
+    },
+    {
+      "area_name": "Mimico-Queensway",
+      "hood_id": 160,
+      "median_renter_shelter_cost": 1240,
+      "median_owner_shelter_cost": 2120
+    },
+    {
+      "area_name": "Humber Bay Shores",
+      "hood_id": 161,
+      "median_renter_shelter_cost": 1980,
+      "median_owner_shelter_cost": 2140
+    },
+    {
+      "area_name": "West Queen West",
+      "hood_id": 162,
+      "median_renter_shelter_cost": 1840,
+      "median_owner_shelter_cost": 2040
+    },
+    {
+      "area_name": "Fort York-Liberty Village",
+      "hood_id": 163,
+      "median_renter_shelter_cost": 2020,
+      "median_owner_shelter_cost": 2320
+    },
+    {
+      "area_name": "Wellington Place",
+      "hood_id": 164,
+      "median_renter_shelter_cost": 2060,
+      "median_owner_shelter_cost": 2320
+    },
+    {
+      "area_name": "Harbourfront-CityPlace",
+      "hood_id": 165,
+      "median_renter_shelter_cost": 2020,
+      "median_owner_shelter_cost": 2120
+    },
+    {
+      "area_name": "St Lawrence-East Bayfront-The Islands",
+      "hood_id": 166,
+      "median_renter_shelter_cost": 1900,
+      "median_owner_shelter_cost": 2080
+    },
+    {
+      "area_name": "Church-Wellesley",
+      "hood_id": 167,
+      "median_renter_shelter_cost": 1680,
+      "median_owner_shelter_cost": 2040
+    },
+    {
+      "area_name": "Downtown Yonge East",
+      "hood_id": 168,
+      "median_renter_shelter_cost": 1760,
+      "median_owner_shelter_cost": 1900
+    },
+    {
+      "area_name": "Bay-Cloverhill",
+      "hood_id": 169,
+      "median_renter_shelter_cost": 2000,
+      "median_owner_shelter_cost": 1960
+    },
+    {
+      "area_name": "Yonge-Bay Corridor",
+      "hood_id": 170,
+      "median_renter_shelter_cost": 2000,
+      "median_owner_shelter_cost": 1780
+    },
+    {
+      "area_name": "Junction-Wallace Emerson",
+      "hood_id": 171,
+      "median_renter_shelter_cost": 1480,
+      "median_owner_shelter_cost": 1880
+    },
+    {
+      "area_name": "Dovercourt Village",
+      "hood_id": 172,
+      "median_renter_shelter_cost": 1500,
+      "median_owner_shelter_cost": 1550
+    },
+    {
+      "area_name": "North Toronto",
+      "hood_id": 173,
+      "median_renter_shelter_cost": 1740,
+      "median_owner_shelter_cost": 2100
+    },
+    {
+      "area_name": "South Eglinton-Davisville",
+      "hood_id": 174,
+      "median_renter_shelter_cost": 1740,
+      "median_owner_shelter_cost": 1900
+    }
+  ]
+}
