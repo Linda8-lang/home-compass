@@ -26,6 +26,7 @@ import {
 } from "@/data/housing-sections";
 import { Disclosure, DisclaimerBadge, StaticDisclaimer, GuidanceDisclaimer } from "./primitives";
 import { SourceCite } from "./source-cite";
+import { NeighbourhoodSnapshotWidget } from "./neighbourhood-snapshot";
 import { cn } from "@/lib/utils";
 
 const CATEGORY_ICONS: Record<string, typeof Building2> = {
@@ -140,9 +141,10 @@ export function ColumnTwo() {
       <div id={compareSection.anchor}>
         <Disclosure
           title={<SectionEyebrow eyebrow={compareSection.eyebrow} title={compareSection.title} />}
-          summary="A factual evaluation checklist — no listings, cards, prices, or addresses"
+          summary="A factual evaluation checklist, plus real neighbourhood crime and rent data — no listings, cards, prices, or addresses"
         >
           <div className="space-y-4">
+            <NeighbourhoodSnapshotWidget />
             {COMPARE_HOUSING_GROUPS.map((g) => {
               const GroupIcon = CRITERION_GROUP_ICONS[g.id] ?? Home;
               return (
