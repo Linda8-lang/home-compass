@@ -1,8 +1,10 @@
+import { Calendar, Briefcase, Home, Building2, Key, Users, GraduationCap, type LucideIcon } from "lucide-react";
+
 /**
  * Static reference data for the Housing section's Column 2 (Static Reference Lane).
  *
  * Exactly three collapsible sections, matching the approved scope:
- *   1. Find Housing      — where to look (category types, no risk ratings or timelines)
+ *   1. Find Housing      — duration and housing-type cards (no risk ratings or timelines)
  *   2. Compare Housing    — how to evaluate (a checklist framework, no listings/prices)
  *   3. Verify the Place   — how to check a place is real before you commit
  *
@@ -34,80 +36,237 @@ export const HOUSING_SECTIONS: SectionMeta[] = [
 ];
 
 /* ---------------------------------------------------------------------- */
-/* 2.1 Find Housing (Where to Look)                                        */
+/* 2.1 Find Housing — duration cards + housing-type cards                  */
 /* ---------------------------------------------------------------------- */
 
-export type HousingCategory = {
+export type HousingChoiceCard = {
   id: string;
+  icon: LucideIcon;
   title: string;
   description: string;
   /** Only rendered when the active persona is Student. */
   studentOnly?: boolean;
 };
 
-/** Categories, strictly these four — the fourth is persona-gated. */
-export const FIND_HOUSING_CATEGORIES: HousingCategory[] = [
+/** Group 1 — "Find the duration that suits your needs". Each has a resource list (see durationResources). */
+export const DURATION_CARDS: HousingChoiceCard[] = [
+  {
+    id: "temporary",
+    icon: Calendar,
+    title: "Temporary (days - weeks)",
+    description: "Best for very short stays. High flexibility. Higher nightly rates.",
+  },
+  {
+    id: "short-term",
+    icon: Briefcase,
+    title: "Short-term (1-6 months)",
+    description: "Best for extended stays with flexibility. Good for transition periods.",
+  },
+  {
+    id: "long-term",
+    icon: Home,
+    title: "Long-term (6+ months)",
+    description: "Best for stability and better rates. Ideal for settling down.",
+  },
+];
+
+/** Group 2 — "Find the type of housing that suits your needs". Strictly these four — the fourth is persona-gated. */
+export const HOUSING_TYPE_CARDS: HousingChoiceCard[] = [
   {
     id: "managed",
+    icon: Building2,
     title: "Managed Buildings",
-    description:
-      "Property management companies operating full apartment complexes. A formal application and standard lease, with centralized or on-site staff for repairs and requests.",
+    description: "Rent from property management companies.",
   },
   {
     id: "owner",
-    title: "Owner-Owned Units",
-    description:
-      "Private landlords renting an entire apartment or house they own directly, rather than through a management company.",
+    icon: Key,
+    title: "Owner-owned units",
+    description: "Rent directly from landlords or owners.",
   },
   {
     id: "rooms",
-    title: "Rooms & Shared Accommodations",
-    description:
-      "A private room within a shared residence, with common areas such as the kitchen and bathroom shared with other occupants.",
+    icon: Users,
+    title: "Rooms & shared housing",
+    description: "Share space and costs with others.",
   },
   {
     id: "university",
-    title: "University Housing Boards",
+    icon: GraduationCap,
+    title: "University housing boards",
     description:
       "Off-campus listing boards and housing offices run by a university, generally restricted to students with a current login.",
     studentOnly: true,
   },
 ];
 
-export const FIND_HOUSING_NOTE =
-  "If you need somewhere to stay right away, short-term or furnished housing can bridge the gap until you secure permanent housing — treat it as a starting point, not a deadline.";
+export type HousingResource = {
+  name: string;
+  url: string;
+  description: string;
+};
 
-export type ResourceLink = { name: string; note: string };
+export type DurationResources = {
+  id: "temporary" | "short-term" | "long-term";
+  resources: HousingResource[];
+};
 
-/** General, non-commercial pointers for where people look — no curated inventory. */
-export const FIND_HOUSING_RESOURCES: ResourceLink[] = [
+/** Resource lists shown in the "Learn more" detail view for each duration card. */
+export const durationResources: DurationResources[] = [
   {
-    name: "General listing sites",
-    note: "Aggregate inventory spanning managed buildings and owner-listed units.",
+    id: "temporary",
+    resources: [
+      {
+        name: "Toronto Shelter System",
+        url: "https://www.toronto.ca/community-people/housing-shelter/",
+        description: "Emergency housing and relief services for immediate shelter needs",
+      },
+      {
+        name: "Hostelworld",
+        url: "https://www.hostelworld.com",
+        description: "Budget hostel accommodations suitable for short initial stays.",
+      },
+      {
+        name: "Blueground Toronto",
+        url: "https://www.theblueground.com/furnished-apartments-toronto",
+        description: "Furnished apartments with flexible stays.",
+      },
+      {
+        name: "Airbnb",
+        url: "https://www.airbnb.ca",
+        description: "Short-term residential rentals booked directly with local home hosts",
+      },
+      {
+        name: "Trivago",
+        url: "https://www.trivago.ca",
+        description: "Hotel price comparison platform",
+      },
+      {
+        name: "Expedia",
+        url: "https://www.expedia.ca",
+        description: "Travel booking platform for hotels and short stays.",
+      },
+      {
+        name: "Booking.com",
+        url: "https://www.booking.com",
+        description: "Booking platform for hotels and temporary accommodation.",
+      },
+      {
+        name: "Hotels.com",
+        url: "https://ca.hotels.com",
+        description: "Hotel booking platform.",
+      },
+      {
+        name: "Trip.com",
+        url: "https://www.trip.com",
+        description: "Hotel and accommodation booking platform",
+      },
+      {
+        name: "Priceline",
+        url: "https://www.priceline.com",
+        description: "Discount travel service offering hotel room deals and bookings.",
+      },
+    ],
   },
   {
-    name: "Community and neighbourhood groups",
-    note: "Often used for rooms and sublets — verify identity before sending anything.",
+    id: "short-term",
+    resources: [
+      {
+        name: "Happipad",
+        url: "https://www.happipad.com",
+        description: "Home-sharing platform connecting renters with hosts.",
+      },
+      {
+        name: "Roomies",
+        url: "https://www.roomies.ca",
+        description: "Shared housing and room rentals.",
+      },
+      {
+        name: "Zumper",
+        url: "https://www.zumper.com",
+        description: "Rental marketplace with short-term and furnished options.",
+      },
+      {
+        name: "Craigslist Sublets",
+        url: "https://www.craigslist.org/search/area/toronto?cat=sub#search=2~gallery~0",
+        description: "Peer-to-peer sublets and temporary rentals.",
+      },
+      {
+        name: "Facebook Marketplace",
+        url: "https://www.facebook.com/marketplace",
+        description: "Peer-to-peer rooms, sublets, and lease takeovers.",
+      },
+    ],
   },
   {
-    name: "Room-share and roommate-matching apps",
-    note: "Useful for matching on lifestyle before you know anyone in the city.",
-  },
-  {
-    name: "Municipal or settlement-agency housing help",
-    note: "Free, non-commercial help desks that can point you to local rental resources.",
-  },
-];
-
-/** Shown only when persona === "Student". */
-export const FIND_HOUSING_STUDENT_RESOURCES: ResourceLink[] = [
-  {
-    name: "University housing office",
-    note: "Staff can review a lease and explain what's typical near campus.",
-  },
-  {
-    name: "Student union and program group chats",
-    note: "Sublets from students leaving for a term — confirm the person is a current student before proceeding.",
+    id: "long-term",
+    resources: [
+      {
+        name: "Rentals.ca",
+        url: "https://rentals.ca",
+        description: "Canadian rental marketplace for apartments and homes.",
+      },
+      {
+        name: "Realtor.ca",
+        url: "https://www.realtor.ca",
+        description: "Real estate portal with agent-listed rental properties.",
+      },
+      {
+        name: "PadMapper",
+        url: "https://www.padmapper.com",
+        description: "Map-based rental search tool.",
+      },
+      {
+        name: "liv.rent",
+        url: "https://www.liv.rent",
+        description: "Rental platform with landlord and listing verification features.",
+      },
+      {
+        name: "Apartments.com",
+        url: "https://www.apartments.com",
+        description: "Large database of apartment rentals.",
+      },
+      {
+        name: "Viewit.ca",
+        url: "https://www.viewit.ca",
+        description: "Apartment rental directory, especially useful for managed buildings.",
+      },
+      {
+        name: "RentSeeker",
+        url: "https://www.rentseeker.ca",
+        description: "Rental listings for apartments and multi-family buildings.",
+      },
+      {
+        name: "4Rent.ca",
+        url: "https://www.4rent.ca",
+        description: "Listings for apartments and managed rental buildings.",
+      },
+      {
+        name: "Condos.ca",
+        url: "https://condos.ca",
+        description: "Toronto condo rental listings.",
+      },
+      {
+        name: "Strata.ca",
+        url: "https://www.strata.ca",
+        description: "Condo rental and real estate listings.",
+      },
+      {
+        name: "HouseSigma",
+        url: "https://housesigma.com",
+        description: "Real estate data and property listings, including rentals.",
+      },
+      {
+        name: "Property.ca",
+        url: "https://www.property.ca",
+        description: "Real estate platform with residential rental listings.",
+      },
+      {
+        name: "Kijiji Real Estate",
+        url: "https://www.kijiji.ca/h-real-estate/108",
+        description: "Classified listings including private landlord rentals.",
+      },
+    ],
   },
 ];
 
