@@ -27,6 +27,7 @@ import {
 import { Disclosure, DisclaimerBadge, StaticDisclaimer, GuidanceDisclaimer } from "./primitives";
 import { SourceCite } from "./source-cite";
 import { NeighbourhoodSnapshotWidget } from "./neighbourhood-snapshot";
+import { CheckThePlaceReport } from "./check-the-place-report";
 import { cn } from "@/lib/utils";
 
 const CATEGORY_ICONS: Record<string, typeof Building2> = {
@@ -198,6 +199,7 @@ export function ColumnTwo() {
           summary="Document prep and scam-avoidance checks — factual, non-speculative"
         >
           <div className="space-y-4">
+            <CheckThePlaceReport />
             {VERIFY_THE_PLACE_GROUPS.map((g) => (
               <div key={g.id} className="surface p-4">
                 <div className="mb-2 flex items-center justify-between gap-2">
