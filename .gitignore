@@ -35,3 +35,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Claude code skills
+.claude1/skills
