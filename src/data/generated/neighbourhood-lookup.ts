@@ -63,10 +63,6 @@ export const NEIGHBOURHOOD_SNAPSHOTS: NeighbourhoodSnapshot[] = (
   }))
   .sort((a, b) => a.areaName.localeCompare(b.areaName));
 
-export const NEIGHBOURHOOD_BY_ID: Map<number, NeighbourhoodSnapshot> = new Map(
-  NEIGHBOURHOOD_SNAPSHOTS.map((n) => [n.hoodId, n]),
-);
-
 export const SAFETY_META: {
   status: DataStatus;
   level: DataLevel;

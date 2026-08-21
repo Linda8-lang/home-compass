@@ -16,9 +16,8 @@ const STATUS_COPY: Record<DataStatus, { label: string; tone: "verified" | "cauti
 };
 
 /**
- * Freshness pill for one ingested data source. Shared by the modal below and by
- * NeighbourhoodSnapshotWidget's group headings, so both places agree on wording.
- * Deliberately never uses text-destructive — none of these three states are an
+ * Freshness pill for one ingested data source, shared by the modal below and by
+ * other data-citation call sites. Deliberately never uses text-destructive — none of these three states are an
  * error the user needs to be alarmed by, that token is reserved for scam warnings
  * and hard failures elsewhere in the app.
  */

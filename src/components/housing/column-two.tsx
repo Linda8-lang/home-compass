@@ -3,7 +3,6 @@ import {
   Home,
   Users,
   GraduationCap,
-  ShieldCheck,
   MapPin,
   Sparkles,
   Wallet,
@@ -22,11 +21,8 @@ import {
   FIND_HOUSING_RESOURCES,
   FIND_HOUSING_STUDENT_RESOURCES,
   COMPARE_HOUSING_GROUPS,
-  VERIFY_THE_PLACE_GROUPS,
 } from "@/data/housing-sections";
 import { Disclosure, DisclaimerBadge, StaticDisclaimer, GuidanceDisclaimer } from "./primitives";
-import { SourceCite } from "./source-cite";
-import { NeighbourhoodSnapshotWidget } from "./neighbourhood-snapshot";
 import { CheckThePlaceReport } from "./check-the-place-report";
 import { cn } from "@/lib/utils";
 
@@ -145,7 +141,6 @@ export function ColumnTwo() {
           summary="A factual evaluation checklist, plus real neighbourhood crime and rent data — no listings, cards, prices, or addresses"
         >
           <div className="space-y-4">
-            <NeighbourhoodSnapshotWidget />
             {COMPARE_HOUSING_GROUPS.map((g) => {
               const GroupIcon = CRITERION_GROUP_ICONS[g.id] ?? Home;
               return (
@@ -196,31 +191,10 @@ export function ColumnTwo() {
       <div id={verifySection.anchor}>
         <Disclosure
           title={<SectionEyebrow eyebrow={verifySection.eyebrow} title={verifySection.title} />}
-          summary="Document prep and scam-avoidance checks — factual, non-speculative"
+          summary="Real neighbourhood crime and rent data for an address — factual, non-speculative"
         >
           <div className="space-y-4">
             <CheckThePlaceReport />
-            {VERIFY_THE_PLACE_GROUPS.map((g) => (
-              <div key={g.id} className="surface p-4">
-                <div className="mb-2 flex items-center justify-between gap-2">
-                  <h3 className="text-sm font-semibold uppercase tracking-wide text-secondary-foreground">
-                    {g.title}
-                  </h3>
-                  {g.id === "documents" && <SourceCite metric="depositRules" compact />}
-                </div>
-                <ul className="space-y-2">
-                  {g.items.map((it) => (
-                    <li
-                      key={it.id}
-                      className="flex gap-2 text-sm leading-relaxed text-secondary-foreground"
-                    >
-                      <ShieldCheck className="mt-0.5 size-3.5 shrink-0 text-verified" aria-hidden />
-                      {it.label}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
           </div>
         </Disclosure>
       </div>

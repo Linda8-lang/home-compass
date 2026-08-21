@@ -109,7 +109,7 @@ function EmptyState({ children }: { children: ReactNode }) {
 }
 
 /**
- * Static-lane only, same as NeighbourhoodSnapshotWidget — reads the promoted TPS/CKAN
+ * Static-lane only — reads the promoted TPS/CKAN
  * (and, once populated, CMHC) JSON directly and must never be threaded into
  * src/routes/api/advisor.ts's context.
  *
