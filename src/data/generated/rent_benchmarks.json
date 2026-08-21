@@ -1,7 +1,7 @@
 {
   "data_status": "ok",
   "data_level": "neighbourhood",
-  "last_updated": "2026-08-20T07:54:44.745Z",
+  "last_updated": "2026-08-21T12:06:16.606Z",
   "source": {
     "name": "City of Toronto Open Data — Neighbourhood Profiles (2021 Census, 158-model)",
     "endpoint": "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/6e19a90f-971c-46b3-852c-0c48c436d1fc/resource/19d4a806-7385-4889-acf2-256f1e079060/download/nbhd_2021_census_profile_full_158model.xlsx",

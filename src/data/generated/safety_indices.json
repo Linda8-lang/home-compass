@@ -1,7 +1,7 @@
 {
   "data_status": "ok",
   "data_level": "neighbourhood",
-  "last_updated": "2026-08-20T07:54:36.249Z",
+  "last_updated": "2026-08-21T12:06:10.197Z",
   "source": {
     "name": "Toronto Police Service — Neighbourhood Crime Rates Open Data",
     "endpoint": "https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/Neighbourhood_Crime_Rates_Open_Data/FeatureServer/0/query",
