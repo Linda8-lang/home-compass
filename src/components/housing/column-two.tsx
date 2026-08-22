@@ -14,6 +14,7 @@ import { HOUSING_SECTIONS, COMPARE_HOUSING_GROUPS } from "@/data/housing-section
 import { Disclosure, DisclaimerBadge, StaticDisclaimer, GuidanceDisclaimer } from "./primitives";
 import { CheckThePlaceReport } from "./check-the-place-report";
 import { ChooseHousingSection } from "./choose-housing";
+import { CostBreakdown } from "./cost-breakdown";
 import { cn } from "@/lib/utils";
 
 /** One icon per Evaluate Housing group, keyed by CriterionGroup.id — purely visual scanning aid. */
@@ -66,6 +67,36 @@ export function ColumnTwo() {
           <div className="space-y-4">
             {COMPARE_HOUSING_GROUPS.map((g) => {
               const GroupIcon = CRITERION_GROUP_ICONS[g.id] ?? Home;
+
+              if (g.id === "costs") {
+                return (
+                  <div key={g.id} className="surface p-4">
+                    <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-secondary-foreground">
+                      <GroupIcon className="size-3.5 shrink-0 text-primary" aria-hidden />
+                      {g.title}
+                    </h3>
+                    <div className="space-y-3">
+                      {g.criteria.map((c) => (
+                        <div key={c.id}>
+                          <p className="text-sm font-semibold text-foreground">{c.label}</p>
+                          <p className="text-sm leading-relaxed text-secondary-foreground">
+                            {c.bullet}
+                          </p>
+                          {c.note && (
+                            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                              Note: {c.note}
+                            </p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-3">
+                      <CostBreakdown />
+                    </div>
+                  </div>
+                );
+              }
+
               return (
                 <div key={g.id} className="surface p-4">
                   <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-secondary-foreground">
@@ -94,7 +125,7 @@ export function ColumnTwo() {
                         </div>
                         <button
                           type="button"
-                          onClick={() => askAdvisor(c.askAdvisorPrompt)}
+                          onClick={() => c.askAdvisorPrompt && askAdvisor(c.askAdvisorPrompt)}
                           className="inline-flex shrink-0 items-center gap-1 self-start rounded-full border border-advisor/40 bg-advisor-soft/50 px-2.5 py-1 text-[11px] font-semibold text-advisor transition-colors hover:bg-advisor-soft"
                         >
                           <Sparkles className="size-3" aria-hidden />

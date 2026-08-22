@@ -1,4 +1,17 @@
-import { Calendar, Briefcase, Home, Building2, Key, Users, GraduationCap, type LucideIcon } from "lucide-react";
+import {
+  Calendar,
+  Briefcase,
+  Home,
+  Building2,
+  Key,
+  Users,
+  GraduationCap,
+  Zap,
+  Wifi,
+  ShieldCheck,
+  Package,
+  type LucideIcon,
+} from "lucide-react";
 
 /**
  * Static reference data for the Housing section's Column 2 (Static Reference Lane).
@@ -281,8 +294,8 @@ export type EvaluationCriterion = {
   bullet: string;
   /** Optional secondary detail, rendered smaller/muted below the bullet. */
   note?: string;
-  /** Pre-filled question offered via the "Ask the AI Advisor about this" affordance. */
-  askAdvisorPrompt: string;
+  /** Pre-filled question offered via the "Ask the AI Advisor about this" affordance. Omitted for the static, calculator-backed "costs" group. */
+  askAdvisorPrompt?: string;
 };
 
 export type CriterionGroup = {
@@ -290,6 +303,46 @@ export type CriterionGroup = {
   title: string;
   criteria: EvaluationCriterion[];
 };
+
+/**
+ * Fields for the "Total Housing Costs" calculator (see CostBreakdown component).
+ * All defaults are 0 — this is a user-input tool, not a data display, so nothing
+ * here should read as a "typical" figure.
+ */
+export type CostBreakdownItem = {
+  id: string;
+  icon: LucideIcon;
+  label: string;
+  /** True for costs that vary a lot by unit (e.g. rent) vs. a smaller predictable range. */
+  isVariable: boolean;
+  defaultValue: number;
+};
+
+export const COST_BREAKDOWN_ITEMS: CostBreakdownItem[] = [
+  { id: "rent", icon: Home, label: "Rent", isVariable: true, defaultValue: 0 },
+  {
+    id: "utilities",
+    icon: Zap,
+    label: "Utilities — Heat, Hydro, Water",
+    isVariable: false,
+    defaultValue: 0,
+  },
+  { id: "internet", icon: Wifi, label: "Internet", isVariable: false, defaultValue: 0 },
+  {
+    id: "insurance",
+    icon: ShieldCheck,
+    label: "Renter's Insurance",
+    isVariable: false,
+    defaultValue: 0,
+  },
+  {
+    id: "misc",
+    icon: Package,
+    label: "Misc — Furniture, Supplies",
+    isVariable: false,
+    defaultValue: 0,
+  },
+];
 
 /** No listings, cards, prices or addresses — a factual evaluation checklist only. */
 export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
@@ -316,7 +369,7 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
         label: "Rent & Extras",
         bullet:
           "Confirm which utilities (heat, hydro, water) are included in the rent, and budget separately for additional costs like internet, tenant insurance, and basic kitchen setup.",
-        askAdvisorPrompt: "How do I figure out my true monthly housing cost beyond just the rent?",
+        note: "Use the calculator below to estimate your own monthly housing cost. Enter your own numbers — these are not typical or average figures.",
       },
     ],
   },
