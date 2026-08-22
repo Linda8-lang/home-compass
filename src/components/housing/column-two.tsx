@@ -14,6 +14,7 @@ import { HOUSING_SECTIONS, COMPARE_HOUSING_GROUPS } from "@/data/housing-section
 import { Disclosure, DisclaimerBadge, StaticDisclaimer, GuidanceDisclaimer } from "./primitives";
 import { CheckThePlaceReport } from "./check-the-place-report";
 import { ChooseHousingSection } from "./choose-housing";
+import { CostBreakdown } from "./cost-breakdown";
 import { cn } from "@/lib/utils";
 
 /** One icon per Evaluate Housing group, keyed by CriterionGroup.id — purely visual scanning aid. */
@@ -66,6 +67,38 @@ export function ColumnTwo() {
           <div className="space-y-4">
             {COMPARE_HOUSING_GROUPS.map((g) => {
               const GroupIcon = CRITERION_GROUP_ICONS[g.id] ?? Home;
+
+              // Special render for Costs section with interactive component
+              if (g.id === "costs") {
+                return (
+                  <div key={g.id} className="surface p-4">
+                    <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-secondary-foreground">
+                      <GroupIcon className="size-3.5 shrink-0 text-primary" aria-hidden />
+                      {g.title}
+                    </h3>
+
+                    {/* Show the static criterion description */}
+                    {g.criteria.map((c) => (
+                      <div key={c.id} className="mb-4">
+                        <p className="text-sm font-semibold text-foreground mb-2">{c.label}</p>
+                        <p className="text-sm leading-relaxed text-secondary-foreground mb-3">
+                          {c.bullet}
+                        </p>
+                        {c.note && (
+                          <p className="text-xs leading-relaxed text-muted-foreground mb-4">
+                            Note: {c.note}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+
+                    {/* NEW: Interactive cost breakdown */}
+                    <CostBreakdown />
+                  </div>
+                );
+              }
+
+              // Default render for other groups
               return (
                 <div key={g.id} className="surface p-4">
                   <h3 className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-secondary-foreground">
@@ -92,14 +125,16 @@ export function ColumnTwo() {
                             </p>
                           )}
                         </div>
-                        <button
-                          type="button"
-                          onClick={() => askAdvisor(c.askAdvisorPrompt)}
-                          className="inline-flex shrink-0 items-center gap-1 self-start rounded-full border border-advisor/40 bg-advisor-soft/50 px-2.5 py-1 text-[11px] font-semibold text-advisor transition-colors hover:bg-advisor-soft"
-                        >
-                          <Sparkles className="size-3" aria-hidden />
-                          Ask the AI Advisor
-                        </button>
+                        {c.askAdvisorPrompt && (
+                          <button
+                            type="button"
+                            onClick={() => askAdvisor(c.askAdvisorPrompt)}
+                            className="inline-flex shrink-0 items-center gap-1 self-start rounded-full border border-advisor/40 bg-advisor-soft/50 px-2.5 py-1 text-[11px] font-semibold text-advisor transition-colors hover:border-advisor/60 hover:bg-advisor-soft"
+                          >
+                            <Sparkles className="size-3" aria-hidden />
+                            Ask the AI Advisor
+                          </button>
+                        )}
                       </li>
                     ))}
                   </ul>
