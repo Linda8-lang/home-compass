@@ -15,7 +15,6 @@ import { CheckThePlaceReport } from "./check-the-place-report";
 import { ChooseHousingSection } from "./choose-housing";
 import { CostBreakdown } from "./cost-breakdown";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useReviewedCriteria } from "./use-reviewed-criteria";
 import { cn } from "@/lib/utils";
 
 /** One icon per Evaluate Housing group, keyed by CriterionGroup.id — purely visual scanning aid. */
@@ -37,9 +36,8 @@ const CRITERION_GROUP_ICONS: Record<string, typeof Home> = {
  * src/data/housing-sections.ts, and nothing here resembles a listing card.
  */
 export function ColumnTwo() {
-  const { filters } = useFlow();
+  const { filters, isCriterionReviewed: isReviewed, toggleCriterionReviewed: toggle } = useFlow();
   const isStudent = filters.status === "student";
-  const { isReviewed, toggle } = useReviewedCriteria();
 
   const findSection = HOUSING_SECTIONS[0]!;
   const compareSection = HOUSING_SECTIONS[1]!;
