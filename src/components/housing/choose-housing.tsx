@@ -10,9 +10,8 @@ import {
 
 /**
  * Shared card for both the duration group and the housing-type group. `onLearnMore`
- * omitted renders the "Learn more" affordance as visually present but inert — the
- * housing-type cards have no destination today, and this column stays static/AI-free
- * (see two-lane architecture boundary), so it must not gain new behavior.
+ * omitted renders the card with no "Learn more" affordance at all — the housing-type
+ * cards have no destination today, so there's nothing for it to open.
  */
 function HousingCard({
   card,
@@ -41,7 +40,7 @@ function HousingCard({
         )}
       </div>
       <p className="text-sm leading-relaxed text-muted-foreground">{card.description}</p>
-      {onLearnMore ? (
+      {onLearnMore && (
         <button
           type="button"
           onClick={onLearnMore}
@@ -50,11 +49,6 @@ function HousingCard({
           Learn more
           <ChevronRight className="size-4" aria-hidden />
         </button>
-      ) : (
-        <span className="mt-auto inline-flex w-fit items-center gap-1 text-sm font-semibold text-primary/70">
-          Learn more
-          <ChevronRight className="size-4" aria-hidden />
-        </span>
       )}
     </article>
   );

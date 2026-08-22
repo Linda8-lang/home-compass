@@ -134,14 +134,7 @@ export function ColumnTwo() {
       </div>
 
       <div id={verifySection.anchor}>
-        <Disclosure
-          title={<SectionEyebrow eyebrow={verifySection.eyebrow} title={verifySection.title} />}
-          summary="Real neighbourhood crime and rent data for an address — factual, non-speculative"
-        >
-          <div className="space-y-4">
-            <CheckThePlaceReport />
-          </div>
-        </Disclosure>
+        <CheckThePlaceReport />
       </div>
 
       <div className="space-y-2 border-t border-border pt-4">
