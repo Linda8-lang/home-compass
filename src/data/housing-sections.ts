@@ -1,4 +1,4 @@
-import { Calendar, Briefcase, Home, Building2, Key, Users, GraduationCap, type LucideIcon } from "lucide-react";
+import { Calendar, Briefcase, Home, Building2, Key, Users, GraduationCap, Zap, Wifi, ShieldCheck, Package, type LucideIcon } from "lucide-react";
 
 /**
  * Static reference data for the Housing section's Column 2 (Static Reference Lane).
@@ -282,7 +282,7 @@ export type EvaluationCriterion = {
   /** Optional secondary detail, rendered smaller/muted below the bullet. */
   note?: string;
   /** Pre-filled question offered via the "Ask the AI Advisor about this" affordance. */
-  askAdvisorPrompt: string;
+  askAdvisorPrompt?: string;
 };
 
 export type CriterionGroup = {
@@ -290,6 +290,47 @@ export type CriterionGroup = {
   title: string;
   criteria: EvaluationCriterion[];
 };
+
+export type CostBreakdownItem = {
+  label: string;
+  icon: LucideIcon;
+  default: number; // default amount in CAD
+  isVariable?: boolean; // rent=true, others=false
+};
+
+/** Cost breakdown items for the interactive calculator. */
+export const COST_BREAKDOWN_ITEMS: CostBreakdownItem[] = [
+  {
+    label: "Rent (Base)",
+    icon: Home,
+    default: 2000,
+    isVariable: true,
+  },
+  {
+    label: "Utilities (Heat, Hydro, Water)",
+    icon: Zap,
+    default: 150,
+    isVariable: false,
+  },
+  {
+    label: "Internet",
+    icon: Wifi,
+    default: 60,
+    isVariable: false,
+  },
+  {
+    label: "Renter's Insurance",
+    icon: ShieldCheck,
+    default: 25,
+    isVariable: false,
+  },
+  {
+    label: "Misc (Furniture, Supplies)",
+    icon: Package,
+    default: 120,
+    isVariable: false,
+  },
+];
 
 /** No listings, cards, prices or addresses — a factual evaluation checklist only. */
 export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
@@ -316,7 +357,7 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
         label: "Rent & Extras",
         bullet:
           "Confirm which utilities (heat, hydro, water) are included in the rent, and budget separately for additional costs like internet, tenant insurance, and basic kitchen setup.",
-        askAdvisorPrompt: "How do I figure out my true monthly housing cost beyond just the rent?",
+        note: "Use the breakdown below to estimate your true monthly housing cost. Actual amounts vary by building, location, and personal choices.",
       },
     ],
   },
