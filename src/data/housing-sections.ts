@@ -294,8 +294,6 @@ export type EvaluationCriterion = {
   bullet: string;
   /** Optional secondary detail, rendered smaller/muted below the bullet. */
   note?: string;
-  /** Pre-filled question offered via the "Ask the AI Advisor about this" affordance. Omitted for the static, calculator-backed "costs" group. */
-  askAdvisorPrompt?: string;
 };
 
 export type CriterionGroup = {
@@ -355,8 +353,6 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
         label: "Entire Unit",
         bullet: "Full privacy and control over your space.",
         note: "Landlords are legally responsible for building repairs and structural maintenance, while tenants pay rent and selected utility bills.",
-        askAdvisorPrompt:
-          "What's the difference between what a landlord must maintain and what I'm responsible for as a tenant?",
       },
     ],
   },
@@ -382,31 +378,24 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
         label: "Transit vs. Driving",
         bullet:
           "Check proximity to subways/streetcars if taking public transit, or highway access if driving.",
-        askAdvisorPrompt:
-          "I'm not sure yet if I'll need a car — how should that affect where I look?",
       },
       {
         id: "winter-ttc-delays",
         label: "Winter & TTC Delays",
         bullet:
           "Account for outdoor wait times in winter, severe TTC delays, crowding during peak hours, and route detours.",
-        askAdvisorPrompt: "How should I think about this commute differently once winter hits?",
       },
       {
         id: "rideshare-carpooling",
         label: "Rideshare / Carpooling",
         bullet:
           "Allow buffer time for carpool/rideshare apps — driver cancellations and inaccurate ETAs are common.",
-        askAdvisorPrompt:
-          "What should I account for if I'm planning to carpool or rely on rideshare instead of transit?",
       },
       {
         id: "bike-lanes",
         label: "Bike Lanes",
         bullet:
           "Ride on streets with dedicated bike lanes for safety (cycling on sidewalks is illegal).",
-        askAdvisorPrompt:
-          "Is cycling a realistic and safe commute option for this kind of route in Toronto?",
       },
     ],
   },
@@ -419,24 +408,18 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
         label: "Lease Strategy",
         bullet:
           "Short-term or furnished housing lets newcomers explore neighborhoods before locking into a long-term lease.",
-        askAdvisorPrompt:
-          "Does a short first lease make sense for my situation, or should I commit to a full year?",
       },
       {
         id: "rent-control-limits",
         label: "Rent Control Limits",
         bullet:
           "Buildings first occupied after November 15, 2018, have NO cap on annual rent increases. Older buildings are subject to the annual city/provincial rent increase cap.",
-        askAdvisorPrompt:
-          "How do I find out whether a specific building is exempt from Ontario's rent increase guideline?",
       },
       {
         id: "credit-alternatives",
         label: "Credit Alternatives",
         bullet:
           "If lacking local credit history or a local job offer, stand out by offering a guarantor/co-signer, bank statements, or paying rent upfront.",
-        askAdvisorPrompt:
-          "I have no local credit history — what can I offer instead of a guarantor?",
       },
     ],
   },
@@ -449,8 +432,6 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
         label: "Application Packet",
         bullet:
           "Bring proof of income (pay stubs or offer letter) and recent bank statements showing sufficient funds.",
-        askAdvisorPrompt:
-          "What counts as acceptable proof of income for a Toronto landlord if I just started my job?",
       },
     ],
   },
@@ -463,8 +444,6 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
         label: "Initial Buffer",
         bullet:
           "Consider a 3-to-6-month lease first to complete SIN/ID processing, job search, and neighborhood evaluation before committing to 12 months.",
-        askAdvisorPrompt:
-          "What should I be evaluating during a short first lease before I decide where to settle long-term?",
       },
     ],
   },
@@ -476,16 +455,12 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
         id: "property-age",
         label: "Property Age",
         bullet: "Older properties typically offer more rent flexibility than brand-new builds.",
-        askAdvisorPrompt:
-          "How should I approach negotiating rent on an older building versus a new one?",
       },
       {
         id: "property-management",
         label: "Property Management",
         bullet:
           "Independently owned properties are usually more open to negotiation than corporate-managed complexes.",
-        askAdvisorPrompt:
-          "How should I approach negotiating with an independent landlord versus a corporate management company?",
       },
     ],
   },
@@ -498,8 +473,6 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
         label: "Landlord Priorities",
         bullet:
           "Frame your application around what landlords care about most: paying rent on time, taking care of the property, and avoiding long vacancies.",
-        askAdvisorPrompt:
-          "How do I position myself as a strong applicant with no Canadian rental history?",
       },
     ],
   },
