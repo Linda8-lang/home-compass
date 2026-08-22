@@ -1,8 +1,9 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Calculator } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { COST_BREAKDOWN_ITEMS } from "@/data/housing-sections";
 import { cn } from "@/lib/utils";
+import { useFlow } from "./flow-state";
 
 /** Generous, non-suggestive ranges — wide enough that no bound reads as a "typical" value. */
 const SLIDER_MAX: Record<string, number> = {
@@ -25,14 +26,9 @@ const CAD_FORMATTER = new Intl.NumberFormat("en-CA", {
  * value here should ever be read as a typical or average figure.
  */
 export function CostBreakdown() {
-  const [values, setValues] = useState<Record<string, number>>(() =>
-    Object.fromEntries(COST_BREAKDOWN_ITEMS.map((item) => [item.id, item.defaultValue])),
-  );
+  const { costValues: values, setCostValue } = useFlow();
 
-  const total = useMemo(
-    () => Object.values(values).reduce((sum, v) => sum + v, 0),
-    [values],
-  );
+  const total = useMemo(() => Object.values(values).reduce((sum, v) => sum + v, 0), [values]);
 
   return (
     <div className="surface space-y-4 p-4">
@@ -57,9 +53,7 @@ export function CostBreakdown() {
                 </span>
                 <span className="text-sm font-semibold text-foreground">
                   {CAD_FORMATTER.format(value)}
-                  <span className="ml-1 text-xs font-normal text-muted-foreground">
-                    ({pct}%)
-                  </span>
+                  <span className="ml-1 text-xs font-normal text-muted-foreground">({pct}%)</span>
                 </span>
               </div>
 
@@ -75,9 +69,7 @@ export function CostBreakdown() {
                 min={0}
                 max={max}
                 step={10}
-                onValueChange={([v]) =>
-                  setValues((prev) => ({ ...prev, [item.id]: v ?? 0 }))
-                }
+                onValueChange={([v]) => setCostValue(item.id, v ?? 0)}
                 aria-label={item.label}
               />
             </div>
