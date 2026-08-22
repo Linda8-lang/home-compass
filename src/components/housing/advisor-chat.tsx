@@ -6,6 +6,7 @@ import { JOURNEY_STAGES } from "@/data/journey";
 import { SAMPLE_CONVERSATIONS, type SampleConversation } from "@/data/advisor-samples";
 import { cn } from "@/lib/utils";
 import { Disclosure, LearnMore, DisclaimerBadge } from "./primitives";
+import { ADVISOR_LIMITS, questionsUsed } from "@/lib/advisor-limits";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -22,9 +23,23 @@ function useAdvisor() {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const used = questionsUsed(messages);
+  const remaining = Math.max(0, ADVISOR_LIMITS.maxQuestionsPerSession - used);
+
+  function reset() {
+    setMessages([]);
+    setError(null);
+  }
+
   async function send(text: string) {
-    const content = text.trim();
+    const content = text.trim().slice(0, ADVISOR_LIMITS.maxCharsPerMessage);
     if (!content || pending) return;
+    if (remaining === 0) {
+      setError(
+        `You have used all ${ADVISOR_LIMITS.maxQuestionsPerSession} questions for this conversation. Start a new one to continue.`,
+      );
+      return;
+    }
     setError(null);
     const next: Msg[] = [...messages, { role: "user", content }];
     setMessages(next);
@@ -73,7 +88,7 @@ function useAdvisor() {
     }
   }
 
-  return { messages, setMessages, pending, error, send };
+  return { messages, setMessages, pending, error, send, remaining, used, reset };
 }
 
 function scrollToSection(anchor: string) {
@@ -84,7 +99,7 @@ function scrollToSection(anchor: string) {
 /** The conversation surface: transcript, suggestions and composer. */
 export function AdvisorConversation({ className }: { className?: string }) {
   const { advisorPrompt, clearAdvisorPrompt } = useFlow();
-  const { messages, setMessages, pending, error, send } = useAdvisor();
+  const { messages, setMessages, pending, error, send, remaining, reset } = useAdvisor();
   const [input, setInput] = useState("");
   const [sample, setSample] = useState<SampleConversation | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -265,8 +280,12 @@ export function AdvisorConversation({ className }: { className?: string }) {
           <input
             ref={inputRef}
             value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask the advisor a question…"
+            onChange={(e) => setInput(e.target.value.slice(0, ADVISOR_LIMITS.maxCharsPerMessage))}
+            maxLength={ADVISOR_LIMITS.maxCharsPerMessage}
+            disabled={remaining === 0}
+            placeholder={
+              remaining === 0 ? "Question limit reached for this conversation" : "Ask the advisor a question…"
+            }
             aria-label="Message the advisor"
             className="h-11 min-w-0 flex-1 bg-transparent px-2.5 text-sm outline-none"
           />
@@ -274,15 +293,26 @@ export function AdvisorConversation({ className }: { className?: string }) {
             type="submit"
             size="icon"
             className="size-10 shrink-0 rounded-xl"
-            disabled={pending || !input.trim()}
+            disabled={pending || !input.trim() || remaining === 0}
           >
             <Send className="size-4" aria-hidden />
             <span className="sr-only">Send</span>
           </Button>
         </div>
-        <p className="mt-2 px-1 text-[11px] text-muted-foreground">
-          Try: deposits, credit history, commute trade-offs, landlord messages.
-        </p>
+        <div className="mt-2 flex items-center justify-between gap-2 px-1 text-[11px] text-muted-foreground">
+          <span>
+            {remaining === 0
+              ? "Question limit reached."
+              : `${remaining} of ${ADVISOR_LIMITS.maxQuestionsPerSession} questions left in this conversation.`}
+          </span>
+          <button
+            type="button"
+            onClick={reset}
+            className="shrink-0 rounded-md px-1.5 py-0.5 font-medium text-advisor underline-offset-2 hover:underline"
+          >
+            New conversation
+          </button>
+        </div>
       </form>
     </div>
   );

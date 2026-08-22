@@ -1,4 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ADVISOR_LIMITS, questionsUsed } from "@/lib/advisor-limits";
+
+/**
+ * In-memory per-IP budget. Best-effort only (resets on redeploy / per worker
+ * instance), but it stops a single client from burning credits in a loop.
+ */
+const ipHits = new Map<string, number[]>();
+
+function overIpBudget(ip: string) {
+  const now = Date.now();
+  const hits = (ipHits.get(ip) ?? []).filter((t) => now - t < ADVISOR_LIMITS.ipWindowMs);
+  hits.push(now);
+  ipHits.set(ip, hits);
+  if (ipHits.size > 5000) ipHits.clear();
+  return hits.length > ADVISOR_LIMITS.maxRequestsPerIpPerWindow;
+}
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -69,6 +85,7 @@ async function callLovable(apiKey: string, history: Msg[], systemLines: string[]
     body: JSON.stringify({
       model: "google/gemini-2.5-flash",
       stream: true,
+      max_tokens: ADVISOR_LIMITS.maxOutputTokens,
       messages: [...systemLines.map((content) => ({ role: "system", content })), ...history],
     }),
   });
@@ -111,6 +128,7 @@ async function callGeminiDirect(apiKey: string, history: Msg[], systemLines: str
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         systemInstruction: { parts: [{ text: systemLines.join("\n\n") }] },
+        generationConfig: { maxOutputTokens: ADVISOR_LIMITS.maxOutputTokens },
         contents: history.map((m) => ({
           role: m.role === "assistant" ? "model" : "user",
           parts: [{ text: m.content }],
@@ -163,12 +181,34 @@ export const Route = createFileRoute("/api/advisor")({
           return errorResponse("Invalid request.", 400);
         }
 
-        const history = (body.messages ?? [])
-          .slice(-12)
-          .filter((m) => typeof m.content === "string");
-        if (history.length === 0) {
+        const all = (body.messages ?? []).filter((m) => typeof m.content === "string");
+        if (all.length === 0) {
           return errorResponse("No message provided.", 400);
         }
+
+        // Hard caps — the client shows these limits, but never trust it.
+        if (questionsUsed(all) > ADVISOR_LIMITS.maxQuestionsPerSession) {
+          return errorResponse(
+            `You have reached this session's limit of ${ADVISOR_LIMITS.maxQuestionsPerSession} questions. Start a new conversation to continue.`,
+            429,
+          );
+        }
+        const latest = all[all.length - 1];
+        if ((latest?.content.length ?? 0) > ADVISOR_LIMITS.maxCharsPerMessage) {
+          return errorResponse(
+            `Questions are limited to ${ADVISOR_LIMITS.maxCharsPerMessage} characters.`,
+            400,
+          );
+        }
+        const ip =
+          request.headers.get("cf-connecting-ip") ??
+          request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+          "unknown";
+        if (overIpBudget(ip)) {
+          return errorResponse("Hourly usage limit reached — please try again later.", 429);
+        }
+
+        const history = all.slice(-ADVISOR_LIMITS.historyTurns);
 
         const systemLines = [
           SYSTEM,
