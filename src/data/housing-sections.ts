@@ -343,8 +343,7 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
       {
         id: "rideshare-carpooling",
         label: "Rideshare / Carpooling",
-        bullet:
-          "Allow buffer time for carpool/rideshare apps — driver cancellations and inaccurate ETAs are common.",
+        bullet: "Extra rideshare time covers delays and inaccurate ETAs",
       },
       {
         id: "bike-lanes",
