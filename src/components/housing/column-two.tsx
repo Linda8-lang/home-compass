@@ -13,9 +13,7 @@ import { HOUSING_SECTIONS, COMPARE_HOUSING_GROUPS } from "@/data/housing-section
 import { Disclosure, DisclaimerBadge, StaticDisclaimer, GuidanceDisclaimer } from "./primitives";
 import { CheckThePlaceReport } from "./check-the-place-report";
 import { ChooseHousingSection } from "./choose-housing";
-import { CostBreakdown } from "./cost-breakdown";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useReviewedCriteria } from "./use-reviewed-criteria";
 import { cn } from "@/lib/utils";
 
 /** One icon per Evaluate Housing group, keyed by CriterionGroup.id — purely visual scanning aid. */
@@ -37,9 +35,8 @@ const CRITERION_GROUP_ICONS: Record<string, typeof Home> = {
  * src/data/housing-sections.ts, and nothing here resembles a listing card.
  */
 export function ColumnTwo() {
-  const { filters } = useFlow();
+  const { filters, isCriterionReviewed: isReviewed, toggleCriterionReviewed: toggle } = useFlow();
   const isStudent = filters.status === "student";
-  const { isReviewed, toggle } = useReviewedCriteria();
 
   const findSection = HOUSING_SECTIONS[0]!;
   const compareSection = HOUSING_SECTIONS[1]!;
@@ -60,7 +57,7 @@ export function ColumnTwo() {
       <div id={findSection.anchor}>
         <Disclosure
           title={<SectionEyebrow eyebrow={findSection.eyebrow} title={findSection.title} />}
-          summary="Pick a duration and a housing type — no risk ratings, no timelines"
+          summary="Pick a duration and a housing type"
           defaultOpen
         >
           <ChooseHousingSection isStudent={isStudent} />
@@ -70,7 +67,7 @@ export function ColumnTwo() {
       <div id={compareSection.anchor}>
         <Disclosure
           title={<SectionEyebrow eyebrow={compareSection.eyebrow} title={compareSection.title} />}
-          summary="A factual evaluation checklist, plus real neighbourhood crime and rent data — no listings, cards, prices, or addresses"
+          summary="A factual checklist covering costs, leases, commute, and documents"
           aside={<ReviewProgressBadge reviewed={reviewedCriteria} total={totalCriteria} />}
         >
           <div className="space-y-4">
@@ -120,11 +117,6 @@ export function ColumnTwo() {
                       </li>
                     ))}
                   </ul>
-                  {g.id === "costs" && (
-                    <div className="mt-3">
-                      <CostBreakdown />
-                    </div>
-                  )}
                 </div>
               );
             })}

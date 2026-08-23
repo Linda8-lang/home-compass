@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import { ChevronRight, GraduationCap, X } from "lucide-react";
+import { Check, ChevronRight, GraduationCap, X } from "lucide-react";
 import {
   DURATION_CARDS,
   HOUSING_TYPE_CARDS,
@@ -7,28 +7,45 @@ import {
   type HousingChoiceCard,
   type DurationResources,
 } from "@/data/housing-sections";
+import { useFlow } from "./flow-state";
+import { cn } from "@/lib/utils";
 
 /**
  * Shared card for both the duration group and the housing-type group. `onLearnMore`
- * omitted renders the card with no "Learn more" affordance at all — the housing-type
- * cards have no destination today, so there's nothing for it to open.
+ * opens the duration resources modal. `onSelect`/`selected` makes the housing-type
+ * cards themselves clickable (single-select) — the selection is lifted into
+ * FlowProvider so the AI Advisor can see which type the user picked.
  */
 function HousingCard({
   card,
   isStudent,
   onLearnMore,
+  onSelect,
+  selected,
 }: {
   card: HousingChoiceCard;
   isStudent: boolean;
   onLearnMore?: () => void;
+  onSelect?: () => void;
+  selected?: boolean;
 }) {
   const Icon = card.icon;
   const showStudentBadge = card.studentOnly && isStudent;
+  const isSelectable = Boolean(onSelect);
 
-  return (
-    <article className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-5">
-      <span className="flex size-10 items-center justify-center rounded-full bg-advisor-soft text-advisor">
-        <Icon className="size-5" aria-hidden />
+  const content = (
+    <>
+      <span
+        className={cn(
+          "flex size-10 items-center justify-center rounded-full bg-advisor-soft text-advisor",
+          selected && "bg-advisor text-white",
+        )}
+      >
+        {selected ? (
+          <Check className="size-5" aria-hidden />
+        ) : (
+          <Icon className="size-5" aria-hidden />
+        )}
       </span>
       <div className="flex flex-wrap items-center gap-2">
         <h3 className="text-base font-bold text-foreground">{card.title}</h3>
@@ -50,6 +67,30 @@ function HousingCard({
           <ChevronRight className="size-4" aria-hidden />
         </button>
       )}
+    </>
+  );
+
+  if (isSelectable) {
+    return (
+      <button
+        type="button"
+        onClick={onSelect}
+        aria-pressed={selected}
+        className={cn(
+          "flex flex-col items-start gap-3 rounded-xl border bg-white p-5 text-left transition-colors",
+          selected
+            ? "border-advisor ring-1 ring-advisor"
+            : "border-gray-200 hover:border-advisor/50",
+        )}
+      >
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <article className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-5">
+      {content}
     </article>
   );
 }
@@ -144,6 +185,7 @@ export function ChooseHousingSection({ isStudent }: { isStudent: boolean }) {
   const [openDurationId, setOpenDurationId] = useState<DurationResources["id"] | null>(null);
   const activeDuration = durationResources.find((d) => d.id === openDurationId) ?? null;
   const activeCard = DURATION_CARDS.find((c) => c.id === openDurationId) ?? null;
+  const { selectedHousingTypeId, setSelectedHousingTypeId } = useFlow();
 
   return (
     <div className="space-y-6">
@@ -160,7 +202,15 @@ export function ChooseHousingSection({ isStudent }: { isStudent: boolean }) {
 
       <CardGroup heading="Find the type of housing that suits your needs">
         {HOUSING_TYPE_CARDS.filter((c) => !c.studentOnly || isStudent).map((card) => (
-          <HousingCard key={card.id} card={card} isStudent={isStudent} />
+          <HousingCard
+            key={card.id}
+            card={card}
+            isStudent={isStudent}
+            selected={selectedHousingTypeId === card.id}
+            onSelect={() =>
+              setSelectedHousingTypeId(selectedHousingTypeId === card.id ? null : card.id)
+            }
+          />
         ))}
       </CardGroup>
 

@@ -18,7 +18,7 @@ const SUGGESTIONS = [
 ];
 
 function useAdvisor() {
-  const { journeyStage, filters } = useFlow();
+  const { journeyStage, filters, advisorAppContext } = useFlow();
   const [messages, setMessages] = useState<Msg[]>([]);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -46,7 +46,12 @@ function useAdvisor() {
     setPending(true);
 
     const journey = JOURNEY_STAGES.find((s) => s.id === journeyStage);
-    const context = `Immigration stage: ${journey?.name ?? journeyStage}. Budget: $${filters.budget}/month in ${filters.city}. Status: ${filters.status}.`;
+    const baseContext = `Immigration stage: ${journey?.name ?? journeyStage}. Budget: $${filters.budget}/month in ${filters.city}. Status: ${filters.status}.`;
+    // advisorAppContext summarizes the user's own interactions in the static lane
+    // (reviewed criteria, their own cost inputs, selected housing type) — read-only
+    // from here, never written back into that state. It deliberately excludes
+    // Check the Place / any curated or ingested data; that boundary is unchanged.
+    const context = advisorAppContext ? `${baseContext} ${advisorAppContext}` : baseContext;
 
     try {
       const res = await fetch("/api/advisor", {
