@@ -8,11 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import type { JourneyStageId } from "@/data/journey";
-import {
-  COMPARE_HOUSING_GROUPS,
-  COST_BREAKDOWN_ITEMS,
-  HOUSING_TYPE_CARDS,
-} from "@/data/housing-sections";
+import { COMPARE_HOUSING_GROUPS, HOUSING_TYPE_CARDS } from "@/data/housing-sections";
 
 /** The three profiles the app personalises for. "student" gates University Housing Boards. */
 export type NewcomerStatus = "student" | "job-offer" | "other";
@@ -53,25 +49,22 @@ type FlowValue = {
    * Shared session state, lifted out of previously component-local state so the
    * AI Advisor can be given an honest picture of what the user has already done
    * in the static lane (Column 2) *as their own interactions* — which criteria
-   * they've reviewed, their own self-entered cost inputs, which housing type
-   * they picked. This is the user's own activity, not curated/ingested data, so
-   * it does not cross the two-lane boundary documented in
-   * docs/user-and-data-flow.md. Read-only from the Advisor's side; nothing here
-   * is ever written back into Column 2 by the Advisor.
+   * they've reviewed, which housing type they picked. This is the user's own
+   * activity, not curated/ingested data, so it does not cross the two-lane
+   * boundary documented in docs/user-and-data-flow.md. Read-only from the
+   * Advisor's side; nothing here is ever written back into Column 2 by the Advisor.
    */
   isCriterionReviewed: (id: string) => boolean;
   toggleCriterionReviewed: (id: string) => void;
-  costValues: Record<string, number>;
-  setCostValue: (id: string, value: number) => void;
   selectedHousingTypeId: string | null;
   setSelectedHousingTypeId: (id: string | null) => void;
 
   /**
-   * Serialized summary of the above (reviewed criteria, cost calculator, selected
-   * housing type only), meant to be sent as the `context` field to /api/advisor.
-   * Deliberately excludes Check the Place / any curated or ingested data — see
-   * the doc comment on CheckThePlaceReportInner in check-the-place-report.tsx
-   * for why that boundary stays intact.
+   * Serialized summary of the above (reviewed criteria, selected housing type
+   * only), meant to be sent as the `context` field to /api/advisor. Deliberately
+   * excludes Check the Place / any curated or ingested data — see the doc
+   * comment on CheckThePlaceReportInner in check-the-place-report.tsx for why
+   * that boundary stays intact.
    */
   advisorAppContext: string;
 };
@@ -101,13 +94,6 @@ export function FlowProvider({ children }: { children: ReactNode }) {
     setReviewed((prev) => ({ ...prev, [id]: !prev[id] }));
   }, []);
 
-  const [costValues, setCostValues] = useState<Record<string, number>>(() =>
-    Object.fromEntries(COST_BREAKDOWN_ITEMS.map((item) => [item.id, item.defaultValue])),
-  );
-  const setCostValue = useCallback((id: string, value: number) => {
-    setCostValues((prev) => ({ ...prev, [id]: value }));
-  }, []);
-
   const [selectedHousingTypeId, setSelectedHousingTypeId] = useState<string | null>(null);
 
   const advisorAppContext = useMemo(() => {
@@ -127,23 +113,13 @@ export function FlowProvider({ children }: { children: ReactNode }) {
       );
     }
 
-    const costTotal = Object.values(costValues).reduce((sum, v) => sum + v, 0);
-    if (costTotal > 0) {
-      const costParts = COST_BREAKDOWN_ITEMS.filter((item) => (costValues[item.id] ?? 0) > 0).map(
-        (item) => `${item.label} $${costValues[item.id]}`,
-      );
-      lines.push(
-        `User's own monthly cost calculator (self-entered, not a market estimate): ${costParts.join(", ")}. Total $${costTotal}.`,
-      );
-    }
-
     if (selectedHousingTypeId) {
       const card = HOUSING_TYPE_CARDS.find((c) => c.id === selectedHousingTypeId);
       if (card) lines.push(`User selected housing type: ${card.title}.`);
     }
 
     return lines.join(" ");
-  }, [costValues, isCriterionReviewed, selectedHousingTypeId]);
+  }, [isCriterionReviewed, selectedHousingTypeId]);
 
   const value = useMemo<FlowValue>(
     () => ({
@@ -156,8 +132,6 @@ export function FlowProvider({ children }: { children: ReactNode }) {
       clearAdvisorPrompt: () => setAdvisorPrompt(null),
       isCriterionReviewed,
       toggleCriterionReviewed,
-      costValues,
-      setCostValue,
       selectedHousingTypeId,
       setSelectedHousingTypeId,
       advisorAppContext,
@@ -168,8 +142,6 @@ export function FlowProvider({ children }: { children: ReactNode }) {
       advisorPrompt,
       isCriterionReviewed,
       toggleCriterionReviewed,
-      costValues,
-      setCostValue,
       selectedHousingTypeId,
       advisorAppContext,
     ],
