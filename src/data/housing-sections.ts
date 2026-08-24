@@ -279,6 +279,136 @@ export const durationResources: DurationResources[] = [
   },
 ];
 
+export type HousingTypeResources = {
+  id: "managed" | "owner" | "rooms" | "university";
+  resources: HousingResource[];
+};
+
+/** Resource lists shown in the "Learn more" detail view for each housing-type card. */
+export const housingTypeResources: HousingTypeResources[] = [
+  {
+    id: "managed",
+    resources: [
+      {
+        name: "Viewit.ca",
+        url: "https://www.viewit.ca",
+        description: "Managed apartment buildings and rental communities.",
+      },
+      {
+        name: "RentSeeker",
+        url: "https://www.rentseeker.ca",
+        description: "Apartment rentals from property managers and professionally managed buildings.",
+      },
+      {
+        name: "4Rent.ca",
+        url: "https://www.4rent.ca",
+        description: "Rental apartments and managed multi-family buildings.",
+      },
+      {
+        name: "Rentals.ca",
+        url: "https://rentals.ca",
+        description: "Apartments and rental homes, including listings from property management companies.",
+      },
+      {
+        name: "liv.rent",
+        url: "https://www.liv.rent",
+        description: "Professionally managed rental properties.",
+      },
+      {
+        name: "Zumper",
+        url: "https://www.zumper.com",
+        description: "Direct listings from verified landlords and property managers.",
+      },
+    ],
+  },
+  {
+    id: "owner",
+    resources: [
+      {
+        name: "Kijiji",
+        url: "https://www.kijiji.ca/h-real-estate/108",
+        description: "Private-owner rental listings, including condos, apartments and houses.",
+      },
+      {
+        name: "Facebook Marketplace",
+        url: "https://www.facebook.com/marketplace",
+        description: "Direct listings from individual owners and private landlords.",
+      },
+      {
+        name: "Craigslist Toronto",
+        url: "https://toronto.craigslist.org",
+        description: "Direct listings from private landlords and individual property owners.",
+      },
+    ],
+  },
+  {
+    id: "rooms",
+    resources: [
+      {
+        name: "Happipad",
+        url: "https://www.happipad.com",
+        description: "Home-sharing / rooms in private homes.",
+      },
+      {
+        name: "Roomies",
+        url: "https://www.roomies.ca",
+        description: "Rooms and roommate matching.",
+      },
+      {
+        name: "Kijiji",
+        url: "https://www.kijiji.ca/h-real-estate/108",
+        description: "Private rooms, roommates and shared accommodations.",
+      },
+      {
+        name: "Craigslist Toronto",
+        url: "https://toronto.craigslist.org",
+        description: "Rooms/shared housing, sublets and roommates.",
+      },
+      {
+        name: "Facebook Marketplace",
+        url: "https://www.facebook.com/marketplace",
+        description: "Rooms, roommates, sublets and lease takeovers.",
+      },
+    ],
+  },
+  {
+    id: "university",
+    resources: [
+      {
+        name: "University of Toronto",
+        url: "https://offcampushousing.utoronto.ca/",
+        description:
+          "Off-campus housing finder; UTORid/JOINid required, guests and other-institution students can also register.",
+      },
+      {
+        name: "York University",
+        url: "https://www.yorku.ca/housing/off-campus/",
+        description: "Off-campus housing service and listings portal.",
+      },
+      {
+        name: "Toronto Metropolitan University",
+        url: "https://www.torontomu.ca/housing/housing-alternatives/off-campus/",
+        description: "Student-focused off-campus housing resource.",
+      },
+      {
+        name: "George Brown Polytechnic",
+        url: "https://www.georgebrown.ca/current-students/services/housing",
+        description: "Housing resource via the Toronto Off-Campus network.",
+      },
+      {
+        name: "Humber Polytechnic",
+        url: "https://humber.ca/housing/living-off-campus",
+        description: "Off-campus housing resources and listings.",
+      },
+      {
+        name: "OCAD University",
+        url: "https://admissions.ocadu.ca/afford/housing-options/housing-info",
+        description: "Housing partners and off-campus resources.",
+      },
+    ],
+  },
+];
+
 /* ---------------------------------------------------------------------- */
 /* 2.2 Evaluate Housing (How to evaluate housing options)                  */
 /* ---------------------------------------------------------------------- */
@@ -343,7 +473,7 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
       {
         id: "rideshare-carpooling",
         label: "Rideshare / Carpooling",
-        bullet: "Extra rideshare time covers delays and inaccurate ETAs",
+        bullet: "Budget extra rideshare time to cover delays, inaccurate ETAs, and driver cancellations.",
       },
       {
         id: "bike-lanes",
@@ -385,7 +515,7 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
         id: "application-packet",
         label: "Application Packet",
         bullet:
-          "Bring proof of income (pay stubs or offer letter) and recent bank statements showing sufficient funds.",
+          "Bring proof of income (pay stubs or offer letter), credit checks, references, and recent bank statements showing sufficient funds.",
       },
     ],
   },
@@ -408,7 +538,7 @@ export const COMPARE_HOUSING_GROUPS: CriterionGroup[] = [
       {
         id: "property-age",
         label: "Property Age",
-        bullet: "Older properties typically offer more rent flexibility than brand-new builds.",
+        bullet: "Older properties typically offer more rent flexibility and negotiation opportunities than brand-new builds.",
       },
       {
         id: "property-management",
