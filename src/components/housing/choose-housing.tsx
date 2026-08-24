@@ -1,20 +1,29 @@
-import { useState, type ReactNode } from "react";
+import { useState, type KeyboardEvent, type MouseEvent, type ReactNode } from "react";
 import { Check, ChevronRight, GraduationCap, X } from "lucide-react";
 import {
   DURATION_CARDS,
   HOUSING_TYPE_CARDS,
   durationResources,
+  housingTypeResources,
   type HousingChoiceCard,
-  type DurationResources,
+  type HousingResource,
 } from "@/data/housing-sections";
 import { useFlow } from "./flow-state";
 import { cn } from "@/lib/utils";
 
+/** Every card that can open the resource modal, duration and housing-type alike, keyed by id. */
+const RESOURCE_LISTS: { id: string; resources: HousingResource[] }[] = [
+  ...durationResources,
+  ...housingTypeResources,
+];
+const ALL_CARDS: HousingChoiceCard[] = [...DURATION_CARDS, ...HOUSING_TYPE_CARDS];
+
 /**
  * Shared card for both the duration group and the housing-type group. `onLearnMore`
- * opens the duration resources modal. `onSelect`/`selected` makes the housing-type
+ * opens the shared resources modal. `onSelect`/`selected` makes the housing-type
  * cards themselves clickable (single-select) — the selection is lifted into
- * FlowProvider so the AI Advisor can see which type the user picked.
+ * FlowProvider so the AI Advisor can see which type the user picked. Duration
+ * cards get `onLearnMore` only; housing-type cards get both.
  */
 function HousingCard({
   card,
@@ -33,8 +42,41 @@ function HousingCard({
   const showStudentBadge = card.studentOnly && isStudent;
   const isSelectable = Boolean(onSelect);
 
-  const content = (
-    <>
+  const handleLearnMoreClick = (e: MouseEvent<HTMLButtonElement>) => {
+    // Nested inside the selectable wrapper below — stop it from also toggling selection.
+    e.stopPropagation();
+    onLearnMore?.();
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLElement>) => {
+    if (!onSelect) return;
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onSelect();
+    }
+  };
+
+  return (
+    <article
+      {...(isSelectable
+        ? {
+            role: "button" as const,
+            tabIndex: 0,
+            "aria-pressed": selected,
+            onClick: onSelect,
+            onKeyDown: handleKeyDown,
+          }
+        : {})}
+      className={cn(
+        "flex flex-col items-start gap-3 rounded-xl border bg-white p-5 text-left transition-colors",
+        isSelectable && "cursor-pointer",
+        isSelectable
+          ? selected
+            ? "border-advisor ring-1 ring-advisor"
+            : "border-gray-200 hover:border-advisor/50"
+          : "border-gray-200",
+      )}
+    >
       <span
         className={cn(
           "flex size-10 items-center justify-center rounded-full bg-advisor-soft text-advisor",
@@ -60,52 +102,29 @@ function HousingCard({
       {onLearnMore && (
         <button
           type="button"
-          onClick={onLearnMore}
+          onClick={handleLearnMoreClick}
           className="mt-auto inline-flex w-fit items-center gap-1 text-sm font-semibold text-primary hover:underline"
         >
           Learn more
           <ChevronRight className="size-4" aria-hidden />
         </button>
       )}
-    </>
-  );
-
-  if (isSelectable) {
-    return (
-      <button
-        type="button"
-        onClick={onSelect}
-        aria-pressed={selected}
-        className={cn(
-          "flex flex-col items-start gap-3 rounded-xl border bg-white p-5 text-left transition-colors",
-          selected
-            ? "border-advisor ring-1 ring-advisor"
-            : "border-gray-200 hover:border-advisor/50",
-        )}
-      >
-        {content}
-      </button>
-    );
-  }
-
-  return (
-    <article className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-5">
-      {content}
     </article>
   );
 }
 
 /**
- * Resource detail view for a duration card's "Learn more". Reuses the app's
- * established modal pattern (see SourceCite / DataSourceCite) rather than a new one.
+ * Resource detail view for a card's "Learn more" — shared by every card in both
+ * the duration group and the housing-type group, university included. Reuses the
+ * app's established modal pattern (see SourceCite / DataSourceCite) rather than a new one.
  */
-function DurationResourceModal({
+function ResourceModal({
   title,
   resources,
   onClose,
 }: {
   title: string;
-  resources: DurationResources["resources"];
+  resources: HousingResource[];
   onClose: () => void;
 }) {
   return (
@@ -182,9 +201,9 @@ function CardGroup({ heading, children }: { heading: string; children: ReactNode
 
 /** Group 1 (duration) + Group 2 (housing type) card sections for "Find Housing". */
 export function ChooseHousingSection({ isStudent }: { isStudent: boolean }) {
-  const [openDurationId, setOpenDurationId] = useState<DurationResources["id"] | null>(null);
-  const activeDuration = durationResources.find((d) => d.id === openDurationId) ?? null;
-  const activeCard = DURATION_CARDS.find((c) => c.id === openDurationId) ?? null;
+  const [openResourceId, setOpenResourceId] = useState<string | null>(null);
+  const activeResource = RESOURCE_LISTS.find((r) => r.id === openResourceId) ?? null;
+  const activeCard = ALL_CARDS.find((c) => c.id === openResourceId) ?? null;
   const { selectedHousingTypeId, setSelectedHousingTypeId } = useFlow();
 
   return (
@@ -195,7 +214,7 @@ export function ChooseHousingSection({ isStudent }: { isStudent: boolean }) {
             key={card.id}
             card={card}
             isStudent={isStudent}
-            onLearnMore={() => setOpenDurationId(card.id as DurationResources["id"])}
+            onLearnMore={() => setOpenResourceId(card.id)}
           />
         ))}
       </CardGroup>
@@ -210,15 +229,16 @@ export function ChooseHousingSection({ isStudent }: { isStudent: boolean }) {
             onSelect={() =>
               setSelectedHousingTypeId(selectedHousingTypeId === card.id ? null : card.id)
             }
+            onLearnMore={() => setOpenResourceId(card.id)}
           />
         ))}
       </CardGroup>
 
-      {activeDuration && activeCard && (
-        <DurationResourceModal
+      {activeResource && activeCard && (
+        <ResourceModal
           title={activeCard.title}
-          resources={activeDuration.resources}
-          onClose={() => setOpenDurationId(null)}
+          resources={activeResource.resources}
+          onClose={() => setOpenResourceId(null)}
         />
       )}
     </div>
