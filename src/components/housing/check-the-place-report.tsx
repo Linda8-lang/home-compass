@@ -1,9 +1,8 @@
-import { Component, useState, type ReactNode } from "react";
-import { Search, MapPin, ShieldCheck, AlertTriangle, Info } from "lucide-react";
+import { Component, useEffect, useState, type ReactNode } from "react";
+import { Search, MapPin, ShieldCheck, AlertTriangle, Info, Bookmark, X } from "lucide-react";
 import {
   matchNeighbourhoodByText,
   CITYWIDE_OFFENCE_RATES,
-  getComparisonNeighbourhoods,
   type NeighbourhoodSnapshot,
   type OffenceStat,
 } from "@/data/generated/neighbourhood-lookup";
@@ -33,6 +32,20 @@ const EXAMPLE_ADDRESSES = [
   "10 St Clair Ave W, Yonge-St.Clair, Toronto",
 ];
 
+const SAVED_PLACES_STORAGE_KEY = "home-compass:check-the-place-saved";
+
+type SavedPlace = { query: string; hoodId: number; areaName: string; savedAt: number };
+
+function readStoredSavedPlaces(): SavedPlace[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.localStorage.getItem(SAVED_PLACES_STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as SavedPlace[]) : [];
+  } catch {
+    return [];
+  }
+}
+
 function formatRate(value: number | null | undefined): string {
   return value == null ? "—" : `${value.toFixed(1)} / 100k`;
 }
@@ -54,10 +67,23 @@ function EmptyState({ children }: { children: ReactNode }) {
  * There is no geocoding pipeline in this app (see matchNeighbourhoodByText's doc
  * comment), so "address" here resolves only when the typed text contains a known
  * Toronto neighbourhood name — it is not a street-level lookup.
+ *
+ * Saved places are kept in their own localStorage key, scoped to this component —
+ * not lifted into FlowProvider — so they stay out of advisorAppContext and the
+ * two-lane boundary documented there holds.
  */
 function CheckThePlaceReportInner() {
   const [addressInput, setAddressInput] = useState("");
   const [query, setQuery] = useState<string | null>(null);
+  const [savedPlaces, setSavedPlaces] = useState<SavedPlace[]>(() => readStoredSavedPlaces());
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(SAVED_PLACES_STORAGE_KEY, JSON.stringify(savedPlaces));
+    } catch {
+      // localStorage unavailable (private mode, disabled storage, etc.) — state still works in-memory.
+    }
+  }, [savedPlaces]);
 
   function checkListing(raw: string) {
     const cleaned = raw.replace(/\s+/g, " ").trim().slice(0, 200);
@@ -67,6 +93,24 @@ function CheckThePlaceReportInner() {
   }
 
   const match: NeighbourhoodSnapshot | null = query ? matchNeighbourhoodByText(query) : null;
+  const isSaved = Boolean(match && savedPlaces.some((p) => p.hoodId === match.hoodId));
+
+  function toggleSave() {
+    if (!match || !query) return;
+    setSavedPlaces((prev) => {
+      if (prev.some((p) => p.hoodId === match.hoodId)) {
+        return prev.filter((p) => p.hoodId !== match.hoodId);
+      }
+      return [
+        { query, hoodId: match.hoodId, areaName: match.areaName, savedAt: Date.now() },
+        ...prev,
+      ];
+    });
+  }
+
+  function removeSaved(hoodId: number) {
+    setSavedPlaces((prev) => prev.filter((p) => p.hoodId !== hoodId));
+  }
 
   return (
     <div className="surface space-y-5 p-4">
@@ -111,6 +155,14 @@ function CheckThePlaceReportInner() {
         </div>
       </form>
 
+      {savedPlaces.length > 0 && (
+        <SavedPlacesList
+          places={savedPlaces}
+          onSelect={(p) => checkListing(p.query)}
+          onRemove={removeSaved}
+        />
+      )}
+
       {query && !match && (
         <EmptyState>
           Not enough data for this area — "{query}" doesn't match a Toronto neighbourhood we have
@@ -129,7 +181,20 @@ function CheckThePlaceReportInner() {
                 <p className="text-xs text-muted-foreground">Matched to {match.areaName}</p>
               </div>
             </div>
-            <VerifiedBadge label="Neighbourhood matched" />
+            <div className="flex items-center gap-2">
+              <VerifiedBadge label="Neighbourhood matched" />
+              <Button
+                type="button"
+                variant={isSaved ? "secondary" : "outline"}
+                size="sm"
+                className="gap-1.5"
+                onClick={toggleSave}
+                aria-pressed={isSaved}
+              >
+                <Bookmark className={cn("size-3.5", isSaved && "fill-current")} aria-hidden />
+                {isSaved ? "Saved" : "Save this place"}
+              </Button>
+            </div>
           </div>
 
           {/* 4. Crime comparison table */}
@@ -143,9 +208,52 @@ function CheckThePlaceReportInner() {
   );
 }
 
+function SavedPlacesList({
+  places,
+  onSelect,
+  onRemove,
+}: {
+  places: SavedPlace[];
+  onSelect: (place: SavedPlace) => void;
+  onRemove: (hoodId: number) => void;
+}) {
+  return (
+    <div className="rounded-lg border border-border/70 p-3">
+      <h4 className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-secondary-foreground">
+        <Bookmark className="size-3.5 shrink-0 text-primary" aria-hidden />
+        Saved Places
+      </h4>
+      <ul className="space-y-1.5">
+        {places.map((p) => (
+          <li
+            key={p.hoodId}
+            className="flex items-center justify-between gap-2 rounded-md border border-border/50 px-2.5 py-1.5 text-xs"
+          >
+            <button
+              type="button"
+              onClick={() => onSelect(p)}
+              className="min-w-0 flex-1 truncate text-left text-foreground hover:text-primary"
+              title={p.query}
+            >
+              {p.query}
+            </button>
+            <button
+              type="button"
+              onClick={() => onRemove(p.hoodId)}
+              aria-label={`Remove ${p.query} from saved places`}
+              className="shrink-0 text-muted-foreground hover:text-foreground"
+            >
+              <X className="size-3.5" aria-hidden />
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function CrimeTable({ match }: { match: NeighbourhoodSnapshot }) {
   const safety = match.safety;
-  const { safest, highestCrime } = getComparisonNeighbourhoods(match.hoodId);
 
   return (
     <div className="rounded-lg border border-border/70 p-3">
@@ -164,10 +272,6 @@ function CrimeTable({ match }: { match: NeighbourhoodSnapshot }) {
               <TableHead>This Neighbourhood</TableHead>
               <TableHead>Toronto Average</TableHead>
               <TableHead>Difference</TableHead>
-              <TableHead>{safest ? `Safest: ${safest.areaName}` : "Safest Neighbourhood"}</TableHead>
-              <TableHead>
-                {highestCrime ? `Highest-Crime: ${highestCrime.areaName}` : "Highest-Crime Neighbourhood"}
-              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -185,8 +289,6 @@ function CrimeTable({ match }: { match: NeighbourhoodSnapshot }) {
                     : diffPct < -5
                       ? "text-verified"
                       : "text-muted-foreground";
-              const safestRate = safest?.safety?.offences[key]?.rate_per_100k ?? null;
-              const highestCrimeRate = highestCrime?.safety?.offences[key]?.rate_per_100k ?? null;
               return (
                 <TableRow key={key}>
                   <TableCell className="font-medium text-foreground">{label}</TableCell>
@@ -195,8 +297,6 @@ function CrimeTable({ match }: { match: NeighbourhoodSnapshot }) {
                   <TableCell className={cn("font-medium", tone)}>
                     {diffPct == null ? "—" : `${diffPct > 0 ? "+" : ""}${diffPct.toFixed(0)}%`}
                   </TableCell>
-                  <TableCell className="text-verified">{formatRate(safestRate)}</TableCell>
-                  <TableCell className="text-caution">{formatRate(highestCrimeRate)}</TableCell>
                 </TableRow>
               );
             })}

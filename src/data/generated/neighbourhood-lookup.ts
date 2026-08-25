@@ -113,54 +113,6 @@ export const CITYWIDE_OFFENCE_RATES: Record<string, number | null> = (() => {
   return rates;
 })();
 
-/**
- * Same five offence types the "Check the Place" crime table shows (see
- * CRIME_TABLE_ROWS in check-the-place-report.tsx) — kept in sync manually since
- * the table's own row list is a small, deliberately-curated UI concern, not
- * generated data. Used only to rank neighbourhoods for the safest/highest-crime
- * comparison below, so the ranking reflects exactly what the table displays.
- */
-const COMPARISON_OFFENCE_KEYS = [
-  "assault",
-  "break_enter",
-  "robbery",
-  "auto_theft",
-  "theft_from_motor_vehicle",
-] as const;
-
-function compositeCrimeRate(n: NeighbourhoodSnapshot): number | null {
-  if (!n.safety) return null;
-  let sum = 0;
-  let hasRate = false;
-  for (const key of COMPARISON_OFFENCE_KEYS) {
-    const rate = n.safety.offences[key]?.rate_per_100k;
-    if (rate == null) continue;
-    sum += rate;
-    hasRate = true;
-  }
-  return hasRate ? sum : null;
-}
-
-/**
- * The citywide safest and highest-crime neighbourhoods (by combined rate across
- * COMPARISON_OFFENCE_KEYS), excluding the neighbourhood the user just looked up so
- * the two comparison columns never just repeat "This Neighbourhood".
- */
-export function getComparisonNeighbourhoods(excludeHoodId: number): {
-  safest: NeighbourhoodSnapshot | null;
-  highestCrime: NeighbourhoodSnapshot | null;
-} {
-  const scored: { n: NeighbourhoodSnapshot; score: number }[] = [];
-  for (const n of NEIGHBOURHOOD_SNAPSHOTS) {
-    if (n.hoodId === excludeHoodId) continue;
-    const score = compositeCrimeRate(n);
-    if (score != null) scored.push({ n, score });
-  }
-  if (scored.length === 0) return { safest: null, highestCrime: null };
-  scored.sort((a, b) => a.score - b.score);
-  return { safest: scored[0]!.n, highestCrime: scored[scored.length - 1]!.n };
-}
-
 export type RentRange = { min: number; max: number };
 
 /** Min/max of median_renter_shelter_cost across all 158 neighbourhoods — real spread, not a per-neighbourhood range (CKAN publishes one median figure per neighbourhood, not by bedroom count). */
