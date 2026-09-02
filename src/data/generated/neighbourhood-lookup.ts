@@ -172,6 +172,21 @@ export const CMHC_CITYWIDE_RANGE: { oneBed: RentRange | null; twoBed: RentRange 
   twoBed: cmhcRange((z) => z.two_bed_avg_rent),
 };
 
+const snapshotByHoodId = new Map<number, NeighbourhoodSnapshot>();
+for (const snapshot of NEIGHBOURHOOD_SNAPSHOTS) {
+  snapshotByHoodId.set(snapshot.hoodId, snapshot);
+}
+
+/**
+ * O(1) counterpart to matchNeighbourhoodByText, for callers that already have a
+ * hood_id — e.g. the street-level geocoding path in src/routes/api/geocode.ts,
+ * which resolves an address to a hood_id via Nominatim + a point-in-polygon check
+ * against src/data/generated/toronto-neighbourhoods.json before this lookup ever runs.
+ */
+export function snapshotForHoodId(hoodId: number): NeighbourhoodSnapshot | null {
+  return snapshotByHoodId.get(hoodId) ?? null;
+}
+
 function normalizeForMatch(s: string): string {
   return s
     .toLowerCase()
@@ -180,14 +195,16 @@ function normalizeForMatch(s: string): string {
 }
 
 /**
- * No geocoding pipeline exists anywhere in this app — by design, the product has no
- * street-level listing/address database (see docs/user-and-data-flow.md, "What is
- * never sent" / "no listing or market data"). This resolves a typed address to a
+ * Fallback path only. Street-level resolution now goes through
+ * src/routes/api/geocode.ts (Nominatim geocoding + point-in-polygon against the
+ * ingested neighbourhood boundaries, joined back to a snapshot via
+ * snapshotForHoodId above). This function is what's used when that lookup fails,
+ * returns no match, or is unavailable: it resolves a typed address to a
  * neighbourhood only when one of the 158 known neighbourhood names appears
  * (punctuation/case-insensitively) inside the typed text, e.g.
- * "10 St Clair Ave W, Yonge-St.Clair, Toronto" matches "Yonge-St.Clair". It is not a
- * street-level geocoder: an address that omits the neighbourhood name will not
- * resolve, by design — see the "not enough data for this area" state in the UI.
+ * "10 St Clair Ave W, Yonge-St.Clair, Toronto" matches "Yonge-St.Clair". An address
+ * that omits the neighbourhood name and can't be geocoded will not resolve — see
+ * the "not enough data for this area" state in the UI.
  */
 export function matchNeighbourhoodByText(input: string): NeighbourhoodSnapshot | null {
   const normalizedInput = normalizeForMatch(input);
