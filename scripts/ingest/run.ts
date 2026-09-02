@@ -1,11 +1,13 @@
 import { ingestSafety } from "./sources/safety-tps.ts";
 import { ingestRent } from "./sources/rent-ckan.ts";
 import { ingestCmhc } from "./sources/rent-cmhc.ts";
+import { ingestBoundaries } from "./sources/neighbourhood-boundaries.ts";
 
 const INGESTERS = {
   safety: ingestSafety,
   rent: ingestRent,
   cmhc: ingestCmhc,
+  boundaries: ingestBoundaries,
 } as const;
 
 type Target = keyof typeof INGESTERS;

@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiGeocodeRouteImport } from './routes/api/geocode'
 import { Route as ApiAdvisorRouteImport } from './routes/api/advisor'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGeocodeRoute = ApiGeocodeRouteImport.update({
+  id: '/api/geocode',
+  path: '/api/geocode',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAdvisorRoute = ApiAdvisorRouteImport.update({
@@ -26,27 +32,31 @@ const ApiAdvisorRoute = ApiAdvisorRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/advisor': typeof ApiAdvisorRoute
+  '/api/geocode': typeof ApiGeocodeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/advisor': typeof ApiAdvisorRoute
+  '/api/geocode': typeof ApiGeocodeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api/advisor': typeof ApiAdvisorRoute
+  '/api/geocode': typeof ApiGeocodeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/advisor'
+  fullPaths: '/' | '/api/advisor' | '/api/geocode'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/advisor'
-  id: '__root__' | '/' | '/api/advisor'
+  to: '/' | '/api/advisor' | '/api/geocode'
+  id: '__root__' | '/' | '/api/advisor' | '/api/geocode'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiAdvisorRoute: typeof ApiAdvisorRoute
+  ApiGeocodeRoute: typeof ApiGeocodeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdvisorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/geocode': {
+      id: '/api/geocode'
+      path: '/api/geocode'
+      fullPath: '/api/geocode'
+      preLoaderRoute: typeof ApiGeocodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiAdvisorRoute: ApiAdvisorRoute,
+  ApiGeocodeRoute: ApiGeocodeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -19,6 +19,16 @@ export const TPS_SAFETY_ENDPOINT =
 export const CKAN_NEIGHBOURHOOD_PROFILES_XLSX =
   "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/6e19a90f-971c-46b3-852c-0c48c436d1fc/resource/19d4a806-7385-4889-acf2-256f1e079060/download/nbhd_2021_census_profile_full_158model.xlsx";
 
+// City of Toronto Open Data (CKAN) — package_show API base. Used to resolve the
+// current resource URL for a dataset by its package id, since CKAN rotates
+// resource UUIDs (the download URL) independently of the stable package id.
+export const CKAN_ACTION_BASE = "https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action";
+
+// City of Toronto Open Data (CKAN) — Neighbourhoods (140/158-model boundary polygons).
+// Package id is stable; the GeoJSON resource's UUID is resolved at ingest time via
+// CKAN_ACTION_BASE's package_show, not hardcoded here.
+export const TORONTO_NEIGHBOURHOODS_CKAN_PACKAGE_ID = "neighbourhoods";
+
 // CMHC's Housing Market Information Portal (HMIP) generates Rental Market Survey
 // exports dynamically per geography/table selection and does not publish a stable
 // static XLSX URL. To populate this fallback baseline:

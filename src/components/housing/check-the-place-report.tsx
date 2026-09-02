@@ -1,7 +1,17 @@
-import { Component, useEffect, useState, type ReactNode } from "react";
-import { Search, MapPin, ShieldCheck, AlertTriangle, Info, Bookmark, X } from "lucide-react";
+import { Component, useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  Search,
+  MapPin,
+  ShieldCheck,
+  AlertTriangle,
+  Info,
+  Bookmark,
+  X,
+  Loader2,
+} from "lucide-react";
 import {
   matchNeighbourhoodByText,
+  snapshotForHoodId,
   CITYWIDE_OFFENCE_RATES,
   type NeighbourhoodSnapshot,
   type OffenceStat,
@@ -36,6 +46,29 @@ const SAVED_PLACES_STORAGE_KEY = "home-compass:check-the-place-saved";
 
 type SavedPlace = { query: string; hoodId: number; areaName: string; savedAt: number };
 
+type GeocodeApiResult = { hoodId: number; areaName: string; lat: number; lon: number } | null;
+
+/**
+ * Best-effort street-level resolution via POST /api/geocode (Nominatim + point-in-
+ * polygon, see src/routes/api/geocode.ts). Any failure — network error, non-OK
+ * response, a hoodId with no matching snapshot — resolves to `null` so the caller
+ * falls back to matchNeighbourhoodByText instead of surfacing an error.
+ */
+async function resolveByGeocode(address: string): Promise<NeighbourhoodSnapshot | null> {
+  try {
+    const res = await fetch("/api/geocode", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ address }),
+    });
+    if (!res.ok) return null;
+    const geocoded = (await res.json()) as GeocodeApiResult;
+    return geocoded ? snapshotForHoodId(geocoded.hoodId) : null;
+  } catch {
+    return null;
+  }
+}
+
 function readStoredSavedPlaces(): SavedPlace[] {
   if (typeof window === "undefined") return [];
   try {
@@ -62,11 +95,10 @@ function EmptyState({ children }: { children: ReactNode }) {
 /**
  * Static-lane only — reads the promoted TPS/CKAN
  * (and, once populated, CMHC) JSON directly and must never be threaded into
- * src/routes/api/advisor.ts's context.
- *
- * There is no geocoding pipeline in this app (see matchNeighbourhoodByText's doc
- * comment), so "address" here resolves only when the typed text contains a known
- * Toronto neighbourhood name — it is not a street-level lookup.
+ * src/routes/api/advisor.ts's context. POST /api/geocode (also static-lane —
+ * it only resolves an address to a hood_id/lat/lon, never touches the Advisor)
+ * is tried first for a street-level match; matchNeighbourhoodByText is the
+ * fallback when that lookup is unavailable, errors, or finds no match.
  *
  * Saved places are kept in their own localStorage key, scoped to this component —
  * not lifted into FlowProvider — so they stay out of advisorAppContext and the
@@ -75,7 +107,10 @@ function EmptyState({ children }: { children: ReactNode }) {
 function CheckThePlaceReportInner() {
   const [addressInput, setAddressInput] = useState("");
   const [query, setQuery] = useState<string | null>(null);
+  const [match, setMatch] = useState<NeighbourhoodSnapshot | null>(null);
+  const [isResolving, setIsResolving] = useState(false);
   const [savedPlaces, setSavedPlaces] = useState<SavedPlace[]>(() => readStoredSavedPlaces());
+  const requestIdRef = useRef(0);
 
   useEffect(() => {
     try {
@@ -85,14 +120,25 @@ function CheckThePlaceReportInner() {
     }
   }, [savedPlaces]);
 
-  function checkListing(raw: string) {
+  async function checkListing(raw: string) {
     const cleaned = raw.replace(/\s+/g, " ").trim().slice(0, 200);
     if (!cleaned) return;
+
+    const requestId = ++requestIdRef.current;
     setAddressInput(cleaned);
     setQuery(cleaned);
+    setMatch(null);
+    setIsResolving(true);
+
+    const resolved = (await resolveByGeocode(cleaned)) ?? matchNeighbourhoodByText(cleaned);
+
+    // A newer submission may have started while this one was in flight — never let
+    // a stale response clobber a more recent query's result.
+    if (requestIdRef.current !== requestId) return;
+    setMatch(resolved);
+    setIsResolving(false);
   }
 
-  const match: NeighbourhoodSnapshot | null = query ? matchNeighbourhoodByText(query) : null;
   const isSaved = Boolean(match && savedPlaces.some((p) => p.hoodId === match.hoodId));
 
   function toggleSave() {
@@ -126,7 +172,7 @@ function CheckThePlaceReportInner() {
         className="space-y-2"
         onSubmit={(e) => {
           e.preventDefault();
-          checkListing(addressInput);
+          void checkListing(addressInput);
         }}
       >
         <div className="flex flex-col gap-2 sm:flex-row">
@@ -136,9 +182,15 @@ function CheckThePlaceReportInner() {
             placeholder="e.g. 1200 Bloor St W, Dovercourt Village, Toronto"
             aria-label="Address to check"
             maxLength={200}
+            disabled={isResolving}
           />
-          <Button type="submit" disabled={!addressInput.trim()} className="shrink-0">
-            Check Listing
+          <Button
+            type="submit"
+            disabled={!addressInput.trim() || isResolving}
+            className="shrink-0 gap-1.5"
+          >
+            {isResolving && <Loader2 className="size-3.5 animate-spin" aria-hidden />}
+            {isResolving ? "Checking…" : "Check Listing"}
           </Button>
         </div>
         <div className="flex flex-wrap gap-1.5">
@@ -146,8 +198,9 @@ function CheckThePlaceReportInner() {
             <button
               key={addr}
               type="button"
-              onClick={() => checkListing(addr)}
-              className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
+              onClick={() => void checkListing(addr)}
+              disabled={isResolving}
+              className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground transition-colors hover:border-primary hover:text-foreground disabled:pointer-events-none disabled:opacity-50"
             >
               {addr}
             </button>
@@ -158,12 +211,12 @@ function CheckThePlaceReportInner() {
       {savedPlaces.length > 0 && (
         <SavedPlacesList
           places={savedPlaces}
-          onSelect={(p) => checkListing(p.query)}
+          onSelect={(p) => void checkListing(p.query)}
           onRemove={removeSaved}
         />
       )}
 
-      {query && !match && (
+      {query && !match && !isResolving && (
         <EmptyState>
           Not enough data for this area — "{query}" doesn't match a Toronto neighbourhood we have
           crime data for. Try including the neighbourhood name, or one of the examples above.
