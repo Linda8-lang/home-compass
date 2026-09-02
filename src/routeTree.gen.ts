@@ -10,22 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiGeocodeRouteImport } from './routes/api/geocode'
 import { Route as ApiAdvisorRouteImport } from './routes/api/advisor'
+import { Route as ApiGeocodeRouteImport } from './routes/api/geocode'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiGeocodeRoute = ApiGeocodeRouteImport.update({
-  id: '/api/geocode',
-  path: '/api/geocode',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiAdvisorRoute = ApiAdvisorRouteImport.update({
   id: '/api/advisor',
   path: '/api/advisor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGeocodeRoute = ApiGeocodeRouteImport.update({
+  id: '/api/geocode',
+  path: '/api/geocode',
   getParentRoute: () => rootRouteImport,
 } as any)
 
