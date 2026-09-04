@@ -154,10 +154,11 @@ export function AdvisorConversation({ className }: { className?: string }) {
                 <span className="font-semibold">You: </span>
                 “Can you help me find housing near my university?”
               </p>
-              <p className="mt-2 text-sm leading-relaxed text-secondary-foreground">
+              <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-secondary-foreground">
                 <span className="font-semibold">AI Advisor: </span>
-                “Sure. To narrow this down, what is your university, preferred monthly budget, and
-                maximum commute time?”
+                “You're pre-landing and budgeting $2,000/month in Toronto.
+                {"\n"}1. University or campus{"\n"}2. Priority (commute vs. rent){"\n"}3. Move-in
+                timing”
               </p>
               <button
                 type="button"

@@ -25,7 +25,7 @@ export const SAMPLE_CONVERSATIONS: SampleConversation[] = [
       {
         role: "assistant",
         content:
-          "Sure. To narrow this down, what is your university, preferred monthly budget, and maximum commute time?",
+          "You're pre-landing and budgeting $2,000/month in Toronto.\n\nA few things I still need:\n1. University or campus (e.g., UofT St. George vs. Scarborough)\n2. Priority (e.g., shorter commute vs. lower rent)\n3. Move-in timing (e.g., temporary for now vs. a full lease from the start)",
       },
       {
         role: "user",
@@ -48,7 +48,7 @@ export const SAMPLE_CONVERSATIONS: SampleConversation[] = [
       {
         role: "assistant",
         content:
-          "I can't point you at specific places — I have no listing database and won't invent addresses or prices. I can help you work out what to compare.\n\nTo start: where will the adults be working or studying, and what monthly rent range are you working with?",
+          "You're arriving in Toronto next month as a family of four. I can't point you at specific places — I have no listing database and won't invent addresses or prices — but I can help you work out what to compare.\n\nA few things I still need:\n1. Work or study location (e.g., downtown vs. a suburb)\n2. Budget (e.g., under $2,500 vs. $2,800+)",
       },
       { role: "user", content: "One job downtown, budget is flexible but under $2,800." },
       {
