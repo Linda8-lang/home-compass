@@ -56,6 +56,21 @@ housing type, stage, budget — is sent to the model, via `advisorAppContext` bu
 `FlowProvider`. Check the Place reads `src/data/generated/*` directly and never threads
 into the Advisor's context. When touching either lane, preserve this boundary.
 
+One deliberate exception: `src/data/sources.ts`'s small, human-authored legal/regulatory
+citation registry (`src/lib/advisor-context.ts`) is matched deterministically against the
+user's question and, when relevant, injected into the Advisor's system prompt so it can
+cite the source by name and date. `src/data/generated/*` remains static-lane-only and is
+unaffected by this.
+
+A second, distinct mechanism feeds the Advisor a **resource directory**:
+`src/lib/advisor-resources.ts` matches the user's question against a duration tier
+(temporary / short-term / long-term) and, on a hit, hands over up to 4 platforms read directly from
+`durationResources` in `src/data/housing-sections.ts` (already static-lane source data —
+not ingested/curated data, so no boundary exception is needed here). This is navigation,
+not a sourced fact — keep it a separate context block and separate `VerifiedEntry.type`
+from citations, and never let the model pick, rank, or add to the list; selection and
+order are decided entirely in code.
+
 ### File-based routing (TanStack Start)
 
 See `src/routes/README.md`. Every `.tsx` in `src/routes/` is a route (`index.tsx` → `/`,
@@ -85,15 +100,26 @@ requires an AI key (500 if both `LOVABLE_API_KEY`/`GEMINI_API_KEY` absent) → v
 body (400) → enforces session question cap / per-message char cap / per-IP hourly budget
 (`src/lib/advisor-limits.ts`, in-memory/best-effort) → truncates history to the last 8 turns
 → prepends the guardrail system prompt (Ontario-specific rules, scam-pattern flagging,
-"never invent listings/addresses/prices", a clarifying-question protocol capped at 3
-questions) → prepends the app-context line → calls the Lovable AI Gateway (stream) or the
-Gemini API directly as a fallback (different wire format: `systemInstruction`,
-"user"/"model" roles instead of "assistant") → maps upstream failures to user-facing errors
-(429/402/404/etc.) → streams plain-text deltas back to the client.
+"never invent listings/addresses/prices", sourcing/legal-financial hedging rules, a
+resource-directory relay rule, a clarifying-question protocol capped at 3 questions) →
+prepends the Verified data block (`retrieveVerifiedContext`/`formatVerifiedContext` in
+`src/lib/advisor-context.ts`, a deterministic keyword match against `src/data/sources.ts`)
+when it matched anything → prepends the Resource directory block (`getResourcePointers` in
+`src/lib/advisor-resources.ts`, a deterministic duration-tier match against
+`durationResources`) when it matched anything → prepends the app-context line → calls the
+Lovable AI Gateway (stream) or the Gemini API directly as a fallback (different wire
+format: `systemInstruction`, "user"/"model" roles instead of "assistant") → maps upstream
+failures to user-facing errors (429/402/404/etc.) → streams plain-text deltas back to the
+client, with an `X-Advisor-Sources` response header (JSON array of `VerifiedEntry`, `type:
+"curated" | "resource"`) that the client renders as a linked citation footnote row and a
+separate tappable resource-pill row under the assistant bubble.
 
 The clarifying-question protocol and the fabrication ban both live in the system prompt in
 `advisor.ts`, not in UI logic — changing AI behavior means editing that prompt (and updating
-`src/data/advisor-samples.ts` if sample conversations should reflect it).
+`src/data/advisor-samples.ts` if sample conversations should reflect it). To add a new
+citation, edit `src/data/sources.ts` (and its keyword list in `advisor-context.ts`); to
+change what the resource directory can surface, edit `durationResources` in
+`housing-sections.ts` — never the matching/selection logic's output shape.
 
 ### Data ingestion
 
@@ -112,3 +138,7 @@ failure. Records join by `hood_id`, not `area_name`. Excel workbook parsing uses
   prices; it has no listing database.
 - Factual claims should be source-aware (`src/data/sources.ts`); numerical/time-sensitive
   claims without a connected source should stay neutralized (`SourcePending`).
+- The Advisor cites a legal/financial claim by name and date only when it's backed by an
+  entry in `src/data/sources.ts`; everything else stays hedged as general guidance.
+- Resource-directory platforms shown by the Advisor are selected, ordered, and capped in
+  code (`src/lib/advisor-resources.ts`) — never by the model.
