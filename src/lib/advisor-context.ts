@@ -6,11 +6,19 @@ import { CITATIONS, SOURCES } from "@/data/sources";
  * src/data/generated/* (ingested crime/rent data), which stays static-lane-only.
  */
 
+/**
+ * type: "curated" entries are sourced facts from the CITATIONS registry (this file).
+ * type: "resource" entries are the resource-directory pointers built in
+ * advisor-resources.ts — a distinct, navigation-only mechanism that happens to share
+ * this shape so the client can render both from one X-Advisor-Sources header.
+ */
 export type VerifiedEntry = {
   label: string;
   sourceName: string;
   updated: string;
-  text: string;
+  text?: string;
+  type: "curated" | "resource";
+  url?: string;
 };
 
 /** Keyword sets for deterministic matching — no LLM call, no fuzzy scoring. */
@@ -41,6 +49,15 @@ const KEYWORDS: Record<string, string[]> = {
     "guideline increase",
     "increase notice",
   ],
+  discriminationProtections: [
+    "discriminat",
+    "human rights",
+    "refused my application",
+    "denied my application",
+    "won't rent to me",
+    "turned down",
+    "protected ground",
+  ],
 };
 
 /** Deterministic keyword match against the citation registry. No LLM call. */
@@ -55,11 +72,18 @@ export function retrieveVerifiedContext(question: string): VerifiedEntry[] {
     const source = SOURCES[citation.sourceIds[0]];
     if (!source) continue;
 
+    // Multiple sources can back one citation (see depositRules); use the first that has a url.
+    const url = citation.sourceIds
+      .map((sourceId) => SOURCES[sourceId]?.url)
+      .find((u): u is string => !!u);
+
     entries.push({
       label: citation.label,
       sourceName: source.name,
       updated: source.updated,
       text: citation.note,
+      type: "curated",
+      url,
     });
   }
 

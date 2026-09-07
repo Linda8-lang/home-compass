@@ -5,6 +5,7 @@ import {
   formatVerifiedContext,
   type VerifiedEntry,
 } from "@/lib/advisor-context";
+import { getResourcePointers, matchDurationTier } from "@/lib/advisor-resources";
 
 /**
  * In-memory per-IP budget. Best-effort only (resets on redeploy / per worker
@@ -35,6 +36,7 @@ Rules:
 - You are helping the user explore and evaluate information. You do not present recommendations curated by the product team, and the app's static pages contain no curated housing recommendations.
 - Sourcing: when the Verified data block below contains a fact relevant to your answer, state it with its source name and "updated" date (e.g., "per the Landlord and Tenant Board, updated Jan 2026"). When a legal or financial claim you're making is not in that block, say plainly that it's general guidance with no citation — never imply an unsourced claim comes from an official source.
 - Legal and financial claims: never phrase these as universal or certain. Use qualifying language ("typically", "in most cases", "as of the date given") and point the user to the named source, or to a licensed professional, for anything that varies by situation.
+- Resource directory: if a "Resource directory" block is provided below, name those platforms with their links exactly as given, in that order — never add one that isn't listed, never rank or recommend one over another, never claim you searched them or know current availability or pricing.
 
 Clarifying-question protocol (important):
 - Before giving personalised housing guidance, make sure you know enough. The inputs that matter are: destination city or area, work or school location, approximate budget, preferred housing type, acceptable commute time, temporary vs. long-term, and other hard constraints (household size, pets, accessibility, move-in date).
@@ -90,7 +92,7 @@ async function callLovable(
   apiKey: string,
   history: Msg[],
   systemLines: string[],
-  verifiedEntries: VerifiedEntry[],
+  sourceEntries: VerifiedEntry[],
 ) {
   const upstream = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
     method: "POST",
@@ -127,7 +129,7 @@ async function callLovable(
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
       "Cache-Control": "no-cache",
-      "X-Advisor-Sources": JSON.stringify(verifiedEntries),
+      "X-Advisor-Sources": JSON.stringify(sourceEntries),
     },
   });
 }
@@ -141,7 +143,7 @@ async function callGeminiDirect(
   apiKey: string,
   history: Msg[],
   systemLines: string[],
-  verifiedEntries: VerifiedEntry[],
+  sourceEntries: VerifiedEntry[],
 ) {
   // Configurable because Google periodically retires model names (e.g. gemini-2.5-flash
   // returning 404 "no longer available to new users") — override via GEMINI_MODEL instead
@@ -189,7 +191,7 @@ async function callGeminiDirect(
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
       "Cache-Control": "no-cache",
-      "X-Advisor-Sources": JSON.stringify(verifiedEntries),
+      "X-Advisor-Sources": JSON.stringify(sourceEntries),
     },
   });
 }
@@ -243,15 +245,42 @@ export const Route = createFileRoute("/api/advisor")({
         const verifiedEntries = retrieveVerifiedContext(latest?.content ?? "");
         const verifiedBlock = formatVerifiedContext(verifiedEntries);
 
+        const resourcePointers = getResourcePointers(latest?.content ?? "");
+        const resourceBlock =
+          resourcePointers.length > 0
+            ? [
+                `Resource directory for this timeframe — name and link exactly what's below, unranked, no others added, no availability/pricing claims:`,
+                ...resourcePointers.map((r) => `- ${r.name} — ${r.url}: ${r.description}`),
+              ].join("\n")
+            : null;
+
+        if (process.env["NODE_ENV"] !== "production") {
+          console.log(
+            `advisor resource match: tier=${matchDurationTier(latest?.content ?? "") ?? "none"} count=${resourcePointers.length}`,
+          );
+        }
+
         const systemLines = [
           SYSTEM,
           ...(verifiedBlock ? [verifiedBlock] : []),
+          ...(resourceBlock ? [resourceBlock] : []),
           ...(body.context ? [`Where the user is in the app: ${body.context}`] : []),
         ];
 
+        const sourceEntries: VerifiedEntry[] = [
+          ...verifiedEntries,
+          ...resourcePointers.map((r) => ({
+            label: r.name,
+            url: r.url,
+            sourceName: r.tier,
+            updated: "",
+            type: "resource" as const,
+          })),
+        ];
+
         // LOVABLE_API_KEY is the primary path; GEMINI_API_KEY only kicks in when it's absent.
-        if (lovableKey) return callLovable(lovableKey, history, systemLines, verifiedEntries);
-        return callGeminiDirect(geminiKey!, history, systemLines, verifiedEntries);
+        if (lovableKey) return callLovable(lovableKey, history, systemLines, sourceEntries);
+        return callGeminiDirect(geminiKey!, history, systemLines, sourceEntries);
       },
     },
   },

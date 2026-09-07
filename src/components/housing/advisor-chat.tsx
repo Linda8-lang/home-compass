@@ -273,13 +273,44 @@ export function AdvisorConversation({ className }: { className?: string }) {
               <div className="whitespace-pre-wrap rounded-2xl border border-advisor/30 bg-advisor-soft/60 px-3.5 py-2.5 text-sm leading-relaxed text-foreground">
                 {m.content || "…"}
               </div>
-              {m.sources && m.sources.length > 0 && (
+              {m.sources && m.sources.some((s) => s.type === "curated") && (
                 <div className="flex flex-wrap gap-x-3 gap-y-0.5 px-1 text-[11px] text-muted-foreground">
-                  {m.sources.map((s, si) => (
-                    <span key={si}>
-                      {s.label} — {s.sourceName}, updated {s.updated}
-                    </span>
-                  ))}
+                  {m.sources
+                    .filter((s) => s.type === "curated")
+                    .map((s, si) =>
+                      s.url ? (
+                        <a
+                          key={si}
+                          href={s.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="underline underline-offset-2 hover:text-foreground"
+                        >
+                          {s.label} — {s.sourceName}, updated {s.updated}
+                        </a>
+                      ) : (
+                        <span key={si}>
+                          {s.label} — {s.sourceName}, updated {s.updated}
+                        </span>
+                      ),
+                    )}
+                </div>
+              )}
+              {m.sources && m.sources.some((s) => s.type === "resource") && (
+                <div className="flex flex-wrap gap-1.5 px-1">
+                  {m.sources
+                    .filter((s) => s.type === "resource")
+                    .map((s, si) => (
+                      <a
+                        key={si}
+                        href={s.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
+                      >
+                        {s.label}
+                      </a>
+                    ))}
                 </div>
               )}
             </div>
