@@ -24,6 +24,15 @@ sources, human-authored) is matched deterministically against the user's questio
 when relevant, injected so the Advisor can cite the source by name and date. `src/data/generated/*`
 remains static-lane-only and is unaffected by this.
 
+A second, separate mechanism gives the Advisor a **resource directory**: a deterministic
+keyword match against the user's question picks a duration tier (temporary / short-term /
+long-term) and hands over up to 4 platforms read straight from `durationResources`
+(`src/data/housing-sections.ts` — static-lane source data, not ingested data). This is
+navigation ("where to look"), not a sourced fact, and it's kept as a distinct context
+block and a distinct entry type from citations. The model never selects, ranks, or adds to
+the list — which platforms appear, in what order, capped at how many, is decided in code
+(`src/lib/advisor-resources.ts`) before the prompt is built.
+
 ---
 
 ## User flow (end to end)
@@ -95,18 +104,23 @@ Navigation is non-linear: every section is always rendered, the index column jus
                                       3 enforce session/char/IP limits (advisor-limits.ts)
                                       4 truncate history → last 8 turns
                                       5 prepend guardrail system prompt
-                                      6 prepend app-context line (stage, budget,
+                                      6 match citations (advisor-context.ts) → prepend
+                                        Verified data block if any matched
+                                      7 match duration tier (advisor-resources.ts) →
+                                        prepend Resource directory block if any matched
+                                      8 prepend app-context line (stage, budget,
                                         status, reviewed criteria, selected housing type)
-                                      7 call Lovable AI Gateway (stream), or the
+                                      9 call Lovable AI Gateway (stream), or the
                                         Gemini API directly if no Lovable key
                                                    │
                                                    ▼
                           google/gemini-2.5-flash (Lovable) — or gemini-2.0-flash
                           direct via GEMINI_MODEL override (SSE either way)
                                                    │
-                                    text deltas ◄──┘
+                          text deltas + X-Advisor-Sources header (curated + resource) ◄──┘
                                                    ▼
-                                    Advisor bubble grows token by token
+                    Advisor bubble grows token by token; citation footnote row and/or
+                    resource-pill row render underneath once the header is read
 ```
 
 No account, no database, no PII leaves the browser. Chat messages, `journeyStage`, `filters`,
@@ -154,19 +168,34 @@ Advisor input (advisor-chat.tsx)
                 • newcomer-credit substitutes
                 • scam-pattern flagging
                 • "never invent listings, addresses, prices"
+                • sourcing rule: cite name + date from the Verified data block when
+                  available, otherwise say plainly it's general guidance
+                • legal/financial claims: qualifying language only, never universal
+                • resource-directory rule: relay exactly what's given, in that order,
+                  never rank/recommend/add one, never claim availability or pricing
                 • clarifying-question protocol (max 3 questions, then one at a time)
-           8. prepend the app-context system line
-           9. POST to the Lovable AI Gateway with stream:true — or, if
+           8. retrieveVerifiedContext(latest message) — deterministic keyword match
+              against src/data/sources.ts's CITATIONS (advisor-context.ts, no LLM
+              call) → prepend the formatted Verified data block if anything matched
+           9. getResourcePointers(latest message) — deterministic duration-tier
+              keyword match against durationResources (advisor-resources.ts, no LLM
+              call) → prepend the formatted Resource directory block (≤ 4 items, in
+              their original order) if a tier matched
+          10. prepend the app-context system line
+          11. POST to the Lovable AI Gateway with stream:true — or, if
               LOVABLE_API_KEY is unset, call the Gemini API directly instead
               (different wire format: system prompt as `systemInstruction`,
               roles are "user"/"model" not "assistant")
-          10. map upstream failures to human errors (429 rate limit, 402 credits
+          12. map upstream failures to human errors (429 rate limit, 402 credits
               exhausted, 404 model unavailable, other)
-          11. transform the SSE frames into a plain text delta stream
-        └─ client reads the stream and appends deltas to the last assistant message
+          13. transform the SSE frames into a plain text delta stream; attach the
+              matched citations + resource pointers as JSON on the X-Advisor-Sources
+              response header
+        └─ client reads the stream and appends deltas to the last assistant message;
+           reads X-Advisor-Sources once and attaches it to that message for rendering
 ```
 
-Two decisions here are product decisions expressed as code:
+Three decisions here are product decisions expressed as code:
 
 - **The clarifying-question protocol lives in the prompt, not the UI.** The model must
   reflect back what it already knows and ask only the minimum missing inputs
@@ -174,6 +203,11 @@ Two decisions here are product decisions expressed as code:
   temp vs. long-term, hard constraints).
 - **Fabrication is forbidden at the prompt level.** There is no listing database, so the
   model is instructed to say so and pivot to *how to look* rather than *what to rent*.
+- **Citations and resource links are selected outside the model, not requested from it.**
+  Both `retrieveVerifiedContext` and `getResourcePointers` run deterministic keyword
+  matching in code before the prompt is built; the model only relays what it's handed,
+  verbatim, and the same matched data is echoed back on `X-Advisor-Sources` so the UI
+  doesn't have to parse it out of the model's prose.
 
 ---
 
@@ -188,6 +222,8 @@ Each sub-step of the hidden logic has an assigned UI surface, so nothing happens
 | Streaming answer | Assistant bubble grows token by token | Violet AI styling, "AI-generated" label — visually distinct from Column 2's styling |
 | Model is still gathering inputs | "Still to clarify: …" banner (sample conversations) | Makes the clarifying protocol legible instead of feeling like interrogation |
 | Answer is guidance, not fact | `DisclaimerBadge` at the top of the Advisor column | "Guidance, not legal advice" |
+| A claim is backed by a named source | Small linked footnote row under the assistant bubble | "Label — source name, updated date", distinct from the resource-pill row |
+| Duration-tier platforms are relevant | Row of tappable pills under the assistant bubble | Same visual pattern as Check the Place's example-address chips — navigation, not an endorsement |
 | Static content limits | Subtle `StaticDisclaimer` near reference content | "Verify important requirements with the relevant official source" |
 | Depth on demand | `Disclosure` / `LearnMore` wrappers throughout Column 2 | Primary question first; detail, sources and resource links one tap away |
 | Session budget visible | Composer footer | "`N` of 15 questions left in this conversation" |
@@ -209,6 +245,15 @@ Data that leaves the client, and the recovery path for each failure.
 - No curated/ingested data (Check the Place's crime/rent figures never enter the Advisor's context)
 - No listing or market data (there is none)
 
+**What the server adds itself (not sent by the client)**
+- A Verified data block, when the latest message keyword-matches an entry in
+  `src/data/sources.ts`'s citation registry
+- A Resource directory block, when the latest message keyword-matches a duration tier
+  in `durationResources`
+- Both are computed deterministically in code from local static-lane files — no LLM call,
+  no ingested data — and are echoed back to the client on the `X-Advisor-Sources` header
+  so the UI can render them without parsing the model's prose
+
 **Recovery paths that exist today**
 
 | Failure | User sees | Recovery |
@@ -223,6 +268,7 @@ Data that leaves the client, and the recovery path for each failure.
 | 404 model unavailable (Gemini fallback) | "The configured AI model is unavailable — set `GEMINI_MODEL` to a current model name." | Operator sets `GEMINI_MODEL` |
 | Other upstream error | "The advisor could not answer (status)." | Retry; upstream detail logged server-side, not shown to the user |
 | Bad or unhelpful answer | Answer is visibly labelled AI, sits beside sourced static content | User can cross-check against the reference column without leaving the screen |
+| Missing/malformed `X-Advisor-Sources` header | No citation footnote or resource pills render | Answer text still streams normally — citations/resources are additive, never blocking |
 
 **The structural kill switch:** the AI is additive. If the Advisor column is removed or
 fails entirely, Find Housing, Evaluate Housing, and Check the Place still deliver the
@@ -250,5 +296,8 @@ neighbourhood crime lookup.
 Local, mostly-ephemeral selections shape which static, source-labelled content is shown;
 the only data that ever leaves the browser is the last eight chat turns plus a summary of
 the user's own in-app activity, which the server rate-limits, wraps in a guardrailed
-prompt, and streams back (via the Lovable Gateway or a direct Gemini fallback) as
-clearly-labelled AI guidance that the static lane never depends on.
+prompt — deterministically enriched, in code, with any matching citation from
+`src/data/sources.ts` and any matching resource-directory platforms from
+`durationResources`, never selected by the model — and streams back (via the Lovable
+Gateway or a direct Gemini fallback) as clearly-labelled AI guidance that the static lane
+never depends on.

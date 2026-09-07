@@ -9,7 +9,7 @@ Newcomers face a dense, unfamiliar housing market. This prototype reduces decisi
 - **Static reference (Column 2)** — structured, source-aware content: where to look, how to evaluate a place, and how to check a specific neighbourhood before committing. No curated listings or recommendations live here.
 - **AI Advisor (Column 3)** — a conversational assistant that helps users explore their specific situation, compare trade-offs, and prepare for landlord conversations, without inventing listings or prices.
 
-Curated/ingested data (crime stats, rent benchmarks) is never fed into the AI Advisor's context — only the user's own in-app activity (reviewed criteria, selected housing type, stage, budget) is.
+Curated/ingested data (crime stats, rent benchmarks) is never fed into the AI Advisor's context — only the user's own in-app activity (reviewed criteria, selected housing type, stage, budget) is. Two deliberate, code-controlled exceptions feed the Advisor from the static lane's own source files: a small legal/regulatory citation registry (`src/data/sources.ts`) it can cite by name and date, and a duration-tier resource directory (`src/data/housing-sections.ts`'s `durationResources`) it can point to — both matched by deterministic keywords, never chosen by the model itself.
 
 ## Key Features
 
@@ -23,6 +23,8 @@ Curated/ingested data (crime stats, rent benchmarks) is never fed into the AI Ad
    - Streaming chat. Primary provider is the Lovable AI Gateway (`google/gemini-2.5-flash`); if `LOVABLE_API_KEY` is not set, it falls back to calling the Gemini API directly with `GEMINI_API_KEY` (model configurable via `GEMINI_MODEL`).
    - Asks at most a few clarifying questions (destination, budget, commute, housing type, duration, constraints) before giving guidance, and reflects back what it already knows from app context.
    - Explicitly avoids fabricated listings, addresses, or prices — it has no listing database.
+   - **Source-grounded citations** — when a legal/financial claim matches an entry in the citation registry (`src/data/sources.ts`, matched deterministically by `src/lib/advisor-context.ts`), the advisor names the source and its "updated" date and the client renders it as a linked footnote; everything else is explicitly hedged as general guidance, never presented with the same confidence.
+   - **Resource directory** — a duration-tier keyword match (`src/lib/advisor-resources.ts`) surfaces up to 4 platforms straight from Find Housing's `durationResources`, rendered as tappable pills. Which platforms, in what order, and how many is decided in code before the prompt is built — the model only relays what it's given, verbatim, and never claims to have searched them or to know current availability or pricing.
    - Session limits enforced both client- and server-side: max questions per session, max characters per message, truncated conversation history, and a per-IP hourly request budget (`src/lib/advisor-limits.ts`).
    - Sample conversation states (`src/data/advisor-samples.ts`) let users preview realistic exchanges without spending a real turn.
 
@@ -43,7 +45,7 @@ Curated/ingested data (crime stats, rent benchmarks) is never fed into the AI Ad
   - `src/data/sources.ts` — citation/provenance registry for factual claims.
   - `src/data/advisor-samples.ts` — sample chat states.
   - `src/data/generated/*` — ingested neighbourhood safety (and, once populated, rent) data; see Data Ingestion below.
-- Chat messages are sent to `src/routes/api/advisor.ts`, which enforces the session/rate limits, prepends the system prompt and app-context line, and streams the response back as plain text (from either the Lovable Gateway or the direct Gemini fallback).
+- Chat messages are sent to `src/routes/api/advisor.ts`, which enforces the session/rate limits, prepends the system prompt, deterministically matches and prepends a Verified data block (citations, via `src/lib/advisor-context.ts`) and a Resource directory block (duration-tier platforms, via `src/lib/advisor-resources.ts`) when either matches, prepends the app-context line, and streams the response back as plain text (from either the Lovable Gateway or the direct Gemini fallback) — with the matched citations and resources echoed back on an `X-Advisor-Sources` response header for the client to render.
 
 ## Data Ingestion
 
@@ -82,16 +84,18 @@ Then open the URL printed in the terminal. Copy `.env.example` to `.env` and set
 2. **GitHub / local IDE** — Clone the repo, create a branch, make changes, and push. Changes will sync back into Lovable.
 3. **Server functions** — Put app-internal logic in `*.functions.ts` files imported by routes; keep raw HTTP endpoints under `src/routes/api/public/*` for external callers.
 4. **Static content** — Add or edit data in `src/data/*` and import it into the relevant Column 2 component (`choose-housing.tsx`, `column-two.tsx`, `check-the-place-report.tsx`).
-5. **AI behavior** — Update the system prompt in `src/routes/api/advisor.ts` and sample interactions in `src/data/advisor-samples.ts`.
+5. **AI behavior** — Update the system prompt in `src/routes/api/advisor.ts` and sample interactions in `src/data/advisor-samples.ts`. To add a citation, edit `src/data/sources.ts` and its keyword list in `src/lib/advisor-context.ts`; to change what the resource directory can surface, edit `durationResources` in `src/data/housing-sections.ts` (the matching/selection logic in `src/lib/advisor-resources.ts` shouldn't need to change).
 6. **Reference data** — Add or update ingesters under `scripts/ingest/` rather than hand-editing `src/data/generated/*`.
 
 ## Design Constraints
 
 - Keep the three-column layout: index, static reference, AI Advisor.
 - Static reference must stay neutral and not present curated housing recommendations.
-- Curated/ingested data (crime stats, rent) must never be fed into the AI Advisor's context — only the user's own in-app activity may be.
+- Curated/ingested data (crime stats, rent) must never be fed into the AI Advisor's context — only the user's own in-app activity may be. The citation registry and resource directory are the two deliberate exceptions, and both stay deterministic (keyword-matched in code, never chosen by the model).
 - AI Advisor must ask clarifying questions and must not fabricate listings, addresses, or prices.
 - All factual claims should be source-aware; time-sensitive or numerical estimates should be neutralized where sources are not yet connected.
+- A legal/financial claim gets cited by name and date only when it's backed by `src/data/sources.ts`; otherwise it stays hedged as general guidance — never presented with the same confidence as a sourced fact.
+- Resource-directory platforms are selected, ordered, and capped in code; the model must relay them verbatim and never rank, add to, or claim to have checked availability/pricing for them.
 - Disclaimers should be subtle but present: "Informational guidance only. Requirements may vary by location and individual circumstances. Verify important requirements with the relevant official source."
 
 ## Deployment
