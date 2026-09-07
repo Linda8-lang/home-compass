@@ -56,6 +56,12 @@ housing type, stage, budget — is sent to the model, via `advisorAppContext` bu
 `FlowProvider`. Check the Place reads `src/data/generated/*` directly and never threads
 into the Advisor's context. When touching either lane, preserve this boundary.
 
+One deliberate exception: `src/data/sources.ts`'s small, human-authored legal/regulatory
+citation registry (`src/lib/advisor-context.ts`) is matched deterministically against the
+user's question and, when relevant, injected into the Advisor's system prompt so it can
+cite the source by name and date. `src/data/generated/*` remains static-lane-only and is
+unaffected by this.
+
 ### File-based routing (TanStack Start)
 
 See `src/routes/README.md`. Every `.tsx` in `src/routes/` is a route (`index.tsx` → `/`,

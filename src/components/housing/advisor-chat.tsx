@@ -7,8 +7,9 @@ import { SAMPLE_CONVERSATIONS, type SampleConversation } from "@/data/advisor-sa
 import { cn } from "@/lib/utils";
 import { Disclosure, LearnMore, DisclaimerBadge } from "./primitives";
 import { ADVISOR_LIMITS, questionsUsed } from "@/lib/advisor-limits";
+import type { VerifiedEntry } from "@/lib/advisor-context";
 
-type Msg = { role: "user" | "assistant"; content: string };
+type Msg = { role: "user" | "assistant"; content: string; sources?: VerifiedEntry[] };
 
 const SUGGESTIONS = [
   "Can you help me find housing near my university?",
@@ -65,7 +66,18 @@ function useAdvisor() {
         throw new Error(data?.error ?? "The advisor could not answer right now.");
       }
 
-      setMessages((m) => [...m, { role: "assistant", content: "" }]);
+      let sources: VerifiedEntry[] | undefined;
+      const sourcesHeader = res.headers.get("X-Advisor-Sources");
+      if (sourcesHeader) {
+        try {
+          const parsed = JSON.parse(sourcesHeader) as VerifiedEntry[];
+          if (Array.isArray(parsed) && parsed.length > 0) sources = parsed;
+        } catch {
+          // malformed header — render without citations rather than failing the reply
+        }
+      }
+
+      setMessages((m) => [...m, { role: "assistant", content: "", sources }]);
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       for (;;) {
@@ -76,7 +88,7 @@ function useAdvisor() {
           const copy = [...m];
           const last = copy[copy.length - 1];
           if (last && last.role === "assistant") {
-            copy[copy.length - 1] = { role: "assistant", content: last.content + chunk };
+            copy[copy.length - 1] = { ...last, content: last.content + chunk };
           }
           return copy;
         });
@@ -261,6 +273,15 @@ export function AdvisorConversation({ className }: { className?: string }) {
               <div className="whitespace-pre-wrap rounded-2xl border border-advisor/30 bg-advisor-soft/60 px-3.5 py-2.5 text-sm leading-relaxed text-foreground">
                 {m.content || "…"}
               </div>
+              {m.sources && m.sources.length > 0 && (
+                <div className="flex flex-wrap gap-x-3 gap-y-0.5 px-1 text-[11px] text-muted-foreground">
+                  {m.sources.map((s, si) => (
+                    <span key={si}>
+                      {s.label} — {s.sourceName}, updated {s.updated}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           ),
         )}

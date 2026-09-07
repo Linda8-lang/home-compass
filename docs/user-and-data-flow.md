@@ -19,6 +19,11 @@ ever appears in the static lane. Curated/ingested data (crime stats, rent benchm
 never fed into the AI Advisor's context — only the user's own in-app activity is (see
 `advisorAppContext` below).
 
+One deliberate exception: `src/data/sources.ts`'s small citation registry (legal/regulatory
+sources, human-authored) is matched deterministically against the user's question and,
+when relevant, injected so the Advisor can cite the source by name and date. `src/data/generated/*`
+remains static-lane-only and is unaffected by this.
+
 ---
 
 ## User flow (end to end)

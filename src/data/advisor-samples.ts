@@ -76,4 +76,18 @@ export const SAMPLE_CONVERSATIONS: SampleConversation[] = [
       },
     ],
   },
+  {
+    id: "deposit-legality",
+    label: "Is this deposit request legal?",
+    blurb: "Situation-specific legal question → direct, cited answer",
+    stillMissing: [],
+    turns: [
+      { role: "user", content: "Is this deposit request legal in Ontario?" },
+      {
+        role: "assistant",
+        content:
+          "Per the Landlord and Tenant Board (Residential Tenancies Act guidance, updated Jan 2026): a landlord can only collect first and last month's rent, plus a refundable key deposit if a key is actually provided. A separate damage deposit is not permitted, however it's labelled.\n\nIf someone is asking for more than that — a damage deposit, cash before a viewing, or a fee described as insurance — treat it as a signal to slow down and verify before paying anything.",
+      },
+    ],
+  },
 ];

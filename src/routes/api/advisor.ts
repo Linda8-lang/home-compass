@@ -1,5 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ADVISOR_LIMITS, questionsUsed } from "@/lib/advisor-limits";
+import {
+  retrieveVerifiedContext,
+  formatVerifiedContext,
+  type VerifiedEntry,
+} from "@/lib/advisor-context";
 
 /**
  * In-memory per-IP budget. Best-effort only (resets on redeploy / per worker
@@ -25,9 +30,11 @@ Rules:
 - Answer for Toronto/Ontario specifically: first + last month's rent is the legal maximum deposit, damage deposits are not allowed, key deposits are refundable, rent increases follow the annual guideline with 90 days notice.
 - The user is a newcomer with no Canadian credit history. Suggest concrete substitutes: proof of funds, guarantor, employment or admission letter, translated references.
 - Flag scam patterns whenever money is discussed before an in-person or live-video viewing.
-- Any number you cite is general guidance, not a verified figure. The app's own listings, rents and safety scores are sample data — say so if asked.
+- Any number or claim not backed by an entry in the Verified data block (when one is provided below) is general guidance, not a verified figure — say so if asked. The app's own listings, rents and safety scores are sample data.
 - Never invent specific addresses, landlords, listings, availability or prices. You have no listing database. If asked to find a place, say you cannot show listings and instead help the user work out what to look for and where to look.
 - You are helping the user explore and evaluate information. You do not present recommendations curated by the product team, and the app's static pages contain no curated housing recommendations.
+- Sourcing: when the Verified data block below contains a fact relevant to your answer, state it with its source name and "updated" date (e.g., "per the Landlord and Tenant Board, updated Jan 2026"). When a legal or financial claim you're making is not in that block, say plainly that it's general guidance with no citation — never imply an unsourced claim comes from an official source.
+- Legal and financial claims: never phrase these as universal or certain. Use qualifying language ("typically", "in most cases", "as of the date given") and point the user to the named source, or to a licensed professional, for anything that varies by situation.
 
 Clarifying-question protocol (important):
 - Before giving personalised housing guidance, make sure you know enough. The inputs that matter are: destination city or area, work or school location, approximate budget, preferred housing type, acceptable commute time, temporary vs. long-term, and other hard constraints (household size, pets, accessibility, move-in date).
@@ -79,7 +86,12 @@ function errorResponse(message: string, status: number) {
 }
 
 /** Primary provider: the Lovable AI Gateway (OpenAI-compatible chat completions). */
-async function callLovable(apiKey: string, history: Msg[], systemLines: string[]) {
+async function callLovable(
+  apiKey: string,
+  history: Msg[],
+  systemLines: string[],
+  verifiedEntries: VerifiedEntry[],
+) {
   const upstream = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -112,7 +124,11 @@ async function callLovable(apiKey: string, history: Msg[], systemLines: string[]
     return typeof delta === "string" && delta.length > 0 ? delta : null;
   });
   return new Response(stream, {
-    headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" },
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-cache",
+      "X-Advisor-Sources": JSON.stringify(verifiedEntries),
+    },
   });
 }
 
@@ -121,7 +137,12 @@ async function callLovable(apiKey: string, history: Msg[], systemLines: string[]
  * is not configured. Gemini's native format differs from OpenAI's — roles are
  * "user"/"model" (not "assistant"), and the system prompt is a separate field.
  */
-async function callGeminiDirect(apiKey: string, history: Msg[], systemLines: string[]) {
+async function callGeminiDirect(
+  apiKey: string,
+  history: Msg[],
+  systemLines: string[],
+  verifiedEntries: VerifiedEntry[],
+) {
   // Configurable because Google periodically retires model names (e.g. gemini-2.5-flash
   // returning 404 "no longer available to new users") — override via GEMINI_MODEL instead
   // of hardcoding a name that can silently break again later.
@@ -165,7 +186,11 @@ async function callGeminiDirect(apiKey: string, history: Msg[], systemLines: str
     return typeof delta === "string" && delta.length > 0 ? delta : null;
   });
   return new Response(stream, {
-    headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-cache" },
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-cache",
+      "X-Advisor-Sources": JSON.stringify(verifiedEntries),
+    },
   });
 }
 
@@ -215,14 +240,18 @@ export const Route = createFileRoute("/api/advisor")({
 
         const history = all.slice(-ADVISOR_LIMITS.historyTurns);
 
+        const verifiedEntries = retrieveVerifiedContext(latest?.content ?? "");
+        const verifiedBlock = formatVerifiedContext(verifiedEntries);
+
         const systemLines = [
           SYSTEM,
+          ...(verifiedBlock ? [verifiedBlock] : []),
           ...(body.context ? [`Where the user is in the app: ${body.context}`] : []),
         ];
 
         // LOVABLE_API_KEY is the primary path; GEMINI_API_KEY only kicks in when it's absent.
-        if (lovableKey) return callLovable(lovableKey, history, systemLines);
-        return callGeminiDirect(geminiKey!, history, systemLines);
+        if (lovableKey) return callLovable(lovableKey, history, systemLines, verifiedEntries);
+        return callGeminiDirect(geminiKey!, history, systemLines, verifiedEntries);
       },
     },
   },
