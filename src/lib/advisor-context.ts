@@ -69,7 +69,9 @@ export function retrieveVerifiedContext(question: string): VerifiedEntry[] {
     const keywords = KEYWORDS[id] ?? [];
     if (!keywords.some((k) => q.includes(k))) continue;
 
-    const source = SOURCES[citation.sourceIds[0]];
+    const primarySourceId = citation.sourceIds[0];
+    if (!primarySourceId) continue;
+    const source = SOURCES[primarySourceId];
     if (!source) continue;
 
     // Multiple sources can back one citation (see depositRules); use the first that has a url.
@@ -83,7 +85,7 @@ export function retrieveVerifiedContext(question: string): VerifiedEntry[] {
       updated: source.updated,
       text: citation.note,
       type: "curated",
-      url,
+      ...(url ? { url } : {}),
     });
   }
 
