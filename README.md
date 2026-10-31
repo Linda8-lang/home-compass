@@ -17,10 +17,10 @@ Curated/ingested data (crime stats, rent benchmarks) is never fed into the AI Ad
 
 2. **Evaluate Housing** — a factual checklist of criteria across living setup, costs, commute, lease/rent control, documents, strategy, negotiation, and application. Users can mark items "Reviewed"; progress persists in `localStorage` and is summarized for the AI Advisor.
 
-3. **Check the Place** — looks up a Toronto neighbourhood by matching the typed address text against a known neighbourhood name (no geocoding), then shows a crime-rate comparison against the citywide average, sourced from Toronto Police Service open data. Users can save places to a shortlist (also `localStorage`-backed).
+3. **Check the Place** — looks up a Toronto neighbourhood by geocoding the typed address through `/api/geocode` (Nominatim, then a match against the 158 neighbourhood boundaries), falling back to matching the text against a known neighbourhood name if that fails, then shows a crime-rate comparison against the citywide average, sourced from Toronto Police Service open data. Users can save places to a shortlist (also `localStorage`-backed).
 
 4. **AI Advisor**
-   - Streaming chat. Primary provider is the Lovable AI Gateway (`google/gemini-2.5-flash`); if `LOVABLE_API_KEY` is not set, it falls back to calling the Gemini API directly with `GEMINI_API_KEY` (model configurable via `GEMINI_MODEL`).
+   - Streaming chat. The sole provider is Groq, using `GROQ_API_KEY` (default model `qwen/qwen3.8-27b`, configurable via `GROQ_MODEL`).
    - Asks at most a few clarifying questions (destination, budget, commute, housing type, duration, constraints) before giving guidance, and reflects back what it already knows from app context.
    - Explicitly avoids fabricated listings, addresses, or prices — it has no listing database.
    - **Source-grounded citations** — when a legal/financial claim matches an entry in the citation registry (`src/data/sources.ts`, matched deterministically by `src/lib/advisor-context.ts`), the advisor names the source and its "updated" date and the client renders it as a linked footnote; everything else is explicitly hedged as general guidance, never presented with the same confidence.
@@ -45,7 +45,7 @@ Curated/ingested data (crime stats, rent benchmarks) is never fed into the AI Ad
   - `src/data/sources.ts` — citation/provenance registry for factual claims.
   - `src/data/advisor-samples.ts` — sample chat states.
   - `src/data/generated/*` — ingested neighbourhood safety (and, once populated, rent) data; see Data Ingestion below.
-- Chat messages are sent to `src/routes/api/advisor.ts`, which enforces the session/rate limits, prepends the system prompt, deterministically matches and prepends a Verified data block (citations, via `src/lib/advisor-context.ts`) and a Resource directory block (duration-tier platforms, via `src/lib/advisor-resources.ts`) when either matches, prepends the app-context line, and streams the response back as plain text (from either the Lovable Gateway or the direct Gemini fallback) — with the matched citations and resources echoed back on an `X-Advisor-Sources` response header for the client to render.
+- Chat messages are sent to `src/routes/api/advisor.ts`, which enforces the session/rate limits, prepends the system prompt, deterministically matches and prepends a Verified data block (citations, via `src/lib/advisor-context.ts`) and a Resource directory block (duration-tier platforms, via `src/lib/advisor-resources.ts`) when either matches, prepends the app-context line, and streams the response back as plain text (from Groq) — with the matched citations and resources echoed back on an `X-Advisor-Sources` response header for the client to render.
 
 ## Data Ingestion
 
@@ -66,7 +66,7 @@ Each ingester validates its source against a schema (`scripts/ingest/schemas/*`)
 - **Build tool:** Vite 8, via `@lovable.dev/vite-tanstack-config` (Nitro, Cloudflare target by default)
 - **Package manager:** Bun
 - **Styling:** Tailwind CSS v4 + shadcn/ui components
-- **AI:** Lovable AI Gateway (Gemini 2.5 Flash), with a direct Gemini API fallback
+- **AI:** Groq (default model Qwen 3.8 27B, configurable via `GROQ_MODEL`)
 - **Auth / database:** Supabase client is scaffolded (`src/integrations/supabase/*`) but not currently used by the housing feature
 
 ## Local Development
@@ -76,7 +76,7 @@ bun install
 bun dev
 ```
 
-Then open the URL printed in the terminal. Copy `.env.example` to `.env` and set at least one AI provider key (`LOVABLE_API_KEY` or `GEMINI_API_KEY`) for the AI Advisor to work — the static reference lane and Check the Place work with no keys configured.
+Then open the URL printed in the terminal. Copy `.env.example` to `.env` and set `GROQ_API_KEY` for the AI Advisor to work — the static reference lane and Check the Place work with no keys configured.
 
 ## How to Contribute
 

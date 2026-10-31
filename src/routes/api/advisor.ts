@@ -87,37 +87,54 @@ function errorResponse(message: string, status: number) {
   });
 }
 
-/** Primary provider: the Lovable AI Gateway (OpenAI-compatible chat completions). */
-async function callLovable(
+/** Sole AI provider: Groq running open-weight Qwen/Llama*/
+/** Sole AI Provider: Groq running open-weight Qwen/Llama */
+async function callGroq(
   apiKey: string,
   history: Msg[],
   systemLines: string[],
   sourceEntries: VerifiedEntry[],
 ) {
-  const upstream = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Lovable-API-Key": apiKey,
-      "X-Lovable-AIG-SDK": "fetch",
-    },
-    body: JSON.stringify({
-      model: "google/gemini-2.5-flash",
-      stream: true,
-      max_tokens: ADVISOR_LIMITS.maxOutputTokens,
-      messages: [...systemLines.map((content) => ({ role: "system", content })), ...history],
-    }),
-  });
+  const model = process.env["GROQ_MODEL"] || "qwen/qwen3.8-27b";
+  const isQwen = model.startsWith("qwen/");
+  let upstream: Response;
+
+  try {
+    upstream = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model,
+        stream: true,
+        max_completion_tokens: ADVISOR_LIMITS.maxOutputTokens,
+        ...(isQwen
+          ? {
+              reasoning_effort: process.env["GROQ_REASONING_EFFORT"] || "none",
+              reasoning_format: "hidden",
+            }
+          : {}),
+        messages: [...systemLines.map((content) => ({ role: "system", content })), ...history],
+      }),
+    });
+  } catch (err) {
+    console.error("advisor upstream unreachable (groq)", err);
+    return errorResponse("The advisor could not be reached — try again in a moment.", 502);
+  }
 
   if (!upstream.ok || !upstream.body) {
     const detail = await upstream.text().catch(() => "");
-    console.error("advisor upstream error (lovable)", upstream.status, detail.slice(0, 500));
+    console.error("advisor upstream error (groq)", upstream.status, detail.slice(0, 500));
     const message =
       upstream.status === 429
         ? "The advisor is rate limited right now — try again in a moment."
-        : upstream.status === 402
-          ? "AI credits are exhausted for this workspace."
-          : `The advisor could not answer (${upstream.status}).`;
+        : upstream.status === 404
+          ? "The configured AI model is unavailable — set GROQ_MODEL to a current model name."
+          : upstream.status === 401 || upstream.status === 403
+            ? "AI is not configured correctly."
+            : `The advisor could not answer (${upstream.status}).`;
     return errorResponse(message, upstream.status);
   }
 
@@ -125,68 +142,7 @@ async function callLovable(
     const delta = json?.choices?.[0]?.delta?.content;
     return typeof delta === "string" && delta.length > 0 ? delta : null;
   });
-  return new Response(stream, {
-    headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "no-cache",
-      "X-Advisor-Sources": JSON.stringify(sourceEntries),
-    },
-  });
-}
 
-/**
- * Fallback provider: calls the Gemini API directly, used only when LOVABLE_API_KEY
- * is not configured. Gemini's native format differs from OpenAI's — roles are
- * "user"/"model" (not "assistant"), and the system prompt is a separate field.
- */
-async function callGeminiDirect(
-  apiKey: string,
-  history: Msg[],
-  systemLines: string[],
-  sourceEntries: VerifiedEntry[],
-) {
-  // Configurable because Google periodically retires model names (e.g. gemini-2.5-flash
-  // returning 404 "no longer available to new users") — override via GEMINI_MODEL instead
-  // of hardcoding a name that can silently break again later.
-  const model = process.env["GEMINI_MODEL"] || "gemini-2.0-flash";
-  const upstream = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse&key=${apiKey}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: systemLines.join("\n\n") }] },
-        generationConfig: { maxOutputTokens: ADVISOR_LIMITS.maxOutputTokens },
-        contents: history.map((m) => ({
-          role: m.role === "assistant" ? "model" : "user",
-          parts: [{ text: m.content }],
-        })),
-      }),
-    },
-  );
-
-  if (!upstream.ok || !upstream.body) {
-    const detail = await upstream.text().catch(() => "");
-    console.error(
-      "advisor upstream error (gemini fallback)",
-      upstream.status,
-      detail.slice(0, 500),
-    );
-    const message =
-      upstream.status === 429
-        ? "The advisor is rate limited right now — try again in a moment."
-        : upstream.status === 404
-          ? "The configured AI model is unavailable — set GEMINI_MODEL to a current model name."
-          : upstream.status === 400 || upstream.status === 403
-            ? "AI is not configured correctly."
-            : `The advisor could not answer (${upstream.status}).`;
-    return errorResponse(message, upstream.status);
-  }
-
-  const stream = toPlainTextStream(upstream.body, (json) => {
-    const delta = json?.candidates?.[0]?.content?.parts?.[0]?.text;
-    return typeof delta === "string" && delta.length > 0 ? delta : null;
-  });
   return new Response(stream, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
@@ -200,9 +156,8 @@ export const Route = createFileRoute("/api/advisor")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const lovableKey = process.env["LOVABLE_API_KEY"];
-        const geminiKey = process.env["GEMINI_API_KEY"];
-        if (!lovableKey && !geminiKey) {
+        const groqKey= process.env["GROQ_API_KEY"];
+        if (!groqKey) {
           return errorResponse("AI is not configured.", 500);
         }
 
@@ -240,7 +195,11 @@ export const Route = createFileRoute("/api/advisor")({
           return errorResponse("Hourly usage limit reached — please try again later.", 429);
         }
 
-        const history = all.slice(-ADVISOR_LIMITS.historyTurns);
+        // Forward only role and content: the client's messages also carry UI fields
+        // (e.g. sources), which Groq rejects with a 400.
+        const history = all
+          .slice(-ADVISOR_LIMITS.historyTurns)
+          .map(({ role, content }) => ({ role, content }));
 
         const verifiedEntries = retrieveVerifiedContext(latest?.content ?? "");
         const verifiedBlock = formatVerifiedContext(verifiedEntries);
@@ -278,9 +237,8 @@ export const Route = createFileRoute("/api/advisor")({
           })),
         ];
 
-        // LOVABLE_API_KEY is the primary path; GEMINI_API_KEY only kicks in when it's absent.
-        if (lovableKey) return callLovable(lovableKey, history, systemLines, sourceEntries);
-        return callGeminiDirect(geminiKey!, history, systemLines, sourceEntries);
+        // Groq_API_KEY is the primary path;
+        return callGroq(groqKey, history, systemLines, sourceEntries);
       },
     },
   },

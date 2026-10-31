@@ -12,7 +12,7 @@ The product has two deliberately separated lanes, and every flow below belongs t
 | Lane | Source of truth | Voice in UI |
 | --- | --- | --- |
 | **Static reference** (Column 2: Find / Evaluate / Verify) | Local data files: `src/data/journey.ts`, `housing-sections.ts`, `sources.ts`, plus ingested JSON under `src/data/generated/*` | Neutral, source-aware badges ("Reference", "General guidance", "Source to be validated", "Data-verified") |
-| **AI Advisor** (Column 3) | Lovable AI Gateway → `google/gemini-2.5-flash`, falling back to the Gemini API directly (`GEMINI_API_KEY`) when `LOVABLE_API_KEY` is not set | Violet, always labelled "AI-generated", never presented as verified fact |
+| **AI Advisor** (Column 3) | Groq (`GROQ_API_KEY`) → `qwen/qwen3.8-27b` by default, configurable via `GROQ_MODEL` | Violet, always labelled "AI-generated", never presented as verified fact |
 
 No AI output is ever written into the static lane, and no curated housing recommendation
 ever appears in the static lane. Curated/ingested data (crime stats, rent benchmarks) is
@@ -53,9 +53,9 @@ Land on app (three columns, always all visible — no wizard/steps)
    │    ├─ Evaluate Housing — factual checklist (costs, commute, lease/rent
    │    │                     control, documents, strategy, negotiation,
    │    │                     application); each item can be marked "Reviewed"
-   │    └─ Check the Place  — type an address, matched by neighbourhood-name
-   │                          substring (no geocoding) to TPS crime data;
-   │                          save places to a shortlist
+   │    └─ Check the Place  — type an address, geocoded via /api/geocode (falls
+   │                          back to neighbourhood-name substring) to TPS
+   │                          crime data; save places to a shortlist
    │
    └─ Column 3 — AI Advisor (persistent, docked; never a bubble or takeover)
         ask a question → advisor asks the minimum clarifying questions
@@ -99,7 +99,7 @@ Navigation is non-linear: every section is always rendered, the index column jus
 └──────────────────────────────────────────────────┼──────────┘
                                                    ▼
                                     POST /api/advisor  (server route)
-                                      1 check LOVABLE_API_KEY / GEMINI_API_KEY present
+                                      1 check GROQ_API_KEY present
                                       2 validate body
                                       3 enforce session/char/IP limits (advisor-limits.ts)
                                       4 truncate history → last 8 turns
@@ -110,12 +110,11 @@ Navigation is non-linear: every section is always rendered, the index column jus
                                         prepend Resource directory block if any matched
                                       8 prepend app-context line (stage, budget,
                                         status, reviewed criteria, selected housing type)
-                                      9 call Lovable AI Gateway (stream), or the
-                                        Gemini API directly if no Lovable key
+                                      9 call Groq chat completions (stream)
                                                    │
                                                    ▼
-                          google/gemini-2.5-flash (Lovable) — or gemini-2.0-flash
-                          direct via GEMINI_MODEL override (SSE either way)
+                          qwen/qwen3.8-27b by default, or the
+                          GROQ_MODEL override (SSE)
                                                    │
                           text deltas + X-Advisor-Sources header (curated + resource) ◄──┘
                                                    ▼
@@ -123,7 +122,9 @@ Navigation is non-linear: every section is always rendered, the index column jus
                     resource-pill row render underneath once the header is read
 ```
 
-No account, no database, no PII leaves the browser. Chat messages, `journeyStage`, `filters`,
+No account and no database. What the user types does leave the browser: Advisor questions
+go to Groq, and Check the Place addresses go to Nominatim via `/api/geocode` (cached in server
+memory for up to 24 hours). Chat messages, `journeyStage`, `filters`,
 and `selectedHousingTypeId` are in-memory only and reset on refresh. The Evaluate Housing
 "Reviewed" checkboxes and Check the Place's saved-places list persist in `localStorage`
 (client-side only) and survive a refresh.
@@ -140,10 +141,11 @@ The events that start a background (non-obvious) flow:
 | 2 | **Stage selected** (Pre-landing / Just landed / Settling) | Column 1 "Your stage" | Updates the "Heads up for this stage" note and the stage line sent as AI context |
 | 3 | **Evaluate Housing item checked** | Column 2 checklist | Writes to `reviewed` (persisted to `localStorage`), updates the progress badge, and feeds `advisorAppContext` |
 | 4 | **Housing type selected** | Find Housing type cards | Sets `selectedHousingTypeId` in `FlowProvider`, feeds `advisorAppContext` |
-| 5 | **Address submitted in Check the Place** | Column 2 "Check the Place" | Local-only text match against ingested neighbourhood data — no network call, never touches the Advisor |
-| 6 | **User submits a question** | Advisor input (or a suggestion / sample conversation) | The full AI round trip — the only network call in the product |
+| 5 | **Address submitted in Check the Place** | Column 2 "Check the Place" | `POST /api/geocode` (Nominatim, then point-in-polygon against the neighbourhood boundaries), falling back to a local text match on any failure — never touches the Advisor |
+| 6 | **User submits a question** | Advisor input (or a suggestion / sample conversation) | The full AI round trip |
 
-Signal 6 is the one with hidden logic. Signals 1–5 are synchronous, local, and instant.
+Signal 6 is the one with hidden logic. Signals 1–4 are synchronous, local, and instant;
+signal 5 makes one server call for the address lookup.
 
 ---
 
@@ -157,12 +159,13 @@ Advisor input (advisor-chat.tsx)
      └─ POST /api/advisor  { messages: last 8, context: "stage + budget + status
                               + reviewed criteria + selected housing type" }
         └─ server route (src/routes/api/advisor.ts)
-           1. require LOVABLE_API_KEY or GEMINI_API_KEY  → 500 if both absent
+           1. require GROQ_API_KEY                       → 500 if absent
            2. parse + validate body                      → 400 if empty/invalid
            3. reject over the session question cap        → 429
            4. reject over the per-message character cap    → 400
            5. reject over the per-IP hourly request budget → 429 (in-memory map, best-effort)
-           6. truncate history to the last 8 turns (cost + context control)
+           6. truncate history to the last 8 turns (cost + context control), keeping
+              only each message's role and content (Groq rejects extra fields)
            7. prepend SYSTEM prompt:
                 • Ontario-specific rules (deposits, notice periods)
                 • newcomer-credit substitutes
@@ -182,12 +185,9 @@ Advisor input (advisor-chat.tsx)
               call) → prepend the formatted Resource directory block (≤ 4 items, in
               their original order) if a tier matched
           10. prepend the app-context system line
-          11. POST to the Lovable AI Gateway with stream:true — or, if
-              LOVABLE_API_KEY is unset, call the Gemini API directly instead
-              (different wire format: system prompt as `systemInstruction`,
-              roles are "user"/"model" not "assistant")
-          12. map upstream failures to human errors (429 rate limit, 402 credits
-              exhausted, 404 model unavailable, other)
+          11. POST to Groq's OpenAI-compatible chat completions API with stream:true
+          12. map upstream failures to human errors (502 unreachable, 429 rate limit,
+              404 model unavailable, 401/403 misconfigured key, other)
           13. transform the SSE frames into a plain text delta stream; attach the
               matched citations + resource pointers as JSON on the X-Advisor-Sources
               response header
@@ -258,14 +258,15 @@ Data that leaves the client, and the recovery path for each failure.
 
 | Failure | User sees | Recovery |
 | --- | --- | --- |
-| No AI key configured (`LOVABLE_API_KEY` and `GEMINI_API_KEY` both unset) | "AI is not configured." | Static lane keeps working — the product is usable with zero AI |
+| No AI key configured (`GROQ_API_KEY` unset) | "AI is not configured." | Static lane keeps working — the product is usable with zero AI |
 | Malformed / empty request | "No message provided." | Re-type and resend |
 | Session question cap reached (15) | "You have reached this session's limit of 15 questions…" | Start a new conversation |
 | Message too long (600 chars) | "Questions are limited to 600 characters." | Shorten and resend |
 | Per-IP hourly budget exceeded | "Hourly usage limit reached — please try again later." | Retry later |
-| 429 rate limit (either provider) | "The advisor is rate limited right now — try again in a moment." | Retry by resending |
-| 402 credits exhausted (Lovable) | "AI credits are exhausted for this workspace." | Fall back to static lane |
-| 404 model unavailable (Gemini fallback) | "The configured AI model is unavailable — set `GEMINI_MODEL` to a current model name." | Operator sets `GEMINI_MODEL` |
+| Groq unreachable (502) | "The advisor could not be reached — try again in a moment." | Retry by resending |
+| 429 rate limit | "The advisor is rate limited right now — try again in a moment." | Retry by resending |
+| 401/403 rejected key | "AI is not configured correctly." | Operator fixes `GROQ_API_KEY` |
+| 404 model unavailable | "The configured AI model is unavailable — set `GROQ_MODEL` to a current model name." | Operator sets `GROQ_MODEL` |
 | Other upstream error | "The advisor could not answer (status)." | Retry; upstream detail logged server-side, not shown to the user |
 | Bad or unhelpful answer | Answer is visibly labelled AI, sits beside sourced static content | User can cross-check against the reference column without leaving the screen |
 | Missing/malformed `X-Advisor-Sources` header | No citation footnote or resource pills render | Answer text still streams normally — citations/resources are additive, never blocking |
@@ -298,6 +299,5 @@ the only data that ever leaves the browser is the last eight chat turns plus a s
 the user's own in-app activity, which the server rate-limits, wraps in a guardrailed
 prompt — deterministically enriched, in code, with any matching citation from
 `src/data/sources.ts` and any matching resource-directory platforms from
-`durationResources`, never selected by the model — and streams back (via the Lovable
-Gateway or a direct Gemini fallback) as clearly-labelled AI guidance that the static lane
+`durationResources`, never selected by the model — and streams back (via Groq) as clearly-labelled AI guidance that the static lane
 never depends on.

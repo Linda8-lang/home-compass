@@ -391,8 +391,7 @@ export function AdvisorHeader({ onClose }: { onClose?: () => void }) {
           <h2 className="sr-only">AI Advisor</h2>
           <p className="flex items-center gap-1.5 text-xs font-semibold leading-snug text-advisor">
             <Cpu className="size-3.5 shrink-0" aria-hidden />
-            AI-Generated Guidance | Multi-model engine (Claude + ChatGPT + Gemini) · URL-verified ·
-            Citation enforced
+            AI-Generated Guidance | Check important details with official sources
           </p>
         </div>
         {onClose && (
