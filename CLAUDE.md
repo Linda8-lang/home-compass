@@ -24,20 +24,30 @@ bun run ingest             # run all data ingesters
 bun run ingest:safety      # TPS neighbourhood crime rates (ArcGIS)
 bun run ingest:rent        # City of Toronto CKAN neighbourhood profiles (rent proxy)
 bun run ingest:cmhc        # CMHC Rental Market Survey baseline (requires CMHC_XLSX_URL; not yet populated)
+bun run ingest:boundaries  # City of Toronto 158-neighbourhood polygons (feeds /api/geocode)
 ```
 
-There is no test suite/framework configured in this repo (no test script in `package.json`).
+The ingest scripts run `node scripts/ingest/run.ts <name>` directly on TypeScript, so they
+need a Node version with native type stripping.
 
-Copy `.env.example` to `.env` and set at least one of `LOVABLE_API_KEY` or `GEMINI_API_KEY`
+There is no test suite/framework configured in this repo (no test script in `package.json`),
+and no typecheck script. Both `bun.lock` and `package-lock.json` are tracked; the scripts also
+run through `npm run <name>` where Bun isn't installed.
+
+Copy `.env.example` to `.env` and set `GROQ_API_KEY`
 for the AI Advisor to work locally — the static reference lane and Check the Place work
 with zero keys configured.
+
+The repo is synced with Lovable (see `AGENTS.md`): never rewrite pushed history (no
+force-push, or amend/rebase/squash of pushed commits), and keep the connected branch in a
+working state, since pushed commits sync back to the Lovable editor.
 
 ## Architecture
 
 **Stack:** TanStack Start v1 (React 19, SSR, file-based routing), Vite 8 via
 `@lovable.dev/vite-tanstack-config` (Nitro, Cloudflare target by default), Tailwind CSS v4 +
-shadcn/ui, Bun. Supabase client is scaffolded (`src/integrations/supabase/*`) but not
-currently used by the housing feature.
+shadcn/ui, Bun. Supabase client is scaffolded (`src/integrations/supabase/*`, with its auth
+middleware attached in `src/start.ts`) but not currently used by the housing feature.
 
 ### The two-lane boundary (the most important invariant in this codebase)
 
@@ -46,13 +56,13 @@ The product is built around a hard separation between two lanes:
 - **Static reference** (Column 2: Find / Evaluate / Verify) — sourced from local data files
   only (`src/data/journey.ts`, `housing-sections.ts`, `sources.ts`, and ingested JSON under
   `src/data/generated/*`). Neutral, source-aware, never a curated recommendation.
-- **AI Advisor** (Column 3) — a streaming chat backed by the Lovable AI Gateway
-  (`google/gemini-2.5-flash`), falling back to the Gemini API directly (`GEMINI_API_KEY`,
-  model configurable via `GEMINI_MODEL`) when `LOVABLE_API_KEY` is unset.
+- **AI Advisor** (Column 3) — a streaming chat backed by Groq as the sole provider
+  (`GROQ_API_KEY`, default model `qwen/qwen3.8-27b`, configurable via `GROQ_MODEL`).
 
 **Curated/ingested data (crime stats, rent benchmarks) must never be fed into the AI
-Advisor's context.** Only the user's own in-app activity — reviewed criteria, selected
-housing type, stage, budget — is sent to the model, via `advisorAppContext` built in
+Advisor's context.** Only the user's own in-app activity is sent to the model, as the
+request's `context` field: `advisor-chat.tsx` builds stage, budget, city and status, then
+appends `advisorAppContext` (reviewed criteria and selected housing type) from
 `FlowProvider`. Check the Place reads `src/data/generated/*` directly and never threads
 into the Advisor's context. When touching either lane, preserve this boundary.
 
@@ -73,15 +83,19 @@ order are decided entirely in code.
 
 ### File-based routing (TanStack Start)
 
-See `src/routes/README.md`. Every `.tsx` in `src/routes/` is a route (`index.tsx` → `/`,
+See `src/routes/README.md`. Every `.tsx` in `src/routes/` is a route, as are the `.ts` API
+handlers under `src/routes/api/` (`index.tsx` → `/`,
 `users/$id.tsx` → `/users/:id` dynamic, `files/$.tsx` → splat via `_splat`, `__root.tsx` is
 the app shell). Don't create `src/pages/` or Next/Remix-style route files.
 `src/routeTree.gen.ts` is auto-generated — never hand-edit it.
 
 Per the top-level README's contribution notes: put app-internal logic in `*.functions.ts`
 files imported by routes; keep raw HTTP endpoints for external callers under
-`src/routes/api/public/*`. A module that must stay server-only should be named `*.server.ts`
-(the `server-only` npm package is banned by an eslint rule — TanStack Start doesn't use it).
+`src/routes/api/public/*`. Neither exists yet: the app's only endpoints are the internal
+`src/routes/api/advisor.ts` and `geocode.ts`, which call no server functions. A module that
+must stay server-only should be named `*.server.ts` or marked with
+`@tanstack/react-start/server-only` (the `server-only` npm package is banned by an eslint
+rule — TanStack Start doesn't use it).
 
 ### State flow
 
@@ -96,20 +110,20 @@ into Column 2 state.
 ### AI Advisor request path
 
 `advisor-chat.tsx` → `POST /api/advisor` (`src/routes/api/advisor.ts`), which in order:
-requires an AI key (500 if both `LOVABLE_API_KEY`/`GEMINI_API_KEY` absent) → validates the
+requires an AI key (500 if `GROQ_API_KEY` is absent) → validates the
 body (400) → enforces session question cap / per-message char cap / per-IP hourly budget
-(`src/lib/advisor-limits.ts`, in-memory/best-effort) → truncates history to the last 8 turns
-→ prepends the guardrail system prompt (Ontario-specific rules, scam-pattern flagging,
-"never invent listings/addresses/prices", sourcing/legal-financial hedging rules, a
-resource-directory relay rule, a clarifying-question protocol capped at 3 questions) →
-prepends the Verified data block (`retrieveVerifiedContext`/`formatVerifiedContext` in
-`src/lib/advisor-context.ts`, a deterministic keyword match against `src/data/sources.ts`)
-when it matched anything → prepends the Resource directory block (`getResourcePointers` in
-`src/lib/advisor-resources.ts`, a deterministic duration-tier match against
-`durationResources`) when it matched anything → prepends the app-context line → calls the
-Lovable AI Gateway (stream) or the Gemini API directly as a fallback (different wire
-format: `systemInstruction`, "user"/"model" roles instead of "assistant") → maps upstream
-failures to user-facing errors (429/402/404/etc.) → streams plain-text deltas back to the
+(`src/lib/advisor-limits.ts`, in-memory/best-effort) → truncates history to the last 8 turns,
+forwarding only each message's `role` and `content` (Groq rejects extra fields such as the
+client's `sources` with a 400) → assembles the system lines, in this order: the guardrail system prompt (Ontario-specific
+rules, scam-pattern flagging, "never invent listings/addresses/prices", sourcing/legal-financial
+hedging rules, a resource-directory relay rule, a clarifying-question protocol capped at 3
+questions on the first reply), the Verified data block (`retrieveVerifiedContext`/
+`formatVerifiedContext` in `src/lib/advisor-context.ts`, a deterministic keyword match against
+`src/data/sources.ts`) when it matched anything, the Resource directory block
+(`getResourcePointers` in `src/lib/advisor-resources.ts`, a deterministic duration-tier match
+against `durationResources`) when it matched anything, and the app-context line → calls
+Groq's OpenAI-compatible chat completions API (stream) → maps upstream
+failures to user-facing errors (429/404/401/403/etc., 502 if Groq is unreachable) → streams plain-text deltas back to the
 client, with an `X-Advisor-Sources` response header (JSON array of `VerifiedEntry`, `type:
 "curated" | "resource"`) that the client renders as a linked citation footnote row and a
 separate tappable resource-pill row under the assistant bubble.
@@ -120,6 +134,16 @@ The clarifying-question protocol and the fabrication ban both live in the system
 citation, edit `src/data/sources.ts` (and its keyword list in `advisor-context.ts`); to
 change what the resource directory can surface, edit `durationResources` in
 `housing-sections.ts` — never the matching/selection logic's output shape.
+
+### Check the Place address lookup
+
+`check-the-place-report.tsx` first tries `POST /api/geocode` (`src/routes/api/geocode.ts`):
+Nominatim geocoding (a descriptive User-Agent is required by its usage policy) → a
+point-in-polygon match against `src/data/generated/toronto-neighbourhoods.json` → a `hood_id`.
+Per-IP budget and a 24h result cache (including negative results; transient upstream failures
+are never cached) live in `src/lib/geocode-limits.ts`. Any failure silently falls back to
+`matchNeighbourhoodByText` in `neighbourhood-lookup.ts`. This whole path is static-lane —
+nothing from it reaches the Advisor.
 
 ### Data ingestion
 
