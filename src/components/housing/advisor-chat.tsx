@@ -77,7 +77,10 @@ function useAdvisor() {
         }
       }
 
-      setMessages((m) => [...m, { role: "assistant", content: "", sources }]);
+      const assistantMessage: Msg = sources
+        ? { role: "assistant", content: "", sources }
+        : { role: "assistant", content: "" };
+      setMessages((m) => [...m, assistantMessage]);
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       for (;;) {
